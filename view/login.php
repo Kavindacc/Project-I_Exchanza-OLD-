@@ -1,5 +1,8 @@
+<?php require '../control/logincon.php' ?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +10,10 @@
     <link rel="stylesheet" href="style.css">
     <title>Login</title>
 </head>
+
 <body>
     <div class="container" style="margin-top:100px;">
-    <div class="row text-center pb-3">
+        <div class="row text-center pb-3">
             <h2>Login now</h2>
         </div>
         <div class="row justify-content-center pb-2">
@@ -18,25 +22,38 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-4">
-                <label class="form-label">Email Address</label>
-                <input type="email" class="form-control" placeholder="example@gmail.com" name="email">
+            <?php if (isset($_GET['error'])) { ?>
+                <div class="col-md-4 bg-warning text-white"><?php echo $_GET['error']; ?></div>
+            <?php } ?>
+
+            <?php if (isset($_GET['success'])) { ?>
+                <div class="col-md-4 bg-success text-white"><?php echo $_GET['success']; ?></div>
+            <?php } ?>
+        </div>
+        <form action="../control/logincon.php" method="post">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-control" placeholder="example@gmail.com" name="email">
+                </div>
             </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <label class="form-label">Password</label>
-                <input class="form-control" type="password" name="password">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <label class="form-label">Password</label>
+                    <input class="form-control" type="password" name="password">
+                </div>
             </div>
-        </div>
-        <div class="row justify-content-center mt-2">
-            <div class="col-md-4"><a href="forgetpassword.php">forget password</a></div>
-        </div>
-        <div class="row justify-content-center mt-2">
-            <div class="col-md-4">
-                <input class="btn btn-primary w-100" type="submit" value="Sign In" name="signin">
+
+            <div class="row justify-content-center mt-2">
+                <div class="col-md-4"><a href="forgetpassword.php">forget password</a></div>
             </div>
-        </div>
+            <div class="row justify-content-center mt-2">
+                <div class="col-md-4">
+                    <input class="btn btn-primary w-100" type="submit" value="Sign In" name="signin">
+                </div>
+            </div>
+        </form>
     </div>
 </body>
+
 </html>
