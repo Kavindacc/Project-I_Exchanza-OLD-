@@ -13,7 +13,7 @@
 <body>
     <!--form-->
     <div class="container p-4 regi">
-        <div class="row text-center pb-3">
+        <div class="row text-center pb-2">
             <h2>Create Account</h2>
         </div>
         <div class="row justify-content-center">

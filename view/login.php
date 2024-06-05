@@ -34,13 +34,13 @@
             <div class="row justify-content-center">
                 <div class="col-md-4">
                     <label class="form-label">Email Address</label>
-                    <input type="email" class="form-control" placeholder="example@gmail.com" name="email">
+                    <input type="email" class="form-control" placeholder="example@gmail.com" name="email" required="">
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-4">
                     <label class="form-label">Password</label>
-                    <input class="form-control" type="password" name="password">
+                    <input class="form-control" type="password" name="password" required="">
                 </div>
             </div>
 

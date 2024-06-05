@@ -1,0 +1,106 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.regi{
+    margin-top:20px;
+    border: 1px solid red!important;
+    background-color: lightblue;
+}
+.carousel-item {
+    height: 90vh;
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-size: cover;
+}
+.con{
+    width:90%;
+    margin:auto;
+    
+}
+.tread{
+    
+    width:90%;
+    padding-bottom:20px;
+    background-color:white;
+    border-radius:15px;
+  
+}
+.lin a{
+    text-decoration: none;
+    color: black;
+}
+.card img:hover{
+    opacity:0.7;
+}
+.card-title a{
+    text-decoration: none;
+    color: black;
+}
+.item{
+    width:90%;
+    margin:0 auto;
+    margin-top:40px;
+    margin-bottom: 20px;
+   
+   
+}
+.text p{
+    color: black;
+}
+.icon{
+    width:20%;
+    margin: auto;
+    
+}
+.item .side{
+    width:35%;
+}
+.thirf{
+    width:80%;
+    margin:0 auto;
+    margin-top:70px;
+    background-color: rgb(216, 181, 139);
+} 
+.thirf .pic{
+    width:40%;
+    height: 20%;
+    clip-path: polygon(50% 0%,0% 100%,100% 100%);
+    position: relative;
+    top: -30px;
+    left:-40px;
+    
+}
+.thirf .text{
+    width:60%;
+    padding:10px 15px;
+    margin-top: 30px;
+}
+.thirf .text a{
+   text-decoration: none;
+   color:black;
+}
+.thirf .text button{
+    padding:5px 0;
+    width:150px;
+    border: none;
+    border-radius: 5px;
+    transition:width 1s;
+}
+.thirf .text button:hover{
+    width:170px;
+    background-color:rgb(194, 187, 177);
+}
+
+
+@media screen and (max-width:720px){
+    .item .side{
+        width:100%;
+    }
+    .thirf .pic{
+        position:relative;
+        top:150px;
+        left: 0;
+    }
+}

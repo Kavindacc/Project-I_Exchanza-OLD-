@@ -38,7 +38,25 @@ class User extends Dbh
         $stmt->execute([$this->name, $this->email, $this->country, $this->gender, $this->filepath, $this->pnum, $this->password]);
     }
 
-    public function login($email) //email check login
+    public function loginAdmin($email) //email check login
+    {
+
+        $this->email = $email;
+
+        $query = "SELECT * FROM usern WHERE email=?";
+        $stmt = $this->connect()->prepare($query);
+        $stmt->execute([$this->email]);
+
+        if ($stmt->rowCount()) {
+            while ($row = $stmt->fetch()) {
+                return $row['password'];
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function loginUser($email) //email check login
     {
 
         $this->email = $email;
