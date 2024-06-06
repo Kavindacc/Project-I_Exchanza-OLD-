@@ -5,7 +5,7 @@ require 'dbconnection.php';
 class User extends Dbh
 {
 
-    protected $name, $gender, $country, $pnum, $password, $email, $filepath, $token, $expire, $token_hash,$userid;
+    protected $name, $gender, $country, $pnum, $password, $email, $filepath, $token, $expire, $token_hash,$userid,$otp;
 
     public function emailexit($email)
     { //email exits function
@@ -22,20 +22,20 @@ class User extends Dbh
         }
     }
 
-    public function insertdb($name, $email, $country, $gender, $filepath, $pnum, $password)
+    public function insertdb($name, $email, $country, $gender,$pnum,$otp, $password)
     { //data inser database
 
         $this->name = $name;
         $this->email = $email;
         $this->country = $country;
         $this->gender = $gender;
-        $this->filepath = $filepath;
+        $this->otp = $otp;
         $this->pnum = $pnum;
         $this->password = $password;
 
-        $query = "INSERT INTO usern(name,email,country,gender,propic,phoneno,password) VALUES (?,?,?,?,?,?,?)";
+        $query = "INSERT INTO usern(name,email,country,gender,password,phoneno,otp) VALUES (?,?,?,?,?,?,?)";
         $stmt = $this->connect()->prepare($query);
-        $stmt->execute([$this->name, $this->email, $this->country, $this->gender, $this->filepath, $this->pnum, $this->password]);
+        $stmt->execute([$this->name, $this->email, $this->country, $this->gender,$this->password,$this->pnum, $this->otp]);
     }
 
     public function loginAdmin($email) //email check login

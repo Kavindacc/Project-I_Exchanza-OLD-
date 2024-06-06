@@ -92,7 +92,15 @@
     width:170px;
     background-color:rgb(194, 187, 177);
 }
-
+.verification{
+    width:25%;
+    padding:30px;
+    margin: auto;
+    margin-top: 150px;
+}
+.verification .button{
+    margin-top: 10px;
+}
 
 @media screen and (max-width:720px){
     .item .side{
@@ -102,5 +110,10 @@
         position:relative;
         top:150px;
         left: 0;
+    }
+    .verification{
+        width:100%;
+        padding:20px;
+        margin-top: 100px;
     }
 }

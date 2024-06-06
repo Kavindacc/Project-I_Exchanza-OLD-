@@ -2,6 +2,7 @@
 
 
 require '../model/user.php';
+require 'otpsent.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['register'])) {
@@ -71,8 +72,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (empty($errors)) {
             $passwordhash = password_hash($password, PASSWORD_DEFAULT);
-            $object->insertdb($name, $email, $country, $gender,$filePath, $pnum, $passwordhash); //insert data databse
-            header("Location: ../view/signup.php?success=Registration successful"); //home page go
+            $otp_str=str_shuffle("0123456789");
+            $otp=substr($otp_str,0,5);
+            $object->insertdb($name, $email, $country, $gender,$pnum,$otp, $passwordhash); //insert data databse
+            $obj=new Otp();
+            $obj->otpsent($email,$otp);
+            
         } else {
             $errorString = implode("|", $errors); //array convert string
             header("Location: ../view/signup.php?error=$errorString");
