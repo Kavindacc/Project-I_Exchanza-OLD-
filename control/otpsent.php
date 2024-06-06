@@ -1,6 +1,7 @@
 <?php
 
 
+session_start();
 class Otp{
 
     protected $email,$otp;
@@ -18,6 +19,7 @@ class Otp{
 
         try {
             $mail->send();
+            $_SESSION['email']=$email;
             header("Location: ../view/verification.php?success=Check your Email"); // verificatio page go
             exit();
 

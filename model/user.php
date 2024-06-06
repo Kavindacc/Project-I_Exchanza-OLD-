@@ -142,4 +142,22 @@ class User extends Dbh
         $stmt=$this->connect()->prepare($sql);
         $stmt->execute([ $this->password,$this->userid]);
     }
+
+    public function accounta($email){
+
+        $this->email=$email;
+
+        $query="SELECT otp FROM usern WHERE email=?";
+        $stmt=$this->connect()->prepare($query);
+        $stmt->execute([$this->email]);
+        if($stmt->rowCount()){
+            while($row=$stmt->fetch()){
+                return $row['otp'];
+            }
+        }
+       
+
+
+    }
+
 }

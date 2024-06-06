@@ -1,4 +1,8 @@
-<?php require '../control/otpsent.php' ?>
+<?php 
+require '../control/otpsent.php' ;
+require '../control/verificationcon.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,8 +23,11 @@
         <?php if (isset($_GET['success'])) { ?>
                 <div class="col bg-success text-white"><?php echo $_GET['success']; ?></div>
             <?php } ?>
+            <?php if (isset($_GET['error'])) { ?>
+                <div class="col bg-warningtext-white"><?php echo $_GET['error']; ?></div>
+            <?php } ?>
         
-        <form action="" method="post">
+        <form action="../control/verificationcon.php" method="post">
             <div class="input mt-3">
                 <input type="text" class="form-control" placeholder="Enter Verification Code" name="vcode" required="">
             </div>
