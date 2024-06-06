@@ -5,7 +5,7 @@ require 'dbconnection.php';
 class User extends Dbh
 {
 
-    protected $name, $gender, $country, $pnum, $password, $email, $filepath, $token, $expire, $token_hash,$userid,$otp;
+    protected $name, $gender, $country, $pnum, $password, $email, $filepath, $token, $expire, $token_hash,$userid,$otp,$status;
 
     public function emailexit($email)
     { //email exits function
@@ -38,6 +38,17 @@ class User extends Dbh
         $stmt->execute([$this->name, $this->email, $this->country, $this->gender,$this->password,$this->pnum, $this->otp]);
     }
 
+    public function statusUpdate($email,$status){
+
+        $this->email=$email;
+        $this->status=$status;
+        $query = "UPDATE usern SET status=? WHERE email=? ";
+        $stmt=$this->connect()->prepare($query);
+        $stmt->execute([$this->status,$this->email]);
+
+        
+    }
+
     public function loginAdmin($email) //email check login
     {
 
@@ -54,6 +65,21 @@ class User extends Dbh
         } else {
             return false;
         }
+    }
+
+    public function status($email){
+
+        $this->email=$email;
+
+        $query="SELECT * FROM usern WHERE email=?";
+        $stmt=$this->connect()->prepare($query);
+        $stmt->execute([$this->email]);
+        if ($stmt->rowCount()) {
+            while ($row = $stmt->fetch()) {
+                return $row['status'];
+            }
+        }
+
     }
 
     public function loginUser($email) //email check login

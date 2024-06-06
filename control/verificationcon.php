@@ -12,6 +12,8 @@ if(isset($_POST['submit'])){
         $otp = $obj->accounta($email); // user.php otp get
 
         if($otp == $code){
+            $status="active";
+            $obj->statusUpdate($email,$status);
             header("Location: ../view/login.php");
             exit();
         } else {
