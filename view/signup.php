@@ -61,28 +61,24 @@
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label class="form-label">Profile picture</label>
-                    <input class="form-control" type="file" name="file">
+                    <label class="form-label">Password</label>
+                    <input class="form-control" type="password" name="password">
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-4">
-                    <label class="form-label">Password</label>
-                    <input class="form-control" type="password" name="password">
-                </div>
-                <div class="col-md-4">
                     <label class="form-label">Repeat password</label>
                     <input class="form-control" type="password" name="rpassword">
                 </div>
-            </div>
-            <div class="row justify-content-center py-3">
-                <div class="col-md-4">
+                <div class="col-md-4" style="margin-top:30px;">
                     <input class="btn btn-primary w-100" type="submit" value="Register" name="register">
                 </div>
-                <div class="col-md-4">
-                    alredy have account<a href="login.php"> login in</a>
-                </div>
             </div>
+
+            <div class="text-center py-3">
+                alredy have account<a href="login.php"> login in</a>
+            </div>
+
         </form>
     </div>
 
