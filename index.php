@@ -55,6 +55,7 @@
                             <button class="btn btn-warning btn-sm ms-2 px-3">
                                 <a href="view/logout.php" class="nav-link text-decoration-none">logout</a>
                             </button>
+                            <?php echo "Hi,".$_SESSION['username'];?>
                         <?php } else { ?>
                             <button class="btn btn-dark btn-sm ms-2 px-3">
                                 <a href="view/login.php" class="nav-link text-decoration-none">login</a>
