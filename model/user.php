@@ -1,6 +1,7 @@
 <?php
 
 require 'dbconnection.php';
+session_start();
 
 class User extends Dbh
 {
@@ -93,6 +94,7 @@ class User extends Dbh
 
         if ($stmt->rowCount()) {
             while ($row = $stmt->fetch()) {
+                $_SESSION['username']=$row['name'];
                 return $row['password'];
             }
         } else {

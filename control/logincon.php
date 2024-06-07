@@ -2,6 +2,7 @@
 
 require '../model/user.php';
 
+
 if (isset($_POST['signin'])) {
 
     $email = $_POST['email'];
@@ -27,7 +28,8 @@ if (isset($_POST['signin'])) {
         if ($status == "active") {
             $rpassword = $obj->loginUser($email);
             if ($rpassword && password_verify($password, $rpassword)) {
-                header("Location: ../view/login.php?success=Login successful"); //user page
+                $_SESSION['logedin']=true;
+                header("Location: ../index.php");//user page(index.php)
                 exit();
             } else {
                 header("Location: ../view/login.php?error=Incorrect email or password");

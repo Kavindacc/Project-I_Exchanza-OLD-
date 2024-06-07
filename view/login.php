@@ -25,10 +25,6 @@
             <?php if (isset($_GET['error'])) { ?>
                 <div class="col-md-4 bg-warning text-white"><?php echo $_GET['error']; ?></div>
             <?php } ?>
-
-            <?php if (isset($_GET['success'])) { ?>
-                <div class="col-md-4 bg-success text-white"><?php echo $_GET['success']; ?></div>
-            <?php } ?>
         </div>
         <form action="../control/logincon.php" method="post">
             <div class="row justify-content-center">
