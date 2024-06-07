@@ -1,11 +1,12 @@
 <?php
 
 require 'dbconnection.php';
+session_start();
 
 class User extends Dbh
 {
 
-    protected $name, $gender, $country, $pnum, $password, $email, $filepath, $token, $expire, $token_hash,$userid;
+    protected $name, $gender, $country, $pnum, $password, $email, $filepath, $token, $expire, $token_hash,$userid,$otp,$status;
 
     public function emailexit($email)
     { //email exits function
@@ -22,20 +23,31 @@ class User extends Dbh
         }
     }
 
-    public function insertdb($name, $email, $country, $gender, $filepath, $pnum, $password)
+    public function insertdb($name, $email, $country, $gender,$pnum,$otp, $password)
     { //data inser database
 
         $this->name = $name;
         $this->email = $email;
         $this->country = $country;
         $this->gender = $gender;
-        $this->filepath = $filepath;
+        $this->otp = $otp;
         $this->pnum = $pnum;
         $this->password = $password;
 
-        $query = "INSERT INTO usern(name,email,country,gender,propic,phoneno,password) VALUES (?,?,?,?,?,?,?)";
+        $query = "INSERT INTO usern(name,email,country,gender,password,phoneno,otp) VALUES (?,?,?,?,?,?,?)";
         $stmt = $this->connect()->prepare($query);
-        $stmt->execute([$this->name, $this->email, $this->country, $this->gender, $this->filepath, $this->pnum, $this->password]);
+        $stmt->execute([$this->name, $this->email, $this->country, $this->gender,$this->password,$this->pnum, $this->otp]);
+    }
+
+    public function statusUpdate($email,$status){
+
+        $this->email=$email;
+        $this->status=$status;
+        $query = "UPDATE usern SET status=? WHERE email=? ";
+        $stmt=$this->connect()->prepare($query);
+        $stmt->execute([$this->status,$this->email]);
+
+        
     }
 
     public function loginAdmin($email) //email check login
@@ -56,6 +68,21 @@ class User extends Dbh
         }
     }
 
+    public function status($email){
+
+        $this->email=$email;
+
+        $query="SELECT * FROM usern WHERE email=?";
+        $stmt=$this->connect()->prepare($query);
+        $stmt->execute([$this->email]);
+        if ($stmt->rowCount()) {
+            while ($row = $stmt->fetch()) {
+                return $row['status'];
+            }
+        }
+
+    }
+
     public function loginUser($email) //email check login
     {
 
@@ -67,6 +94,7 @@ class User extends Dbh
 
         if ($stmt->rowCount()) {
             while ($row = $stmt->fetch()) {
+                $_SESSION['username']=$row['name'];
                 return $row['password'];
             }
         } else {
@@ -142,4 +170,22 @@ class User extends Dbh
         $stmt=$this->connect()->prepare($sql);
         $stmt->execute([ $this->password,$this->userid]);
     }
+
+    public function accounta($email){
+
+        $this->email=$email;
+
+        $query="SELECT otp FROM usern WHERE email=?";
+        $stmt=$this->connect()->prepare($query);
+        $stmt->execute([$this->email]);
+        if($stmt->rowCount()){
+            while($row=$stmt->fetch()){
+                return $row['otp'];
+            }
+        }
+       
+
+
+    }
+
 }

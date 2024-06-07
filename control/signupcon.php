@@ -2,6 +2,7 @@
 
 
 require '../model/user.php';
+require 'otpsent.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['register'])) {
@@ -65,39 +66,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $pnum = trim(stripslashes(htmlspecialchars($pnum))); //santizer number
         }
 
-        $filePath = null; //file upload start
-        if (isset($_FILES['file']) && $_FILES['file']['error'] === 0) {
-            $file = $_FILES['file'];
-            $filename = $file['name'];
-            $filetmpname = $file['tmp_name'];
-            $filesize = $file['size'];
-            $fileext = explode('.', $filename);//string convert array
-            $fileactualext = strtolower(end($fileext));
-            $allowed = ['jpg', 'jpeg', 'png'];
-
-            if (in_array($fileactualext, $allowed)) {
-                if ($filesize < 1000000) { // 1MB file size limit
-                    $fileNewName = uniqid();
-                    $fileNewName.= "." . $fileactualext;
-                    $fileDestination = '../upload/' . $fileNewName;
-                    move_uploaded_file($filetmpname, $fileDestination);
-                    $filePath = $fileDestination;
-                } else {
-                    $errors[] = "File is too big";
-                }
-            } else {
-                $errors[] = "Please upload jpg, jpeg, or png type";
-            }
-        } //file end
-
         if ($password !== $rpassword) { //repeat pasword check
             $errors[] = "Passwords do not match";
         }
 
         if (empty($errors)) {
             $passwordhash = password_hash($password, PASSWORD_DEFAULT);
-            $object->insertdb($name, $email, $country, $gender,$filePath, $pnum, $passwordhash); //insert data databse
-            header("Location: ../view/signup.php?success=Registration successful"); //home page go
+            $otp_str=str_shuffle("0123456789");
+            $otp=substr($otp_str,0,5);
+            $object->insertdb($name, $email, $country, $gender,$pnum,$otp, $passwordhash); //insert data databse
+            $obj=new Otp();
+            $obj->otpsent($email,$otp);
+            
         } else {
             $errorString = implode("|", $errors); //array convert string
             header("Location: ../view/signup.php?error=$errorString");
