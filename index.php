@@ -55,7 +55,7 @@
                             <button class="btn btn-warning btn-sm ms-2 px-3">
                                 <a href="view/logout.php" class="nav-link text-decoration-none">logout</a>
                             </button>
-                            <?php echo "Hi,".$_SESSION['username'];?>
+                            <?php echo "Hi," . $_SESSION['username']; ?>
                         <?php } else { ?>
                             <button class="btn btn-dark btn-sm ms-2 px-3">
                                 <a href="view/login.php" class="nav-link text-decoration-none">login</a>
@@ -236,6 +236,8 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
 </body>
+
 
 </html>
