@@ -13,8 +13,8 @@
 
 <body style="background-color: gainsboro;">
     <!--nav bar-->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary  sticky-top">
-        <div class="container-fluid"><!--logo-->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid logo"><!--logo-->
             <a class="navbar-brand" href="#"><img src="img/Exchanza.png" width="100px"></a>
             <!--toggle button-->
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -201,7 +201,7 @@
     </div>
 
     <!--footer-->
-    <div class="container-fluid" style="background-color:burlywood;">
+    <div class="container-fluid footer">
         <div class="container p-3">
             <div class="row">
                 <div class="col">
