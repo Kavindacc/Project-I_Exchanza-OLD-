@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $otp_str=str_shuffle("0123456789");
             $otp=substr($otp_str,0,5);
             $object->insertdb($name, $email, $country, $gender,$pnum,$otp, $passwordhash); //insert data databse
-            $obj=new Otp();
+            $obj=new Otp();//otpsent.php
             $obj->otpsent($email,$otp);
             
         } else {

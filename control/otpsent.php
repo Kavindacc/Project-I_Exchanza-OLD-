@@ -1,7 +1,7 @@
 <?php
 
 
-session_start();
+
 class Otp{
 
     protected $email,$otp;
