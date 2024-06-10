@@ -11,7 +11,7 @@
     <title>index</title>
 </head>
 
-<body style="background-color: gainsboro;">
+<body style="background-color: white;">
     <!--nav bar-->
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container-fluid logo"><!--logo-->
@@ -91,7 +91,7 @@
         </button>
     </div>
     <!--trift,bit container-->
-    <div class="thirf d-flex flex-row">
+    <div class="thirf d-flex flex-row thirf-left">
         <div class="pic">
             <img src="img/pexels-kseniachernaya-3965545.jpg" width="100%">
         </div>
@@ -103,7 +103,7 @@
             <button><a href="">Shop Now&nbsp;>></a></button>
         </div>
     </div>
-    <div class="thirf d-flex flex-row">
+    <div class="thirf d-flex flex-row thirf-right">
         <div class="pic">
             <img src="img/keagan-henman-ufuk99QfQTg-unsplash.jpg" width="100%">
         </div>
@@ -115,7 +115,7 @@
             <button><a href="">Shop Now&nbsp;>></a></button>
         </div>
     </div>
-    <div class="thirf d-flex flex-row">
+    <div class="thirf d-flex flex-row thirf-left">
         <div class="pic">
             <img src="img/pexels-olly-3755706.jpg" width="100%">
         </div>
@@ -172,7 +172,7 @@
     </div>
     <!--iteam-->
     <div class="item d-flex justify-content-around flex-column flex-md-row">
-        <div class="d-flex flex-column  p-4 side">
+        <div class="d-flex flex-column  p-4 side side-left">
             <div class="icon"><i class="fa-solid fa-recycle" style="font-size:50px;"></i>
             </div><br>
             <div class="text">
@@ -185,7 +185,7 @@
                 <P>We do all we can to give your clothes a second life by reselling or responsibly recycling them</P>
             </div>
         </div>
-        <div class="d-flex flex-column  p-4 side">
+        <div class="d-flex flex-column  p-4 side side-right">
             <div class="icon text-center"><i class="fa-solid fa-house" style="font-size:50px;"></i>
             </div><br>
             <div class="text ">
@@ -235,6 +235,8 @@
             </div>
         </div>
     </div>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="view/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 
 </body>
