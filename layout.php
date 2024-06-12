@@ -14,19 +14,17 @@
     <title>index</title>
 </head>
 
-<body style="background-color: gainsboro;">
-    <!--nav bar-->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary  sticky-top">
-        <div class="container-fluid"><!--logo-->
-            <a class="navbar-brand" href="#"><img src="img/Exchanza.png" width="100px"></a>
+<body>
+     <!--nav bar-->
+     <nav class="navbar navbar-expand-lg sticky-top nav">
+        <div class="container-fluid logo"><!--logo-->
+           <a class="navbar-brand" href="#"><img src="../Project-I_Exchanza/img/Exchanza.png" width="100px"></a>
             <!--toggle button-->
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <!--sidebar-->
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <!--sidebarheader-->
                 <div class="offcanvas-header border-bottom">
                     <h5 class="offcanvas-title " id="offcanvasNavbarLabel">Exchanze</h5>
@@ -48,29 +46,34 @@
                             <a class="nav-link" href="#">Selling</a>
                         </li>
                     </ul>
-                    <form class="d-flex me-4" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search">
-                        <a href="#1" class="nav-link  text-decoration-none  mt-2"><i
-                                class="fa-solid fa-magnifying-glass"></i></a>
+                    <form class="d-flex me-4 align-items-center" role="search">
+                        <input class="search me-2" type="search" placeholder="Search">
+                        <a href="#1" class="nav-link  text-decoration-none  mt-1"><i class="fa-solid fa-magnifying-glass"></i></a>
                     </form>
                     <!--login nav-link-a-color-->
-                    <div
-                        class="d-flex flex-column flex-lg-row float-start  justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
-                        <a href="#1" class="nav-link  text-decoration-none mx-2"><i
-                                class="fa-solid fa-cart-plus"></i></a>
-                        <button class="btn btn-dark btn-sm ms-2 px-3"><a href="view/login.php"
-                                class="nav-link text-decoration-none ">login</a></button>
+                    <div class="d-flex flex-column float-start flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
+                        <a href="#1" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
+                        <?php
+                        if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
+                            <button class="lo-out btn-sm ms-2 px-3">
+                                <a href="view/logout.php" class=" text-decoration-none">logout</a>
+                            </button>
+                            <?php echo "Hi," . $_SESSION['username']; ?>
+                        <?php } else { ?>
+                            <button class="lo-button btn-sm ms-2 px-3">
+                                <a href="view/login.php" class=" text-decoration-none">login</a>
+                            </button>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
         </div>
-    </nav>
-
+    </nav> 
 
     {{  }}
 
     <!--footer-->
-    <div class="container-fluid" style="background-color:burlywood;">
+    <div class="container-fluid footer">
         <div class="container p-3">
             <div class="row">
                 <div class="col">
@@ -92,18 +95,12 @@
                 </div>
                 <div class="col lin">
                     <h5>Connect with Us</h5>
-                    <p><a href=""><i class="fa-brands fa-facebook"
-                                style="font-size:50px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i
-                                class="fa-brands fa-instagram"
-                                style="font-size:50px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i
-                                class="fa-brands fa-youtube" style="font-size:50px;"></i></a></p>
+                    <p><a href=""><i class="fa-brands fa-facebook" style="font-size:50px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i class="fa-brands fa-instagram" style="font-size:50px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i class="fa-brands fa-youtube" style="font-size:50px;"></i></a></p>
                 </div>
             </div>
             <div class="row mt-2">
                 <div class="d-flex justify-content-between flex-column flex-md-row">
-                    <div><i class="fa-brands fa-cc-visa" style="font-size:50px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i
-                            class="fa-brands fa-cc-mastercard" style="font-size:50px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i
-                            class="fa-brands fa-cc-amex" style="font-size:50px;"></i></div>
+                    <div><i class="fa-brands fa-cc-visa" style="font-size:50px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-brands fa-cc-mastercard" style="font-size:50px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-brands fa-cc-amex" style="font-size:50px;"></i></div>
                     <div>&copy;Exchanze All Rights are reserved</div>
 
                 </div>
