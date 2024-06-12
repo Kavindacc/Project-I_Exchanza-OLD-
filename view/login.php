@@ -14,7 +14,7 @@
 
 <body>
     <!--nav bar-->
-    <nav class="navbar navbar-expand-lg sticky-top">
+    <nav class="navbar navbar-expand-lg sticky-top nav">
         <div class="container-fluid logo"><!--logo-->
             <a class="navbar-brand" href="#"><img src="../img/Exchanza.png" width="100px"></a>
             <!--toggle button-->
@@ -44,8 +44,8 @@
                             <a class="nav-link" href="#">Selling</a>
                         </li>
                     </ul>
-                    <form class="d-flex me-4" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search">
+                    <form class="d-flex me-4 align-items-center" role="search">
+                        <input class="search me-2" type="search" placeholder="Search">
                         <a href="#1" class="nav-link  text-decoration-none  mt-2"><i class="fa-solid fa-magnifying-glass"></i></a>
                     </form>
                     <!--login nav-link-a-color-->
@@ -53,13 +53,13 @@
                         <a href="#1" class="nav-link  text-decoration-none mx-2"><i class="fa-solid fa-cart-plus"></i></a>
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
-                            <button class="btn btn-warning btn-sm ms-2 px-3">
-                                <a href="view/logout.php" class="nav-link text-decoration-none">logout</a>
+                            <button class="lo-out btn-sm ms-2 px-3">
+                                <a href="view/logout.php" class=" text-decoration-none">logout</a>
                             </button>
                             <?php echo "Hi," . $_SESSION['username']; ?>
                         <?php } else { ?>
-                            <button class="btn btn-dark btn-sm ms-2 px-3">
-                                <a href="#1" class="nav-link text-decoration-none active" style="cursor: default;">login</a>
+                            <button class="lo-button btn-sm ms-2 px-3"style="cursor: default;background:#4c3f31 ;">
+                                <a href="#1" class=" text-decoration-none active" style="cursor: default;">login</a>
                             </button>
                         <?php } ?>
                     </div>

@@ -17,9 +17,9 @@ class User extends Dbh
         $stmt->execute([$this->email]);
 
         if ($stmt->rowCount()>0) {
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 return $row['email'];
-            }
+            
         }
     }
 
@@ -60,9 +60,9 @@ class User extends Dbh
         $stmt->execute([$this->email]);
 
         if ($stmt->rowCount()>0) {
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 return $row['password'];
-            }
+            
         } else {
             return false;
         }
@@ -76,9 +76,9 @@ class User extends Dbh
         $stmt=$this->connect()->prepare($query);
         $stmt->execute([$this->email]);
         if ($stmt->rowCount()>0) {
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 return $row['status'];
-            }
+            
         }
 
     }
@@ -93,10 +93,10 @@ class User extends Dbh
         $stmt->execute([$this->email]);
 
         if ($stmt->rowCount()>0) {
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 $_SESSION['username']=$row['name'];
                 return $row['password'];
-            }
+            
         } else {
             return false;
         }
@@ -137,10 +137,10 @@ class User extends Dbh
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$this->token_hash]);
         if ($stmt->rowCount()>0) {
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
                return $row['reset_token_expire'];
                $row['userid'];
-            }
+            
         } else {
             return false; //token not found
         }
@@ -154,9 +154,9 @@ class User extends Dbh
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$this->token_hash]);
         if ($stmt->rowCount()>0) {
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC); 
                return $row['userid'];
-            }
+            
         } 
     }
 
@@ -179,9 +179,9 @@ class User extends Dbh
         $stmt=$this->connect()->prepare($query);
         $stmt->execute([$this->email]);
         if($stmt->rowCount()>0){
-            while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
+            $row=$stmt->fetch(PDO::FETCH_ASSOC);
                 return $row['otp'];
-            }
+            
         }
        
 
