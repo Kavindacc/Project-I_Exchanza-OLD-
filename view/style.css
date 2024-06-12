@@ -7,9 +7,17 @@ body{
     background: #e3e2dd;
 }
 .regi{
-    margin-top:20px;
-    border: 1px solid red!important;
-    background-color: lightblue;
+    margin-top:30px;
+    
+}
+.regi a{
+    text-decoration: none;
+}
+.regi a:hover{
+    font-weight: 600;
+}
+input[type=submit]:hover{
+    transform: scaley(1.2);
 }
 .carousel-item {
     height: 90vh;

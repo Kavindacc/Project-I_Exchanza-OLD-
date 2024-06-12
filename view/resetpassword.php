@@ -63,7 +63,7 @@ if (strtotime($result) <= time()) { //convrt secound time/
             </div>
             <div class="row mt-2">
                 <div class="col-md-4">
-                    <input class="btn btn-primary w-100" type="submit" value="Reset" name="reset">
+                    <input class="btn btn-primary w-100" type="submit" value="Reset" name="reset" style="background:#897062;border:none;">
                 </div>
             </div>
         </form>

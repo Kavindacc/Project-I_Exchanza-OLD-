@@ -15,7 +15,7 @@
     <!--nav bar-->
     <nav class="navbar navbar-expand-lg sticky-top nav">
         <div class="container-fluid logo"><!--logo-->
-            <a class="navbar-brand" href="#"><img src="img/Exchanza.png" width="100px"></a>
+           <a class="navbar-brand" href="#"><img src="../Project-I_Exchanza/img/Exchanza.png" width="100px"></a>
             <!--toggle button-->
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -48,7 +48,7 @@
                         <a href="#1" class="nav-link  text-decoration-none  mt-1"><i class="fa-solid fa-magnifying-glass"></i></a>
                     </form>
                     <!--login nav-link-a-color-->
-                    <div class="d-flex flex-column flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
+                    <div class="d-flex flex-column float-start flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
                         <a href="#1" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
@@ -65,7 +65,7 @@
                 </div>
             </div>
         </div>
-    </nav>
+    </nav> 
     <!--sider-->
     <div id="carouselExampleCaptions" class="carousel slide carousel-fade con" ;>
         <div class="carousel-indicators">

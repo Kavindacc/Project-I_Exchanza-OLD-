@@ -33,7 +33,7 @@
         </div>
         <div class="row mt-3">
             <div class="col-md-4">
-                <input class="btn btn-primary w-100" type="submit" value="continue" name="continue">
+                <input class="btn btn-primary w-100" type="submit" value="continue" name="continue"style="background:#897062;border:none;">
             </div>
         </div>
         </form>

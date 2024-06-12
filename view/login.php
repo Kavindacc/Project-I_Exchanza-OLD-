@@ -100,49 +100,16 @@
                     <div class="col-md-4"><a href="forgetpassword.php">forget password</a></div>
                 </div>
                 <div class="row justify-content-center mt-2">
-                    <div class="col-md-4">
-                        <input class="btn btn-primary w-100" type="submit" value="Sign In" name="signin">
+                    <div class="col-md-4 login-btn">
+                        <input class="btn btn-primary w-100" type="submit" value="Sign In" name="signin"style="background:#897062;border:none;">
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <!--footer-->
-    <div class="container-fluid footer">
-        <div class="container p-3">
-            <div class="row">
-                <div class="col">
-                    <img src="../img/Exchanza.png" width="200px">
-                </div>
-            </div>
-            <div class="row  mt-4" style="border-bottom:1px solid black;">
-                <div class="col">
-                    <p class=""><i class="fa-solid fa-phone"></i>&nbsp;&nbsp;+94 112 555 444</p>
-                    <p class=""><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;exchanza@gmail.com</p>
-                    <p class=""><i class="fa-solid fa-location-dot"></i>&nbsp;&nbsp;No.56/2,Kotta Rd,Colombo
-                        05,<br>&nbsp;&nbsp;&nbsp;&nbsp;Sri Lanka</p>
-                </div>
-                <div class="col lin">
-                    <h5>Information</h5>
-                    <p><a href="#1">Privacy &amp; Policy</a></p>
-                    <p><a href="#1">About Us</a></p>
-                    <p><a href="#1">Terms &amp; Condition</a></p>
-                </div>
-                <div class="col lin">
-                    <h5>Connect with Us</h5>
-                    <p><a href=""><i class="fa-brands fa-facebook" style="font-size:50px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i class="fa-brands fa-instagram" style="font-size:50px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i class="fa-brands fa-youtube" style="font-size:50px;"></i></a></p>
-                </div>
-            </div>
-            <div class="row mt-2">
-                <div class="d-flex justify-content-between flex-column flex-md-row">
-                    <div><i class="fa-brands fa-cc-visa" style="font-size:50px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-brands fa-cc-mastercard" style="font-size:50px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-brands fa-cc-amex" style="font-size:50px;"></i></div>
-                    <div>&copy;Exchanze All Rights are reserved</div>
+    
 
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--fotterclose-->
+    
     <!--prevent backbutton-->
     <script type="text/javascript">
         function preventback() {
