@@ -16,10 +16,10 @@ class User extends Dbh
         $stmt = $this->connect()->prepare($query);
         $stmt->execute([$this->email]);
 
-        if ($stmt->rowCount()) {
-            while ($row = $stmt->fetch()) {
+        if ($stmt->rowCount()>0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 return $row['email'];
-            }
+            
         }
     }
 
@@ -59,10 +59,10 @@ class User extends Dbh
         $stmt = $this->connect()->prepare($query);
         $stmt->execute([$this->email]);
 
-        if ($stmt->rowCount()) {
-            while ($row = $stmt->fetch()) {
+        if ($stmt->rowCount()>0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 return $row['password'];
-            }
+            
         } else {
             return false;
         }
@@ -75,10 +75,10 @@ class User extends Dbh
         $query="SELECT * FROM usern WHERE email=?";
         $stmt=$this->connect()->prepare($query);
         $stmt->execute([$this->email]);
-        if ($stmt->rowCount()) {
-            while ($row = $stmt->fetch()) {
+        if ($stmt->rowCount()>0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 return $row['status'];
-            }
+            
         }
 
     }
@@ -92,11 +92,11 @@ class User extends Dbh
         $stmt = $this->connect()->prepare($query);
         $stmt->execute([$this->email]);
 
-        if ($stmt->rowCount()) {
-            while ($row = $stmt->fetch()) {
+        if ($stmt->rowCount()>0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 $_SESSION['username']=$row['name'];
                 return $row['password'];
-            }
+            
         } else {
             return false;
         }
@@ -110,7 +110,7 @@ class User extends Dbh
         $stmt = $this->connect()->prepare($query);
         $stmt->execute([$this->email]);
 
-        if ($stmt->rowCount()) {
+        if ($stmt->rowCount()>0) {
             return true;
         } else {
             return false;
@@ -136,11 +136,11 @@ class User extends Dbh
         $sql = "SELECT * FROM usern WHERE reset_token_hash=?";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$this->token_hash]);
-        if ($stmt->rowCount()) {
-            while ($row = $stmt->fetch()) {
+        if ($stmt->rowCount()>0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
                return $row['reset_token_expire'];
                $row['userid'];
-            }
+            
         } else {
             return false; //token not found
         }
@@ -153,10 +153,10 @@ class User extends Dbh
         $sql = "SELECT * FROM usern WHERE reset_token_hash=?";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$this->token_hash]);
-        if ($stmt->rowCount()) {
-            while ($row = $stmt->fetch()) {
+        if ($stmt->rowCount()>0) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC); 
                return $row['userid'];
-            }
+            
         } 
     }
 
@@ -178,10 +178,10 @@ class User extends Dbh
         $query="SELECT otp FROM usern WHERE email=?";
         $stmt=$this->connect()->prepare($query);
         $stmt->execute([$this->email]);
-        if($stmt->rowCount()){
-            while($row=$stmt->fetch()){
+        if($stmt->rowCount()>0){
+            $row=$stmt->fetch(PDO::FETCH_ASSOC);
                 return $row['otp'];
-            }
+            
         }
        
 
