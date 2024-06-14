@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require '../model/user.php';
 
 if(isset($_POST['submit'])){
