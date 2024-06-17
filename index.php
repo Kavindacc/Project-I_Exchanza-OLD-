@@ -15,7 +15,7 @@
     <!--nav bar-->
     <nav class="navbar navbar-expand-lg sticky-top nav">
         <div class="container-fluid logo"><!--logo-->
-           <a class="navbar-brand" href="#"><img src="../Project-I_Exchanza/img/Exchanza.png" width="100px"></a>
+            <a class="navbar-brand" href="#"><img src="../Project-I_Exchanza/img/Exchanza.png" width="100px"></a>
             <!--toggle button-->
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -52,9 +52,9 @@
                         <a href="../Project-I_Exchanza/view/cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
-                            <button class="lo-out btn-sm ms-2 px-3">
-                                <a href="view/logout.php" class=" text-decoration-none">logout</a>
-                            </button>
+
+                            <a href="view/userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user"style="font-size:1.5rem;"></i></a>
+
                             <?php echo "Hi," . $_SESSION['username']; ?>
                         <?php } else { ?>
                             <button class="lo-button btn-sm ms-2 px-3">
@@ -65,7 +65,7 @@
                 </div>
             </div>
         </div>
-    </nav> 
+    </nav>
     <!--sider-->
     <div id="carouselExampleCaptions" class="carousel slide carousel-fade con" ;>
         <div class="carousel-indicators">
