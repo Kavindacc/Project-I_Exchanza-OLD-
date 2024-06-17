@@ -1,4 +1,6 @@
-<?php require '../control/logincon.php' ?>
+<?php require '../control/logincon.php';
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">

@@ -6,7 +6,7 @@ session_start();
 class User extends Dbh
 {
 
-    protected $name, $gender, $country, $pnum, $password, $email, $filepath, $token, $expire, $token_hash,$userid,$otp,$status;
+    private $name, $gender, $country, $pnum, $password, $email, $filepath, $token, $expire, $token_hash,$userid,$otp,$status;
 
     public function emailexit($email)
     { //email exits function
