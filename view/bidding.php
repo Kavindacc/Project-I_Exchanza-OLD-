@@ -80,7 +80,7 @@
                     <h1 class="text-md font-medium " >UPTO 40% OFF</h1>
 
                     <div class="mt-3 w-full">
-                        <button class=" p-2 flex justify-center items-center text-md font-semibold text-white bg-black rounded-md px-3">Shop Now</button>
+                        <button class=" p-2 flex justify-center items-center text-md font-semibold text-white bg-black rounded-md px-3">Add Your Bid</button>
                     </div>
 
                 </div>
@@ -113,8 +113,7 @@
                     <button class="p-1 rounded-md px-2 bg-[#F6F6F6]"><li class="fa-solid fa-magnifying-glass"""></li></button>
                 </div>
 
-                <div class="flex flex-col w-full""">asd</div>
-
+                
             </div>
 
         </div>
