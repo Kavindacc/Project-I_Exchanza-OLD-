@@ -1,7 +1,6 @@
 <?php
 
 
-
 class Otp{
 
     protected $email,$otp;

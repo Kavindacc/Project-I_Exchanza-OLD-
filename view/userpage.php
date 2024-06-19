@@ -1,4 +1,5 @@
 <?php 
+session_start();
 $filePath = null; //file upload start
         if (isset($_FILES['file']) && $_FILES['file']['error'] === 0) {
             $file = $_FILES['file'];
@@ -24,3 +25,21 @@ $filePath = null; //file upload start
             }
         } //file end
         ?>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="style.css">
+            <title>User page</title>
+        </head>
+        <body>
+            <div>
+                <h2>Hi, <?php echo  $_SESSION['username']; ?> </h2>
+                <a href="logout.php"><button>Logout</button>
+            </div>
+            
+            </div>
+
+        </body>
+        </html>
