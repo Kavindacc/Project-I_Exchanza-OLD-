@@ -220,7 +220,8 @@
     position: absolute;
     top: 30%;
     right: 2%;
-    background: rgba(240, 182, 182, 0.5); /* Black background with 0.5 opacity */
+    /* background: rgba(87, 136, 241, 0.285); */
+    background: linear-gradient(rgba(209, 143, 176,0.6), rgba(122, 159, 232,0.6));
     width: 60%; 
     /* margin-right: 5%; */
   }
@@ -324,9 +325,9 @@
 
 .catr{
     display: flex;
-    gap: 6%;
+    gap: 10%;
     margin-bottom: 1%;
-    /* background-color: aqua; */
+    justify-content: center;
 }
 .col.r1, .col.r2, .col.r3, .col.r4, .col.r5, .col.r6 {
     padding: 0;
@@ -355,10 +356,9 @@
 
 .catt{
     display: flex;
-    gap: 6%;
-    /* margin-bottom: 1%; */
-    /* margin-left: 1.5%; */
-    /* background-color: #4C3F31; */
+    gap: 10%;
+    margin-bottom: 1%;
+    justify-content: center;
     height: auto;
 }
 .col.t1, .col.t2, .col.t3, .col.t4, .col.t5, .col.t6 {

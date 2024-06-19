@@ -8,20 +8,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <!-- integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="view/style.css">
-    <link rel="stylesheet" href="thriftW.css">
+    <link rel="stylesheet" href="view/style.css"> 
+    <link rel="stylesheet" href="thrift men.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
         crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
-    <title>Thrift</title>
+    <title>Thrift Men </title>
 </head>
 
 <body>
 <!--nav bar-->
  <nav class="navbar navbar-expand-lg sticky-top nav">
         <div class="container-fluid logo"><!--logo-->
-            <a class="navbar-brand" href="#"><img src="../img/Exchanza.png" width="100px"></a>
+            <a class="navbar-brand" href="#"><img src="../Project-I_Exchanza/img/Exchanza.png" width="100px"></a>
             <!--toggle button-->
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -82,12 +82,12 @@
  <div class="but">
  <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab"
-     aria-controls="home-tab-pane" aria-selected="true" onclick="window.location.href='thrift.php';">Women</button>
+    <button class="nav-link " id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab"
+     aria-controls="home-tab-pane" aria-selected="false" onclick="window.location.href='thrift.php';">Women</button>
   </li>
   <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" 
-    aria-controls="profile-tab-pane" aria-selected="false" onclick="window.location.href='thrift_men.php';">Men</button>
+    <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" 
+    aria-controls="profile-tab-pane" aria-selected="true" onclick="window.location.href='thrift_men.php';">Men</button>
   </li>
   <li class="nav-item" role="presentation">
     <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" 
@@ -95,10 +95,9 @@
   </li>
  </ul>
  <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0"></div>
-  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0"></div>
+  <div class="tab-pane fade " id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0"></div>
+  <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0"></div>
   <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0"></div>
-  <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0"></div>
  </div>
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </div>
@@ -229,11 +228,11 @@
 
 <!-- image container -->
  <div class="container thrift" id="thriftwomen">
-     <img src="../img/thrift-women.png" alt="women thrift intro" class="thriftwomen">
+     <img src="../img/thrift-men.png" alt="women thrift intro" class="thriftwomen">
  
     <div class="text-block">
 
-        <h1 align="center">Women</h1>
+        <h1 align="center">Men</h1>
         <pre class="para1">
         “Most of my wardrobe is vintage and I’ve worn dresses to the Oscars that
         I got for $10.At Sean Penn’s last Haiti gala I wore this vintage dress that 
@@ -252,52 +251,52 @@
 
     <div class="col r1">
         <a href="cat_items_template.php">
-            <img src="../img/TopsW.jpg" alt="women thrift cat1" class="rounded-circle img-fluid twc1" >
+            <img src="../img/mens t shirt.jpg" alt="men thrift cat1" class="rounded-circle img-fluid twc1" >
         </a>
         
     </div>
     
     <div class="col r2">
         <a href="cat_items_template.php">    
-            <img src="../img/dressW.jpg" alt="women thrift cat2" class="rounded-circle img-fluid twc2" >
+            <img src="../img/mens shirt.jpg" alt="men thrift cat2" class="rounded-circle img-fluid twc2" >
         </a>
     </div>
     <div class="col r3"> 
         <a href="cat_items_template.php"> 
-            <img src="../img/denimW.jpg" alt="women thrift cat3" class="rounded-circle img-fluid twc3" >
+            <img src="../img/men denim.jpg" alt="men thrift cat3" class="rounded-circle img-fluid twc3" >
         </a>
     </div>
     <div class="col r4">
         <a href="cat_items_template.php"> 
-            <img src="../img/acsW.jpg" alt="women thrift cat4" class="rounded-circle img-fluid twc4" >
+            <img src="../img/men suits.jpg" alt="men thrift cat4" class="rounded-circle img-fluid twc4" >
         </a>
     </div>
     <div class="col r5">
         <a href="cat_items_template.php"> 
-            <img src="../img/bagW.jpg" alt="women thrift cat5" class="rounded-circle img-fluid twc5" >
+            <img src="../img/men acs.jpg" alt="men thrift cat5" class="rounded-circle img-fluid twc5" >
         </a>
     </div>
     <div class="col r6">
         <a href="cat_items_template.php"> 
-            <img src="../img/ShoeW.jpg" alt="women thrift cat6" class="rounded-circle img-fluid twc6" >
+            <img src="../img/men shoes.jpg" alt="men thrift cat6" class="rounded-circle img-fluid twc6" >
         </a>
         </div>
   </div>
   <div class="row row-cols-6 catt">
     <div class="col t1"> 
-         <p> Tops </p>                   
+         <p> T-Shirts </p>                   
     </div>
     <div class="col t2"> 
-         <p> Dresses </p>                   
+         <p> Shirts </p>                   
     </div>
     <div class="col t3"> 
          <p> Pants </p>                   
     </div>
     <div class="col t4"> 
-         <p> Accessories  </p>                   
+         <p> Suits  </p>                   
     </div>
     <div class="col t5"> 
-         <p> Bags </p>                   
+         <p> Accessories </p>                   
     </div>
     <div class="col t6"> 
          <p> Shoes </p>                   
