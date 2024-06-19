@@ -10,6 +10,91 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>index</title>
+    <style type="text/tailwindcss">
+        .product{
+            @apply relative overflow-hidden p-[20px];
+        }
+        .product-category{
+            @apply py-0 px-[10vw] text-[30px] font-[500] mb-[40px] capitalize;
+        }
+        .product-container{
+            @apply py-0 px-[10vw] flex overflow-x-auto scroll-smooth;
+        }
+        .product-container::-webkit-scrollbar{
+            @apply hidden;
+        }
+        .product-card{
+            @apply flex-[0_0_auto] w-[250px] h-[450px] mr-[40px]; 
+        }
+        .product-image{
+            @apply relative w-full h-[350px] overflow-hidden;
+        }
+        .product-thumb{
+            @apply w-full h-full object-cover;
+        }
+        .discount-tag {
+            @apply absolute bg-[#fff] p-[5px] rounded-[5px] text-[#ff7d7d] right-[10px] top-[10px] capitalize;
+        }
+        .card-btn{
+            @apply absolute bottom-[10px] left-[50%] -translate-x-1/2  p-[10px] w-[90%] capitalize border-[none] bg-[#fff] rounded-[5px] duration-[0.5s] cursor-pointer opacity-0;    
+        }
+        .product-card:hover .card-btn{
+            @apply opacity-100;
+        }
+
+        .card-btn:hover{
+            @apply bg-[#ff7d7d] text-[#fff];
+        }
+        .product-info{
+            @apply w-full h-full pt-[10px];
+        }
+        .product-brand{
+            @apply uppercase;
+        }
+        .product-short-description{
+            @apply w-full h-[20px] leading-[20px] overflow-hidden opacity-[0.5] capitalize my-[5px];
+        }
+        .price{
+            @apply font-extrabold text-[20px];
+        }
+        .actual-price{
+            @apply ml-[20px] opacity-50 line-through;
+        }
+        .pre-btn,.nxt-btn{
+            @apply border-0 w-[10vw] h-full absolute top-0 flex justify-center items-center bg-gradient-to-r from-transparent to-white cursor-pointer z-20;
+        }
+        .pre-btn {
+            @apply left-0 rotate-180;
+        }
+        .nxt-btn {
+            @apply right-0;
+        }
+        .pre-btn img,
+        .nxt-btn img {
+            @apply opacity-20;
+        }
+        .pre-btn:hover img,
+        .nxt-btn:hover img {
+            @apply opacity-100;
+        }
+        .collection-container {
+            @apply w-full grid grid-cols-2 gap-2.5;
+        }
+        .collection {
+            @apply relative;
+        }
+        .collection img {
+            @apply w-full h-full object-cover;
+        }
+        .collection p {
+            @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white text-5xl capitalize;
+        }
+        .collection:nth-child(3) {
+            @apply col-span-2 mb-2.5;
+        }
+    </style>
+
+    
 </head>
 
 <body>
@@ -70,8 +155,9 @@
 
 
     <!-- content -->
-    <div class="flex w-full flex-col pb-10 ">
+    <div class="flex w-full flex-col pb-10 px-10">
 
+        <!-- Hero Section -->
         <div class="flex flex-row w-full bg-[#F3F3F3] px-3">
             
             <div class="hidden md:flex w-full justify-center items-center ">
@@ -93,8 +179,8 @@
                 <div class="flex text-white md:hidden md:text-white flex-col gap-3 relative top-[-45%] left-[10%]">
 
                     <h1 class="text-xl">Classic Exclusive</h1>
-                    <h1 class="text-3xl font-bold " >Women's Collection</h1>
-                    <h1 class="text-md font-medium " >UPTO 40% OFF</h1>
+                    <h1 class="text-3xl font-bold" >Women's Collection</h1>
+                    <h1 class="text-md font-medium" >UPTO 40% OFF</h1>
 
                     <div class="mt-3 w-full">
                         <button class=" p-2 flex justify-center items-center text-md font-semibold text-white bg-black rounded-md px-3">Shop Now</button>
@@ -104,17 +190,136 @@
             </div>
     
         </div>
-
+        <!-- Ongoing Bidding Section-->
         <div class="flex flex-col px-12 pt-16 bg-red bg-[#F3F3F3]">
 
-            <div class="flex justify-between flex-row w-full bg-[#F3F3F3] px-3">
-                <h1 class='text-2xl text-semibold my-auto'>Shop by Categories</h1>
-
-                <div class="flex gap-3 my-auto">
-                    <button class="p-1 bg-[black] text-white rounded-md px-2"><li class="fa-solid fa-magnifying-glass"""></li></button>
-                    <button class="p-1 rounded-md px-2 bg-[#F6F6F6]"><li class="fa-solid fa-magnifying-glass"""></li></button>
-                </div>      
+        <div class="product bg-[#CEC0B9]"> 
+            <h2 class="product-category">ongoing Bidding</h2>
+            <button class="pre-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
+            <button class="nxt-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
+            <div class="product-container">
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="../img/Bidding/card1.jpg" class="product-thumb" alt="">
+                        <button class="card-btn">add to wishlist</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand</h2>
+                        <p class="product-short-description">a short line about the cloth..</p>
+                        <span class="price">$20</span><span class="actual-price">$40</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="../img/Bidding/card2.jpg" class="product-thumb" alt="">
+                        <button class="card-btn">add to wishlist</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand</h2>
+                        <p class="product-short-description">a short line about the cloth..</p>
+                        <span class="price">$20</span><span class="actual-price">$40</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="../img/Bidding/card3.jpg" class="product-thumb" alt="">
+                        <button class="card-btn">add to wishlist</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand</h2>
+                        <p class="product-short-description">a short line about the cloth..</p>
+                        <span class="price">$20</span><span class="actual-price">$40</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="../img/Bidding/card4.jpg" class="product-thumb" alt="">
+                        <button class="card-btn">add to wishlist</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand</h2>
+                        <p class="product-short-description">a short line about the cloth..</p>
+                        <span class="price">$20</span><span class="actual-price">$40</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="../img/Bidding/card5.jpg" class="product-thumb" alt="">
+                        <button class="card-btn">add to wishlist</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand</h2>
+                        <p class="product-short-description">a short line about the cloth..</p>
+                        <span class="price">$20</span><span class="actual-price">$40</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="../img/Bidding/card6.jpg" class="product-thumb" alt="">
+                        <button class="card-btn">add to wishlist</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand</h2>
+                        <p class="product-short-description">a short line about the cloth..</p>
+                        <span class="price">$20</span><span class="actual-price">$40</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="../img/Bidding/card7.jpg" class="product-thumb" alt="">
+                        <button class="card-btn">add to wishlist</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand</h2>
+                        <p class="product-short-description">a short line about the cloth..</p>
+                        <span class="price">$20</span><span class="actual-price">$40</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="../img/Bidding/card8.jpg" class="product-thumb" alt="">
+                        <button class="card-btn">add to wishlist</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand</h2>
+                        <p class="product-short-description">a short line about the cloth..</p>
+                        <span class="price">$20</span><span class="actual-price">$40</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="../img/Bidding/card9.jpg" class="product-thumb" alt="">
+                        <button class="card-btn">add to wishlist</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand</h2>
+                        <p class="product-short-description">a short line about the cloth..</p>
+                        <span class="price">$20</span><span class="actual-price">$40</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <span class="discount-tag">50% off</span>
+                        <img src="../img/Bidding/card10.jpg" class="product-thumb" alt="">
+                        <button class="card-btn">add to wishlist</button>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-brand">brand</h2>
+                        <p class="product-short-description">a short line about the cloth..</p>
+                        <span class="price">$20</span><span class="actual-price">$40</span>
+                    </div>
+                </div>
             </div>
+        </div>
         </div>
 
     </div>
