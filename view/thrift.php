@@ -37,10 +37,10 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center  flex-grow-1 pe-3">
                         <li class="nav-item mx-2">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link " aria-current="page" href="../index.php">Home</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="../view/thrift.php">Thrift</a>
+                            <a class="nav-link active" href="../view/thrift.php">Thrift</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="#">Bidding</a>
@@ -59,7 +59,7 @@
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
 
-                            <a href="view/userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user"style="font-size:1.5rem;"></i></a>
+                            <a href="userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user"style="font-size:1.5rem;"></i></a>
 
                             <?php echo "Hi," . $_SESSION['username']; ?>
                         <?php } else { ?>
@@ -118,9 +118,13 @@
             Thrifting is an excellent way to save money, reduce waste, and support sustainable fashion.
              By thrifting items, you can find unique pieces while also contributing to a more eco-friendly world.
         </p>
-        <button class="add-item-btn" onclick="showForm()">Add Item</button>
+        <?php if(!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) {?> <!--logedin session eka -->
+        <a href="login.php" style="text-decoration: none;"><button class="add-item-btn">Add Item</button> </a>
+        
+        <?php } else{?>
+        <button class="add-item-btn" onclick="showForm()">Add Item</button>  
         <script src="sidepanel.js"></script>
- 
+        <?php } ?>
         <div id="addItemForm"class="add-item-form">   </div>
  </div>     
  <!-- Popup overlay and form -->
@@ -131,7 +135,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <h2 class="mb-4">Add Item to Resell</h2>
-                    <form id="resellForm"><!--form start add to iteam-->
+                    <form id="resellForm">                <!--form start add to iteam-->
                         <div class="form-group">
                             <label for="itemName" class="bold">Item Name</label>
                             <input type="text" class="form-control" id="itemName" placeholder="Enter item name" required>
@@ -202,7 +206,7 @@
                             <small class="form-text text-muted">Please provide an estimate of how many times this item has been used.</small>
                         </div>
                         <button type="submit" class="btn btn-primary ssubmit">Submit</button>
-                    </form>
+                    </form><!--form end-->
                 </div>
                 <div class="col-md-6">
                     <h2>Preview</h2>
