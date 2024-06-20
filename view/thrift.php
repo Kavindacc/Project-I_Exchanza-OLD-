@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <!-- integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="view/style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="thriftW.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
@@ -131,7 +131,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <h2 class="mb-4">Add Item to Resell</h2>
-                    <form id="resellForm">
+                    <form id="resellForm"><!--form start add to iteam-->
                         <div class="form-group">
                             <label for="itemName" class="bold">Item Name</label>
                             <input type="text" class="form-control" id="itemName" placeholder="Enter item name" required>
@@ -233,7 +233,7 @@
  
     <div class="text-block">
 
-        <h1 align="center">Women</h1>
+        <h1 style="text-align:center">Women</h1>
         <pre class="para1">
         “Most of my wardrobe is vintage and I’ve worn dresses to the Oscars that
         I got for $10.At Sean Penn’s last Haiti gala I wore this vintage dress that 
