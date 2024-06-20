@@ -261,68 +261,7 @@
     object-fit: cover;
 
 }
-/* responsive for the first part  */
-
-@media (max-width: 1024px) {
-    .text-block {
-        top: 25%;
-        width: 80%;
-        padding: 1rem;
-    }
-    .text-block h1 {
-        font-size: 3vw;
-    }
-    .para1 {
-        font-size: 2vw;
-    }
-}
-
-@media (max-width: 768px) {
-    .text-block {
-        top: 20%;
-        width: 90%;
-        padding: 0.8rem;
-    }
-    .text-block h1 {
-        font-size: 4vw;
-    }
-    .para1 {
-        font-size: 2.5vw;
-    }
-}
-
-@media (max-width: 576px) {
-    .text-block {
-        top: 15%;
-        right: 1%;
-        width: 95%;
-        padding: 0.6rem;
-    }
-    .text-block h1 {
-        font-size: 5vw;
-    }
-    .para1 {
-        font-size: 3vw;
-    }
-}
-
-@media (max-width: 400px) {
-    .text-block {
-        top: 10%;
-        width:60%;
-        height:80%;
-        padding: 0.4rem;
-    }
-    .text-block h1 {
-        font-size: 5vw;
-    }
-    .para1 {
-        font-size: 2vw;
-    }
-}
-
 /* catpart */
-
 .catr{
     display: flex;
     gap: 10%;
@@ -503,4 +442,424 @@
     border-radius: 50%; 
     /* margin-right: 15px; */
     flex-shrink: 0;
+}
+
+/* responsive for the first part  */
+
+@media (max-width: 1024px) {
+    .text-block {
+        top: 25%;
+        width: 80%;
+        padding: 1rem;
+    }
+    .text-block h1 {
+        font-size: 3vw;
+    }
+    .para1 {
+        font-size: 2vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .text-block {
+        top: 20%;
+        width: 90%;
+        padding: 0.8rem;
+    }
+    .text-block h1 {
+        font-size: 4vw;
+    }
+    .para1 {
+        font-size: 2.5vw;
+    }
+}
+
+@media (max-width: 576px) {
+    .text-block {
+        top: 15%;
+        right: 1%;
+        width: 95%;
+        padding: 0.6rem;
+    }
+    .text-block h1 {
+        font-size: 5vw;
+    }
+    .para1 {
+        font-size: 3vw;
+    }
+}
+
+@media (max-width: 400px) {
+    .text-block {
+        top: 10%;
+        width:60%;
+        height:80%;
+        padding: 0.4rem;
+    }
+    .text-block h1 {
+        font-size: 5vw;
+    }
+    .para1 {
+        font-size: 2vw;
+    }
+}
+
+/* responsive */
+/* Mobile and small screens (max-width: 768px) */
+@media (max-width: 768px) {
+    /* Navbar adjustments */
+    .navbar-brand img {
+        max-height: 40px;
+    }
+
+    .navbar-toggler {
+        font-size: 1.25rem;
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-link {
+        margin: 5px 0;
+    }
+
+    .search {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .lo-button {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* Arena adjustments */
+    .arena {
+        padding: 40px 0;
+    }
+
+    .artext {
+        font-size: 1.5rem;
+    }
+
+    .feather {
+        font-size: 4rem;
+    }
+
+    .but .nav-link {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    /* Add Item Button and Form */
+    .side-panel {
+        right: -250px;
+        height:50%;
+    }
+    .add-item-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .popup-overlay .close-btn {
+        top: 20px;
+    }
+    .reviews blockquote {
+        margin-right: 50%;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #555;
+        /* background-color: aqua; */
+    }
+    .revieW{
+        /* background-color: #746557; */
+         /* #092805cd */
+         box-shadow: 0 2px 8px rgba(137, 112, 98,0.677);
+    }
+    .reviews blockquote p {
+        margin-bottom: 0.5rem;
+        margin-right: 15%;
+    }
+    
+    .reviews blockquote cite {
+        font-style: normal;
+        font-weight: bold;
+        color: #092805cd;
+        
+    }
+    /* Cards adjustments */
+    .card {
+        margin: 0 0 10px;
+    }
+
+    .card img {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+    }
+
+    .stat h3 {
+        position:relative; 
+        left: 18%;
+    }
+
+    .stat p {
+        position:relative; 
+        left: 18%;
+    }
+    /* Footer adjustments */
+    .footer {
+        padding: 15px 0;
+    }
+
+    .footer h5 {
+        font-size: 1.1rem;
+    }
+
+    .footer p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablets and medium screens (min-width: 769px and max-width: 992px) */
+@media (min-width: 769px) and (max-width: 992px) {
+    /* Navbar adjustments */
+    /* .navbar-brand img {
+        max-height: 45px;
+    }
+
+    .navbar-toggler {
+        font-size: 1.25rem;
+    }
+
+    .navbar-nav {
+        flex-direction: row;
+    }
+
+    .nav-link {
+        margin: 0 5px;
+    }
+
+    .search {
+        width: auto;
+        margin-top: 0;
+    }
+
+    .lo-button {
+        width: auto;
+        margin-top: 0;
+    } */
+
+    /* Arena adjustments */
+    .arena {
+        padding: 50px 0;
+    }
+
+    .artext {
+        font-size: 1.75rem;
+    }
+
+    .feather {
+        font-size: 4.5rem;
+    }
+
+    .but .nav-link {
+        font-size: 1rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    /* Add Item Button and Form */
+    .side-panel {
+        right: -250px;
+        height:50%;
+    }
+    .add-item-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .popup-overlay .close-btn {
+        top: 20px;
+    }
+
+    .reviews blockquote {
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #555;
+        /* background-color: aqua; */
+    }
+    .revieW{
+        /* background-color: #746557; */
+         /* #092805cd */
+         box-shadow: 0 2px 8px rgba(137, 112, 98,0.677);
+    }
+    .reviews blockquote p {
+        margin-bottom: 0.5rem;
+        margin-right: 10%;
+    }
+    
+    .reviews blockquote cite {
+        font-style: normal;
+        font-weight: bold;
+        color: #092805cd;
+        
+    }
+    .stat h3 {
+        position:relative; 
+        left: 20%;
+    }
+
+    .stat p {
+        position:relative; 
+        left: 20%;
+    }
+    /* Cards adjustments */
+    .card {
+        margin: 0 0 15px;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+    }
+
+    .card-text {
+        font-size: 0.95rem;
+    }
+
+    /* Footer adjustments */
+    .footer {
+        padding: 20px 0;
+    }
+
+    .footer h5 {
+        font-size: 1.15rem;
+    }
+
+    .footer p {
+        font-size: 0.95rem;
+    }
+}
+
+/* Large screens (min-width: 993px) */
+@media (min-width: 993px) {
+    /* Navbar adjustments */
+    /* .navbar-brand img {
+        max-height: 50px;
+    }
+
+    .navbar-toggler {
+        font-size: 1.5rem;
+    }
+
+    .navbar-nav {
+        flex-direction: row;
+    }
+
+    .nav-link {
+        margin: 0 10px;
+    }
+
+    .search {
+        width: auto;
+        margin-top: 0;
+    }
+
+    .lo-button {
+        width: auto;
+        margin-top: 0;
+    } */
+
+    /* Arena adjustments */
+    /* .arena {
+        padding: 60px 0;
+    } */
+
+    .artext {
+        font-size: 2rem;
+    }
+
+    .feather {
+        font-size: 5rem;
+    }
+
+    .but .nav-link {
+        font-size: 1.1rem;
+        padding: 0.5rem 1rem;
+    }
+
+    /* Add Item Button and Form */
+    .add-item-btn {
+        width: auto;
+        padding: 12px;
+        font-size: 1.1rem;
+    }
+
+
+    .popup-overlay .close-btn {
+        top: 20px;
+    }
+    .revieW{
+        /* background-color: #746557; */
+         /* #092805cd */
+         box-shadow: 0 2px 8px rgba(137, 112, 98,0.677);
+    }
+    .reviews blockquote p {
+        margin-bottom: 0.5rem;
+        margin-right: 10%;
+    }
+    
+    .reviews blockquote cite {
+        font-style: normal;
+        font-weight: bold;
+        color: #092805cd;
+        
+    }
+    .stat h3 {
+        position:relative; 
+        left: 20%;
+    }
+
+    .stat p {
+        position:relative; 
+        left: 20%;
+    }
+    .col.r1, .col.r2, .col.r3, .col.r4, .col.r5, .col.r6 {
+    margin-bottom: 10%;
+    }
+    /* Cards adjustments */
+    .card {
+        margin: 0 0 20px;
+    }
+
+    .card-title {
+        font-size: 1.3rem;
+    }
+
+    .card-text {
+        font-size: 1rem;
+    }
+
+    /* Footer adjustments */
+    .footer {
+        padding: 25px 0;
+    }
+
+    .footer h5 {
+        font-size: 1.2rem;
+    }
+
+    .footer p {
+        font-size: 1rem;
+    }
 }
