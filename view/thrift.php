@@ -121,7 +121,7 @@
         <button class="add-item-btn" onclick="showForm()">Add Item</button>
         <script src="sidepanel.js"></script>
  
-        <div id="addItemForm"class="add-item-form">   </div>
+        <!-- <div id="addItemForm"class="add-item-form">   </div> -->
  </div>     
  <!-- Popup overlay and form -->
  <div id="popupForm" class="popup-overlay">
