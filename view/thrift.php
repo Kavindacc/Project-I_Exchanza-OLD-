@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <!-- integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="view/style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="thriftW.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
@@ -37,10 +37,10 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center  flex-grow-1 pe-3">
                         <li class="nav-item mx-2">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link " aria-current="page" href="../index.php">Home</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="../view/thrift.php">Thrift</a>
+                            <a class="nav-link active" href="../view/thrift.php">Thrift</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="#">Bidding</a>
@@ -59,7 +59,7 @@
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
 
-                            <a href="view/userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user"style="font-size:1.5rem;"></i></a>
+                            <a href="userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user"style="font-size:1.5rem;"></i></a>
 
                             <?php echo "Hi," . $_SESSION['username']; ?>
                         <?php } else { ?>
@@ -118,10 +118,14 @@
             Thrifting is an excellent way to save money, reduce waste, and support sustainable fashion.
              By thrifting items, you can find unique pieces while also contributing to a more eco-friendly world.
         </p>
-        <button class="add-item-btn" onclick="showForm()">Add Item</button>
+        <?php if(!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) {?> <!--logedin session eka -->
+        <a href="login.php" style="text-decoration: none;"><button class="add-item-btn">Add Item</button> </a>
+        
+        <?php } else{?>
+        <button class="add-item-btn" onclick="showForm()">Add Item</button>  
         <script src="sidepanel.js"></script>
- 
-        <!-- <div id="addItemForm"class="add-item-form">   </div> -->
+        <?php } ?>
+        <div id="addItemForm"class="add-item-form">   </div>
  </div>     
  <!-- Popup overlay and form -->
  <div id="popupForm" class="popup-overlay">
@@ -131,7 +135,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <h2 class="mb-4">Add Item to Resell</h2>
-                    <form id="resellForm">
+                    <form id="resellForm">                <!--form start add to iteam-->
                         <div class="form-group">
                             <label for="itemName" class="bold">Item Name</label>
                             <input type="text" class="form-control" id="itemName" placeholder="Enter item name" required>
@@ -202,7 +206,7 @@
                             <small class="form-text text-muted">Please provide an estimate of how many times this item has been used.</small>
                         </div>
                         <button type="submit" class="btn btn-primary ssubmit">Submit</button>
-                    </form>
+                    </form><!--form end-->
                 </div>
                 <div class="col-md-6">
                     <h2>Preview</h2>
@@ -233,7 +237,7 @@
  
     <div class="text-block">
 
-        <h1 align="center">Women</h1>
+        <h1 style="text-align:center">Women</h1>
         <pre class="para1">
         “Most of my wardrobe is vintage and I’ve worn dresses to the Oscars that
         I got for $10.At Sean Penn’s last Haiti gala I wore this vintage dress that 
