@@ -119,7 +119,7 @@
              By thrifting items, you can find unique pieces while also contributing to a more eco-friendly world.
         </p>
         <?php if(!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) {?> <!--logedin session eka -->
-        <a href="login.php" style="text-decoration: none;"><button class="add-item-btn">Add Item</button> </a>
+        <a href="login.php" style="text-decoration: none;"><button class="add-item-btn"style="width:100%;">Add Item</button> </a>
         
         <?php } else{?>
         <button class="add-item-btn" onclick="showForm()">Add Item</button>  
@@ -358,7 +358,7 @@
  </div>
  </div>   
 <!--footer-->
- <div class="container-fluid" style="background-color:burlywood;">
+ <div class="container-fluid footer">
         <div class="container p-3">
             <div class="row">
                 <div class="col">
