@@ -52,23 +52,6 @@ class User extends Dbh
         }
     }
 
-    public function statusUpdate($email, $status)
-    {
-
-        $this->email = $email;
-        $this->status = $status;
-
-        try {
-            $query = "UPDATE usern SET status=? WHERE email=? ";
-            $stmt = $this->connect()->prepare($query);
-            $stmt->execute([$this->status, $this->email]);
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-
-         
-        
-    }
 
     public function statusUpdate($email,$status){
 
