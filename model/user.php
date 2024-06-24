@@ -9,22 +9,26 @@ class User extends Dbh
     private $name, $gender, $country, $pnum, $password, $email, $filepath, $token, $expire, $token_hash, $userid, $otp, $status;
 
     public function emailexit($email)
-    { //email exits function
-
+    {                                        //email exits function
         $this->email = $email;
         try {
 
+            
             $query = "SELECT * FROM usern WHERE email=?";
             $stmt = $this->connect()->prepare($query);
             $stmt->execute([$this->email]);
-
-            if ($stmt->rowCount() > 0) {
+    
+            if ($stmt->rowCount()>0) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                return $row['email'];
+                    return $row['email'];
+                
             }
-        } catch (PDOException $e) {
+
+        }  catch (PDOException $e) {
+
             echo "Error: " . $e->getMessage();
         }
+
     }
 
     public function insertdb($name, $email, $country, $gender, $pnum, $otp, $password)
@@ -41,6 +45,7 @@ class User extends Dbh
         try {
             $query = "INSERT INTO usern(name,email,country,gender,password,phoneno,otp) VALUES (?,?,?,?,?,?,?)";
             $stmt = $this->connect()->prepare($query);
+
             $stmt->execute([$this->name, $this->email, $this->country, $this->gender, $this->password, $this->pnum, $this->otp]);
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -60,6 +65,26 @@ class User extends Dbh
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
+
+         
+        
+    }
+
+    public function statusUpdate($email,$status){
+
+        $this->email=$email;
+        $this->status=$status;
+
+        try {
+            $query = "UPDATE usern SET status=? WHERE email=? ";
+            $stmt=$this->connect()->prepare($query);
+            $stmt->execute([$this->status,$this->email]);
+
+        }  catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+           
+
     }
 
     public function loginAdmin($email) //email check login
@@ -72,15 +97,20 @@ class User extends Dbh
             $stmt = $this->connect()->prepare($query);
             $stmt->execute([$this->email]);
 
+
             if ($stmt->rowCount() > 0) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 return $row['password'];
             } else {
                 return false;
             }
-        } catch (PDOException $e) {
+        } 
+        catch (PDOException $e) {
+
             echo "Error: " . $e->getMessage();
         }
+
+
     }
 
     public function status($email)
@@ -89,6 +119,7 @@ class User extends Dbh
         $this->email = $email;
 
         try {
+
             $query = "SELECT * FROM usern WHERE email=?";
             $stmt = $this->connect()->prepare($query);
             $stmt->execute([$this->email]);
@@ -99,6 +130,10 @@ class User extends Dbh
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
+
+
+
+
     }
 
     public function loginUser($email) //email check login
@@ -111,6 +146,7 @@ class User extends Dbh
             $stmt = $this->connect()->prepare($query);
             $stmt->execute([$this->email]);
 
+
             if ($stmt->rowCount() > 0) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 $_SESSION['username'] = $row['name'];
@@ -118,28 +154,39 @@ class User extends Dbh
             } else {
                 return false;
             }
-        } catch (PDOException $e) {
+        } 
+        catch (PDOException $e) {
+
             echo "Error: " . $e->getMessage();
         }
+
     }
 
     public function checkemail($email) //email check fogetpassword
     {
 
         $this->email = $email;
+
         try {
             $query = "SELECT * FROM usern WHERE email=?";
             $stmt = $this->connect()->prepare($query);
             $stmt->execute([$this->email]);
 
-            if ($stmt->rowCount() > 0) {
+
+    
+            if ($stmt->rowCount()>0) {
+
                 return true;
             } else {
                 return false;
             }
-        } catch (PDOException $e) {
+
+        } 
+        catch (PDOException $e) {
+
             echo "Error: " . $e->getMessage();
         }
+
     }
 
     public function update($token, $expire, $email) //token insert forgetpasword
@@ -153,9 +200,14 @@ class User extends Dbh
             $query = "UPDATE usern SET reset_token_hash=?, reset_token_expire=? WHERE email=?";
             $stmt = $this->connect()->prepare($query);
             $stmt->execute([$this->token, $this->expire, $this->email]);
+
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
-        }
+
+        } 
+        
+
+
     }
 
     public function token($token_hash) //password reset token check
@@ -166,6 +218,7 @@ class User extends Dbh
             $sql = "SELECT * FROM usern WHERE reset_token_hash=?";
             $stmt = $this->connect()->prepare($sql);
             $stmt->execute([$this->token_hash]);
+
             if ($stmt->rowCount() > 0) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 return $row['reset_token_expire'];
@@ -173,9 +226,12 @@ class User extends Dbh
             } else {
                 return false; //token not found
             }
-        } catch (PDOException $e) {
+        } 
+        catch (PDOException $e) {
+
             echo "Error: " . $e->getMessage();
         }
+
     }
 
     public function userid($token_hash) //password reset userid token check
@@ -186,6 +242,7 @@ class User extends Dbh
             $sql = "SELECT * FROM usern WHERE reset_token_hash=?";
             $stmt = $this->connect()->prepare($sql);
             $stmt->execute([$this->token_hash]);
+
             if ($stmt->rowCount() > 0) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 return $row['userid'];
@@ -193,6 +250,9 @@ class User extends Dbh
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
+
+
+
     }
 
     public function updatepassword($passwordhash, $result)
@@ -202,6 +262,7 @@ class User extends Dbh
         $this->userid = $result;
 
         try {
+
             $sql = "UPDATE usern SET password=?,reset_token_hash=NULL,reset_token_expire=NULL WHERE userid=?";
 
             $stmt = $this->connect()->prepare($sql);
@@ -209,6 +270,8 @@ class User extends Dbh
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
+
+
     }
 
     public function accounta($email)
@@ -217,6 +280,7 @@ class User extends Dbh
         $this->email = $email;
 
         try {
+
             $query = "SELECT otp FROM usern WHERE email=?";
             $stmt = $this->connect()->prepare($query);
             $stmt->execute([$this->email]);
@@ -224,9 +288,14 @@ class User extends Dbh
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 return $row['otp'];
             }
+
+          
+
+
         } 
         catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
+
     }
 }
