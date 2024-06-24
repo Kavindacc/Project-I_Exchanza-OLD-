@@ -15,6 +15,19 @@ document.getElementById('closePopup').addEventListener('click', function() {
 });
 
 $(document).ready(function() {
+    // Update preview function
+    function updatePreview() {
+        $('#previewName').text($('#itemName').val());
+        $('#previewPrice').text('Rs. ' + $('#price').val());
+        $('#previewDescription').text($('#description').val());
+        $('#previewCategory').text($('#category option:selected').text());
+        $('#previewSubcategory').text($('#subcategory option:selected').text());
+        $('#previewTimesUsed').text('Times Used: ' + $('#timesUsed').val());
+        var selectedSize = $('input[name="size"]:checked').val();
+        $('#previewSize').text(selectedSize ? 'Size: ' + selectedSize : '');
+    }
+
+    // Category change event
     $('#category').change(function() {
         var category = $(this).val();
         if (category === 'women') {
@@ -27,6 +40,7 @@ $(document).ready(function() {
         updatePreview();
     });
 
+    // Subcategory change event
     $('#subcategory').change(function() {
         var subcategory = $(this).val();
         if (subcategory === 'tops') {
@@ -38,6 +52,7 @@ $(document).ready(function() {
         updatePreview();
     });
 
+    // Input and change events
     $('#itemName, #price, #description, #timesUsed').on('input', function() {
         updatePreview();
     });
@@ -58,6 +73,7 @@ $(document).ready(function() {
         updatePreview();
     });
 
+    // Form validation
     $('#resellForm').submit(function(event) {
         var form = this;
         if (form.checkValidity() === false) {
@@ -66,15 +82,5 @@ $(document).ready(function() {
         }
         form.classList.add('was-validated');
     });
-
-    function updatePreview() {
-        $('#previewName').text($('#itemName').val());
-        $('#previewPrice').text('Rs. ' + $('#price').val());
-        $('#previewDescription').text($('#description').val());
-        $('#previewCategory').text($('#category option:selected').text());
-        $('#previewSubcategory').text($('#subcategory option:selected').text());
-        $('#previewTimesUsed').text('Times Used: ' + $('#timesUsed').val());
-        var selectedSize = $('input[name="size"]:checked').val();
-        $('#previewSize').text(selectedSize ? 'Size: ' + selectedSize : '');
-    }
 });
+
