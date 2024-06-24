@@ -6,7 +6,7 @@ if(isset($_POST['submit'])){
 
     $productname=$_POST['iteamname'];
     $price=$_POST['price'];
-    $color=$_POST['colour'];
+    $colour=$_POST['colour'];
     $description=$_POST['description'];
     $category=$_POST['category'];
     $subcategory=$_POST['subcategory'];
@@ -15,7 +15,7 @@ if(isset($_POST['submit'])){
     $userid=$_SESSION['userid'];
 
     $obj=new Products();
-    $obj->insertProduct($productname, $price, $color, $description, $category, $subcategory, $size, $condition, $userid);
+    $obj->insertProduct($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $userid);
 
 
 

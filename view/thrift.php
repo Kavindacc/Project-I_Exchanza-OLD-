@@ -124,8 +124,9 @@
         <?php } else{?>
         <button class="add-item-btn" onclick="showForm()">Add Item</button>  
         <script src="sidepanel.js"></script>
-        <?php } ?>
         <div id="addItemForm"class="add-item-form">   </div>
+        <?php } ?>
+        
  </div>     
  <!-- Popup overlay and form -->
  <div id="popupForm" class="popup-overlay">
