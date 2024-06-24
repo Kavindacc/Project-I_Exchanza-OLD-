@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <!-- integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="view/style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="thriftW.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
@@ -37,10 +37,10 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center  flex-grow-1 pe-3">
                         <li class="nav-item mx-2">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link " aria-current="page" href="../index.php">Home</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Thrift</a>
+                            <a class="nav-link active" href="../view/thrift.php">Thrift</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="#">Bidding</a>
@@ -59,7 +59,7 @@
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
 
-                            <a href="view/userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user"style="font-size:1.5rem;"></i></a>
+                            <a href="userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user"style="font-size:1.5rem;"></i></a>
 
                             <?php echo "Hi," . $_SESSION['username']; ?>
                         <?php } else { ?>
@@ -118,10 +118,14 @@
             Thrifting is an excellent way to save money, reduce waste, and support sustainable fashion.
              By thrifting items, you can find unique pieces while also contributing to a more eco-friendly world.
         </p>
-        <button class="add-item-btn" onclick="showForm()">Add Item</button>
+        <?php if(!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) {?> <!--logedin session eka -->
+        <a href="login.php" style="text-decoration: none;"><button class="add-item-btn">Add Item</button> </a>
+        
+        <?php } else{?>
+        <button class="add-item-btn" onclick="showForm()">Add Item</button>  
         <script src="sidepanel.js"></script>
- 
-        <!-- <div id="addItemForm"class="add-item-form">   </div> -->
+        <?php } ?>
+        <div id="addItemForm"class="add-item-form">   </div>
  </div>     
  <!-- Popup overlay and form -->
  <div id="popupForm" class="popup-overlay">
@@ -131,34 +135,34 @@
             <div class="row">
                 <div class="col-md-6">
                     <h2 class="mb-4">Add Item to Resell</h2>
-                    <form id="resellForm">
+                    <form action="../control/thriftcon.php" method="post" id="resellForm">                <!--form start add to iteam-->
                         <div class="form-group">
                             <label for="itemName" class="bold">Item Name</label>
-                            <input type="text" class="form-control" id="itemName" placeholder="Enter item name" required>
+                            <input type="text" class="form-control" id="itemName" placeholder="Enter item name" name="iteamname" required >
                         </div>
                         <div class="form-group">
                             <label for="price" class="bold">Price (Rs.)</label>
-                            <input type="number" class="form-control" id="price" placeholder="Enter price" required>
+                            <input type="number" class="form-control" id="price" placeholder="Enter price" name="price" required>
                         </div>
                         <div class="form-group">
                             <label for="color" class="bold">Color</label>
-                            <input type="color" class="form-control" id="color" required>
+                            <input type="color" class="form-control" id="color" name="colour" required>
                         </div>
                         <div class="form-group">
                             <label for="coverImage" class="bold">Cover Image</label>
-                            <input type="file" class="form-control-file" id="coverImage" required>
+                            <input type="file" class="form-control-file" id="coverImage" name="image" required >
                         </div>
                         <div class="form-group">
                             <label for="otherImages" class="bold">Other Images (Optional)</label>
-                            <input type="file" class="form-control-file" id="otherImages" multiple>
+                            <input type="file" class="form-control-file" id="otherImages" name="otherimage" >
                         </div>
                         <div class="form-group">
                             <label for="description" class="bold">Description</label>
-                            <textarea class="form-control" id="description" rows="3" placeholder="Enter description" required></textarea>
+                            <textarea class="form-control" id="description" rows="3" placeholder="Enter description" name="description" required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="category" class="bold">Category</label>
-                            <select class="form-control" id="category" required>
+                            <select class="form-control" id="category" name="category" required>
                                 <option value="">Select Category</option>
                                 <option value="men">Men</option>
                                 <option value="women">Women</option>
@@ -167,7 +171,7 @@
                         </div>
                         <div class="form-group hidden" id="subcategoryWrapper">
                             <label for="subcategory" class="bold">Subcategory</label>
-                            <select class="form-control" id="subcategory">
+                            <select class="form-control" id="subcategory" name="subcategory">
                                 <option value="">Select Subcategory</option>
                                 <option value="tops">Tops</option>
                                 <option value="dresses">Dresses</option>
@@ -198,11 +202,11 @@
                         </div>
                         <div class="form-group">
                             <label for="timesUsed" class="bold">Condition</label>
-                            <input type="number" class="form-control" id="timesUsed" placeholder="Enter number of times used" required>
+                            <input type="number" class="form-control" id="timesUsed" placeholder="Enter number of times used" name="condition" required>
                             <small class="form-text text-muted">Please provide an estimate of how many times this item has been used.</small>
                         </div>
-                        <button type="submit" class="btn btn-primary ssubmit">Submit</button>
-                    </form>
+                        <button type="submit" class="btn btn-primary ssubmit" name="submit">Submit</button>
+                    </form><!--form end-->
                 </div>
                 <div class="col-md-6">
                     <h2>Preview</h2>
@@ -233,7 +237,7 @@
  
     <div class="text-block">
 
-        <h1 align="center">Women</h1>
+        <h1 style="text-align:center">Women</h1>
         <pre class="para1">
         “Most of my wardrobe is vintage and I’ve worn dresses to the Oscars that
         I got for $10.At Sean Penn’s last Haiti gala I wore this vintage dress that 
