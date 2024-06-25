@@ -122,7 +122,8 @@ class User extends Dbh
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 $_SESSION['username'] = $row['name'];
                 $_SESSION['userid'] = $row['userid'];
-                return $row['password'];
+                $_SESSION['password']=$row['password'];
+                return  $_SESSION['password'];
             } else {
                 return false;
             }

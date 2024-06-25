@@ -10,7 +10,7 @@ if (isset($_POST['submit'])) {
     $colour = $_POST['colour'];
     $description = $_POST['description'];
     $category = strtolower($_POST['category']);
-    $subcategory = $_POST['subcategory'];
+    $subcategory = strtolower($_POST['subcategory']);
     $size = isset($_POST['size']) ? $_POST['size'] : null; // Use ternary operator
     $condition = $_POST['condition'];
     $userid = $_SESSION['userid'];

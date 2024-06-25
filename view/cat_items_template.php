@@ -1,3 +1,9 @@
+<?php
+
+require '../model/products.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +19,7 @@
 
 <body>
     <div class="container mt-4">
-
+    <?php $sub=$_GET['sub'];echo $sub;?><!--sub category eka ganna-->
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Men</a></li>
@@ -76,6 +82,30 @@
                 </div>
             </div>
         </template>
+    </div>
+
+
+    <div class="container d-flex justify-content-start flex-wrap mt-4"><!--text-->
+        <?php
+
+        $obj = new Products();
+        $rows = $obj->get($sub);
+        if(isset($rows)){
+        foreach ($rows as $row) { ?>
+            <div class="card" style="width: 17rem;margin:.6rem;">
+                <img src="../upload/<?php echo $row['image']?>" class="card-img-top" alt="..." style="height:15rem;">
+                <div class="card-body">
+                    <h5 class="card-title"><?php echo $row['product_name'];?></h5>
+                    <p class="card-text"><?php echo $row['description'];?></p>
+                    <p class="card-text"><?php echo $row['colour'];?></p>
+                    <p class="card-text"><?php if(isset($row['size'])) { echo $row['size']; } ?></p>
+                    <p class="card-text"><?php echo $row['price'];?></p>
+                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                </div>
+            </div>
+        <?php }}
+        ?>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
