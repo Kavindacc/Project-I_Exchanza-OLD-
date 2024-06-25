@@ -221,7 +221,7 @@
                             <div class="product-card">
                                 <div class="product-image rounded-[5px]">
                                     <span class="countdown-tag">04:24:49</span>
-                                    <img src="../img/Bidding/card1.jpg" class="product-thumb" alt="">
+                                    <img src="../img/Bidding/card2.jpg" class="product-thumb" alt="">
                                     <button class="card-btn">Bid Now</button>
                                 </div>
                                 <div class="product-info">
@@ -254,7 +254,7 @@
                             <div class="product-card">
                                 <div class="product-image rounded-[5px]">
                                     <span class="countdown-tag">04:24:49</span>
-                                    <img src="../img/Bidding/card1.jpg" class="product-thumb" alt="">
+                                    <img src="../img/Bidding/card3.jpg" class="product-thumb" alt="">
                                     <button class="card-btn">Bid Now</button>
                                 </div>
                                 <div class="product-info">
