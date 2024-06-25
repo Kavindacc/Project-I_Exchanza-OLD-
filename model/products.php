@@ -32,14 +32,14 @@ class Products extends Dbh
         }
     }
 
-    public function get($userid){
+    public function get($subcategory){
 
-        $this->userid=$userid;
+        $this->subcategory=$subcategory;
 
         try {
-            $query="SELECT * FROM products WHERE category=?";
+            $query="SELECT * FROM products WHERE subcategory=?";
             $stmt=$this->connect()->prepare($query);
-            $stmt->execute(['kids']);
+            $stmt->execute([$this->subcategory]);
             if($stmt->rowCount()>0){
                 $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
                 return $rows;
