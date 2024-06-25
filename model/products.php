@@ -31,4 +31,22 @@ class Products extends Dbh
             echo "Error: " . $e->getMessage();
         }
     }
+
+    public function get($userid){
+
+        $this->userid=$userid;
+
+        try {
+            $query="SELECT * FROM products WHERE category=?";
+            $stmt=$this->connect()->prepare($query);
+            $stmt->execute(['kids']);
+            if($stmt->rowCount()>0){
+                $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $rows;
+            }
+        } 
+        catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
 }

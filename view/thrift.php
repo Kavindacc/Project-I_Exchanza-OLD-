@@ -81,7 +81,7 @@ require '../model/products.php';
             <?php if (isset($_GET['success'])) { //success
                 echo $_GET['success'];
             } ?>
-            <?php if (isset($_GET['error'])) {//error
+            <?php if (isset($_GET['error'])) { //error
                 echo $_GET['error'];
             } ?>
             <p>Thrift Arena</p>
@@ -260,10 +260,16 @@ require '../model/products.php';
         <div class="row row-cols-6 catr">
 
             <div class="col r1">
-                <a href="cat_items_template.php">
-                    <img src="../img/TopsW.jpg" alt="women thrift cat1" class="rounded-circle img-fluid twc1">
-                </a>
+                <?php if (!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) { ?> <!--logedin session eka -->
+                    <a href="login.php"><!--iteam show page-->
+                        <img src="../img/TopsW.jpg" alt="women thrift cat1" class="rounded-circle img-fluid twc1">
+                    </a>
 
+                <?php } else { ?>
+                    <<a href="texttrift.php"><!--iteam show page-->
+                        <img src="../img/TopsW.jpg" alt="women thrift cat1" class="rounded-circle img-fluid twc1">
+                        </a>
+                    <?php } ?>
             </div>
 
             <div class="col r2">

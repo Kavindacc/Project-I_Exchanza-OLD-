@@ -5,11 +5,11 @@ session_start();
 
 if (isset($_POST['submit'])) {
 
-    $productname = $_POST['itemname'];
+    $productname = ucfirst($_POST['itemname']);
     $price = $_POST['price'];
     $colour = $_POST['colour'];
     $description = $_POST['description'];
-    $category = $_POST['category'];
+    $category = strtolower($_POST['category']);
     $subcategory = $_POST['subcategory'];
     $size = isset($_POST['size']) ? $_POST['size'] : null; // Use ternary operator
     $condition = $_POST['condition'];
