@@ -10,8 +10,8 @@ Class Dbh{
     protected function connect(){
 
         $this->servername="localhost";
-        $this->username="Exchanze";
-        $this->password="exchanze123@E";
+        $this->username="root";//username add karanna
+        $this->password="";//password add karanna
         $this->dbname="exchanzedb";
 
         try {
