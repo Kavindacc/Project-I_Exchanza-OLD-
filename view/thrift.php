@@ -19,7 +19,7 @@ require '../model/products.php';
     <title>Thrift</title>
 </head>
 
-<body>
+<body style="background: none;">
     <!--nav bar-->
     <nav class="navbar navbar-expand-lg sticky-top nav">
         <div class="container-fluid logo"><!--logo-->
@@ -257,7 +257,7 @@ require '../model/products.php';
 
     <!-- cats -->
     <div class="container text-center">
-        <div class="row row-cols-6 catr">
+        <div class="row row-col-6 catr">
         <?php if (!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) { ?> <!--logedin session eka -->
             <div class="col r1">
                 <a href="login.php"><!--iteam show page-->
