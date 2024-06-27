@@ -9,7 +9,92 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>index</title>
+    <title>Bidding</title>
+    <style type="text/tailwindcss">
+        .product{
+            @apply relative overflow-hidden p-[20px];
+        }
+        .product-category{
+            @apply py-0 px-[10vw] text-[30px] font-[500] mb-[40px] capitalize text-[#4C3F31];
+        }
+        .product-container{
+            @apply py-1 px-[10vw] flex overflow-y-hidden overflow-x-auto scroll-smooth;
+        }
+        .product-container::-webkit-scrollbar{
+            @apply hidden;
+        }
+        .product-card{
+            @apply flex-[0_0_auto] w-[250px] h-[450px] mr-[40px]; 
+        }
+        .product-image{
+            @apply relative w-full h-[350px] overflow-hidden transition-all duration-300 hover:scale-105;
+        }
+        .product-thumb{
+            @apply w-full h-full object-cover;
+        }
+        .countdown-tag {
+            @apply absolute bg-[#746557] p-[5px] rounded-[5px] text-[#e7e0dc] right-[10px] top-[10px] capitalize;
+        }
+        .card-btn{
+            @apply absolute bottom-[10px] left-[50%] -translate-x-1/2  p-[10px] w-[50%] capitalize border-[#746557] bg-[#CEC0B9] rounded-[10px] duration-[0.5s] cursor-pointer opacity-0 text-[#4C3F31];    
+        }
+        .product-card:hover .card-btn {
+            @apply opacity-100;
+        }
+
+        .card-btn:hover{
+            @apply bg-[#746557] text-[#fff]  scale-110 tracking-widest ;
+        }
+        .product-info{
+            @apply w-full h-full pt-[10px];
+        }
+        /* .product-brand{
+            @apply ;
+        } */
+        .product-short-description{
+            @apply w-full h-[20px] leading-[20px] overflow-hidden opacity-[0.5] capitalize my-[5px] text-black;
+        }
+        .price{
+            @apply font-extrabold text-[20px];
+        }
+        .actual-price{
+            @apply ml-[20px] opacity-50 line-through;
+        }
+        .pre-btn,.nxt-btn{
+            @apply border-0 w-[10vw] h-full absolute top-0 flex justify-center items-center bg-gradient-to-r from-transparent to-[#e7e0dc] cursor-pointer z-20;
+        }
+        .pre-btn {
+            @apply left-0 rotate-180;
+        }
+        .nxt-btn {
+            @apply right-0;
+        }
+        .pre-btn img,
+        .nxt-btn img {
+            @apply opacity-20;
+        }
+        .pre-btn:hover img,
+        .nxt-btn:hover img {
+            @apply opacity-100;
+        }
+        .collection-container {
+            @apply w-full grid grid-cols-2 gap-2.5;
+        }
+        .collection {
+            @apply relative;
+        }
+        .collection img {
+            @apply w-full h-full object-cover;
+        }
+        .collection p {
+            @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white text-5xl capitalize;
+        }
+        .collection:nth-child(3) {
+            @apply col-span-2 mb-2.5;
+        }
+    </style>
+
+    
 </head>
 
 <body>
@@ -70,53 +155,123 @@
 
 
     <!-- content -->
-    <div class="flex w-full flex-col pb-10 ">
+    <div class="flex w-full flex-col pb-10 px-10">
 
-        <div class="flex flex-row w-full bg-[#F3F3F3] px-3">
-            
-            <div class="hidden md:flex w-full justify-center items-center ">
-                <div class="flex flex-col gap-3">
-
-                    <h1 class="text-xl">Classic Exclusive</h1>
-                    <h1 class="text-3xl font-bold " >Women's Collection</h1>
-                    <h1 class="text-md font-medium " >UPTO 40% OFF</h1>
-
-                    <div class="mt-3 w-full">
-                        <button class=" p-2 flex justify-center items-center text-md font-semibold text-white bg-black rounded-md px-3">Add Your Bid</button>
-                    </div>
-
+        <!-- Hero Section -->
+        <div class="flex flex-row w-full bg-[#F3F3F3] px-5 pt-4">
+            <div class="relative w-full max-h-[450px] overflow-hidden rounded-[20px]">
+                <img src="../img/Bidding/banner.png" alt="Exclusive rare collectibles auction" class="">
+                <div class="absolute bottom-10 left-6 right-6  bg-opacity-80 pl-36 pt-3 rounded-md ">
+                    <p class=" text-[#746557] text-[20px] font-medium tracking-[0.25rem] mb-2">Hot Auctions</p>
+                    <h2 class="uppercase text-[50px] font-bold pr-[800px]">Exclusive rare collectibles auction</h2>
+                    <p class="text-[25px] text-[#948276] font-semibold ">Join The Bidding War!</p>
+                    <button class="p-2 my-2 w-[12%] uppercase font-semibold border-2 border-[#AE9D92] bg-[#CEC0B9] rounded-[4px] duration-[0.5s] cursor-pointer text-[#4C3F31] hover:scale-105 hover:tracking-widest hover:w-[13%] hover:text-[#d0bfae] hover:bg-[#746557]">Add Your Bid</button>
                 </div>
-            </div>
-            
-            <div class="flex flex-col w-full justify-start ">
-                <img class="w-full " src="../img/bid-main div bg.webp" />
-                <div class="flex text-white md:hidden md:text-white flex-col gap-3 relative top-[-45%] left-[10%]">
-
-                    <h1 class="text-xl">Classic Exclusive</h1>
-                    <h1 class="text-3xl font-bold " >Women's Collection</h1>
-                    <h1 class="text-md font-medium " >UPTO 40% OFF</h1>
-
-                    <div class="mt-3 w-full">
-                        <button class=" p-2 flex justify-center items-center text-md font-semibold text-white bg-black rounded-md px-3">Shop Now</button>
-                    </div>
-
-                </div>
-            </div>
-    
+            </div>            
         </div>
 
+
+        <!-- Ongoing Bidding Section-->
         <div class="flex flex-col px-12 pt-16 bg-red bg-[#F3F3F3]">
 
-            <div class="flex justify-between flex-row w-full bg-[#F3F3F3] px-3">
-                <h1 class='text-2xl text-semibold my-auto'>Shop by Categories</h1>
-
-                <div class="flex gap-3 my-auto">
-                    <button class="p-1 bg-[black] text-white rounded-md px-2"><li class="fa-solid fa-magnifying-glass"""></li></button>
-                    <button class="p-1 rounded-md px-2 bg-[#F6F6F6]"><li class="fa-solid fa-magnifying-glass"""></li></button>
-                </div>      
+        <div class="product bg-[#CEC0B9] rounded-[20px]"> 
+            <h2 class="product-category">ongoing Bidding</h2>
+            <button class="pre-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
+            <button class="nxt-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
+            <div class="product-container">
+                <?php
+                    $items = [1,2,3,4,5,3];
+                    foreach ($items as $item) {
+                        echo '
+                            <div class="product-card">
+                                <div class="product-image rounded-[5px]">
+                                    <span class="countdown-tag">04:24:49</span>
+                                    <img src="../img/Bidding/card1.jpg" class="product-thumb" alt="">
+                                    <button class="card-btn ">
+                                        Bid Now 
+                                    </button>
+                                </div>
+                                <div class="product-info">
+                                    <h2 class="product-brand">Luxury Party Stage Men Dress Suit Costume</h2>
+                                    <p class="product-short-description">Homme Popular Clothing Groomsmen Regular Fit Tuxedo 3 Pieces Set Jacket+Trousers+Vest
+                                    Please check your real size and make an order.</p>
+                                    <span class="price">$20</span><span class="actual-price">$40</span>
+                                </div>
+                            </div>        
+                        
+                        ';
+                    }
+                ?>
             </div>
         </div>
+        </div>
 
+        <!-- Upcomming Bidding Section-->
+        <div class="flex flex-col px-12 pt-16 bg-red bg-[#F3F3F3]">
+
+        <div class="product bg-[#CEC0B9] rounded-[20px]"> 
+            <h2 class="product-category">Upcomming Bidding</h2>
+            <button class="pre-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
+            <button class="nxt-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
+            <div class="product-container">
+                <?php
+                    $items = [1,2,3,4,5,3];
+                    foreach ($items as $item) {
+                        echo '
+                            <div class="product-card">
+                                <div class="product-image rounded-[5px]">
+                                    <span class="countdown-tag">04:24:49</span>
+                                    <img src="../img/Bidding/card2.jpg" class="product-thumb" alt="">
+                                    <button class="card-btn">Bid Now</button>
+                                </div>
+                                <div class="product-info">
+                                    <h2 class="product-brand">Luxury Party Stage Men Dress Suit Costume</h2>
+                                    <p class="product-short-description">Homme Popular Clothing Groomsmen Regular Fit Tuxedo 3 Pieces Set Jacket+Trousers+Vest
+                                    Please check your real size and make an order.</p>
+                                    <span class="price">$20</span><span class="actual-price">$40</span>
+                                </div>
+                            </div>        
+                        
+                        ';
+                    }
+                ?>
+            </div>
+        </div>
+        </div>
+
+        <!-- Finished Bidding Section-->
+        <div class="flex flex-col px-12 pt-16 bg-red bg-[#F3F3F3]">
+
+        <div class="product bg-[#CEC0B9] rounded-[20px]"> 
+            <h2 class="product-category">Finished Bidding</h2>
+            <button class="pre-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
+            <button class="nxt-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
+            <div class="product-container">
+                <?php
+                    $items = [1,2,3,4,5,3];
+                    foreach ($items as $item) {
+                        echo '
+                            <div class="product-card">
+                                <div class="product-image rounded-[5px]">
+                                    <span class="countdown-tag">04:24:49</span>
+                                    <img src="../img/Bidding/card3.jpg" class="product-thumb" alt="">
+                                    <button class="card-btn">Bid Now</button>
+                                </div>
+                                <div class="product-info">
+                                    <h2 class="product-brand">Luxury Party Stage Men Dress Suit Costume</h2>
+                                    <p class="product-short-description">Homme Popular Clothing Groomsmen Regular Fit Tuxedo 3 Pieces Set Jacket+Trousers+Vest
+                                    Please check your real size and make an order.</p>
+                                    <span class="price">$20</span><span class="actual-price">$40</span>
+                                </div>
+                            </div>        
+                        
+                        ';
+                    }
+                ?>
+            </div>
+        </div>
+        </div>
+                
     </div>
 
     <!--footer-->
@@ -154,6 +309,7 @@
             </div>
         </div>
     </div>
+    <script src="bidScript.js"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="view/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
