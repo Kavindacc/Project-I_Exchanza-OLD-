@@ -1,4 +1,5 @@
 <?php
+require '../model/products.php';
 session_start();
 $filePath = null; //file upload start
 if (isset($_FILES['file']) && $_FILES['file']['error'] === 0) {
@@ -73,7 +74,7 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] === 0) {
                         <a href="../Project-I_Exchanza/view/cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
-                            <a href="logout.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3"style="color: #FFFF;">logout</button></a>
+                            <a href="logout.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3" style="color: #FFFF;">logout</button></a>
                         <?php } ?>
                     </div>
                 </div>
@@ -81,29 +82,63 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] === 0) {
         </div>
     </nav>
 
-    <div class="row ps-4 mt-3">
-        <h2>Hi, <?php echo  $_SESSION['username']; ?> </h2>
-    </div>
+
+    <h2 class="mt-3 ms-4">Hi, <?php echo  $_SESSION['username']; ?> </h2>
+
 
     <div class="container-fluid mt-3">
-        <div class="row d-flex  mx-auto py-3">
-            <div class="col-sm-4 d-flex flex-column py-2">
+        <div class="row d-flex  mx-auto ">
+            <div class="col-sm-3 d-flex flex-column ">
 
-                <img src="../img/profile.png" class=" img-fluid rounded-4 py-2" alt="..."style=" max-height:400px;">
-                <button type="button" class="btn btn-outline-primary m-2">Pesonal information</button>
-                <button type="button" class="btn btn-outline-primary m-2">My Orders</button>
-                <button type="button" class="btn btn-outline-primary m-2">My Iteams</button>
+                <img src="../img/profile.png" class=" img-fluid rounded-4 py-2" alt="..." style=" max-height:350px;">
+                <button type="button" class="btn btn-outline-primary m-2" onclick="showInformation()" id="information">Pesonal information</button>
+                <button type="button" class="btn btn-outline-primary m-2" onclick="showOrderTable()" id="order">My Orders</button>
+                <button type="button" class="btn btn-outline-primary m-2" onclick="showItemTable()" id="item">My Iteams</button>
 
             </div>
-            <div class="col-sm-8 py-2 my-auto">
-                <table class="table">
+            <div class="col-sm-9 py-2 mt-5" id="itemtable">
+                <table class="table  table-striped table-hover table-sm"><!--iteam table-->
+                    <thead> 
+                        <tr class="table-primary">
+                            <th scope="col">Product_Id</th>
+                            <th scope="col">Product_Name</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Action</th>
+                        </tr>   
+                    </thead>
+
+                    <tbody>
+                         <?php
+                        $obj = new Products();//product get product table accourding userid
+                        $rows = $obj->get($_SESSION['userid']) ;
+                        foreach($rows as $row) { ?>
+
+                        <tr class="vertical-center">
+                            <td><?php echo $row['product_id'];?></td>
+                            <td><?php echo $row['product_name'];?></td>
+                            <td><img src="<?php echo $row['image'];?>" class="table-image"></td>
+                            <td><?php echo $row['price'];?></td>
+                            <td><?php echo $row['category'];?></td>
+                            <td><button type="button" class="btn btn-outline-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .9rem; --bs-btn-font-size: .75rem;"> Edit</button>&nbsp;&nbsp;
+                                <button type="button" class="btn btn-outline-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .6rem; --bs-btn-font-size: .75rem;"> Delete</button>
+                            </td>
+                        </tr>
+
+                        <?php }?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-9 py-2 mt-5" id="producttable">
+                <table class="table  table-striped table-hover table-sm"><!--iteam table-->
                     <thead>
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
-                            <th scope="col"></th>
+                        <tr class="table-primary">
+                            <th scope="col">Product_Id</th>
+                            <th scope="col">Product_Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -112,16 +147,20 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] === 0) {
                             <td>Mark</td>
                             <td>Otto</td>
                             <td>@mdo</td>
-                            <td><button type="button" class="btn btn-outline-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .9rem; --bs-btn-font-size: .75rem;"> Edit</button></td>
+                            <td><button type="button" class="btn btn-outline-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .9rem; --bs-btn-font-size: .75rem;"> Edit</button>&nbsp;&nbsp;
+                                <button type="button" class="btn btn-outline-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .6rem; --bs-btn-font-size: .75rem;"> Delete</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+
     </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>

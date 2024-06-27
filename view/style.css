@@ -159,7 +159,16 @@ input[type=submit]:hover{
 .verification .button{
     margin-top: 10px;
 }
-
+#itemtable{
+    display: none;
+}
+.table-image {
+    width: 100px;
+    height:75px;
+}
+.vertical-center {
+    vertical-align: middle;
+}
 @media screen and (max-width:720px){
     .item .side{
         width:100%;
