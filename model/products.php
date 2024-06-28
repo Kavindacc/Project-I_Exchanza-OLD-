@@ -1,10 +1,16 @@
 <?php
 
-require 'dbconnection.php';
 
-class Products extends Dbh
+class Products 
 {
     private $productname, $price, $colour, $description, $category, $subcategory, $condition, $userid, $size, $filePath;
+
+    private $pdo;
+
+    public function __construct() {
+        $db = new Dbh();
+        $this->pdo = $db->connect();
+    }
 
     public function insertProduct($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath, $userid)
     {
@@ -21,7 +27,7 @@ class Products extends Dbh
 
         try {
             $query = "INSERT INTO products(product_name, price, colour, description, category, subcategory, size, `condition`, image, userid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = $this->connect()->prepare($query);
+            $stmt = $this->pdo->prepare($query);
             $stmt->execute([$this->productname, $this->price, $this->colour, $this->description, $this->category, $this->subcategory, $this->size, $this->condition, $this->filePath, $this->userid]);
             if ($stmt->rowCount() > 0) {
                 header("Location: ../view/thrift.php?success=Product Added.");//thrift page
@@ -38,12 +44,13 @@ class Products extends Dbh
 
         try {
             $query="SELECT * FROM products WHERE userid=?";
-            $stmt=$this->connect()->prepare($query);
+            $stmt=$this->pdo->prepare($query);
             $stmt->execute([$this->userid]);
             if($stmt->rowCount()>0){
                 $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
                 return $rows;
             }
+           
         } 
         catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
