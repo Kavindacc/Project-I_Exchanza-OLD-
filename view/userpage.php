@@ -1,6 +1,7 @@
 <?php
 require '../model/products.php';
-session_start();
+require '../model/user.php';
+
 $filePath = null; //file upload start
 if (isset($_FILES['file']) && $_FILES['file']['error'] === 0) {
     $file = $_FILES['file'];
@@ -57,10 +58,10 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] === 0) {
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center  flex-grow-1 pe-3">
                         <li class="nav-item mx-2">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link" aria-current="page" href="../index.php">Home</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="../Project-I_Exchanza/view/thrift.php">Thrift</a>
+                            <a class="nav-link" href="../view/thrift.php">Thrift</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="#">Bidding</a>
@@ -90,48 +91,104 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] === 0) {
         <div class="row d-flex  mx-auto ">
             <div class="col-sm-3 d-flex flex-column ">
 
-                <img src="../img/profile.png" class=" img-fluid rounded-4 py-2" alt="..." style=" max-height:350px;">
+                <?php if (isset( $_SESSION['profilepic'])) { ?>
+                    <img src="<?php echo htmlspecialchars($_SESSION['profilepic']); ?>" class="img-fluid rounded-4 py-2" alt="Profile Picture" style="max-height:350px;">
+                <?php } else { ?>
+                    <img src="../img/profile.png" class="img-fluid rounded-4 py-2" alt="Default Profile Picture" style="max-height:350px;">
+                <?php } ?>
+
                 <button type="button" class="btn btn-outline-primary m-2" onclick="showInformation()" id="information">Pesonal information</button>
                 <button type="button" class="btn btn-outline-primary m-2" onclick="showOrderTable()" id="order">My Orders</button>
                 <button type="button" class="btn btn-outline-primary m-2" onclick="showItemTable()" id="item">My Iteams</button>
 
             </div>
-            <div class="col-sm-9 py-2 mt-5" id="itemtable">
-                <table class="table  table-striped table-hover table-sm"><!--iteam table-->
-                    <thead> 
-                        <tr class="table-primary">
-                            <th scope="col">Product_Id</th>
-                            <th scope="col">Product_Name</th>
-                            <th scope="col">Image</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Action</th>
-                        </tr>   
-                    </thead>
+            <div class="col-sm-6 py-2 mt-5 mx-auto" id="personalinfo"><!--personal information -->
+                <?php if (isset($_GET['success'])) {
+                    echo $_GET['success'];
+                }
+                if (isset($_GET['error'])) {
+                    echo $_GET['error'];
+                } ?>
+                <?php
 
-                    <tbody>
-                         <?php
-                        $obj = new Products();//product get product table accourding userid
-                        $rows = $obj->get($_SESSION['userid']) ;
-                        foreach($rows as $row) { ?>
+                $obj = new User();
+                $row = $obj->getInformation($_SESSION['userid']);
 
-                        <tr class="vertical-center">
-                            <td><?php echo $row['product_id'];?></td>
-                            <td><?php echo $row['product_name'];?></td>
-                            <td><img src="<?php echo $row['image'];?>" class="table-image"></td>
-                            <td><?php echo $row['price'];?></td>
-                            <td><?php echo $row['category'];?></td>
-                            <td><button type="button" class="btn btn-outline-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .9rem; --bs-btn-font-size: .75rem;"> Edit</button>&nbsp;&nbsp;
-                                <button type="button" class="btn btn-outline-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .6rem; --bs-btn-font-size: .75rem;"> Delete</button>
-                            </td>
-                        </tr>
-
-                        <?php }?>
-                    </tbody>
-                </table>
+                ?>
+                <form action="../control/updatepersonalinfocon.php" method="post" enctype="multipart/form-data"><!--from-->
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" placeholder="<?php echo $row['name']; ?>" name="name" disabled>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-6">
+                            <label for="" class="form-label">Email</label>
+                            <input type="email" class="form-control" placeholder="<?php echo $row['email']; ?>" name="email" disabled>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="" class="form-label">Address</label>
+                            <input type="text" class="form-control" placeholder="Address" name="address" disabled>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-6">
+                            <label for="" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" placeholder="<?php echo $row['phoneno']; ?>" name="phoneno" disabled>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="" class="form-label">Profile Picture</label>
+                            <input class="form-control" type="file" id="profile" name="profilepic" disabled>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-outline-success" id="update" name="update">Update</button>
+                </form><!--form end-->
+                <button type="button" class="btn btn-outline-success" id="edit" onclick="edit();">Edit</button><!--edit button-->
             </div>
-            <div class="col-sm-9 py-2 mt-5" id="producttable">
-                <table class="table  table-striped table-hover table-sm"><!--iteam table-->
+            <div class="col-sm-9 py-2 mt-5" id="itemtable"><!--iteam table-->
+                <?php
+                $obj = new Products(); // product get product table according to userid
+                if ($obj->get($_SESSION['userid']) != null) {
+                ?>
+                    <table class="table table-striped table-hover table-sm">
+                        <thead>
+                            <tr class="table-primary">
+                                <th scope="col">Product_Id</th>
+                                <th scope="col">Product_Name</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <?php
+                            $rows = $obj->get($_SESSION['userid']);
+                            foreach ($rows as $row) {
+                            ?>
+                                <tr class="vertical-center">
+                                    <td><?php echo $row['product_id']; ?></td>
+                                    <td><?php echo $row['product_name']; ?></td>
+                                    <td><img src="<?php echo $row['image']; ?>" class="table-image"></td>
+                                    <td><?php echo $row['price']; ?></td>
+                                    <td><?php echo $row['category']; ?></td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .9rem; --bs-btn-font-size: .75rem;"> Edit</button>&nbsp;&nbsp;
+                                        <button type="button" class="btn btn-outline-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .6rem; --bs-btn-font-size: .75rem;"> Delete</button>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                <?php } else { ?>
+                    <h2>No Add Iteams Yet</h2>
+                <?php } ?>
+
+            </div>
+            <div class="col-sm-9 py-2 mt-5" id="producttable"><!--order table-->
+                <table class="table  table-striped table-hover table-sm">
                     <thead>
                         <tr class="table-primary">
                             <th scope="col">Product_Id</th>

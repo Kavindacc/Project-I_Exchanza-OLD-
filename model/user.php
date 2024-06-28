@@ -3,10 +3,17 @@
 require 'dbconnection.php';
 session_start();
 
-class User extends Dbh
+class User
 {
 
     private $name, $gender, $country, $pnum, $password, $email, $filepath, $token, $expire, $token_hash, $userid, $otp, $status;
+
+    private $pdo;
+
+    public function __construct() {
+        $db = new Dbh();
+        $this->pdo = $db->connect();
+    }
 
     public function emailexit($email)
     {                                        //email exits function
@@ -15,7 +22,7 @@ class User extends Dbh
 
 
             $query = "SELECT * FROM usern WHERE email=?";
-            $stmt = $this->connect()->prepare($query);
+            $stmt = $this->pdo->prepare($query);
             $stmt->execute([$this->email]);
 
             if ($stmt->rowCount() > 0) {
@@ -41,7 +48,7 @@ class User extends Dbh
 
         try {
             $query = "INSERT INTO usern(name,email,country,gender,password,phoneno,otp) VALUES (?,?,?,?,?,?,?)";
-            $stmt = $this->connect()->prepare($query);
+            $stmt = $this->pdo->prepare($query);
 
             $stmt->execute([$this->name, $this->email, $this->country, $this->gender, $this->password, $this->pnum, $this->otp]);
         } catch (PDOException $e) {
@@ -58,7 +65,7 @@ class User extends Dbh
 
         try {
             $query = "UPDATE usern SET status=? WHERE email=? ";
-            $stmt = $this->connect()->prepare($query);
+            $stmt = $this->pdo->prepare($query);
             $stmt->execute([$this->status, $this->email]);
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -72,7 +79,7 @@ class User extends Dbh
 
         try {
             $query = "SELECT * FROM usern WHERE email=?";
-            $stmt = $this->connect()->prepare($query);
+            $stmt = $this->pdo->prepare($query);
             $stmt->execute([$this->email]);
 
 
@@ -96,7 +103,7 @@ class User extends Dbh
         try {
 
             $query = "SELECT * FROM usern WHERE email=?";
-            $stmt = $this->connect()->prepare($query);
+            $stmt = $this->pdo->prepare($query);
             $stmt->execute([$this->email]);
             if ($stmt->rowCount() > 0) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -114,7 +121,7 @@ class User extends Dbh
 
         try {
             $query = "SELECT * FROM usern WHERE email=?";
-            $stmt = $this->connect()->prepare($query);
+            $stmt = $this->pdo->prepare($query);
             $stmt->execute([$this->email]);
 
 
@@ -140,7 +147,7 @@ class User extends Dbh
 
         try {
             $query = "SELECT * FROM usern WHERE email=?";
-            $stmt = $this->connect()->prepare($query);
+            $stmt = $this->pdo->prepare($query);
             $stmt->execute([$this->email]);
 
 
@@ -166,7 +173,7 @@ class User extends Dbh
 
         try {
             $query = "UPDATE usern SET reset_token_hash=?, reset_token_expire=? WHERE email=?";
-            $stmt = $this->connect()->prepare($query);
+            $stmt = $this->pdo->prepare($query);
             $stmt->execute([$this->token, $this->expire, $this->email]);
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -179,7 +186,7 @@ class User extends Dbh
 
         try {
             $sql = "SELECT * FROM usern WHERE reset_token_hash=?";
-            $stmt = $this->connect()->prepare($sql);
+            $stmt = $this->pdo->prepare($sql);
             $stmt->execute([$this->token_hash]);
 
             if ($stmt->rowCount() > 0) {
@@ -201,7 +208,7 @@ class User extends Dbh
 
         try {
             $sql = "SELECT * FROM usern WHERE reset_token_hash=?";
-            $stmt = $this->connect()->prepare($sql);
+            $stmt = $this->pdo->prepare($sql);
             $stmt->execute([$this->token_hash]);
 
             if ($stmt->rowCount() > 0) {
@@ -223,7 +230,7 @@ class User extends Dbh
 
             $sql = "UPDATE usern SET password=?,reset_token_hash=NULL,reset_token_expire=NULL WHERE userid=?";
 
-            $stmt = $this->connect()->prepare($sql);
+            $stmt = $this->pdo->prepare($sql);
             $stmt->execute([$this->password, $this->userid]);
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -238,7 +245,7 @@ class User extends Dbh
         try {
 
             $query = "SELECT otp FROM usern WHERE email=?";
-            $stmt = $this->connect()->prepare($query);
+            $stmt = $this->pdo->prepare($query);
             $stmt->execute([$this->email]);
             if ($stmt->rowCount() > 0) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -248,4 +255,42 @@ class User extends Dbh
             echo "Error: " . $e->getMessage();
         }
     }
+
+    public function getInformation($userid){
+
+        $this->userid=$userid;
+        
+        try {
+
+            $query = "SELECT * FROM usern WHERE userid=?";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([$this->userid]);
+            if ($stmt->rowCount() > 0) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $_SESSION['profilepic']=$row['profilepic'];
+                return $row;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    public function updateImg($filePath,$userid){
+
+        $this->userid=$userid;
+        $this->filepath=$filePath;
+
+        
+        try {
+
+            $query = "UPDATE usern SET profilepic =? WHERE userid =?";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([$this->filepath,$this->userid]);
+            if ($stmt->rowCount() > 0) {
+                return true;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
 }
