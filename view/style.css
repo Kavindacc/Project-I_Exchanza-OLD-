@@ -162,6 +162,12 @@ input[type=submit]:hover{
 #itemtable{
     display: none;
 }
+#producttable{
+    display: none;
+}
+#update{
+    display: none;
+}
 .table-image {
     width: 100px;
     height:75px;

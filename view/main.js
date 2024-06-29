@@ -11,6 +11,7 @@ ScrollReveal().reveal('.tread', { origin: 'bottom' });
 function showItemTable() {//iteam button disable
     document.getElementById('itemtable').style.display = 'block';
     document.getElementById('producttable').style.display = 'none';
+    document.getElementById('personalinfo').style.display='none';
     document.getElementById('item').disabled = true;
     document.getElementById('order').disabled = false;
     document.getElementById('information').disabled = false;
@@ -27,6 +28,7 @@ function showItemTable() {//iteam button disable
 function showOrderTable() {//order button disable
     document.getElementById('itemtable').style.display = 'none';
     document.getElementById('producttable').style.display = 'block';
+    document.getElementById('personalinfo').style.display='none';
     document.getElementById('order').disabled = true;
     document.getElementById('item').disabled = false;
     document.getElementById('information').disabled = false;
@@ -40,6 +42,9 @@ function showOrderTable() {//order button disable
 }
 
 function showInformation(){//information button disable
+    document.getElementById('personalinfo').style.display='block';
+    document.getElementById('itemtable').style.display = 'none';
+    document.getElementById('producttable').style.display = 'none';
     document.getElementById('information').disabled = true;
     document.getElementById('order').disabled = false;
     document.getElementById('item').disabled = false;
@@ -50,4 +55,13 @@ function showInformation(){//information button disable
     document.getElementById('order').style.background = ''; 
     document.getElementById('order').style.color = '';
     
+}
+
+
+function edit() {
+
+    
+    document.getElementById('edit').style.display='none';
+    document.getElementById('profile').disabled=false;
+    document.getElementById('update').style.display = 'block';
 }
