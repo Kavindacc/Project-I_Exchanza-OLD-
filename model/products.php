@@ -1,16 +1,11 @@
 <?php
 
-
-class Products 
+require '../model/user.php';
+class Products extends User
 {
     private $productname, $price, $colour, $description, $category, $subcategory, $condition, $userid, $size, $filePath;
 
-    private $pdo;
-
-    public function __construct() {
-        $db = new Dbh();
-        $this->pdo = $db->connect();
-    }
+    
 
     public function insertProduct($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath, $userid)
     {

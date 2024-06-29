@@ -1,31 +1,8 @@
 <?php
+
 require '../model/products.php';
-require '../model/user.php';
-
-$filePath = null; //file upload start
-if (isset($_FILES['file']) && $_FILES['file']['error'] === 0) {
-    $file = $_FILES['file'];
-    $filename = $file['name'];
-    $filetmpname = $file['tmp_name'];
-    $filesize = $file['size'];
-    $fileext = explode('.', $filename); //string convert array
-    $fileactualext = strtolower(end($fileext));
-    $allowed = ['jpg', 'jpeg', 'png'];
-
-    if (in_array($fileactualext, $allowed)) {
-        if ($filesize < 1000000) { // 1MB file size limit
-            $fileNewName = uniqid();
-            $fileNewName .= "." . $fileactualext;
-            $fileDestination = '../upload/' . $fileNewName;
-            move_uploaded_file($filetmpname, $fileDestination);
-            $filePath = $fileDestination;
-        } else {
-            $errors[] = "File is too big";
-        }
-    } else {
-        $errors[] = "Please upload jpg, jpeg, or png type";
-    }
-} //file end
+session_start();
+//product.php add karanna ,nmut product.php change karanna one
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +52,7 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] === 0) {
                         <a href="../Project-I_Exchanza/view/cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
-                            <a href="logout.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3" style="color: #FFFF;">logout</button></a>
+                            <a href="logout.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3 " style="color: #FFFF;">logout</button></a>
                         <?php } ?>
                     </div>
                 </div>
@@ -91,7 +68,7 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] === 0) {
         <div class="row d-flex  mx-auto ">
             <div class="col-sm-3 d-flex flex-column ">
 
-                <?php if (isset( $_SESSION['profilepic'])) { ?>
+                <?php if (isset($_SESSION['profilepic']) && !empty($_SESSION['profilepic'])) { ?>
                     <img src="<?php echo htmlspecialchars($_SESSION['profilepic']); ?>" class="img-fluid rounded-4 py-2" alt="Profile Picture" style="max-height:350px;">
                 <?php } else { ?>
                     <img src="../img/profile.png" class="img-fluid rounded-4 py-2" alt="Default Profile Picture" style="max-height:350px;">
@@ -175,8 +152,34 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] === 0) {
                                     <td><?php echo $row['price']; ?></td>
                                     <td><?php echo $row['category']; ?></td>
                                     <td>
-                                        <button type="button" class="btn btn-outline-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .9rem; --bs-btn-font-size: .75rem;"> Edit</button>&nbsp;&nbsp;
-                                        <button type="button" class="btn btn-outline-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .6rem; --bs-btn-font-size: .75rem;"> Delete</button>
+                                    <button type="submit" class="btn btn-outline-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .9rem; --bs-btn-font-size: .75rem;"> Edit</button>&nbsp;&nbsp;
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .6rem; --bs-btn-font-size: .75rem;">
+                                            Delete
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog modal-dialog-centered modal-sm">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Do you Want to Delete ?</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <form action="../control/updatepersonalinfocon.php" method="post"><!--delete product table-->
+                                                        <input type="hidden" name="productid" value="<?php echo $row['product_id']; ?>">
+                                                        <button type="submit" class="btn btn-danger" name="delete">
+                                                            Delete
+                                                        </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+
                                     </td>
                                 </tr>
                             <?php } ?>
