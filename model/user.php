@@ -1,7 +1,7 @@
 <?php
 
 require 'dbconnection.php';
-
+session_start();
 
 class User
 {
@@ -287,6 +287,7 @@ class User
             $stmt = $this->pdo->prepare($query);
             $stmt->execute([$this->filepath,$this->userid]);
             if ($stmt->rowCount() > 0) {
+                $_SESSION['profilepic']=$this->filepath;
                 return true;
             }
         } catch (PDOException $e) {

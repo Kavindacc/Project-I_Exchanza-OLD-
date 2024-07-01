@@ -2,7 +2,7 @@
 
 require '../model/products.php';
 
-//product.php add karanna ,nmut product.php change karanna one
+// product.php add karanna ,nmut product.php change karanna one
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,22 +64,22 @@ require '../model/products.php';
     <h2 class="mt-3 ms-4">Hi, <?php echo  $_SESSION['username']; ?> </h2>
 
 
-    <div class="container-fluid py-2">
+    <div class="container-fluid mt-3">
         <div class="row d-flex  mx-auto ">
-            <div class="col-sm-3 d-flex flex-column "><!--prifile picture with button-->
+            <div class="col-sm-3 d-flex flex-column ">
 
                 <?php if (isset($_SESSION['profilepic']) && !empty($_SESSION['profilepic'])) { ?>
-                    <img src="<?php echo htmlspecialchars($_SESSION['profilepic']); ?>" class="img-fluid rounded-4 py-2" alt="Profile Picture" style="max-height:300px;">
+                    <img src="<?php echo htmlspecialchars($_SESSION['profilepic']); ?>" class="img-fluid rounded-4 py-2" alt="Profile Picture" style="max-height:350px;">
                 <?php } else { ?>
-                    <img src="../img/profile.png" class="img-fluid rounded-4" alt="Default Profile Picture" style="max-height:300px;">
+                    <img src="../img/profile.png" class="img-fluid rounded-4 py-2" alt="Default Profile Picture" style="max-height:350px;">
                 <?php } ?>
 
-                <button type="button" class="btn  my-2" onclick="showInformation()" id="information">Pesonal information</button>
-                <button type="button" class="btn  mb-2" onclick="showOrderTable()" id="order">My Orders</button>
-                <button type="button" class="btn  " onclick="showItemTable()" id="item">My Iteams</button>
+                <button type="button" class="btn btn-outline-primary m-2" onclick="showInformation()" id="information">Pesonal information</button>
+                <button type="button" class="btn btn-outline-primary m-2" onclick="showOrderTable()" id="order">My Orders</button>
+                <button type="button" class="btn btn-outline-primary m-2" onclick="showItemTable()" id="item">My Iteams</button>
 
             </div>
-            <div class="col-sm-8 py-2  mx-auto mt-5 " id="personalinfo"><!--personal information -->
+            <div class="col-sm-6 py-2 mt-5 mx-auto" id="personalinfo" style="display:none;"><!--personal information -->
                 <?php if (isset($_GET['success'])) {
                     echo $_GET['success'];
                 }
@@ -98,7 +98,6 @@ require '../model/products.php';
                             <label for="" class="form-label">Full Name</label>
                             <input type="text" class="form-control" placeholder="<?php echo $row['name']; ?>" name="name" disabled>
                         </div>
-
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-6">
@@ -106,35 +105,40 @@ require '../model/products.php';
                             <input type="email" class="form-control" placeholder="<?php echo $row['email']; ?>" name="email" disabled>
                         </div>
                         <div class="col-sm-6">
-                            <label for="" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" placeholder="<?php echo $row['phoneno']; ?>" name="phoneno" disabled>
+                            <label for="" class="form-label">Address</label>
+                            <input type="text" class="form-control" placeholder="Address" name="address" disabled>
                         </div>
-
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-6">
-                            <label for="" class="form-label">Gender</label>
-                            <input class="form-control" type="text" id="" name="gender" placeholder="<?php echo $row['gender']; ?>" disabled>
+                            <label for="" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" placeholder="<?php echo $row['phoneno']; ?>" name="phoneno" disabled>
                         </div>
                         <div class="col-sm-6">
                             <label for="" class="form-label">Profile Picture</label>
                             <input class="form-control" type="file" id="profile" name="profilepic" disabled>
                         </div>
                     </div>
-                    <div class="float-sm-end"><button type="submit" class="btn btn-outline-success" id="update" name="update"style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Update</button></div>
-
+                    <button type="submit" class="btn btn-outline-success" id="update" name="update">Update</button>
                 </form><!--form end-->
-                <div class="float-sm-end"><button type="button" class="btn btn-outline-success" id="edit" onclick="edit();"style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Add Profile Picture</button><!--edit button--></div>
-
+                <button type="button" class="btn btn-outline-success" id="edit" onclick="edit();">Edit</button><!--edit button-->
             </div>
-            <div class="col-sm-9 py-2 mt-5" id="itemtable" style="display:none;"><!--iteam table-->
+            <div class="col-sm-9 py-2 mt-5" id="itemtable"><!--iteam table-->
+                <?php if (isset($_SESSION['deletesuccess'])) { ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong><?php echo $_SESSION['deletesuccess']; ?></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php unset($_SESSION['deletesuccess']);
+                } ?>
+
                 <?php
                 $obj = new Products(); // product get product table according to userid
                 $rows = $obj->get($_SESSION['userid']);
                 if ($rows != null) {
                 ?>
                     <table class="table table-striped table-hover table-sm">
-                        <thead >
+                        <thead>
                             <tr class="table-primary">
                                 <th scope="col">Product_Id</th>
                                 <th scope="col">Product_Name</th>
@@ -186,7 +190,6 @@ require '../model/products.php';
                                     </td>
                                 </tr>
                             <?php } ?>
-
                         </tbody>
                     </table>
                 <?php } else { ?>

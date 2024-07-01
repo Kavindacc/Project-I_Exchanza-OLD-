@@ -51,4 +51,15 @@ class Products extends User
             echo "Error: " . $e->getMessage();
         }
     }
+
+    public function delete($productid){
+        $query = "DELETE FROM products WHERE product_id = ?";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([$productid]);
+        if ($stmt->rowCount() > 0) {
+            return true;
+        } else {
+            // Failed to delete product
+        }
+    }
 }
