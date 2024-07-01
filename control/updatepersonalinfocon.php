@@ -14,7 +14,7 @@ if(isset($_POST['update'])){
         $filesize = $file['size'];
         $fileext = explode('.', $filename); // String convert array
         $fileactualext = strtolower(end($fileext));
-        $allowed = ['jpg', 'jpeg', 'png'];
+        $allowed = ['jpg', 'jpeg', 'png'];//santize
 
         if (in_array($fileactualext, $allowed)) {
             if ($filesize < 1000000) { // 1MB file size limit

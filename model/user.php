@@ -8,7 +8,7 @@ class User
 
     private $name, $gender, $country, $pnum, $password, $email, $filepath, $token, $expire, $token_hash, $userid, $otp, $status;
 
-    private $pdo;
+    protected $pdo;
 
     public function __construct() {
         $db = new Dbh();
@@ -130,6 +130,7 @@ class User
                 $_SESSION['username'] = $row['name'];
                 $_SESSION['userid'] = $row['userid'];
                 $_SESSION['password']=$row['password'];
+                $_SESSION['profilepic']=$row['profilepic'];
                 return  $_SESSION['password'];
             } else {
                 return false;
@@ -267,7 +268,7 @@ class User
             $stmt->execute([$this->userid]);
             if ($stmt->rowCount() > 0) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                $_SESSION['profilepic']=$row['profilepic'];
+                
                 return $row;
             }
         } catch (PDOException $e) {
@@ -286,6 +287,7 @@ class User
             $stmt = $this->pdo->prepare($query);
             $stmt->execute([$this->filepath,$this->userid]);
             if ($stmt->rowCount() > 0) {
+                $_SESSION['profilepic']=$this->filepath;
                 return true;
             }
         } catch (PDOException $e) {
@@ -294,3 +296,4 @@ class User
     }
 
 }
+?>

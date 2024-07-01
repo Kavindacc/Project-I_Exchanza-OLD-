@@ -1,7 +1,7 @@
 <?php
 require '../model/products.php';
 
-session_start();
+//seseion strt delete
 
 if (isset($_POST['submit'])) {
 
