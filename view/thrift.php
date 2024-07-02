@@ -300,7 +300,7 @@
          <p> Bags </p>                   
     </div>
     <div class="col t6"> 
-         <p> Shoes </p>                   
+         <p> Shoes </p>
     </div>
   </div> 
 
