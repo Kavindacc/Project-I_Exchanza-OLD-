@@ -60,11 +60,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-        if (empty($pnum)) { //phone number check
+        if (empty($pnum)) {
             $errors[] = "Phone Number is required";
         } else {
-            $pnum = trim(stripslashes(htmlspecialchars($pnum))); //santizer number
+            // Sanitize the phone number
+            $saniPhoneNumber = preg_replace("/[^0-9]/", "", $pnum);
+        
+            if (strlen($saniPhoneNumber) === 10) {
+                // Valid phone number
+                $pnum = $saniPhoneNumber;
+            } else {
+                $errors[] = "Invalid Phone Number format";
+            }
         }
+        
 
         if ($password !== $rpassword) { //repeat pasword check
             $errors[] = "Passwords do not match";

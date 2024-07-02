@@ -1,34 +1,23 @@
 <?php
-require '../model/products.php';
+require '../model/user.php';
 
-//seseion strt delete
 
-if (isset($_POST['submit'])) {
-
-    $productname = ucfirst($_POST['itemname']);
-    $price = $_POST['price'];
-    $colour = $_POST['colour'];
-    $description = $_POST['description'];
-    $category = strtolower($_POST['category']);
-    $subcategory = strtolower($_POST['subcategory']);
-    $size = isset($_POST['size']) ? $_POST['size'] : null; // Use ternary operator
-    $condition = $_POST['condition'];
-    $userid = $_SESSION['userid'];
+if(isset($_POST['update'])){
 
     $errors = [];
     $filePath = null; // File upload start
 
-    if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
-        $file = $_FILES['image'];
+    if (isset($_FILES['profilepic']) && $_FILES['profilepic']['error'] === 0) {
+        $file = $_FILES['profilepic'];
         $filename = $file['name'];
         $filetmpname = $file['tmp_name'];
         $filesize = $file['size'];
         $fileext = explode('.', $filename); // String convert array
         $fileactualext = strtolower(end($fileext));
-        $allowed = ['jpg', 'jpeg', 'png'];
+        $allowed = ['jpg', 'jpeg', 'png'];//santize
 
         if (in_array($fileactualext, $allowed)) {
-            if ($filesize < 2000000) { // 2MB file size limit
+            if ($filesize < 1000000) { // 1MB file size limit
                 $fileNewName = uniqid('', true) . "." . $fileactualext;
                 $fileDestination = '../upload/' . $fileNewName;
                 if (move_uploaded_file($filetmpname, $fileDestination)) {
@@ -45,17 +34,24 @@ if (isset($_POST['submit'])) {
     } 
 
     if ($filePath !== null) {
-        $obj = new Products();
-        $obj->insertProduct($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath, $userid);
+        $obj = new User();//upload image
+        if($obj->updateImg($filePath,$_SESSION['userid'])){
+            header("Location: ../view/userpage.php?success=Profile picture Upload.");//userpage page
+            exit();
+        }
     } else {
         $errors[] = "File upload failed or no file uploaded.";
     }
 
     if (!empty($errors)) {
         foreach ($errors as $error) {
-            header("Location: ../view/thrift.php?error=$error.");//thrift page
+            header("Location: ../view/userpage.php?error=$error.");//userpage page
             exit();
         }
     }
 }
+
+
+
+
 ?>
