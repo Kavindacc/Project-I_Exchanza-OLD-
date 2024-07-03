@@ -87,7 +87,7 @@
             <tr>
                 <td>
                     <div class="cart-info">
-                       <img src="Paige Dress.jpg" >
+                       <img src="../img/Paige Dress.jpg" >
                        <div>
                         <p><b>Paige Dress</b></p>
                         <br>
@@ -102,7 +102,7 @@
             <tr>
                 <td>
                     <div class="cart-info">
-                       <img src="Cami Dress.jpg" >
+                       <img src="../img/Dress.jpg" >
                        <div>
                         <p><b>Cami Dress</b></p>
                         <br>
@@ -117,7 +117,7 @@
             <tr>
                 <td>
                     <div class="cart-info">
-                       <img src="Cap.jpg" >
+                       <img src="../img/Cap.jpg" >
                        <div>
                         <p><b>Cap</b></p> 
                         <br>
@@ -132,7 +132,7 @@
             <tr>
                 <td>
                     <div class="cart-info">
-                       <img src="Women's Skirt.jpg" >
+                       <img src="../img/Women's Skirt.jpg" >
                        <div>
                         <p><b>Women's Skirt</b></p>
                         <br>
@@ -182,7 +182,7 @@
         <div class="container p-3">
             <div class="row">
                 <div class="col">
-                    <img src="img/Exchanza.png" width="200px">
+                    <img src="../img/Exchanza.png" width="200px">
                 </div>
             </div>
             <div class="row  mt-4" style="border-bottom:1px solid black;">
