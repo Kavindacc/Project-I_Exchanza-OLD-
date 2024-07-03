@@ -1,0 +1,33 @@
+.card-custom-bg {
+    background-color: #f4f4f4;
+  }
+  
+  .product-image-container {
+    position: relative;
+    overflow: hidden;
+    cursor: zoom-in;
+  }
+  .product-image {
+    transition: transform 0.3s ease;
+  }
+  .product-image-container:hover .product-image {
+    transform: scale(1.2);
+  }
+  .thumbnail {
+    cursor: pointer;
+  }
+  .heart-icon {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: red;
+    stroke-width: 2px;
+  }
+  .heart-icon.filled {
+    fill: red;
+  }
+.item img{
+    width: 120px;
+    height: 120px;
+}  

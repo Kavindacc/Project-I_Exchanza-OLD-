@@ -1,0 +1,865 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* #746557 #CEC0B9 #E3E2DD #F4F4F4 #4C3F31 #AE9D92 #897062 */
+.arena{
+    display: flex;
+    gap: 3%;
+    background-color: #E3E2DD;
+    margin-top: 1%;
+    padding-left: 30%;
+    padding-right: 0%;
+    padding-top:1%;
+    margin-bottom:1%;
+    position: relative;
+    width: 100%;
+    max-width: 1280px;
+    box-shadow: 0 2px 8px rgba(137, 112, 98,0.677);
+    border-radius: 10%;
+}
+.artext{
+    margin-top: 1vw;
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    color: #092805cd;
+    font-size: x-large;
+    font-weight: bolder;
+}
+.arena svg{
+    margin-top: 1vw;
+    margin-left: 5%;
+    color: #4C3F31;
+}
+.arena  svg {
+    /* display: inline-block; */
+    transition: transform 0.2s ease;
+}
+
+/* .arena a:hover svg {
+    transform: scale(1.1); 
+    cursor: pointer;
+    color: #897062;
+}  */
+
+.arena a {
+    text-decoration: none; /* Removes the underline */
+    color: inherit; /* Inherits the color from parent */
+}
+
+.but{
+    margin-top: 1%;
+}
+.nav-tabs .nav-link {
+    border-bottom: 1px solid #4C3F31;
+}
+
+.nav-tabs .nav-link.active {
+    border-bottom: none;
+    background-color: white;
+}
+.arena .nav-link.active {
+    
+    border-color:#4C3F31;
+    background-color: transparent;
+    border-bottom: none !important;
+}
+#home-tab,#profile-tab,#contact-tab{
+    color:#093606f1;
+    background-color: transparent;
+}
+/* sidepanel */
+.side-panel {
+    position: fixed;
+    right: -250px;
+    top: 10%;
+    width: 250px;
+    height:90%;
+    background-color: rgb(255, 255, 255);
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    transition: right 0.3s ease;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+.side-panel img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.side-panel p {
+    margin-bottom: 20px;
+}
+
+.add-item-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color:#4C3F31;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+/* form */
+/* popup form */
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 30;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+    max-height: 100vh; /* Set a maximum height */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    margin: 50px auto;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+    margin-top: 5%;
+}
+/* .add-item-form {
+    display:none;
+    margin-top: 20px;
+} */
+
+/* .add-item-form h2 {
+    margin-bottom: 10px;
+} */
+
+/* .add-item-form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.add-item-form input, .add-item-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.add-item-form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+} */
+.hidden {
+    display:none;
+}
+#color {
+     width: 100%;
+     padding: 0;
+     height: 38px;
+     border: none;
+}
+.card-preview {
+     margin-top: 20px;
+}
+.card-preview img {
+     max-width: 100%;
+     height: auto;
+}
+.card-preview .card-body {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+}
+.bold{
+     font-weight: 500;
+}
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+.ssubmit{
+    background-color: #4C3F31;
+    color: white;
+    border-color: #4C3F31;
+}
+.ssubmit:hover {
+    background-color:#897062;
+    color: white;
+    border-color: #4C3F31;
+}
+/* image container */
+.text-block{
+
+    position: absolute;
+    top: 30%;
+    right: 2%;
+    background: rgba(240, 182, 182, 0.5); /* Black background with 0.5 opacity */
+    width: 60%; 
+    /* margin-right: 5%; */
+  }
+  .text-block h1{
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    color: #092805cd;
+  }
+  .para1{
+    margin-right: 500px;
+    padding: 0;
+    font-family:'anadale mono';
+    /* Avantgarde , , sans-serif TeX Gyre Adventor*/
+    color: #020f01f1;
+    /* font-weight: 150; */
+    font-size: 110%;
+    margin-right: 5%;
+    margin-bottom: 0.1%;
+  }
+#thriftwomen{
+    padding-left: 0%;
+    padding-right: 0%;
+    padding-top:1%;
+    margin-bottom:1%;
+    position: relative;
+    width: 100%;
+    max-width: 1280px;  /* Optional: constrain the max width */
+    aspect-ratio: 1280 / 600;  /* Maintain the 1280:600 aspect ratio */
+    /* overflow: hidden */
+
+}
+.thriftwomen{
+    /* width: 100%;
+    height: 46.88%;
+    object-fit: cover; */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
+/* catpart */
+.catr{
+    display: flex;
+    gap: 6%;
+    margin-bottom: 1%;
+    /* background-color: aqua; */
+}
+.col.r1, .col.r2, .col.r3, .col.r4, .col.r5, .col.r6 {
+    padding: 0;
+    overflow: hidden;
+    display: flex;           /* Use flexbox to center content */
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    background-color: aqua;
+    height: 150px;           
+    width: 150px;
+    border-radius: 50%; 
+}
+.twc1, .twc2, .twc3, .twc4, .twc5, .twc6{
+    width: 100%;            /* Make the image fill the parent width */
+    height: auto;           /* Maintain aspect ratio */
+    border-radius: 50%;
+    object-fit: cover;      /* Scale the image to cover the container */
+}
+
+.col a {
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Ensures the anchor does not alter the layout */
+    margin: 0; /* Reset margin */
+    padding: 0; /* Reset padding */
+}
+
+.catt{
+    display: flex;
+    gap: 6%;
+    /* margin-bottom: 1%; */
+    /* margin-left: 1.5%; */
+    /* background-color: #4C3F31; */
+    height: auto;
+}
+.col.t1, .col.t2, .col.t3, .col.t4, .col.t5, .col.t6 {
+    padding: 0;
+    overflow: hidden;
+    display: flex;           /* Use flexbox to center content */
+    justify-content: center;
+    /* height: 150px;            */
+    width: 150px;
+    /* background-color: #daac78; */
+   
+}
+.catt p{
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+    color: #092805cd;
+    align-items: center;
+}
+
+/* review part */
+.des{
+    /* display: flex; */
+    /* background-color: #a9317f; */
+    padding-left: 1%;
+    position: relative;
+    margin-bottom: 2%;
+    margin-top: 2%;
+
+}
+/* .revieW{
+    margin-top: 1%;
+    height: 200px;
+    margin-bottom: 1%;
+    
+}
+.revieW .col{
+    background-color: #daac78;
+    height: 100px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+} */
+.reviews {
+    padding: 0.1rem;
+    /* background-color: #fff; */
+    max-width: 800px;
+    margin: 0.1rem auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    
+}
+
+.reviews h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #092805cd;
+    margin-bottom: 1.5rem;
+}
+
+.review1,.review2 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+.review img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.review blockquote {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #555;
+}
+
+.review blockquote p {
+    margin-bottom: 0.5rem;
+}
+
+.review blockquote cite {
+    font-style: normal;
+    font-weight: bold;
+    color: #092805cd;
+    
+}
+
+/* stat */
+.stat .row{
+    align-items: center;
+    display:flex;
+    /* background-color:#746557; */
+    /* flex-wrap: nowrap; */
+    margin-bottom: 1%;
+    border-radius: 8px;
+    
+}
+.stat1, .stat2, .stat3 {
+    position: relative;
+    /* border: 1px solid red; */
+    box-shadow: 0 2px 8px rgba(137, 112, 98,0.677);
+    
+  }
+.stat h3 {
+    position: absolute; 
+    top: 1rem; 
+    left: 50%;
+    transform: translateX(-21%);
+      
+}
+.stat div{
+    display: flex;
+    flex: 1;
+    width:100%;
+}
+.stat p {
+    position:absolute; 
+    left: 50%;
+    transform: translateX(-21%);
+    word-wrap: break-word;
+    margin-right: 1%;  
+    margin-top: 12%;    
+}
+
+.ts1,.ts2,.ts3{
+    padding: 0;
+    overflow: hidden;
+    display: flex;  
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    background-color: #897062; 
+    height: 150px;           
+    width: 150px;
+    border-radius: 50%; 
+    /* margin-right: 15px; */
+    flex-shrink: 0;
+}
+
+/* responsive for the first part  */
+
+@media (max-width: 1024px) {
+    .text-block {
+        top: 25%;
+        width: 80%;
+        padding: 1rem;
+    }
+    .text-block h1 {
+        font-size: 3vw;
+    }
+    .para1 {
+        font-size: 2vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .text-block {
+        top: 20%;
+        width: 90%;
+        padding: 0.8rem;
+    }
+    .text-block h1 {
+        font-size: 4vw;
+    }
+    .para1 {
+        font-size: 2.5vw;
+    }
+}
+
+@media (max-width: 576px) {
+    .text-block {
+        top: 15%;
+        right: 1%;
+        width: 95%;
+        padding: 0.6rem;
+    }
+    .text-block h1 {
+        font-size: 5vw;
+    }
+    .para1 {
+        font-size: 3vw;
+    }
+}
+
+@media (max-width: 400px) {
+    .text-block {
+        top: 10%;
+        width:60%;
+        height:80%;
+        padding: 0.4rem;
+    }
+    .text-block h1 {
+        font-size: 5vw;
+    }
+    .para1 {
+        font-size: 2vw;
+    }
+}
+
+/* responsive */
+/* Mobile and small screens (max-width: 768px) */
+@media (max-width: 768px) {
+    /* Navbar adjustments */
+    .navbar-brand img {
+        max-height: 40px;
+    }
+
+    .navbar-toggler {
+        font-size: 1.25rem;
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-link {
+        margin: 5px 0;
+    }
+
+    .search {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .lo-button {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* Arena adjustments */
+    .arena {
+        padding: 40px 0;
+    }
+
+    .artext {
+        font-size: 1.5rem;
+    }
+
+    .feather {
+        font-size: 4rem;
+    }
+
+    .but .nav-link {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    /* Add Item Button and Form */
+    .side-panel {
+        right: -250px;
+        height:50%;
+    }
+    .add-item-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .popup-overlay .close-btn {
+        top: 20px;
+    }
+    .reviews blockquote {
+        margin-right: 50%;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #555;
+        /* background-color: aqua; */
+    }
+    .revieW{
+        /* background-color: #746557; */
+         /* #092805cd */
+         box-shadow: 0 2px 8px rgba(137, 112, 98,0.677);
+    }
+    .reviews blockquote p {
+        margin-bottom: 0.5rem;
+        margin-right: 15%;
+    }
+    
+    .reviews blockquote cite {
+        font-style: normal;
+        font-weight: bold;
+        color: #092805cd;
+        
+    }
+    /* Cards adjustments */
+    .card {
+        margin: 0 0 10px;
+    }
+
+    .card img {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+    }
+
+    .stat h3 {
+        position:relative; 
+        left: 18%;
+    }
+
+    .stat p {
+        position:relative; 
+        left: 18%;
+    }
+    /* Footer adjustments */
+    .footer {
+        padding: 15px 0;
+    }
+
+    .footer h5 {
+        font-size: 1.1rem;
+    }
+
+    .footer p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablets and medium screens (min-width: 769px and max-width: 992px) */
+@media (min-width: 769px) and (max-width: 992px) {
+    /* Navbar adjustments */
+    /* .navbar-brand img {
+        max-height: 45px;
+    }
+
+    .navbar-toggler {
+        font-size: 1.25rem;
+    }
+
+    .navbar-nav {
+        flex-direction: row;
+    }
+
+    .nav-link {
+        margin: 0 5px;
+    }
+
+    .search {
+        width: auto;
+        margin-top: 0;
+    }
+
+    .lo-button {
+        width: auto;
+        margin-top: 0;
+    } */
+
+    /* Arena adjustments */
+    .arena {
+        padding: 50px 0;
+    }
+
+    .artext {
+        font-size: 1.75rem;
+    }
+
+    .feather {
+        font-size: 4.5rem;
+    }
+
+    .but .nav-link {
+        font-size: 1rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    /* Add Item Button and Form */
+    .side-panel {
+        right: -250px;
+        height:50%;
+    }
+    .add-item-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .popup-overlay .close-btn {
+        top: 20px;
+    }
+
+    .reviews blockquote {
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #555;
+        /* background-color: aqua; */
+    }
+    .revieW{
+        /* background-color: #746557; */
+         /* #092805cd */
+         box-shadow: 0 2px 8px rgba(137, 112, 98,0.677);
+    }
+    .reviews blockquote p {
+        margin-bottom: 0.5rem;
+        margin-right: 10%;
+    }
+    
+    .reviews blockquote cite {
+        font-style: normal;
+        font-weight: bold;
+        color: #092805cd;
+        
+    }
+    .stat h3 {
+        position:relative; 
+        left: 20%;
+    }
+
+    .stat p {
+        position:relative; 
+        left: 20%;
+    }
+    /* Cards adjustments */
+    .card {
+        margin: 0 0 15px;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+    }
+
+    .card-text {
+        font-size: 0.95rem;
+    }
+
+    /* Footer adjustments */
+    .footer {
+        padding: 20px 0;
+    }
+
+    .footer h5 {
+        font-size: 1.15rem;
+    }
+
+    .footer p {
+        font-size: 0.95rem;
+    }
+}
+
+/* Large screens (min-width: 993px) */
+@media (min-width: 993px) {
+    /* Navbar adjustments */
+    /* .navbar-brand img {
+        max-height: 50px;
+    }
+
+    .navbar-toggler {
+        font-size: 1.5rem;
+    }
+
+    .navbar-nav {
+        flex-direction: row;
+    }
+
+    .nav-link {
+        margin: 0 10px;
+    }
+
+    .search {
+        width: auto;
+        margin-top: 0;
+    }
+
+    .lo-button {
+        width: auto;
+        margin-top: 0;
+    } */
+
+    /* Arena adjustments */
+    /* .arena {
+        padding: 60px 0;
+    } */
+
+    .artext {
+        font-size: 2rem;
+    }
+
+    .feather {
+        font-size: 5rem;
+    }
+
+    .but .nav-link {
+        font-size: 1.1rem;
+        padding: 0.5rem 1rem;
+    }
+
+    /* Add Item Button and Form */
+    .add-item-btn {
+        width: auto;
+        padding: 12px;
+        font-size: 1.1rem;
+    }
+
+
+    .popup-overlay .close-btn {
+        top: 20px;
+    }
+    .revieW{
+        /* background-color: #746557; */
+         /* #092805cd */
+         box-shadow: 0 2px 8px rgba(137, 112, 98,0.677);
+    }
+    .reviews blockquote p {
+        margin-bottom: 0.5rem;
+        margin-right: 10%;
+    }
+    
+    .reviews blockquote cite {
+        font-style: normal;
+        font-weight: bold;
+        color: #092805cd;
+        
+    }
+    .stat h3 {
+        position:relative; 
+        left: 20%;
+    }
+
+    .stat p {
+        position:relative; 
+        left: 20%;
+    }
+    .col.r1, .col.r2, .col.r3, .col.r4, .col.r5, .col.r6 {
+    margin-bottom: 10%;
+    }
+    /* Cards adjustments */
+    .card {
+        margin: 0 0 20px;
+    }
+
+    .card-title {
+        font-size: 1.3rem;
+    }
+
+    .card-text {
+        font-size: 1rem;
+    }
+
+    /* Footer adjustments */
+    .footer {
+        padding: 25px 0;
+    }
+
+    .footer h5 {
+        font-size: 1.2rem;
+    }
+
+    .footer p {
+        font-size: 1rem;
+    }
+}

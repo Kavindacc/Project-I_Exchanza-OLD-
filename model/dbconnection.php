@@ -1,5 +1,6 @@
 <?php
 
+
 Class Dbh{
 
     private $servername;
@@ -7,12 +8,12 @@ Class Dbh{
     private $password;
     private $dbname;
 
-    protected function connect(){
+    public function connect(){
 
         $this->servername="localhost";
-        $this->username="root";
-        $this->password="";
-        $this->dbname="login";
+        $this->username="root";//username add karanna
+        $this->password="";//password add karanna
+        $this->dbname="exchanzedb";
 
         try {
             

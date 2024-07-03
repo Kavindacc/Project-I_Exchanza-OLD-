@@ -25,7 +25,7 @@ if (isset($_POST['continue'])) {
         $mail->Body = <<<END
 
         Click <a href="http://example.com/resetpassword.php?token=$token">here </a>to reset your password.
-        END;//domain name danna one
+        END;//domain name danna one resetpassword link eka
 
         try {
             $mail->send();

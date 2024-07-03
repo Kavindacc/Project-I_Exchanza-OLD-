@@ -41,7 +41,7 @@ input[type=submit]:hover{
     
     width:90%;
     padding-bottom:20px;
-    background:  #f4f4f4;;
+    background:  #f4f4f4;
     border-radius:15px;
   
 }
@@ -90,19 +90,7 @@ input[type=submit]:hover{
 .lo-button a{
     color: #FFFF;
 }
-.lo-out{
-    background: #AE9D92;
-    border: none;
-    border-radius: .4rem;
-    padding: .5rem;
-}
-.lo-out:hover{
-    background:#4c3f31 ;
 
-}
-.lo-out a{
-    color: #FFFF;
-}
 .text p{
     color: black;
 }
@@ -172,6 +160,29 @@ input[type=submit]:hover{
     margin-top: 10px;
 }
 
+#update{
+    display: none;
+}
+.table-image {
+    width: 100px;
+    height:75px;
+}
+.vertical-center {
+    vertical-align: middle;
+}
+#personalinfo{
+    background: #f4f4f4;
+    max-height: 320px;
+    border-radius: .6rem;
+}
+#information,#order,#item{
+    --bs-btn-color:#FFFF;
+    --bs-btn-bg:#897062;
+    --bs-btn-border-color:none;
+    --bs-btn-hover-bg:#4c3f31;
+    --bs-btn-hover-color:#FFFF;
+}
+
 @media screen and (max-width:720px){
     .item .side{
         width:100%;
@@ -185,5 +196,10 @@ input[type=submit]:hover{
         width:100%;
         padding:20px;
         margin-top: 100px;
+    }
+    #personalinfo{
+        
+        max-height: 460px;
+        
     }
 }
