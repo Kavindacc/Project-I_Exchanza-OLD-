@@ -1,16 +1,11 @@
 <?php
 
-
-class Products 
+require '../model/user.php';
+class Products extends User
 {
     private $productname, $price, $colour, $description, $category, $subcategory, $condition, $userid, $size, $filePath;
 
-    private $pdo;
-
-    public function __construct() {
-        $db = new Dbh();
-        $this->pdo = $db->connect();
-    }
+    
 
     public function insertProduct($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath, $userid)
     {
@@ -54,6 +49,17 @@ class Products
         } 
         catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function delete($productid){
+        $query = "DELETE FROM products WHERE product_id = ?";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([$productid]);
+        if ($stmt->rowCount() > 0) {
+            return true;
+        } else {
+            // Failed to delete product
         }
     }
 }
