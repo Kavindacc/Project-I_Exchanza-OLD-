@@ -102,7 +102,7 @@
             <tr>
                 <td>
                     <div class="cart-info">
-                       <img src="../img/Dress.jpg" >
+                       <img src="../img/Cami Dress.jpg" >
                        <div>
                         <p><b>Cami Dress</b></p>
                         <br>
