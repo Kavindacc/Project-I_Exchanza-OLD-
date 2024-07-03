@@ -14,7 +14,7 @@
 
 <body>
     <!--nav bar-->
-    <nav class="navbar navbar-expand-lg sticky-top">
+    <nav class="navbar navbar-expand-lg sticky-top nav">
         <div class="container-fluid logo"><!--logo-->
             <a class="navbar-brand" href="#"><img src="../img/Exchanza.png" width="100px"></a>
             <!--toggle button-->
@@ -44,8 +44,8 @@
                             <a class="nav-link" href="#">Selling</a>
                         </li>
                     </ul>
-                    <form class="d-flex me-4" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search">
+                    <form class="d-flex me-4 align-items-center" role="search">
+                        <input class="search me-2" type="search" placeholder="Search">
                         <a href="#1" class="nav-link  text-decoration-none  mt-2"><i class="fa-solid fa-magnifying-glass"></i></a>
                     </form>
                     <!--login nav-link-a-color-->
@@ -53,13 +53,13 @@
                         <a href="#1" class="nav-link  text-decoration-none mx-2"><i class="fa-solid fa-cart-plus"></i></a>
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
-                            <button class="btn btn-warning btn-sm ms-2 px-3">
-                                <a href="view/logout.php" class="nav-link text-decoration-none">logout</a>
+                            <button class="lo-out btn-sm ms-2 px-3">
+                                <a href="view/logout.php" class=" text-decoration-none">logout</a>
                             </button>
                             <?php echo "Hi," . $_SESSION['username']; ?>
                         <?php } else { ?>
-                            <button class="btn btn-dark btn-sm ms-2 px-3">
-                                <a href="#1" class="nav-link text-decoration-none active" style="cursor: default;">login</a>
+                            <button class="lo-button btn-sm ms-2 px-3"style="cursor: default;background:#4c3f31 ;">
+                                <a href="#1" class=" text-decoration-none active" style="cursor: default;">login</a>
                             </button>
                         <?php } ?>
                     </div>
@@ -100,49 +100,16 @@
                     <div class="col-md-4"><a href="forgetpassword.php">forget password</a></div>
                 </div>
                 <div class="row justify-content-center mt-2">
-                    <div class="col-md-4">
-                        <input class="btn btn-primary w-100" type="submit" value="Sign In" name="signin">
+                    <div class="col-md-4 login-btn">
+                        <input class="btn btn-primary w-100" type="submit" value="Sign In" name="signin"style="background:#897062;border:none;">
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <!--footer-->
-    <div class="container-fluid footer">
-        <div class="container p-3">
-            <div class="row">
-                <div class="col">
-                    <img src="../img/Exchanza.png" width="200px">
-                </div>
-            </div>
-            <div class="row  mt-4" style="border-bottom:1px solid black;">
-                <div class="col">
-                    <p class=""><i class="fa-solid fa-phone"></i>&nbsp;&nbsp;+94 112 555 444</p>
-                    <p class=""><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;exchanza@gmail.com</p>
-                    <p class=""><i class="fa-solid fa-location-dot"></i>&nbsp;&nbsp;No.56/2,Kotta Rd,Colombo
-                        05,<br>&nbsp;&nbsp;&nbsp;&nbsp;Sri Lanka</p>
-                </div>
-                <div class="col lin">
-                    <h5>Information</h5>
-                    <p><a href="#1">Privacy &amp; Policy</a></p>
-                    <p><a href="#1">About Us</a></p>
-                    <p><a href="#1">Terms &amp; Condition</a></p>
-                </div>
-                <div class="col lin">
-                    <h5>Connect with Us</h5>
-                    <p><a href=""><i class="fa-brands fa-facebook" style="font-size:50px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i class="fa-brands fa-instagram" style="font-size:50px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i class="fa-brands fa-youtube" style="font-size:50px;"></i></a></p>
-                </div>
-            </div>
-            <div class="row mt-2">
-                <div class="d-flex justify-content-between flex-column flex-md-row">
-                    <div><i class="fa-brands fa-cc-visa" style="font-size:50px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-brands fa-cc-mastercard" style="font-size:50px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-brands fa-cc-amex" style="font-size:50px;"></i></div>
-                    <div>&copy;Exchanze All Rights are reserved</div>
+    
 
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--fotterclose-->
+    
     <!--prevent backbutton-->
     <script type="text/javascript">
         function preventback() {
