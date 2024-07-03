@@ -87,7 +87,7 @@
             <tr>
                 <td>
                     <div class="cart-info">
-                       <img src="../img/Paige Dress.jpg" >
+                       <img src="../img/Paige Dress.jpg" alt="Paige Dress" >
                        <div>
                         <p><b>Paige Dress</b></p>
                         <br>
@@ -102,7 +102,7 @@
             <tr>
                 <td>
                     <div class="cart-info">
-                       <img src="../img/Dress.jpg" >
+                       <img src="../img/Cami Dress.jpg" alt="Cami Dress">
                        <div>
                         <p><b>Cami Dress</b></p>
                         <br>
@@ -117,7 +117,7 @@
             <tr>
                 <td>
                     <div class="cart-info">
-                       <img src="../img/Cap.jpg" >
+                       <img src="../img/Cap.jpg" alt="Cap" >
                        <div>
                         <p><b>Cap</b></p> 
                         <br>
@@ -132,7 +132,7 @@
             <tr>
                 <td>
                     <div class="cart-info">
-                       <img src="../img/Women's Skirt.jpg" >
+                       <img src="../img/Women's Skirt.jpg" alt="Women's Skirt >
                        <div>
                         <p><b>Women's Skirt</b></p>
                         <br>
