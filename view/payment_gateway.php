@@ -113,7 +113,7 @@
                                     if((zip) != null){
                                         if((district) != null){
                                             if((province) != null){
-                                                //window.location.href="http://localhost/Project-I_Exchanza/view/payment_gateway.php";
+                                                window.location.href="http://localhost/Project-I_Exchanza/view/payment_gateway.php";
                                             }
                                         }
                                     }
@@ -166,7 +166,6 @@
 
                             <span id="error_msg" class="text-danger">
                                 
-
 
                             </span>   
 
@@ -233,7 +232,7 @@
                         
                         <hr>
 
-                        <input type="button" value="Buy now" onclick="errormsg()" onclick="validation()">
+                        <input type="button" value="Buy now" onclick="errormsg()" onclick="validation()" onclick="goback()">
 
                         <p class="text-muted text-center">Complimentary Shipping & Returns</p>
                         </form>
@@ -308,6 +307,7 @@
                         }
 
                         return true; // If all validations pass
+
                     }
 
 
@@ -344,23 +344,32 @@
     <script>
 
         function errormsg(){
+
             var card = "card";
             var card = "<?php echo $card ?>";
-            if(card == "card"){
-                document.getElementById("error_msg").innerHTML="<?php echo $validationResult; ?>"
-                
-            }
-
-            if ((<?php echo $validationResult ?>) != true) {
             
-                history.back();
+            if(card == "card"){
+
+                document.getElementById("error_msg").innerHTML="<?php echo $validationResult; ?>";
+
                 
             }
 
+            
         } 
-        
 
-        //document.getElementsByName("name").innerHTML="<?php echo $name ?>"
+        
+        function goback(){
+
+            var value = "<?php echo $validationResult; ?>";
+
+            if(value != true){
+                window.history.back();
+            }
+
+        }
+
+        
 
     </script>  
 
