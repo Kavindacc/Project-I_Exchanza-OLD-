@@ -68,6 +68,9 @@
     color:#093606f1;
     background-color: transparent;
 }
+#myTab{
+    background-color: transparent;
+}
 /* sidepanel */
 .side-panel {
     position: fixed;
@@ -278,8 +281,35 @@
     height: 150px;           
     width: 150px;
     border-radius: 50%; 
+    position: relative;
 }
-.twc1, .twc2, .twc3, .twc4, .twc5, .twc6{
+
+/* Hide text by default */
+.hide {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white; /* Or any color you prefer */
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: background color for better visibility */
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    width: 80%; /* Adjust width as needed */
+    z-index: 10; /* Ensure text is above the image */
+}
+
+/* Show text on hover */
+.col.r1:hover .hide,
+.col.r2:hover .hide,
+.col.r3:hover .hide,
+.col.r4:hover .hide,
+.col.r5:hover .hide,
+.col.r6:hover .hide {
+    display: block;
+}
+.twc1, .twc2{
     width: 100%;            /* Make the image fill the parent width */
     height: auto;           /* Maintain aspect ratio */
     border-radius: 50%;
@@ -291,29 +321,6 @@
     display: inline-block; /* Ensures the anchor does not alter the layout */
     margin: 0; /* Reset margin */
     padding: 0; /* Reset padding */
-}
-
-.catt{
-    display: flex;
-    gap: 10%;
-    margin-bottom: 1%;
-    justify-content: center;
-    height: auto;
-}
-.col.t1, .col.t2, .col.t3, .col.t4, .col.t5, .col.t6 {
-    padding: 0;
-    overflow: hidden;
-    display: flex;           /* Use flexbox to center content */
-    justify-content: center;
-    /* height: 150px;            */
-    width: 150px;
-    /* background-color: #daac78; */
-   
-}
-.catt p{
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    color: #092805cd;
-    align-items: center;
 }
 
 /* review part */

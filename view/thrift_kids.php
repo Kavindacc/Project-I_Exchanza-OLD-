@@ -117,8 +117,13 @@
             Thrifting is an excellent way to save money, reduce waste, and support sustainable fashion.
              By thrifting items, you can find unique pieces while also contributing to a more eco-friendly world.
         </p>
-        <button class="add-item-btn" onclick="showForm()">Add Item</button>
+        <?php if(!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) {?> <!--logedin session eka -->
+        <a href="login.php" style="text-decoration: none;"><button class="add-item-btn">Add Item</button> </a>
+        
+        <?php } else{?>
+        <button class="add-item-btn" onclick="showForm()">Add Item</button>  
         <script src="sidepanel.js"></script>
+        <?php } ?>
  
         <div id="addItemForm"class="add-item-form">   </div>
  </div>     
@@ -250,26 +255,19 @@
   <div class="row row-cols-6 catr">
 
     <div class="col r1">
-        <a href="cat_items_template.php">
+        <a href="cat_items_template.php?category=kids&subcategory=clothes">
             <img src="../img/kids clothes.jpg" alt="men thrift cat1" class="rounded-circle img-fluid twc1" >
         </a>
-        
+        <p class="hide"> Clothes </p>
     </div>
     
     <div class="col r2">
-        <a href="cat_items_template.php">    
+        <a href="cat_items_template.php?category=kids&subcategory=toys">    
             <img src="../img/toys.jpg" alt="men thrift cat2" class="rounded-circle img-fluid twc2" >
         </a>
+        <p class="hide">Toys and Accessories </p>
     </div>
   </div>
-  <div class="row row-cols-6 catt">
-    <div class="col t1"> 
-         <p> Clothes </p>                   
-    </div>
-    <div class="col t2"> 
-         <p> Toys and Accessories </p>                   
-    </div>
-  </div> 
 
  </div>
 

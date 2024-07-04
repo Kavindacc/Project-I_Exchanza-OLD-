@@ -118,6 +118,7 @@
             Thrifting is an excellent way to save money, reduce waste, and support sustainable fashion.
             By thrifting items, you can find unique pieces while also contributing to a more eco-friendly world.
         </p>
+<<<<<<< HEAD
         <?php if (!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) { ?> <!--logedin session eka -->
             <a href="login.php" style="text-decoration: none;"><button class="add-item-btn" style="width:100%;">Add Item</button> </a>
 
@@ -138,6 +139,76 @@
                             <div class="form-group">
                                 <label for="itemName" class="bold">Item Name</label>
                                 <input type="text" class="form-control" id="itemName" placeholder="Enter item name" name="itemname" required>
+=======
+        <?php if(!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) {?> <!--logedin session eka -->
+        <a href="login.php" style="text-decoration: none;"><button class="add-item-btn">Add Item</button> </a>
+        
+        <?php } else{?>
+        <button class="add-item-btn" onclick="showForm()">Add Item</button>  
+        <script src="sidepanel.js"></script>
+        <?php } ?>
+        <div id="addItemForm"class="add-item-form">   </div>
+ </div>     
+ <!-- Popup overlay and form -->
+ <div id="popupForm" class="popup-overlay">
+    <div class="popup-content">
+        <button id="closePopup" class="close-btn">&times;</button>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="mb-4">Add Item to Resell</h2>
+                    <form id="resellForm">
+                        <div class="form-group">
+                            <label for="itemName" class="bold">Item Name</label>
+                            <input type="text" class="form-control" id="itemName" placeholder="Enter item name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="price" class="bold">Price (Rs.)</label>
+                            <input type="number" class="form-control" id="price" placeholder="Enter price" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="color" class="bold">Color</label>
+                            <input type="color" class="form-control" id="color" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="coverImage" class="bold">Cover Image</label>
+                            <input type="file" class="form-control-file" id="coverImage" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="otherImages" class="bold">Other Images (Optional)</label>
+                            <input type="file" class="form-control-file" id="otherImages" multiple>
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="bold">Description</label>
+                            <textarea class="form-control" id="description" rows="3" placeholder="Enter description" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="category" class="bold">Category</label>
+                            <select class="form-control" id="category" required>
+                                <option value="">Select Category</option>
+                                <option value="men">Men</option>
+                                <option value="women">Women</option>
+                                <option value="kids">Kids</option>
+                            </select>
+                        </div>
+                        <div class="form-group hidden" id="subcategoryWrapper">
+                            <label for="subcategory" class="bold">Subcategory</label>
+                            <select class="form-control" id="subcategory">
+                                <option value="">Select Subcategory</option>
+                                <option value="tops">Tops</option>
+                                <option value="dresses">Dresses</option>
+                                <option value="pants">Pants</option>
+                                <option value="accessories">Accessories</option>
+                                <option value="bags">Bags</option>
+                                <option value="shoes">Shoes</option>
+                            </select>
+                        </div>
+                        <div class="form-group hidden" id="sizeChartWrapper">
+                            <label class="bold">Size</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="size" id="sizeS" value="S">
+                                <label class="form-check-label" for="sizeS">S</label>
+>>>>>>> laya
                             </div>
                             <div class="form-group">
                                 <label for="price" class="bold">Price (Rs.)</label>
@@ -245,7 +316,76 @@
 
                                                                          —<b>Winona Ryder</b> -Red, April 2014 </pre><br>
 
+<<<<<<< HEAD
         </div>
+=======
+<!-- cats -->
+ <div class="container text-center">
+  <div class="row row-cols-6 catr">
+
+    <div class="col r1">
+        <a href="cat_items_template.php?category=men&subcategory=t-shirts">
+            <img src="../img/mens t shirt.jpg" alt="men thrift cat1" class="rounded-circle img-fluid twc1" >
+        </a>
+        <p class="hide"> T-Shirts </p>
+    </div>
+    
+    <div class="col r2">
+        <a href="cat_items_template.php?category=men&subcategory=shirts">    
+            <img src="../img/mens shirt.jpg" alt="men thrift cat2" class="rounded-circle img-fluid twc2" >
+        </a>
+        <p class="hide"> Shirts </p>
+    </div>
+
+    <div class="col r3"> 
+        <a href="cat_items_template.php?category=men&subcategory=pants"> 
+            <img src="../img/men denim.jpg" alt="men thrift cat3" class="rounded-circle img-fluid twc3" >
+        </a>
+        <p class="hide"> Pants </p>  
+    </div>
+
+    <div class="col r4">
+        <a href="cat_items_template.php?category=men&subcategory=suits"> 
+            <img src="../img/men suits.jpg" alt="men thrift cat4" class="rounded-circle img-fluid twc4" >
+        </a>
+        <p class="hide"> Suits  </p> 
+    </div>
+
+    <div class="col r5">
+        <a href="cat_items_template.php?category=men&subcategory=accessories"> 
+            <img src="../img/men acs.jpg" alt="men thrift cat5" class="rounded-circle img-fluid twc5" >
+        </a>
+        <p class="hide"> Accessories </p> 
+    </div>
+
+    <div class="col r6">
+        <a href="cat_items_template.php?category=men&subcategory=shoes"> 
+            <img src="../img/men shoes.jpg" alt="men thrift cat6" class="rounded-circle img-fluid twc6" >
+        </a>
+        <p class="hide"> Shoes </p>  
+    </div>
+  </div>
+  <!-- <div class="row row-cols-6 catt">
+    <div class="col t1"> 
+         <p> T-Shirts </p>                   
+    </div>
+    <div class="col t2"> 
+         <p> Shirts </p>                   
+    </div>
+    <div class="col t3"> 
+         <p> Pants </p>                   
+    </div>
+    <div class="col t4"> 
+         <p> Suits  </p>                   
+    </div>
+    <div class="col t5"> 
+         <p> Accessories </p>                   
+    </div>
+    <div class="col t6"> 
+         <p> Shoes </p>                   
+    </div>
+  </div>  -->
+>>>>>>> laya
 
     </div>
 
