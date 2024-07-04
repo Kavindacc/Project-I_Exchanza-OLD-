@@ -1,10 +1,10 @@
 /*---Cart items details-----*/
 
 .cart-page{
-    margin:80px auto;
+    margin:10px auto;
  }
  table{
-    width: 100%; 
+    width: 100%;  
     border-collapse: collapse;
  }
 
@@ -16,8 +16,8 @@
  th{
     text-align: left;
     padding: 5px;
-    color: #fff;
-    background: #0b1254;
+    color: #CEC0B9;
+    background: #4C3F31;
     font-weight: normal;
  }
 
@@ -49,7 +49,7 @@
 }
 
 .total-price table{
-   border-top: 3px solid #1b08a3;
+   border-top: 3px solid #746557;
    width: 100%;
    max-width: 400px;
 }
@@ -66,15 +66,15 @@ th:last-child{
    width: 100%;
    padding: 0 10px;
    margin-bottom: 20px;
-   color: #ffffff;
+   color: #CEC0B9;
    cursor: pointer;
    border: none;
    border-radius: 3px;
-   background-color: #07579c;
+   background-color: #897062;
 }
 
 button:hover, .checkout:hover{
-   background-color: #636264f6 ;
+   background-color: #AE9D92 ;
 }
 
 
