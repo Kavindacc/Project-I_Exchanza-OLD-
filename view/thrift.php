@@ -364,39 +364,39 @@ require '../model/products.php';
                     <img src="../img/ShoeW.jpg" alt="women thrift cat6" class="rounded-circle img-fluid twc6">
                 </a>
             </div>
-        <?php } else{?>
+        <?php } else{?><!--item categogy and sub link-->
             <div class="col r1">
-                <a href="cat_items_template.php?sub=tops"><!--iteam show page-->
+                <a href="cat_items_template.php?cat=women&sub=tops"><!--iteam show page-->
                     <img src="../img/TopsW.jpg" alt="women thrift cat1" class="rounded-circle img-fluid twc1">
                 </a>
             </div>
 
             <div class="col r2">
-                <a href="cat_items_template.php">
+                <a href="cat_items_template.php?cat=women&sub=dresses">
                     <img src="../img/dressW.jpg" alt="women thrift cat2" class="rounded-circle img-fluid twc2">
                 </a>
             </div>
 
             <div class="col r3">
-                <a href="cat_items_template.php">
+                <a href="cat_items_template.php?cat=women&sub=pants">
                     <img src="../img/denimW.jpg" alt="women thrift cat3" class="rounded-circle img-fluid twc3">
                 </a>
             </div>
 
             <div class="col r4">
-                <a href="cat_items_template.php">
+                <a href="cat_items_template.php?cat=women&sub=accessories">
                     <img src="../img/acsW.jpg" alt="women thrift cat4" class="rounded-circle img-fluid twc4">
                 </a>
             </div>
 
             <div class="col r5">
-                <a href="cat_items_template.php">
+                <a href="cat_items_template.php?cat=women&sub=bags">
                     <img src="../img/bagW.jpg" alt="women thrift cat5" class="rounded-circle img-fluid twc5">
                 </a>
             </div>
 
             <div class="col r6">
-                <a href="cat_items_template.php?sub=shoes">
+                <a href="cat_items_template.php?cat=women&sub=shoes">
                     <img src="../img/ShoeW.jpg" alt="women thrift cat6" class="rounded-circle img-fluid twc6">
                 </a>
             </div>
