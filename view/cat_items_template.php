@@ -61,10 +61,38 @@
         </div>
 
         <div class="row" id="itemContainer">
-            <!-- Cards tika render wenne methanta -->
+            <?php include 'database.php';
+
+                // Get category and subcategory from URL parameters
+                $category = isset($_GET['category']) ? $_GET['category'] : 'women'; // Default to 'men' if not set
+                $subcategory = isset($_GET['subcategory']) ? $_GET['subcategory'] : 'tops'; // Default to 'tops' if not set
+
+                $sql = "SELECT imgSrc, title, size, price FROM items WHERE category='$category' AND subcategory='$subcategory'";
+                $result = $conn->query($sql);
+
+                $items = [];
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        $items[] = $row;
+                    }
+                }
+                $conn->close();
+            ?>
+                <?php foreach ($items as $item) { ?>
+                 <div class="col-md-3 mb-4">
+                    <div class="card card-custom-bg">
+                        <img src="<?php echo $item['imgSrc']; ?>" class="card-img-top" alt="<?php echo $item['title']; ?>">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $item['title']; ?></h5>
+                            <p class="card-text"><?php echo $item['size']; ?></p>
+                            <p class="card-text"><?php echo $item['price']; ?></p>
+                        </div>
+                    </div>
+                 </div>
+                <?php } ?>
         </div>
 
-        <template id="itemTemplate">
+        <!-- <template id="itemTemplate">
             <div class="col-md-3 mb-4">
                 <div class="card card-custom-bg">
                     <img src="" class="card-img-top" alt="">
@@ -75,7 +103,7 @@
                     </div>
                 </div>
             </div>
-        </template>
+        </template> -->
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

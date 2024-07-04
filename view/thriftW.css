@@ -36,7 +36,7 @@
     transition: transform 0.2s ease;
 }
 
-/* .arena a:hover svg {
+/* .arena svg :hover {
     transform: scale(1.1); 
     cursor: pointer;
     color: #897062;
@@ -49,6 +49,7 @@
 
 .but{
     margin-top: 1%;
+    /* background-color: #c2a61c; */
 }
 .nav-tabs .nav-link {
     border-bottom: 1px solid #4C3F31;
@@ -56,16 +57,18 @@
 
 .nav-tabs .nav-link.active {
     border-bottom: none;
-    background-color: white;
+    background-color: rgb(114, 84, 84);
 }
-.arena .nav-link.active {
-    
+.arena .nav-link.active {  
     border-color:#4C3F31;
     background-color: transparent;
     border-bottom: none !important;
 }
 #home-tab,#profile-tab,#contact-tab{
     color:#093606f1;
+    background-color: transparent;
+}
+#myTab{
     background-color: transparent;
 }
 /* sidepanel */
@@ -277,7 +280,37 @@
     height: 150px;           
     width: 150px;
     border-radius: 50%; 
+    position: relative;
 }
+
+/* Hide text by default */
+.hide {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white; /* Or any color you prefer */
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: background color for better visibility */
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    width: 80%; /* Adjust width as needed */
+    z-index: 10; /* Ensure text is above the image */
+}
+
+/* Show text on hover */
+.col.r1:hover .hide,
+.col.r2:hover .hide,
+.col.r3:hover .hide,
+.col.r4:hover .hide,
+.col.r5:hover .hide,
+.col.r6:hover .hide {
+    display: block;
+}
+
+     
+
 .twc1, .twc2, .twc3, .twc4, .twc5, .twc6{
     width: 100%;            /* Make the image fill the parent width */
     height: auto;           /* Maintain aspect ratio */
@@ -292,29 +325,6 @@
     padding: 0; /* Reset padding */
 }
 
-.catt{
-    display: flex;
-    gap: 6%;
-    /* margin-bottom: 1%; */
-    /* margin-left: 1.5%; */
-    /* background-color: #4C3F31; */
-    height: auto;
-}
-.col.t1, .col.t2, .col.t3, .col.t4, .col.t5, .col.t6 {
-    padding: 0;
-    overflow: hidden;
-    display: flex;           /* Use flexbox to center content */
-    justify-content: center;
-    /* height: 150px;            */
-    width: 150px;
-    /* background-color: #daac78; */
-   
-}
-.catt p{
-    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
-    color: #092805cd;
-    align-items: center;
-}
 
 /* review part */
 .des{

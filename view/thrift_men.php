@@ -117,9 +117,13 @@
             Thrifting is an excellent way to save money, reduce waste, and support sustainable fashion.
              By thrifting items, you can find unique pieces while also contributing to a more eco-friendly world.
         </p>
-        <button class="add-item-btn" onclick="showForm()">Add Item</button>
+        <?php if(!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) {?> <!--logedin session eka -->
+        <a href="login.php" style="text-decoration: none;"><button class="add-item-btn">Add Item</button> </a>
+        
+        <?php } else{?>
+        <button class="add-item-btn" onclick="showForm()">Add Item</button>  
         <script src="sidepanel.js"></script>
- 
+        <?php } ?>
         <div id="addItemForm"class="add-item-form">   </div>
  </div>     
  <!-- Popup overlay and form -->
@@ -250,39 +254,48 @@
   <div class="row row-cols-6 catr">
 
     <div class="col r1">
-        <a href="cat_items_template.php">
+        <a href="cat_items_template.php?category=men&subcategory=t-shirts">
             <img src="../img/mens t shirt.jpg" alt="men thrift cat1" class="rounded-circle img-fluid twc1" >
         </a>
-        
+        <p class="hide"> T-Shirts </p>
     </div>
     
     <div class="col r2">
-        <a href="cat_items_template.php">    
+        <a href="cat_items_template.php?category=men&subcategory=shirts">    
             <img src="../img/mens shirt.jpg" alt="men thrift cat2" class="rounded-circle img-fluid twc2" >
         </a>
+        <p class="hide"> Shirts </p>
     </div>
+
     <div class="col r3"> 
-        <a href="cat_items_template.php"> 
+        <a href="cat_items_template.php?category=men&subcategory=pants"> 
             <img src="../img/men denim.jpg" alt="men thrift cat3" class="rounded-circle img-fluid twc3" >
         </a>
+        <p class="hide"> Pants </p>  
     </div>
+
     <div class="col r4">
-        <a href="cat_items_template.php"> 
+        <a href="cat_items_template.php?category=men&subcategory=suits"> 
             <img src="../img/men suits.jpg" alt="men thrift cat4" class="rounded-circle img-fluid twc4" >
         </a>
+        <p class="hide"> Suits  </p> 
     </div>
+
     <div class="col r5">
-        <a href="cat_items_template.php"> 
+        <a href="cat_items_template.php?category=men&subcategory=accessories"> 
             <img src="../img/men acs.jpg" alt="men thrift cat5" class="rounded-circle img-fluid twc5" >
         </a>
+        <p class="hide"> Accessories </p> 
     </div>
+
     <div class="col r6">
-        <a href="cat_items_template.php"> 
+        <a href="cat_items_template.php?category=men&subcategory=shoes"> 
             <img src="../img/men shoes.jpg" alt="men thrift cat6" class="rounded-circle img-fluid twc6" >
         </a>
-        </div>
+        <p class="hide"> Shoes </p>  
+    </div>
   </div>
-  <div class="row row-cols-6 catt">
+  <!-- <div class="row row-cols-6 catt">
     <div class="col t1"> 
          <p> T-Shirts </p>                   
     </div>
@@ -301,7 +314,7 @@
     <div class="col t6"> 
          <p> Shoes </p>                   
     </div>
-  </div> 
+  </div>  -->
 
  </div>
 
