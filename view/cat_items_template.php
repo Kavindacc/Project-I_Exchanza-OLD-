@@ -176,6 +176,7 @@ require '../model/products.php';
 
 
     </div>
+    <h1>hg</h1>
 
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="view/main.js"></script>
