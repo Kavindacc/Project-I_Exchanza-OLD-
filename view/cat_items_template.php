@@ -124,7 +124,6 @@ require '../model/products.php';
     <div class="container d-flex justify-content-start flex-wrap "><!--get iteam-->
         <?php
 
-<<<<<<< Updated upstream
         $obj = new Products();
         $rows = $obj->getitem($category, $subcategory);
         if (isset($rows) && !empty($rows)) {
@@ -141,21 +140,6 @@ require '../model/products.php';
                         <p class="card-text">Rs.<?php echo $row['price']; ?></p>
                         <a href="#" class="btn btn-primary">Add to Cart</a>
                     </div>
-=======
-        //$obj = new Products();
-        //$rows = $obj->get($sub);
-        if(isset($rows)){
-        foreach ($rows as $row) { ?>
-            <div class="card" style="width: 17rem;margin:.6rem;">
-                <img src="../upload/<?php echo $row['image']?>" class="card-img-top" alt="..." style="height:15rem;">
-                <div class="card-body">
-                    <h5 class="card-title"><?php echo $row['product_name'];?></h5>
-                    <p class="card-text"><?php echo $row['description'];?></p>
-                    <p class="card-text"><?php echo $row['colour'];?></p>
-                    <p class="card-text"><?php if(isset($row['size'])) { echo $row['size']; } ?></p>
-                    <p class="card-text"><?php echo $row['price'];?></p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
->>>>>>> Stashed changes
                 </div>
             <?php }
         } else { ?>
