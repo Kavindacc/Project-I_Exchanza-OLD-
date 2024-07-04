@@ -20,13 +20,13 @@ if (isset($_POST['edit'])) {
     }
 
     $obj = new Products();
-    if ($obj->updateitem($product_name, $price, $category, $image, $product_id)) {
-        $_SESSION['msg']="Product updated successfully";
+    if ($obj->updateitem($product_id, $product_name, $price, $image)) {
+        $_SESSION['editsuccess']="Product updated successfully";
         header("Location: ../view/afterdeletei.php");//userpage page
         exit();
     }
     else{
-        $_SESSION['wmsg']="Product updated successfully";
+        $_SESSION['editsuccess']="Product Not updated successfully";
         header("Location: ../view/afterdeletei.php");//userpage page
         exit();
     }
