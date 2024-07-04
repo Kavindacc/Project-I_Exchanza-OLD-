@@ -99,8 +99,8 @@ class Products extends User
         $stmt->bindParam(2, $price);
         $stmt->bindParam(3, $image);
         $stmt->bindParam(4, $product_id);
-    
-        if ($stmt->execute()) {
+        $stmt->execute();
+        if ($stmt->rowCount()>0) {
             return true;
         } else {
             //failed

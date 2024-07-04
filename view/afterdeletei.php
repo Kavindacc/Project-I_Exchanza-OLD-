@@ -180,7 +180,7 @@ require '../model/products.php';
                                         <!--  Modal edit-->
                                         <div class="modal fade" id="<?php echo $editModalId; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="<?php echo $editModalId; ?>Label" aria-hidden="true">
                                             <div class="modal-dialog">
-                                                <div class="modal-content">
+                                                <div class="modal-content"style="background:#AE9D92;color:#ffff;">
                                                     <div class="modal-header">
                                                         <h1 class="modal-title fs-5" id="<?php echo $editModalId; ?>Label">Edit Product</h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -205,7 +205,7 @@ require '../model/products.php';
                                                                 <input type="file" class="form-control" name="image">
                                                                 <input type="hidden" name="current_image" value="<?php echo $row['image']; ?>">
                                                             </div>
-                                                            <button type="submit" class="btn btn-primary" name="edit">Save changes</button>
+                                                            <button type="submit" class="btn btn-primary" name="edit"style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Save changes</button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -215,7 +215,7 @@ require '../model/products.php';
                                         <!-- Modal delete -->
                                         <div class="modal fade" id="<?php echo $modalId; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="<?php echo $modalId; ?>Label" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered modal-sm">
-                                                <div class="modal-content">
+                                                <div class="modal-content"style="background:#AE9D92;color:#ffff;">
                                                     <div class="modal-header">
                                                         <h1 class="modal-title fs-5" id="<?php echo $modalId; ?>Label">Do you Want to Delete?</h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
