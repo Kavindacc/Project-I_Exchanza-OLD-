@@ -114,10 +114,7 @@ require '../model/products.php';
             </div>
         </div>
 
-        <div class="row" id="itemContainer">
-            <!-- Cards tika render wenne methanta -->
-        </div>
-
+        
     </div>
 
 
