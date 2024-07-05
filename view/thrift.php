@@ -258,44 +258,8 @@ require '../model/products.php';
     <!-- cats -->
     <div class="container text-center">
         <div class="row row-col-6 catr">
-        <?php if (!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) { ?> <!--logedin session eka -->
-            <div class="col r1">
-                <a href="login.php"><!--iteam show page-->
-                    <img src="../img/TopsW.jpg" alt="women thrift cat1" class="rounded-circle img-fluid twc1">
-                </a>
-            </div>
-
-            <div class="col r2">
-                <a href="login.php">
-                    <img src="../img/dressW.jpg" alt="women thrift cat2" class="rounded-circle img-fluid twc2">
-                </a>
-            </div>
-
-            <div class="col r3">
-                <a href="login.php">
-                    <img src="../img/denimW.jpg" alt="women thrift cat3" class="rounded-circle img-fluid twc3">
-                </a>
-            </div>
-
-            <div class="col r4">
-                <a href="login.php">
-                    <img src="../img/acsW.jpg" alt="women thrift cat4" class="rounded-circle img-fluid twc4">
-                </a>
-            </div>
-
-            <div class="col r5">
-                <a href="login.php">
-                    <img src="../img/bagW.jpg" alt="women thrift cat5" class="rounded-circle img-fluid twc5">
-                </a>
-            </div>
-
-            <div class="col r6">
-                <a href="login.php">
-                    <img src="../img/ShoeW.jpg" alt="women thrift cat6" class="rounded-circle img-fluid twc6">
-                </a>
-            </div>
-        <?php } else{?><!--item categogy and sub link-->
-            <div class="col r1">
+                                         
+          <div class="col r1">
                 <a href="cat_items_template.php?cat=women&sub=tops"><!--iteam show page-->
                     <img src="../img/TopsW.jpg" alt="women thrift cat1" class="rounded-circle img-fluid twc1">
                 </a>
@@ -330,7 +294,7 @@ require '../model/products.php';
                     <img src="../img/ShoeW.jpg" alt="women thrift cat6" class="rounded-circle img-fluid twc6">
                 </a>
             </div>
-            <?php }?>
+           
         </div>
         <div class="row row-cols-6 catt">
             <div class="col t1">
