@@ -258,8 +258,12 @@ require '../model/products.php';
     <!-- cats -->
     <div class="container text-center">
         <div class="row row-col-6 catr">
+
+        <!--item categogy and sub link-->
+            <div class="col r1">
                                          
           <div class="col r1">
+
                 <a href="cat_items_template.php?cat=women&sub=tops"><!--iteam show page-->
                     <img src="../img/TopsW.jpg" alt="women thrift cat1" class="rounded-circle img-fluid twc1">
                 </a>
@@ -294,7 +298,10 @@ require '../model/products.php';
                     <img src="../img/ShoeW.jpg" alt="women thrift cat6" class="rounded-circle img-fluid twc6">
                 </a>
             </div>
+
+
            
+
         </div>
         <div class="row row-cols-6 catt">
             <div class="col t1">
