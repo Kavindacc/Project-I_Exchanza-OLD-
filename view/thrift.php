@@ -259,157 +259,157 @@ require '../model/products.php';
     <div class="container text-center">
         <div class="row row-col-6 catr">
 
-        <!--item categogy and sub link-->
+            <!--item categogy and sub link-->
             <div class="col r1">
-                                         
-          <div class="col r1">
 
-                <a href="cat_items_template.php?cat=women&sub=tops"><!--iteam show page-->
-                    <img src="../img/TopsW.jpg" alt="women thrift cat1" class="rounded-circle img-fluid twc1">
-                </a>
+                <div class="col r1">
+
+                    <a href="cat_items_template.php?cat=women&sub=tops"><!--iteam show page-->
+                        <img src="../img/TopsW.jpg" alt="women thrift cat1" class="rounded-circle img-fluid twc1">
+                    </a>
+                </div>
+
+                <div class="col r2">
+                    <a href="cat_items_template.php?cat=women&sub=dresses">
+                        <img src="../img/dressW.jpg" alt="women thrift cat2" class="rounded-circle img-fluid twc2">
+                    </a>
+                </div>
+
+                <div class="col r3">
+                    <a href="cat_items_template.php?cat=women&sub=pants">
+                        <img src="../img/denimW.jpg" alt="women thrift cat3" class="rounded-circle img-fluid twc3">
+                    </a>
+                </div>
+
+                <div class="col r4">
+                    <a href="cat_items_template.php?cat=women&sub=accessories">
+                        <img src="../img/acsW.jpg" alt="women thrift cat4" class="rounded-circle img-fluid twc4">
+                    </a>
+                </div>
+
+                <div class="col r5">
+                    <a href="cat_items_template.php?cat=women&sub=bags">
+                        <img src="../img/bagW.jpg" alt="women thrift cat5" class="rounded-circle img-fluid twc5">
+                    </a>
+                </div>
+
+                <div class="col r6">
+                    <a href="cat_items_template.php?cat=women&sub=shoes">
+                        <img src="../img/ShoeW.jpg" alt="women thrift cat6" class="rounded-circle img-fluid twc6">
+                    </a>
+                </div>
+
+
+
+
             </div>
-
-            <div class="col r2">
-                <a href="cat_items_template.php?cat=women&sub=dresses">
-                    <img src="../img/dressW.jpg" alt="women thrift cat2" class="rounded-circle img-fluid twc2">
-                </a>
+            <div class="row row-cols-6 catt">
+                <div class="col t1">
+                    <p> Tops </p>
+                </div>
+                <div class="col t2">
+                    <p> Dresses </p>
+                </div>
+                <div class="col t3">
+                    <p> Pants </p>
+                </div>
+                <div class="col t4">
+                    <p> Accessories </p>
+                </div>
+                <div class="col t5">
+                    <p> Bags </p>
+                </div>
+                <div class="col t6">
+                    <p> Shoes </p>
+                </div>
             </div>
-
-            <div class="col r3">
-                <a href="cat_items_template.php?cat=women&sub=pants">
-                    <img src="../img/denimW.jpg" alt="women thrift cat3" class="rounded-circle img-fluid twc3">
-                </a>
-            </div>
-
-            <div class="col r4">
-                <a href="cat_items_template.php?cat=women&sub=accessories">
-                    <img src="../img/acsW.jpg" alt="women thrift cat4" class="rounded-circle img-fluid twc4">
-                </a>
-            </div>
-
-            <div class="col r5">
-                <a href="cat_items_template.php?cat=women&sub=bags">
-                    <img src="../img/bagW.jpg" alt="women thrift cat5" class="rounded-circle img-fluid twc5">
-                </a>
-            </div>
-
-            <div class="col r6">
-                <a href="cat_items_template.php?cat=women&sub=shoes">
-                    <img src="../img/ShoeW.jpg" alt="women thrift cat6" class="rounded-circle img-fluid twc6">
-                </a>
-            </div>
-
-
-           
 
         </div>
-        <div class="row row-cols-6 catt">
-            <div class="col t1">
-                <p> Tops </p>
-            </div>
-            <div class="col t2">
-                <p> Dresses </p>
-            </div>
-            <div class="col t3">
-                <p> Pants </p>
-            </div>
-            <div class="col t4">
-                <p> Accessories </p>
-            </div>
-            <div class="col t5">
-                <p> Bags </p>
-            </div>
-            <div class="col t6">
-                <p> Shoes </p>
-            </div>
-        </div>
 
-    </div>
-
-    <!-- review  div-->
-    <div class="container ">
-        <div class="row des">
-            <div class="col-5 stat">
-                <h2>Why Thrift</h2>
-                <div class="row stat1">
-                    <img src="../img/thriftstat.jpg" alt="thrift stat" class="rounded-circle img-fluid ts1">
-                    <h3>QUALITY ASSURED</h3>
-                    <p>We quality check every single item on<br><b>Exchanza.</b><br>No more surprise stains or fake brands. </p>
+        <!-- review  div-->
+        <div class="container ">
+            <div class="row des">
+                <div class="col-5 stat">
+                    <h2>Why Thrift</h2>
+                    <div class="row stat1">
+                        <img src="../img/thriftstat.jpg" alt="thrift stat" class="rounded-circle img-fluid ts1">
+                        <h3>QUALITY ASSURED</h3>
+                        <p>We quality check every single item on<br><b>Exchanza.</b><br>No more surprise stains or fake brands. </p>
+                    </div>
+                    <div class="row stat2">
+                        <img src="../img/thrift stat2.jpg" alt="thrift stat" class="rounded-circle img-fluid ts2">
+                        <h3>QUALITY ASSURED</h3>
+                        <p>We quality check every single item on<br><b>Exchanza.</b><br>No more surprise stains or fake brands. </p>
+                    </div>
+                    <div class="row stat3">
+                        <img src="../img/thrift stat4.jpg" alt="thrift stat" class="rounded-circle img-fluid ts3">
+                        <h3>QUALITY ASSURED</h3>
+                        <p>We quality check every single item on<br><b>Exchanza.</b><br>No more surprise stains or fake brands. </p>
+                    </div>
                 </div>
-                <div class="row stat2">
-                    <img src="../img/thrift stat2.jpg" alt="thrift stat" class="rounded-circle img-fluid ts2">
-                    <h3>QUALITY ASSURED</h3>
-                    <p>We quality check every single item on<br><b>Exchanza.</b><br>No more surprise stains or fake brands. </p>
-                </div>
-                <div class="row stat3">
-                    <img src="../img/thrift stat4.jpg" alt="thrift stat" class="rounded-circle img-fluid ts3">
-                    <h3>QUALITY ASSURED</h3>
-                    <p>We quality check every single item on<br><b>Exchanza.</b><br>No more surprise stains or fake brands. </p>
-                </div>
-            </div>
-            <div class="col-7">
-                <div class="container text-center">
-                    <h2>Hear It From Others</h2>
-                    <div class="row revieW">
-                        <section class="reviews">
-                            <div class="review1">
-                                <img src="https://via.placeholder.com/150" alt="George">
-                                <blockquote>
-                                    <p>"Secondhand has never been so simple. There's no reason to buy new anymore. You get great quality clothes and you're doing some good for the planet."</p>
-                                    <cite>George</cite>
-                                </blockquote>
-                            </div>
-                            <div class="review2">
-                                <img src="https://via.placeholder.com/150" alt="Alex">
-                                <blockquote>
-                                    <p>"I've never been into thrifting because I thought it would take too much time - but Thrift+ has converted me! It's so quick and easy to find exactly what I am looking for."</p>
-                                    <cite>Alex</cite>
-                                </blockquote>
-                            </div>
-                        </section>
+                <div class="col-7">
+                    <div class="container text-center">
+                        <h2>Hear It From Others</h2>
+                        <div class="row revieW">
+                            <section class="reviews">
+                                <div class="review1">
+                                    <img src="https://via.placeholder.com/150" alt="George">
+                                    <blockquote>
+                                        <p>"Secondhand has never been so simple. There's no reason to buy new anymore. You get great quality clothes and you're doing some good for the planet."</p>
+                                        <cite>George</cite>
+                                    </blockquote>
+                                </div>
+                                <div class="review2">
+                                    <img src="https://via.placeholder.com/150" alt="Alex">
+                                    <blockquote>
+                                        <p>"I've never been into thrifting because I thought it would take too much time - but Thrift+ has converted me! It's so quick and easy to find exactly what I am looking for."</p>
+                                        <cite>Alex</cite>
+                                    </blockquote>
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--footer-->
-    <div class="container-fluid footer">
-        <div class="container p-3">
-            <div class="row">
-                <div class="col">
-                    <img src="../img/Exchanza.png" width="200px">
+        <!--footer-->
+        <div class="container-fluid footer">
+            <div class="container p-3">
+                <div class="row">
+                    <div class="col">
+                        <img src="../img/Exchanza.png" width="200px">
+                    </div>
                 </div>
-            </div>
-            <div class="row  mt-4" style="border-bottom:1px solid black;">
-                <div class="col">
-                    <p class=""><i class="fa-solid fa-phone"></i>&nbsp;&nbsp;+94 112 555 444</p>
-                    <p class=""><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;exchanza@gmail.com</p>
-                    <p class=""><i class="fa-solid fa-location-dot"></i>&nbsp;&nbsp;No.56/2,Kotta Rd,Colombo
-                        05,<br>&nbsp;&nbsp;&nbsp;&nbsp;Sri Lanka</p>
+                <div class="row  mt-4" style="border-bottom:1px solid black;">
+                    <div class="col">
+                        <p class=""><i class="fa-solid fa-phone"></i>&nbsp;&nbsp;+94 112 555 444</p>
+                        <p class=""><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;exchanza@gmail.com</p>
+                        <p class=""><i class="fa-solid fa-location-dot"></i>&nbsp;&nbsp;No.56/2,Kotta Rd,Colombo
+                            05,<br>&nbsp;&nbsp;&nbsp;&nbsp;Sri Lanka</p>
+                    </div>
+                    <div class="col lin">
+                        <h5>Information</h5>
+                        <p><a href="#1">Privacy &amp; Policy</a></p>
+                        <p><a href="#1">About Us</a></p>
+                        <p><a href="#1">Terms &amp; Condition</a></p>
+                    </div>
+                    <div class="col lin">
+                        <h5>Connect with Us</h5>
+                        <p><a href=""><i class="fa-brands fa-facebook" style="font-size:50px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i class="fa-brands fa-instagram" style="font-size:50px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i class="fa-brands fa-youtube" style="font-size:50px;"></i></a></p>
+                    </div>
                 </div>
-                <div class="col lin">
-                    <h5>Information</h5>
-                    <p><a href="#1">Privacy &amp; Policy</a></p>
-                    <p><a href="#1">About Us</a></p>
-                    <p><a href="#1">Terms &amp; Condition</a></p>
-                </div>
-                <div class="col lin">
-                    <h5>Connect with Us</h5>
-                    <p><a href=""><i class="fa-brands fa-facebook" style="font-size:50px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i class="fa-brands fa-instagram" style="font-size:50px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i class="fa-brands fa-youtube" style="font-size:50px;"></i></a></p>
-                </div>
-            </div>
-            <div class="row mt-2">
-                <div class="d-flex justify-content-between flex-column flex-md-row">
-                    <div><i class="fa-brands fa-cc-visa" style="font-size:50px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-brands fa-cc-mastercard" style="font-size:50px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-brands fa-cc-amex" style="font-size:50px;"></i></div>
-                    <div>&copy;Exchanze All Rights are reserved</div>
+                <div class="row mt-2">
+                    <div class="d-flex justify-content-between flex-column flex-md-row">
+                        <div><i class="fa-brands fa-cc-visa" style="font-size:50px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-brands fa-cc-mastercard" style="font-size:50px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-brands fa-cc-amex" style="font-size:50px;"></i></div>
+                        <div>&copy;Exchanze All Rights are reserved</div>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="sidepanel.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="sidepanel.js"></script>
 
 </body>
 
