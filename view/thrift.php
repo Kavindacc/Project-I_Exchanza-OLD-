@@ -3,6 +3,7 @@
 require '../model/products.php';
 
 
+
 ?>
 
 <!DOCTYPE html>
@@ -64,9 +65,12 @@ require '../model/products.php';
                             <a href="userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user" style="font-size:1.5rem;"></i></a>
 
                             <?php echo "Hi," . $_SESSION['username']; ?>
-                        <?php } else { ?>
+                        <?php } else {
+                            $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+                            $_SESSION['redirect']=$currentPage;
+                        ?>
                             <button class="lo-button btn-sm ms-2 px-3">
-                                <a href="view/login.php" class=" text-decoration-none">login</a>
+                                <a href="login.php" class=" text-decoration-none">login</a>
                             </button>
                         <?php } ?>
                     </div>
@@ -123,8 +127,13 @@ require '../model/products.php';
             Thrifting is an excellent way to save money, reduce waste, and support sustainable fashion.
             By thrifting items, you can find unique pieces while also contributing to a more eco-friendly world.
         </p>
-        <?php if (!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) { ?> <!--logedin session eka -->
-            <a href="login.php" style="text-decoration: none;"><button class="add-item-btn" style="width:100%;">Add Item</button> </a>
+        <?php if (!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) { //login session eka
+            $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];//get current page 
+            $_SESSION['redirect']=$currentPage;
+        ?>
+            <a href="login.php" style="text-decoration: none;">
+                <button class="add-item-btn" style="width:100%;">Add Item</button>
+            </a>
 
         <?php } else { ?>
             <button class="add-item-btn" style="width:100%;" onclick="showForm()">Add Item</button>
@@ -372,44 +381,45 @@ require '../model/products.php';
                 </div>
             </div>
         </div>
-        <!--footer-->
-        <div class="container-fluid footer">
-            <div class="container p-3">
-                <div class="row">
-                    <div class="col">
-                        <img src="../img/Exchanza.png" width="200px">
-                    </div>
+    </div>
+    <!--footer-->
+    <div class="container-fluid footer">
+        <div class="container p-3">
+            <div class="row">
+                <div class="col">
+                    <img src="../img/Exchanza.png" width="200px">
                 </div>
-                <div class="row  mt-4" style="border-bottom:1px solid black;">
-                    <div class="col">
-                        <p class=""><i class="fa-solid fa-phone"></i>&nbsp;&nbsp;+94 112 555 444</p>
-                        <p class=""><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;exchanza@gmail.com</p>
-                        <p class=""><i class="fa-solid fa-location-dot"></i>&nbsp;&nbsp;No.56/2,Kotta Rd,Colombo
-                            05,<br>&nbsp;&nbsp;&nbsp;&nbsp;Sri Lanka</p>
-                    </div>
-                    <div class="col lin">
-                        <h5>Information</h5>
-                        <p><a href="#1">Privacy &amp; Policy</a></p>
-                        <p><a href="#1">About Us</a></p>
-                        <p><a href="#1">Terms &amp; Condition</a></p>
-                    </div>
-                    <div class="col lin">
-                        <h5>Connect with Us</h5>
-                        <p><a href=""><i class="fa-brands fa-facebook" style="font-size:50px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i class="fa-brands fa-instagram" style="font-size:50px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i class="fa-brands fa-youtube" style="font-size:50px;"></i></a></p>
-                    </div>
+            </div>
+            <div class="row  mt-4" style="border-bottom:1px solid black;">
+                <div class="col">
+                    <p class=""><i class="fa-solid fa-phone"></i>&nbsp;&nbsp;+94 112 555 444</p>
+                    <p class=""><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;exchanza@gmail.com</p>
+                    <p class=""><i class="fa-solid fa-location-dot"></i>&nbsp;&nbsp;No.56/2,Kotta Rd,Colombo
+                        05,<br>&nbsp;&nbsp;&nbsp;&nbsp;Sri Lanka</p>
                 </div>
-                <div class="row mt-2">
-                    <div class="d-flex justify-content-between flex-column flex-md-row">
-                        <div><i class="fa-brands fa-cc-visa" style="font-size:50px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-brands fa-cc-mastercard" style="font-size:50px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-brands fa-cc-amex" style="font-size:50px;"></i></div>
-                        <div>&copy;Exchanze All Rights are reserved</div>
+                <div class="col lin">
+                    <h5>Information</h5>
+                    <p><a href="#1">Privacy &amp; Policy</a></p>
+                    <p><a href="#1">About Us</a></p>
+                    <p><a href="#1">Terms &amp; Condition</a></p>
+                </div>
+                <div class="col lin">
+                    <h5>Connect with Us</h5>
+                    <p><a href=""><i class="fa-brands fa-facebook" style="font-size:50px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i class="fa-brands fa-instagram" style="font-size:50px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i class="fa-brands fa-youtube" style="font-size:50px;"></i></a></p>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="d-flex justify-content-between flex-column flex-md-row">
+                    <div><i class="fa-brands fa-cc-visa" style="font-size:50px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-brands fa-cc-mastercard" style="font-size:50px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-brands fa-cc-amex" style="font-size:50px;"></i></div>
+                    <div>&copy;Exchanze All Rights are reserved</div>
 
-                    </div>
                 </div>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="sidepanel.js"></script>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="sidepanel.js"></script>
 
 </body>
 

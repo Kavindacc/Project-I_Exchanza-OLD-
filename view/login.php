@@ -53,17 +53,10 @@
                     <!--login nav-link-a-color-->
                     <div class="d-flex flex-column flex-lg-row float-start  justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
                         <a href="#1" class="nav-link  text-decoration-none mx-2"><i class="fa-solid fa-cart-plus"></i></a>
-                        <?php
-                        if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
-                            <button class="lo-out btn-sm ms-2 px-3">
-                                <a href="view/logout.php" class=" text-decoration-none">logout</a>
-                            </button>
-                            <?php echo "Hi," . $_SESSION['username']; ?>
-                        <?php } else { ?>
-                            <button class="lo-button btn-sm ms-2 px-3"style="cursor: default;background:#4c3f31 ;">
-                                <a href="#1" class=" text-decoration-none active" style="cursor: default;">login</a>
-                            </button>
-                        <?php } ?>
+                        <button class="lo-button btn-sm ms-2 px-3" style="cursor: default;background:#4c3f31 ;">
+                            <a href="#1" class=" text-decoration-none active" style="cursor: default;">login</a>
+                        </button>
+
                     </div>
                 </div>
             </div>
@@ -85,6 +78,9 @@
                 <?php } ?>
             </div>
             <form action="../control/logincon.php" method="post">
+                <input type="hidden" name="redirect" value="<?php if (isset($_GET['redirect']) && !empty($_GET['redirect'])) {
+                                                                echo $_GET['redirect'];
+                                                            } ?>">
                 <div class="row justify-content-center">
                     <div class="col-md-4">
                         <label class="form-label">Email Address</label>
@@ -103,15 +99,15 @@
                 </div>
                 <div class="row justify-content-center mt-2">
                     <div class="col-md-4 login-btn">
-                        <input class="btn btn-primary w-100" type="submit" value="Sign In" name="signin"style="background:#897062;border:none;">
+                        <input class="btn btn-primary w-100" type="submit" value="Sign In" name="signin" style="background:#897062;border:none;">
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    
 
-    
+
+
     <!--prevent backbutton-->
     <script type="text/javascript">
         function preventback() {

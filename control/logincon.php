@@ -7,6 +7,7 @@ if (isset($_POST['signin'])) {
 
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $redirect=$_SESSION['redirect'];
 
     if (empty($password) || empty($email)) {
         header("Location: ../view/login.php?error=Email and password cannot be empty");
@@ -27,10 +28,17 @@ if (isset($_POST['signin'])) {
         $status = $obj->status($email); //user.php function
         if ($status == "active") {
             $rpassword = $obj->loginUser($email);
-            if ($rpassword && password_verify($password, $rpassword)) {
-                $_SESSION['logedin']=true;
-                header("Location: ../index.php");//user page(index.php)
-                exit();
+            if (password_verify($password, $rpassword)) {
+                $_SESSION['logedin'] = true;
+
+                if (isset($redirect)) {//redirect page
+                    header("Location: $redirect");
+                    exit();
+                }
+                else{
+                    header("Location: ../index.php");
+                    exit();
+                }
             } else {
                 header("Location: ../view/login.php?error=Incorrect email or password");
                 exit();
