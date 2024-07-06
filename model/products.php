@@ -113,12 +113,38 @@ class Products extends User
             $query = "SELECT p.* FROM products p JOIN thrift t ON p.product_id = t.product_id WHERE p.category = ? AND p.subcategory = ?";
             $stmt = $this->pdo->prepare($query);
             $stmt->execute([$category, $subcategory]);
-            if ($stmt->rowCount() > 0) {
+            if ($stmt->rowCount() > 1) {
+                // Fetch all rows
                 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                return $rows;
+            } elseif ($stmt->rowCount() == 1) {
+                // Fetch the single row
+                $rows = $stmt->fetch(PDO::FETCH_ASSOC);
+            } else {
+                // No rows found
+                $rows = [];
             }
+            
+            return $rows;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
     }
+
+    public function getproductid($userid) {
+        try {
+            $query = "SELECT product_id FROM products WHERE userid = ?";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindParam(1, $userid);
+            $stmt->execute();
+            
+            $productIds = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            
+            return $productIds;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            
+        }
+    }
+    
+    
 }

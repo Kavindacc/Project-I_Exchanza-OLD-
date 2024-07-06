@@ -63,9 +63,9 @@ require '../model/products.php';
 
                             <?php echo "Hi," . $_SESSION['username']; ?>
                         <?php } else { ?>
-                            <button class="lo-button btn-sm ms-2 px-3">
-                                <a href="view/login.php" class=" text-decoration-none">login</a>
-                            </button>
+
+                            <a href="login.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3" style="color:#ffff;">login</button></a>
+
                         <?php } ?>
                     </div>
                 </div>
@@ -75,12 +75,16 @@ require '../model/products.php';
     <div class="container pt-3"><!--sub category eka ganna-->
         <?php if (isset($_GET['cat']) || isset($_GET['sub'])) {
 
-            $category = $_GET['cat'];
-            $subcategory = $_GET['sub'];
+            $_SESSION['category'] = $_GET['cat'];
+            $_SESSION['subcategory'] = $_GET['sub'];
         } ?>
 
         <div class="text-center">
-            <h1>Shop Secondhand <?php echo ucfirst($category) . "'s&nbsp;" . ucfirst($subcategory) ?></h1>
+            <h1>Shop Secondhand <?php if (isset($_SESSION['category'])) {
+                                    echo $_SESSION['category'];
+                                } ?> 's&nbsp; <?php if (isset($_SESSION['subcategory'])) {
+                                                    echo ucfirst($_SESSION['subcategory']);
+                                                } ?></h1>
         </div>
 
         <div class="d-flex justify-left gap-2">
@@ -114,15 +118,20 @@ require '../model/products.php';
             </div>
         </div>
 
-        
+
     </div>
 
 
     <div class="container d-flex justify-content-start flex-wrap "><!--get iteam-->
+        <?php if (isset($_GET['msg'])) {
+            echo $_GET['msg'];
+        } else if (isset($_GET['wmsg'])) {
+            echo $_GET['wmsg'];
+        } ?>
         <?php
 
         $obj = new Products();
-        $rows = $obj->getitem($category, $subcategory);
+        $rows = $obj->getitem($_SESSION['category'], $_SESSION['subcategory']);
         if (isset($rows) && !empty($rows)) {
             foreach ($rows as $row) { ?>
                 <div class="card m-2" style="width: 17rem;">
@@ -136,6 +145,18 @@ require '../model/products.php';
                                                 } ?></p>
                         <p class="card-text">Rs.<?php echo $row['price']; ?></p>
                         <a href="#" class="btn btn-primary">Add to Cart</a>
+                        <form action="../control/wishlist.php" method="post">
+                            <input type="hidden" name="productid" value="<?php echo $row['product_id']; ?>">
+                            <?php if (!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) {
+                                $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; //get current page 
+                                $_SESSION['redirect'] = $currentPage; ?>
+                                <a href="login.php" style="text-decoration: none;">
+                                    <button type="button" class="btn btn-primary mt-2">Add to Wishlist</button>
+                                </a>
+                            <?php } else { ?>
+                                <button type="submit" class="btn btn-primary mt-2" name="wishlist">Add to Wishlist</button>
+                            <?php } ?>
+                        </form>
                     </div>
                 </div>
             <?php }
@@ -145,7 +166,7 @@ require '../model/products.php';
 
 
     </div>
-    <h1>hg</h1>
+
 
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="view/main.js"></script>

@@ -69,9 +69,7 @@ require '../model/products.php';
                             $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
                             $_SESSION['redirect']=$currentPage;
                         ?>
-                            <button class="lo-button btn-sm ms-2 px-3">
-                                <a href="login.php" class=" text-decoration-none">login</a>
-                            </button>
+                            <a href="login.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3"style="color:#ffff;">login</button></a>
                         <?php } ?>
                     </div>
                 </div>
