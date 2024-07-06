@@ -316,9 +316,7 @@
 
                                                                          —<b>Winona Ryder</b> -Red, April 2014 </pre><br>
 
-<<<<<<< HEAD
         </div>
-=======
 <!-- cats -->
  <div class="container text-center">
   <div class="row row-cols-6 catr">
@@ -385,7 +383,6 @@
          <p> Shoes </p>                   
     </div>
   </div>  -->
->>>>>>> laya
 
     </div>
 
