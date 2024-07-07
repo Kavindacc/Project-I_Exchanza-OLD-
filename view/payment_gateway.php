@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="payment_gateway_style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
-
+    <title>payment</title>
 </head>
 
 
@@ -87,7 +87,7 @@
 
                     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         // Use the null coalescing operator to provide default values if keys are not set
-                        $name = $_POST['name'] ?? '';
+                        $fullname = $_POST['name'] ?? '';
                         $addres = $_POST['addres'] ?? '';
                         $city = $_POST['city'] ?? '';
                         $zip = $_POST['zip'] ?? '';
@@ -100,7 +100,7 @@
                     <script>
 
                     function validation(){
-                        var name = "<?php echo $name; ?>"
+                        var fullname = "<?php echo $fullname; ?>"
                         var addres = "<?php echo $addres; ?>"
                         var city = "<?php echo $city; ?>"
                         var zip = "<?php echo $zip; ?>"
@@ -261,20 +261,79 @@
 
     <?php
         // Database connection
-        $conn = new mysqli('127.0.0.1', 'root', '6065031');
+        $servername = "127.0.0.1";
+        $username = "root";
+        $password = "6065031";
+        $dbname = "project-i_exchanza";
 
+        // Create a connection to the database
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        // Check the connection
         if ($conn->connect_error) {
-            echo "Error !!!";
-        } 
-        else{
-            
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                // Use the null coalescing operator to provide default values if keys are not set
-                $card = $_POST['card'] ?? '';
-                $name = $_POST['name'] ?? '';
-                $cardNumber = $_POST['cardNumber'] ?? '';
-                $expDate = $_POST['expDate'] ?? '';
-                $cvv = $_POST['cvv'] ?? '';
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        // Check if the request method is POST
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Retrieve form data with null coalescing operator to handle unset keys
+            $card = $_POST['card'] ?? '';
+            $name = $_POST['name'] ?? '';
+            $cardNumber = $_POST['cardNumber'] ?? '';
+            $expDate = $_POST['expDate'] ?? '';
+            $cvv = $_POST['cvv'] ?? '';
+            $save = $_POST['save'] ?? '';
+
+            // Check if the save button was clicked
+            if ($save == "save") {
+                // Prepare the SQL statement with placeholders
+                $stmt = $conn->prepare("INSERT INTO card_details (CardHolderName, CardNumber, ExpDate, cvv) VALUES (?, ?, ?, ?)");
+                
+                // Check if the preparation was successful
+                if ($stmt) {
+                    // Bind the parameters with appropriate types
+                    $stmt->bind_param("ssss", $name, $cardNumber, $expDate, $cvv);
+                    
+                    // Execute the statement
+                    if ($stmt->execute()) {
+                        
+                    } else {
+                        
+                    }
+                    
+                    // Close the statement
+                    $stmt->close();
+                } else {
+                    
+                }
+            }
+            // Prepare the SQL statement with placeholders
+            $stmt = $conn->prepare("INSERT INTO place_order (FullName, Addres, City, Zip, District, Province) VALUES (?, ?, ?, ?, ?, ?)");
+                
+            // Check if the preparation was successful
+            if ($stmt) {
+                // Bind the parameters with appropriate types
+                $stmt->bind_param("ssssss", $fullname, $addres, $city, $zip, $district, $province);
+                
+                // Execute the statement
+                if ($stmt->execute()) {
+                    
+                } else {
+                    
+                }
+                
+                // Close the statement
+                $stmt->close();
+            } else {
+                
+            }
+        }
+
+        // Close the connection
+        $conn->close();
+                
+
+
 
 
                 class getCardDetails{
@@ -314,8 +373,9 @@
                     
                     
             }
-        }
-    }
+        
+
+    
 
     $card = $_POST['card'] ?? '';
 
@@ -337,7 +397,6 @@
         } 
     }
 
-
     ?>
 
 
@@ -348,7 +407,7 @@
             var card = "card";
             var card = "<?php echo $card ?>";
             
-            if(card == "card"){
+            if((card == "card") && ("<?php echo $validationResult; ?>" != 1)){
 
                 document.getElementById("error_msg").innerHTML="<?php echo $validationResult; ?>";
 
@@ -372,6 +431,7 @@
         
 
     </script>  
+
 
 </body>
 
