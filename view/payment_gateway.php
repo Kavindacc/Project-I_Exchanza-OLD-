@@ -407,7 +407,7 @@
             var card = "card";
             var card = "<?php echo $card ?>";
             
-            if(card == "card"){
+            if((card == "card") && ("<?php echo $validationResult; ?>" != 1)){
 
                 document.getElementById("error_msg").innerHTML="<?php echo $validationResult; ?>";
 
