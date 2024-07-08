@@ -1,6 +1,8 @@
 <?php
 
-require '../model/user.php';
+require '../model/usern.php';
+require '../model/dbconnection.php';
+
 if (isset($_POST['continue'])) {
 
     $email = $_POST['email'];
@@ -12,10 +14,10 @@ if (isset($_POST['continue'])) {
     $expire = date("Y-m-d H:i:s", time() + 60 * 30);
 
     //store database token and expire time
-    $object = new User();
-    $vemail = $object->checkemail($email);
+    $object = new RegisteredCustormer();
+    $vemail = $object->checkemail($email,Dbh::connect());
     if ($vemail) {
-        $object->update($token_hash, $expire, $email);
+        $object->update($token_hash, $expire,Dbh::connect());
 
         $mail = require 'mailer.php';
 
