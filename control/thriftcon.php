@@ -1,7 +1,7 @@
 <?php
 require '../model/products.php';
-
-//seseion strt delete
+require '../model/dbconnection.php';
+session_start();
 
 if (isset($_POST['submit'])) {
 
@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
     } 
 
     if ($filePath !== null) {
-        $obj = new Products();
+        $obj = new Item(Dbh::connect());
         $obj->insertProduct($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath, $userid);
     } else {
         $errors[] = "File upload failed or no file uploaded.";

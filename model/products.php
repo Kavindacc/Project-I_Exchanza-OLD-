@@ -3,9 +3,14 @@
 
 class Item
 {
-    /*private $productname, $price, $colour, $description, $category, $subcategory, $condition, $userid, $size, $filePath;
+    public $productname, $price, $colour, $description, $category, $subcategory, $condition, $userid, $size, $filePath;
 
+    private $pdo;
 
+    public function __construct($pdo = null) //conection database
+    {
+        $this->pdo = $pdo;
+    }
 
     public function insertProduct($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath, $userid)
     {
@@ -59,37 +64,12 @@ class Item
         }
     }
 
-
-    public function get($userid)
-    {
-
-        $this->userid = $userid;
-
-        try {
-            $query = "SELECT * FROM products WHERE userid=?";
-            $stmt = $this->pdo->prepare($query);
-            $stmt->execute([$this->userid]);
-            if ($stmt->rowCount() > 0) {
-                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                return $rows;
-            }
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }*/
-    private $pdo;
-
-    public function __construct($pdo)
-    {
-        $this->pdo = $pdo;
-    }
-
     public function delete($productid)
     {
         try {
             $query = "DELETE FROM products WHERE product_id = ?";
             $stmt = $this->pdo->prepare($query);
-            $stmt->bindParam(1,$productid);
+            $stmt->bindParam(1, $productid);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
                 return true;
@@ -118,22 +98,15 @@ class Item
         }
     }
 
-   /* public function getitem($category, $subcategory) //subcategory category product get
+    public function getitem($category, $subcategory) //subcategory category product get
     {
         try {
             $query = "SELECT p.* FROM products p JOIN thrift t ON p.product_id = t.product_id WHERE p.category = ? AND p.subcategory = ?";
             $stmt = $this->pdo->prepare($query);
-            $stmt->execute([$category, $subcategory]);
-            if ($stmt->rowCount() > 1) {
-                // Fetch all rows
-                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            } elseif ($stmt->rowCount() == 1) {
-                // Fetch the single row
-                $rows = $stmt->fetch(PDO::FETCH_ASSOC);
-            } else {
-                // No rows found
-                $rows = [];
-            }
+            $stmt->bindParam(1, $category);
+            $stmt->bindParam(2, $subcategory);
+            $stmt->execute();
+            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             return $rows;
         } catch (PDOException $e) {
@@ -155,5 +128,5 @@ class Item
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
-    }*/
+    }
 }

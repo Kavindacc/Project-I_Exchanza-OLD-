@@ -5,8 +5,8 @@ require 'sendpassword.php';
 $token = $_POST['token'];
 $token_hash = hash("sha256", $token);
 
-$obj = new User();
-$result = $obj->token($token_hash);
+$obj = new RegisteredCustormer();
+$result = $obj->token($token_hash,dbh::connect());
 if (strtotime($result) <= time()) { //convrt secound time/ 
     //token expired
 
@@ -30,9 +30,8 @@ else{//token valid
     }
     if (empty($errors)) {
         $passwordhash = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $obj = new User();
-        $result = $obj->userid($token_hash);
-        $obj->updatepassword($passwordhash,$result); //insert data databse
+        $result = $obj->userid(dbh::connect());
+        $obj->updatepassword($passwordhash,$result,dbh::connect()); //insert data databse
         header("Location: ../view/resetpassword.php?success=Reset password successful"); //home page go
     } else {
         $errorString = implode("|", $errors); //array convert string
