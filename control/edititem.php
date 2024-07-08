@@ -1,6 +1,7 @@
 <?php
 
 require '../model/products.php';
+require '../model/dbconnection.php';
 
 if (isset($_POST['edit'])) {
     $product_id = $_POST['product_id'];
@@ -19,7 +20,7 @@ if (isset($_POST['edit'])) {
         $image = $current_image;
     }
 
-    $obj = new Products();
+    $obj = new Item(Dbh::connect());
     if ($obj->updateitem($product_id, $product_name, $price, $image)) {
         $_SESSION['editsuccess']="Product updated successfully";
         header("Location: ../view/afterdeletei.php");//userpage page

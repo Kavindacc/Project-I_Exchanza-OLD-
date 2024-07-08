@@ -1,6 +1,6 @@
 <?php
-require '../model/user.php';
-
+require '../model/usern.php';
+require "../model/dbconnection.php";
 
 if(isset($_POST['update'])){
 
@@ -34,8 +34,8 @@ if(isset($_POST['update'])){
     } 
 
     if ($filePath !== null) {
-        $obj = new User();//upload image
-        if($obj->updateImg($filePath,$_SESSION['userid'])){
+        $obj = new RegisteredCustormer($_SESSION['userid']);//upload image
+        if($obj->updateImg($filePath,Dbh::connect())){
             header("Location: ../view/userpage.php?success=Profile picture Upload.");//userpage page
             exit();
         }

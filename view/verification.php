@@ -1,5 +1,5 @@
 <?php 
-require '../control/otpsent.php' ;
+
 require '../control/verificationcon.php';
 
 ?>

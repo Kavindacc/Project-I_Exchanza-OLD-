@@ -1,10 +1,11 @@
 <?php
 
 
-require '../model/user.php';
+require '../model/dbconnection.php';
+require '../model/visitor.php';
 require 'otpsent.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     if (isset($_POST['register'])) {
         $name = $_POST['name'];
         $email = $_POST['email'];
@@ -27,8 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($email)) { //email check
             $errors[] = "Email is required";
         } else {
-            $object = new User();
-            $emailexit = $object->emailexit($email);
+            $visitor = new Visitor(null, $email, null, null, null, null, null);
+            $emailexit = $visitor->emailexit($email,Dbh::connect());
             if ($email == $emailexit) {
                 $errors[] = "Email already exists";
             } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -83,7 +84,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $passwordhash = password_hash($password, PASSWORD_DEFAULT);
             $otp_str=str_shuffle("0123456789");
             $otp=substr($otp_str,0,5);
-            $object->insertdb($name, $email, $country, $gender,$pnum,$otp, $passwordhash); //insert data databse
+            $object = new Visitor($name, $email, $country, $gender,$pnum,$otp, $passwordhash);
+            $object->signup(Dbh::connect()); //insert data databse
             $obj=new Otp();//otpsent.php
             $obj->otpsent($email,$otp);
             
@@ -92,4 +94,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: ../view/signup.php?error=$errorString");
         }
     }
-}
+

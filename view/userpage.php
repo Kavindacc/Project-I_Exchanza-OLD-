@@ -1,6 +1,7 @@
 <?php
 
-require '../model/products.php';
+require '../model/dbconnection.php';
+require '../model/usern.php';
 
 //product.php add karanna ,nmut product.php change karanna one
 ?>
@@ -88,8 +89,8 @@ require '../model/products.php';
                 } ?>
                 <?php
 
-                $obj = new User();
-                $row = $obj->getInformation($_SESSION['userid']);
+                $obj = new RegisteredCustormer($_SESSION['userid']);//manage account
+                $row = $obj->manageAccount(Dbh::connect());
 
                 ?>
                 <form action="../control/updatepersonalinfocon.php" method="post" enctype="multipart/form-data"><!--from-->
@@ -129,8 +130,8 @@ require '../model/products.php';
             </div>
             <div class="col-sm-9 py-2 mt-5" id="itemtable" style="display:none;"><!--iteam table-->
                 <?php
-                $obj = new Products(); // product get product table according to userid
-                $rows = $obj->get($_SESSION['userid']);
+                $obj = new RegisteredCustormer($_SESSION['userid']); // product get product table according to userid
+                $rows = $obj->browserProducts(Dbh::connect());
                 if ($rows != null) {
                 ?>
                     <table class="table table-striped table-hover table-sm">
