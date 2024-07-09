@@ -1,10 +1,11 @@
 <?php
+
 session_start();
 class User
 {
 
     private $name, $gender, $country, $pnum;
-    protected $email,$password;
+    protected $email, $password;
 
     public function __construct($email = null)
     {
@@ -110,7 +111,7 @@ class RegisteredCustormer extends User
         try {
             $query = "SELECT * FROM products WHERE userid=?";
             $stmt = $pdo->prepare($query);
-            $stmt->bindParam(1,$this->userid);
+            $stmt->bindParam(1, $this->userid);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
                 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -121,9 +122,9 @@ class RegisteredCustormer extends User
         }
     }
 
-    public function checkemail($email,$pdo) //email check fogetpassword
+    public function checkemail($email, $pdo) //email check fogetpassword
     {
-        $this->email=$email;
+        $this->email = $email;
         try {
             $query = "SELECT * FROM usern WHERE email=?";
             $stmt = $pdo->prepare($query);
@@ -162,7 +163,7 @@ class RegisteredCustormer extends User
         try {
             $sql = "SELECT * FROM usern WHERE reset_token_hash=?";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(1,$this->token_hash);
+            $stmt->bindParam(1, $this->token_hash);
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {
@@ -180,11 +181,11 @@ class RegisteredCustormer extends User
 
     public function userid($pdo) //password reset userid token check
     {
-    
+
         try {
             $sql = "SELECT * FROM usern WHERE reset_token_hash=?";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(1,$this->token_hash);
+            $stmt->bindParam(1, $this->token_hash);
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {
@@ -196,7 +197,7 @@ class RegisteredCustormer extends User
         }
     }
 
-    public function updatepassword($passwordhash, $result,$pdo) //update password
+    public function updatepassword($passwordhash, $result, $pdo) //update password
     {
 
         $this->password = $passwordhash;
@@ -206,10 +207,66 @@ class RegisteredCustormer extends User
 
             $sql = "UPDATE usern SET password=?,reset_token_hash=NULL,reset_token_expire=NULL WHERE userid=?";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(1,$this->password);
-            $stmt->bindParam(1,$this->userid);
+            $stmt->bindParam(1, $this->password);
+            $stmt->bindParam(1, $this->userid);
             $stmt->execute();
         } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+}
+
+class Seller extends RegisteredCustormer
+{
+    private $productname, $price, $colour, $description, $category, $subcategory, $condition, $userid, $size, $filePath;
+    public function additemforthrifting($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath, $userid,$pdo)
+    {
+
+        $this->productname = $productname;
+        $this->price = $price;
+        $this->colour = $colour;
+        $this->description = $description;
+        $this->category = $category;
+        $this->subcategory = $subcategory;
+        $this->size = $size;
+        $this->condition = $condition;
+        $this->filePath = $filePath;
+        $this->userid = $userid;
+
+        try {
+            // Insert product into products table
+            $query = "INSERT INTO products (product_name, price, colour, description, category, subcategory, size, `condition`, image, userid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(1, $this->productname);
+            $stmt->bindParam(2, $this->price);
+            $stmt->bindParam(3, $this->colour);
+            $stmt->bindParam(4, $this->description);
+            $stmt->bindParam(5, $this->category);
+            $stmt->bindParam(6, $this->subcategory);
+            $stmt->bindParam(7, $this->size);
+            $stmt->bindParam(8, $this->condition);
+            $stmt->bindParam(9, $this->filePath);
+            $stmt->bindParam(10, $this->userid);
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+                // Get the last inserted product ID
+                $product_id = $pdo->lastInsertId();
+
+                // Insert into thrift table
+                $thrift_query = "INSERT INTO thrift (product_id, user_id) VALUES (?, ?)";
+                $thrift_stmt = $pdo->prepare($thrift_query);
+                $thrift_stmt->bindParam(1, $product_id);
+                $thrift_stmt->bindParam(2, $this->userid);
+                $thrift_stmt->execute();
+
+                if ($thrift_stmt->rowCount() > 0) {
+                    header("Location: ../view/thrift.php?success=Product Added.");
+                    exit();
+                }
+            }
+        } catch (PDOException $e) {
+
             echo "Error: " . $e->getMessage();
         }
     }
