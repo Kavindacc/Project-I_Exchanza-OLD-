@@ -6,8 +6,8 @@ require '../model/dbconnection.php';
 
 if (isset($_POST['signin'])) {
 
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $password = htmlspecialchars(trim($_POST['password']));
     $redirect=$_SESSION['redirect'];
 
     if (empty($password) || empty($email)) {
