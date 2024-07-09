@@ -1,6 +1,7 @@
 <?php
 
-require '../model/user.php';
+require '../model/usern.php';
+require '../model/dbconnection.php';
 
 
 if (isset($_POST['signin'])) {
@@ -14,21 +15,21 @@ if (isset($_POST['signin'])) {
         exit();
     }
 
-    $obj = new User();
-    if ($email == "admin1@gmail.com") {
-        $rpassword = $obj->loginAdmin($email);
+    $obj = new User($email);
+   if ($email == "admin1@gmail.com") {
+        /*$rpassword = $obj->loginAdmin($email);
         if ($rpassword && password_verify($password, $rpassword)) {
             header("Location: ../view/admin.php"); //admin page
             exit();
         } else {
             header("Location: ../view/login.php?error=Incorrect email or password");
             exit();
-        }
+        }*/
     } else {
-        $status = $obj->status($email); //user.php function
+        $status = $obj->status(Dbh::connect()); //user.php function
         if ($status == "active") {
-            $rpassword = $obj->loginUser($email);
-            if (password_verify($password, $rpassword)) {
+            $obj->login(Dbh::connect());
+            if (password_verify($password,$_SESSION['password'])) {
                 $_SESSION['logedin'] = true;
 
                 if (isset($redirect)) {//redirect page

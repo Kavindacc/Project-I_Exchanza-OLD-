@@ -1,7 +1,7 @@
 <?php
-require '../model/products.php';
-
-//seseion strt delete
+require '../model/usern.php';
+require '../model/dbconnection.php';
+session_start();
 
 if (isset($_POST['submit'])) {
 
@@ -45,8 +45,8 @@ if (isset($_POST['submit'])) {
     } 
 
     if ($filePath !== null) {
-        $obj = new Products();
-        $obj->insertProduct($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath, $userid);
+        $obj = new Seller();
+        $obj->additemforthrifting($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath, $userid,Dbh::connect());
     } else {
         $errors[] = "File upload failed or no file uploaded.";
     }

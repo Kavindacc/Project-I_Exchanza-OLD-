@@ -1,7 +1,8 @@
 <?php
 
 require '../model/products.php';
-
+require '../model/dbconnection.php';
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -130,7 +131,7 @@ require '../model/products.php';
         } ?>
         <?php
 
-        $obj = new Products();
+        $obj = new Item(Dbh::connect());
         $rows = $obj->getitem($_SESSION['category'], $_SESSION['subcategory']);
         if (isset($rows) && !empty($rows)) {
             foreach ($rows as $row) { ?>
