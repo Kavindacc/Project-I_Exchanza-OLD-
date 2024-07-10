@@ -73,7 +73,7 @@ class RegisteredCustormer extends User
 
             $query = "SELECT * FROM usern WHERE userid=?";
             $stmt = $pdo->prepare($query);
-            $stmt->bindParam(1, $this->userid);
+            $stmt->bindParam(1, $this->userid, PDO::PARAM_INT);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -95,17 +95,76 @@ class RegisteredCustormer extends User
 
             $query = "UPDATE usern SET profilepic =? WHERE userid =?";
             $stmt = $pdo->prepare($query);
-            $stmt->execute([$this->filepath, $this->userid]);
+            $stmt->bindParam(1, $this->filepath);
+            $stmt->bindParam(2, $this->userid);
+            $stmt->execute();
             if ($stmt->rowCount() > 0) {
                 $_SESSION['profilepic'] = $this->filepath;
                 return true;
+            } else {
+                return false;
             }
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
     }
 
-    public function browserProducts($pdo) //browser products
+    public function updateUserInfo($name, $phoneno, $pdo)
+    {
+        try {
+            $query = "UPDATE usern SET name=?, phoneno=? WHERE userid =?";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(1, $name);
+            $stmt->bindParam(2, $phoneno);
+            $stmt->bindParam(3, $this->userid);
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function verifyPassword($password, $pdo) //change password function
+    {
+
+        $query = "SELECT password FROM usern WHERE userid =?";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(1, $this->userid);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            // Verify password hash
+            return password_verify($password, $result['password']);
+        }
+
+        return false;
+    }
+
+    public function changepassword($hashedPassword, $pdo)
+    { //password change function
+
+        $query = "UPDATE usern SET password=? WHERE userid =?";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(1, $hashedPassword);
+        $stmt->bindParam(2, $this->userid);
+        $stmt->execute();
+
+        if ($stmt->rowcount()>0) {
+            
+            return true;
+        }
+
+        return false;
+    }
+
+
+    public function browserProducts($pdo) //browser products function
     {
 
         try {
@@ -219,7 +278,7 @@ class RegisteredCustormer extends User
 class Seller extends RegisteredCustormer
 {
     private $productname, $price, $colour, $description, $category, $subcategory, $condition, $userid, $size, $filePath;
-    public function additemforthrifting($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath, $userid,$pdo)
+    public function additemforthrifting($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath, $userid, $pdo)
     {
 
         $this->productname = $productname;

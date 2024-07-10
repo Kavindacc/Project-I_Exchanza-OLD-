@@ -95,9 +95,6 @@ require 'otpsent.php';
             $obj=new Otp();//otpsent.php
             $obj->otpsent($email,$otp);
             
-        } else {
-            $errorString = implode("|", $errors); //array convert string
-            header("Location: ../view/signup.php?error=$errorString");
-        }
+        } 
     }
 

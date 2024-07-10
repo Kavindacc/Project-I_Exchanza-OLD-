@@ -131,8 +131,8 @@ session_start();
         } ?>
         <?php
 
-        $obj = new Item(Dbh::connect());
-        $rows = $obj->getitem($_SESSION['category'], $_SESSION['subcategory']);
+        $obj = new Thrift();
+        $rows = $obj->getdetails($_SESSION['category'], $_SESSION['subcategory'],Dbh::connect());
         if (isset($rows) && !empty($rows)) {
             foreach ($rows as $row) { ?>
                 <div class="card m-2" style="width: 17rem;">

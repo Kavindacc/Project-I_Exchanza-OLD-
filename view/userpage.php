@@ -81,15 +81,38 @@ require '../model/usern.php';
 
             </div>
             <div class="col-sm-8 py-2  mx-auto mt-5 " id="personalinfo"><!--personal information -->
-                <?php if (isset($_GET['success'])) {
-                    echo $_GET['success'];
-                }
-                if (isset($_GET['error'])) {
-                    echo $_GET['error'];
+                <?php if (isset($_SESSION['success'])) { ?><!--change personal information-->
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong><?php echo $_SESSION['success']; ?></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php unset($_SESSION['success']);
+                } ?>
+                <?php if (isset($_SESSION['error'])) { ?>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong><?php echo $_SESSION['error']; ?></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php unset($_SESSION['error']);
+                } ?>
+
+                <?php if (isset($_SESSION['psuccess'])) { ?><!--change password-->
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong><?php echo $_SESSION['psuccess']; ?></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php unset($_SESSION['psuccess']);
+                } ?>
+                <?php if (isset($_SESSION['perror'])) { ?>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong><?php echo $_SESSION['perror']; ?></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php unset($_SESSION['perror']);
                 } ?>
                 <?php
 
-                $obj = new RegisteredCustormer($_SESSION['userid']);//manage account
+                $obj = new RegisteredCustormer($_SESSION['userid']); //manage account
                 $row = $obj->manageAccount(Dbh::connect());
 
                 ?>
@@ -97,7 +120,7 @@ require '../model/usern.php';
                     <div class="row mb-3">
                         <div class="col">
                             <label for="" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" placeholder="<?php echo $row['name']; ?>" name="name" disabled>
+                            <input type="text" class="form-control" placeholder="<?php echo $row['name']; ?>" name="name" id="name" disabled>
                         </div>
 
                     </div>
@@ -108,7 +131,7 @@ require '../model/usern.php';
                         </div>
                         <div class="col-sm-6">
                             <label for="" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" placeholder="<?php echo $row['phoneno']; ?>" name="phoneno" disabled>
+                            <input type="tel" class="form-control" placeholder="<?php echo $row['phoneno']; ?>" name="phoneno" id="phoneno" disabled>
                         </div>
 
                     </div>
@@ -125,8 +148,42 @@ require '../model/usern.php';
                     <div class="float-sm-end"><button type="submit" class="btn btn-outline-success" id="update" name="update" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Update</button></div>
 
                 </form><!--form end-->
-                <div class="float-sm-end"><button type="button" class="btn btn-outline-success" id="edit" onclick="edit();" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Add Profile Picture</button><!--edit button--></div>
+                <div class="float-sm-end"><button type="button" class="btn btn-outline-success" id="edit" onclick="edit();" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Edit Personal Information</button><!--edit button--></div>
 
+                <!-- Change Password Button -->
+                <div class="float-sm-end me-4"><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#changePasswordModal" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#FFA500;">Change Password</button></div>
+
+                <!-- Change Password Modal -->
+                <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="background:#AE9D92;color:#ffff;">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="../control/changepasswordcon.php" method="post">
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="currentPassword" class="form-label">Current Password</label>
+                                        <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="newPassword" class="form-label">New Password</label>
+                                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="confirmNewPassword" class="form-label">Confirm New Password</label>
+                                        <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary" name="changepassword" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Change Password</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-9 py-2 mt-5" id="itemtable" style="display:none;"><!--iteam table-->
                 <?php
@@ -170,7 +227,7 @@ require '../model/usern.php';
                                         <!--  Modal edit-->
                                         <div class="modal fade" id="<?php echo $editModalId; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="<?php echo $editModalId; ?>Label" aria-hidden="true">
                                             <div class="modal-dialog">
-                                                <div class="modal-content"style="background:#AE9D92;color:#ffff;">
+                                                <div class="modal-content" style="background:#AE9D92;color:#ffff;">
                                                     <div class="modal-header">
                                                         <h1 class="modal-title fs-5" id="<?php echo $editModalId; ?>Label">Edit Product</h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -205,7 +262,7 @@ require '../model/usern.php';
                                         <!-- Modal delete -->
                                         <div class="modal fade" id="<?php echo $modalId; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="<?php echo $modalId; ?>Label" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered modal-sm">
-                                                <div class="modal-content"style="background:#AE9D92;color:#ffff;">
+                                                <div class="modal-content" style="background:#AE9D92;color:#ffff;">
                                                     <div class="modal-header">
                                                         <h1 class="modal-title fs-5" id="<?php echo $modalId; ?>Label">Do you Want to Delete?</h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
