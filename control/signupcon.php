@@ -35,16 +35,22 @@ require 'otpsent.php';
             } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $errors[] = "Invalid Email";
             } else {
-                $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+                $email = filter_var($email, FILTER_SANITIZE_EMAIL);//santize email
             }
         }
 
-        if ($country == '--Select Country--') { //location check
+        if (empty($country)) { //location check
             $errors[] = "Country is required";
         }
+        else{
+            $country = trim(stripslashes(htmlspecialchars($country)));//santize
+        }
 
-        if ($gender == '--Select Gender--') { //gender check
+        if (empty($gender)) { //gender check
             $errors[] = "Gender is required";
+        }
+        else{
+            $gender = trim(stripslashes(htmlspecialchars($gender)));//santize
         }
 
         if (empty($password)) { //password check
@@ -89,9 +95,6 @@ require 'otpsent.php';
             $obj=new Otp();//otpsent.php
             $obj->otpsent($email,$otp);
             
-        } else {
-            $errorString = implode("|", $errors); //array convert string
-            header("Location: ../view/signup.php?error=$errorString");
-        }
+        } 
     }
 

@@ -17,7 +17,7 @@ if (isset($_POST['continue'])) {
     $object = new RegisteredCustormer();
     $vemail = $object->checkemail($email,Dbh::connect());
     if ($vemail) {
-        $object->update($token_hash, $expire,Dbh::connect());
+        $object->updateToken($token_hash, $expire,Dbh::connect());
 
         $mail = require 'mailer.php';
 
@@ -26,7 +26,7 @@ if (isset($_POST['continue'])) {
         $mail->Subject = "Password Reset";
         $mail->Body = <<<END
 
-        Click <a href="http://example.com/resetpassword.php?token=$token">here </a>to reset your password.
+        Click <a href="http://localhost/git%20project%201/Project-I_Exchanza/view/resetpassword.php?token=$token">here </a>to reset your password.
         END;//domain name danna one resetpassword link eka
 
         try {

@@ -47,21 +47,7 @@ class Item
         }
     }
 
-    public function getitem($category, $subcategory) //subcategory category product get
-    {
-        try {
-            $query = "SELECT p.* FROM products p JOIN thrift t ON p.product_id = t.product_id WHERE p.category = ? AND p.subcategory = ?";
-            $stmt = $this->pdo->prepare($query);
-            $stmt->bindParam(1, $category);
-            $stmt->bindParam(2, $subcategory);
-            $stmt->execute();
-            $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            return $rows;
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
 
     public function getproductid($userid)
     {
@@ -78,4 +64,26 @@ class Item
             echo "Error: " . $e->getMessage();
         }
     }
+}
+
+class Thrift extends Item{
+
+    public $thriftitems =[];
+
+    public function getdetails($category, $subcategory,$pdo) //subcategory category product get
+    {
+        try {
+            $query = "SELECT p.* FROM products p JOIN thrift t ON p.product_id = t.product_id WHERE p.category = ? AND p.subcategory = ?";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(1, $category);
+            $stmt->bindParam(2, $subcategory);
+            $stmt->execute();
+            $thriftitems= $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $thriftitems;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
 }

@@ -1,20 +1,25 @@
 <?php
 
-require '../control/sendpassword.php';
+require '../model/usern.php';
+require '../model/dbconnection.php';
 
-$token = $_GET['token'];
-$token_hash = hash("sha256", $token);
-
-$obj = new User();
-$result = $obj->token($token_hash);
-if (strtotime($result) <= time()) { //convrt secound time/ 
-    //token expired
-
-} else if (!$result) {
-    //token not found
+if(isset($_GET['token'])){
+    $token = $_GET['token'];
+    
 }
 
+/*$token_hash = hash("sha256", $token);
 
+$obj = new RegisteredCustormer();
+$result = $obj->token($token_hash, Dbh::connect());
+if (strtotime($result) <= time()) { //convrt secound time/ 
+    echo "expire";
+
+} else if (!$result) {
+    echo "not found";
+}
+
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,47 +32,54 @@ if (strtotime($result) <= time()) { //convrt secound time/
     <title>Resetpassword</title>
 </head>
 
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Reset password</h2>
-            </div>
-        </div>
-        <form action="../control/resetpasswordcon.php" method="post">
-            <div class="row">
-                <div class="col-md-4">
-                    <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
-                </div>
-            </div>
-            <div class="row">
-            <?php if (isset($_GET['error'])) { ?>
-                <div class="col-md-4 bg-warning text-white"><?php echo $_GET['error']; ?></div>
-            <?php } ?>
+<body class="d-flex justify-content-center align-items-center"style="height:100vh;">
+    <div class="col-sm-4 ">
 
-            <?php if (isset($_GET['success'])) { ?>
-                <div class="col-md-4 bg-success text-white"><?php echo $_GET['success']; ?></div>
-            <?php } ?>
-        </div>
-            <div class="row mt-2 ">
-                <div class="col-md-4">
-                    <label class="form-label">Password</label>
-                    <input class="form-control" type="password" name="password" required="">
-                </div>
+        <h2>Reset password</h2>
+
+
+        <form action="../control/resetpasswordcon.php" method="post">
+            <div class="mb-3">
+
+                <input type="hidden" name="token" value="<?php echo $token; ?>">
+
             </div>
-            <div class="row mt-2">
-                <div class="col-md-4">
-                    <label class="form-label">repeat Password</label>
-                    <input class="form-control" type="password" name="rpassword" required="">
-                </div>
+            <div class="mb-3">
+                <?php if (isset($_GET['error'])) { ?>
+                    <div class=" bg-warning text-white"><?php echo $_GET['error']; ?></div>
+                <?php } ?>
+
+                <?php if (isset($_GET['success'])) { ?>
+                    <div class=" bg-success text-white"><?php echo $_GET['success']; ?></div>
+                <?php } ?>
             </div>
-            <div class="row mt-2">
-                <div class="col-md-4">
-                    <input class="btn btn-primary w-100" type="submit" value="Reset" name="reset" style="background:#897062;border:none;">
-                </div>
+            <div class="mb-3">
+
+                <label class="form-label">Password</label>
+                <input class="form-control" type="password" name="password" required>
+
             </div>
+            <div class="mb-3">
+
+                <label class="form-label">repeat Password</label>
+                <input class="form-control" type="password" name="rpassword" required>
+
+            </div>
+
+            <div>
+                <input class="btn btn-primary w-100" type="submit" value="Reset" name="reset" style="background:#897062;border:none;">
+            </div>
+
         </form>
     </div>
 </body>
-
+<script type="text/javascript">
+        function preventback() {
+            window.history.forward()
+        };
+        setTimeout("preventback()", 0);
+        window.onunload = function() {
+            null
+        };
+    </script>
 </html>

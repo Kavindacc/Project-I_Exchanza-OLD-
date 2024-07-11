@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 require '../model/products.php';
 require '../model/dbconnection.php';
 if(isset($_POST['delete'])){
@@ -13,6 +14,7 @@ if(isset($_POST['delete'])){
     }
     
 }
+
 
 
 
