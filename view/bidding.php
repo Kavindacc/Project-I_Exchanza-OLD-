@@ -99,7 +99,7 @@
             @apply blur-[30px] pointer-events-none select-none;
         }
         #bidpopupform {
-            @apply bg-white fixed top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 p-[20px] shadow-lg rounded-[10px]  transition-opacity duration-500 w-[80vw] h-[81vh] visible opacity-100;
+            @apply bg-white fixed top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 p-[20px] shadow-lg rounded-[10px]  transition-opacity duration-500 w-[80vw] h-[81vh] invisible opacity-0;
         }
         #bidpopupform.active {
             @apply transition-[0.5s] opacity-100 visible; 
@@ -323,12 +323,12 @@
                 
     </div>
     <!-- Popup Form -->
-    <div id="bidpopupform">
+    <div class=" overflow-y-auto" id="bidpopupform">
         <button id="fcancel-btn" onclick=addBidForm() class="fcancel-btn w-10 text-[1.8rem] ml-[98%] p-0 -mt-40 hover:scale-110 hover:transition-[0.8s]">&times;</button>                
         <div class="flex mx-10 my-2 gap-4">
             <div class="w-[60%] border-r-2 border-[#AE9D92]">
                 <h2 class="f-title">ADD YOUR BID</h2>
-                <form action="" method="post" enctype="" id="">
+                <form action="../control/bidding.php" method="get" enctype="" id="">
                     <div class="bform-items">
                                 <label for="itemName"  class="bflable">Item Name</label>
                                 <input type="text" class="form-control" id="itemName" placeholder="Enter item name" name="itemname" required>
@@ -369,19 +369,23 @@
                     
                 </form>        
             </div>
-            <div class="w-full md:w-[40%] pl-4">
+
+            <div class="w-full md:w-[40%] overflow-y-auto pl-4">
                 <h2 class="f-title">Bid Item Preview</h2>
                 <div class="preview-container flex flex-col items-center border-[1px] border-[#AE9D92] rounded-lg p-4">
                     <img id="previewImage" src="https://via.placeholder.com/200x250" alt="Item image" class="mb-4 rounded-md w-[200px] h-[250px] overflow-hidden">
                     <div class="text-left">
-                        <h5 class="text-xl font-semibold mb-2 text-[#746557]" id="previewName">Item Name</h5>
-                        <p class="text-[#897062] mb-2 w-" id="previewDescription">Description</p>
+                        <h5 class="break-words max-w-[200px] text-xl font-semibold mb-2 text-[#746557]" id="previewName">Item Name</h5>
+                        <p class="text-[#897062] mb-2 break-words max-w-[200px]" id="previewDescription">Description</p>
                         <p class="text-[#897062] mb-2" id="prevBidStartingTime">Your Bid Starts at:
-                        <Span class="font-semibold"> 00:00:00:00</Span></p>
+                        <Span class="" id="countdown" class="font-semibold"> 00:00:00:00</Span></p>
                         <h5 class="text-lg font-semibold text-[#6b564a]" id="previewPrice">Rs. 0.00</h5>
                     </div>
                 </div>
-            </div>                    
+            </div>
+            
+            
+
         </div>
     </div>
 
