@@ -42,7 +42,7 @@ if (isset($_POST['reset'])) {
             $passwordhash = password_hash($password, PASSWORD_DEFAULT);
             $userid = $result['userid'];
             $obj->updatePassword($passwordhash, $userid, Dbh::connect());
-            header("Location: ../view/login.php?success=Password reset successful");
+            header("Location: ../view/login.php");
         } else {
             $errorString = implode("|", $errors);
             header("Location: ../view/resetpassword.php?error=$errorString");
