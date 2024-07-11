@@ -200,7 +200,7 @@ class RegisteredCustormer extends User
         }
     }
 
-    public function update($token, $expire, $pdo) //token insert forgetpasword
+    public function updateToken($token, $expire, $pdo) //token insert forgetpasword
     {
 
         $this->token = $token;
@@ -209,31 +209,29 @@ class RegisteredCustormer extends User
         try {
             $query = "UPDATE usern SET reset_token_hash=?, reset_token_expire=? WHERE email=?";
             $stmt = $pdo->prepare($query);
-            $stmt->execute([$this->token, $this->expire, $this->email]);
+            $stmt->bindParam(1, $this->token);
+            $stmt->bindParam(2, $this->expire);
+            $stmt->bindParam(3, $this->email);
+            $stmt->execute();
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
     }
 
-    public function token($token_hash, $pdo) //password reset token check
-    {
-        $this->token_hash = $token_hash;
-
+    public function validateToken($token_hash, $pdo) {
         try {
             $sql = "SELECT * FROM usern WHERE reset_token_hash=?";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(1, $this->token_hash);
+            $stmt->bindParam(1,$token_hash);
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                return $row['reset_token_expire'];
-                $row['userid'];
+                return $row; 
             } else {
-                return false; //token not found
+                return false; // Token not found
             }
         } catch (PDOException $e) {
-
             echo "Error: " . $e->getMessage();
         }
     }
@@ -256,18 +254,15 @@ class RegisteredCustormer extends User
         }
     }
 
-    public function updatepassword($passwordhash, $result, $pdo) //update password
+    public function updatePassword($passwordhash, $userid, $pdo) //update password
     {
-
-        $this->password = $passwordhash;
-        $this->userid = $result;
 
         try {
 
             $sql = "UPDATE usern SET password=?,reset_token_hash=NULL,reset_token_expire=NULL WHERE userid=?";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(1, $this->password);
-            $stmt->bindParam(1, $this->userid);
+            $stmt->bindParam(1,$passwordhash);
+            $stmt->bindParam(2, $userid);
             $stmt->execute();
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
