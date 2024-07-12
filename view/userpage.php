@@ -186,6 +186,20 @@ require '../model/usern.php';
                 </div>
             </div>
             <div class="col-sm-9 py-2 mt-5" id="itemtable" style="display:none;"><!--iteam table-->
+            <?php if (isset($_SESSION['deletesuccess'])) { ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong><?php echo $_SESSION['deletesuccess']; ?></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php unset($_SESSION['deletesuccess']);
+                } ?>
+                <?php if (isset($_SESSION['editsuccess'])) { ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong><?php echo $_SESSION['editsuccess']; ?></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php unset($_SESSION['editsuccess']);
+                } ?>
                 <?php
                 $obj = new RegisteredCustormer($_SESSION['userid']); // product get product table according to userid
                 $rows = $obj->browserProducts(Dbh::connect());
