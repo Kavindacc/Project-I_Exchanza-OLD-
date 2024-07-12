@@ -136,7 +136,7 @@ session_start();
         if (isset($rows) && !empty($rows)) {
             foreach ($rows as $row) { ?>
                 <div class="card m-2" style="width: 17rem;">
-                    <img src="../upload/<?php echo $row['image'] ?>" class="card-img-top" alt="..." style="height:10rem;">
+                    <img src="../upload/<?php echo $row['image'] ?>" class="card-img-top" alt="..." style="height:10rem;" href="items_template.php?id=<?php $row['product_id']; ?>">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                         <p class="card-text"><?php echo $row['description']; ?></p>

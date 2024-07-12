@@ -267,68 +267,51 @@ session_start();
         <div class="row row-col-6 catr">
 
             <!--item categogy and sub link-->
-            <div class="col r1">
+            <!-- <div class="col r1"> -->
 
                 <div class="col r1">
 
                     <a href="cat_items_template.php?cat=women&sub=tops"><!--iteam show page-->
                         <img src="../img/TopsW.jpg" alt="women thrift cat1" class="rounded-circle img-fluid twc1">
                     </a>
+                    <p class="hide"> Tops </p> 
                 </div>
 
                 <div class="col r2">
                     <a href="cat_items_template.php?cat=women&sub=dresses">
                         <img src="../img/dressW.jpg" alt="women thrift cat2" class="rounded-circle img-fluid twc2">
                     </a>
+                    <p class="hide"> Dresses </p> 
                 </div>
 
                 <div class="col r3">
                     <a href="cat_items_template.php?cat=women&sub=pants">
                         <img src="../img/denimW.jpg" alt="women thrift cat3" class="rounded-circle img-fluid twc3">
                     </a>
+                    <p class="hide"> Pants </p> 
                 </div>
 
                 <div class="col r4">
                     <a href="cat_items_template.php?cat=women&sub=accessories">
                         <img src="../img/acsW.jpg" alt="women thrift cat4" class="rounded-circle img-fluid twc4">
                     </a>
+                    <p class="hide"> Accessories </p> 
                 </div>
 
                 <div class="col r5">
                     <a href="cat_items_template.php?cat=women&sub=bags">
                         <img src="../img/bagW.jpg" alt="women thrift cat5" class="rounded-circle img-fluid twc5">
                     </a>
+                    <p class="hide"> Bags </p> 
                 </div>
 
                 <div class="col r6">
                     <a href="cat_items_template.php?cat=women&sub=shoes">
                         <img src="../img/ShoeW.jpg" alt="women thrift cat6" class="rounded-circle img-fluid twc6">
                     </a>
+                    <p class="hide"> Shoes </p> 
                 </div>
 
-
-
-
-            </div>
-            <div class="row row-cols-6 catt">
-                <div class="col t1">
-                    <p> Tops </p>
-                </div>
-                <div class="col t2">
-                    <p> Dresses </p>
-                </div>
-                <div class="col t3">
-                    <p> Pants </p>
-                </div>
-                <div class="col t4">
-                    <p> Accessories </p>
-                </div>
-                <div class="col t5">
-                    <p> Bags </p>
-                </div>
-                <div class="col t6">
-                    <p> Shoes </p>
-                </div>
             </div>
 
         </div>
