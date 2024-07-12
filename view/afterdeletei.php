@@ -81,11 +81,33 @@ require '../model/usern.php';
 
             </div>
             <div class="col-sm-6 py-2 mt-5 mx-auto" id="personalinfo" style="display:none;"><!--personal information -->
-                <?php if (isset($_GET['success'])) {
-                    echo $_GET['success'];
-                }
-                if (isset($_GET['error'])) {
-                    echo $_GET['error'];
+            <?php if (isset($_SESSION['success'])) { ?><!--change personal information-->
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong><?php echo $_SESSION['success']; ?></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php unset($_SESSION['success']);
+                } ?>
+                <?php if (isset($_SESSION['error'])) { ?>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong><?php echo $_SESSION['error']; ?></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php unset($_SESSION['error']);
+                } ?>
+                <?php if (isset($_SESSION['psuccess'])) { ?><!--change password-->
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong><?php echo $_SESSION['psuccess']; ?></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php unset($_SESSION['psuccess']);
+                } ?>
+                <?php if (isset($_SESSION['perror'])) { ?>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong><?php echo $_SESSION['perror']; ?></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php unset($_SESSION['perror']);
                 } ?>
                 <?php
 
@@ -122,7 +144,41 @@ require '../model/usern.php';
                     </div>
                     <button type="submit" class="btn btn-outline-success" id="update" name="update">Update</button>
                 </form><!--form end-->
-                <button type="button" class="btn btn-outline-success" id="edit" onclick="edit();">Edit</button><!--edit button-->
+                <button type="button" class="btn btn-outline-success" id="edit" onclick="edit();">Edit Personal Information<</button><!--edit button-->
+
+                <div class="float-sm-end me-4"><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#changePasswordModal" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#FFA500;">Change Password</button></div>
+
+                <!-- Change Password Modal -->
+                <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="background:#AE9D92;color:#ffff;">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="../control/changepasswordcon.php" method="post"><!--password change form-->
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="currentPassword" class="form-label">Current Password</label>
+                                        <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="newPassword" class="form-label">New Password</label>
+                                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="confirmNewPassword" class="form-label">Confirm New Password</label>
+                                        <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Change Password</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-9 py-2 mt-5" id="itemtable"><!--iteam table-->
                 <?php if (isset($_SESSION['deletesuccess'])) { ?>

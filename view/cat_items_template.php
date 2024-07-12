@@ -73,7 +73,7 @@ session_start();
             </div>
         </div>
     </nav>
-    <div class="container pt-3"><!--sub category eka ganna-->
+    <div class="container pt-1"><!--sub category eka ganna-->
         <?php if (isset($_GET['cat']) || isset($_GET['sub'])) {
 
             $_SESSION['category'] = $_GET['cat'];
@@ -89,6 +89,7 @@ session_start();
         </div>
 
         <div class="d-flex justify-left gap-2">
+
             <div class="dropdown">
                 <button class="btn dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Sort
@@ -99,18 +100,17 @@ session_start();
                     <li><a class="dropdown-item" href="#">Newest Arrivals</a></li>
                 </ul>
             </div>
-            <div>
-                <button class="btn dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Filter
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                <ul class="dropdown-menu" aria-labelledby="filterDropdown">
                     <li><a class="dropdown-item" href="#">Category</a></li>
                     <li><a class="dropdown-item" href="#">Type</a></li>
                     <li><a class="dropdown-item" href="#">Size</a></li>
                     <li><a class="dropdown-item" href="#">Colour</a></li>
                 </ul>
             </div>
-
         </div>
 
         <div class="collapse mb-4" id="filterOptions">
@@ -118,21 +118,33 @@ session_start();
                 <!-- Filter options methna danna -->
             </div>
         </div>
-
-
     </div>
+    <div class="container d-flex justify-content-start mt-2"><!--close button-->
+        <?php if (isset($_SESSION['msg'])) { ?>
+            <div class="alert alert-success  alert-dismissible fade show col-12" role="alert">
+                <strong><?php echo $_SESSION['msg'];
+                        unset($_SESSION['msg']); ?></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
 
 
-    <div class="container d-flex justify-content-start flex-wrap "><!--get iteam-->
-        <?php if (isset($_GET['msg'])) {
-            echo $_GET['msg'];
-        } else if (isset($_GET['wmsg'])) {
-            echo $_GET['wmsg'];
-        } ?>
+        <?php } ?>
+        <?php if (isset($_SESSION['wmsg'])) { ?>
+            <div class="alert alert-warning alert-dismissible fade show col-12" role="alert">
+                <strong><?php echo $_SESSION['wmsg'];
+                        unset($_SESSION['wmsg']); ?></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+
+        <?php } ?>
+    </div>
+    <div class="container d-flex justify-content-start flex-wrap mt-3"><!--get iteam-->
+
         <?php
 
-        $obj = new Item(Dbh::connect());
-        $rows = $obj->getitem($_SESSION['category'], $_SESSION['subcategory']);
+        $obj = new Thrift();
+        $rows = $obj->getdetails($_SESSION['category'], $_SESSION['subcategory'], Dbh::connect());
         if (isset($rows) && !empty($rows)) {
             foreach ($rows as $row) { ?>
                 <div class="card m-2" style="width: 17rem;">
@@ -140,22 +152,32 @@ session_start();
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                         <p class="card-text"><?php echo $row['description']; ?></p>
-                        <p class="card-text"><?php echo $row['colour']; ?></p>
                         <p class="card-text"><?php if (isset($row['size'])) {
                                                     echo $row['size'];
                                                 } ?></p>
                         <p class="card-text">Rs.<?php echo $row['price']; ?></p>
-                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                        <form action="../control/wishlist.php" method="post">
+                        <form action="../control/wishlist.php" method="post"><!--wishlistform-->
                             <input type="hidden" name="productid" value="<?php echo $row['product_id']; ?>">
                             <?php if (!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) {
                                 $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; //get current page 
                                 $_SESSION['redirect'] = $currentPage; ?>
                                 <a href="login.php" style="text-decoration: none;">
-                                    <button type="button" class="btn btn-primary mt-2">Add to Wishlist</button>
+                                    <button type="button" class="btn btn-primary mt-2  equal-width" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Add to Wishlist</button>
                                 </a>
                             <?php } else { ?>
-                                <button type="submit" class="btn btn-primary mt-2" name="wishlist">Add to Wishlist</button>
+                                <button type="submit" class="btn btn-primary mt-2  equal-width" name="wishlist" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Add to Wishlist</button>
+                            <?php } ?>
+                        </form>
+                        <form action="../control/addtocart.php" method="post"><!--wishlistform-->
+                            <input type="hidden" name="productid" value="<?php echo $row['product_id']; ?>">
+                            <?php if (!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) {
+                                $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; //get current page 
+                                $_SESSION['redirect'] = $currentPage; ?>
+                                <a href="login.php" style="text-decoration: none;">
+                                    <button type="button" class="btn btn-primary mt-2  equal-width" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Add to Cart</button>
+                                </a>
+                            <?php } else { ?>
+                                <button type="submit" class="btn btn-primary mt-2  equal-width" name="addtocart" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Add to Cart</button>
                             <?php } ?>
                         </form>
                     </div>
@@ -171,7 +193,7 @@ session_start();
 
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="view/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>

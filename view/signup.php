@@ -96,7 +96,7 @@
                 <div class="col-md-4">
                     <label class="form-label">Country</label>
                     <select class="form-select" aria-label="Default select example" name="country">
-                        <option value="--Select Country--">--Select Country--</option>
+                        <option value=""disabled selected hidden>--Select Country--</option>
                         <option value="Sri lanka">Sri lanka</option>
                         <option value="Uk">Uk</option>
                     </select>
@@ -110,7 +110,7 @@
                 <div class="col-md-4">
                     <label class="form-label">Gender</label>
                     <select class="form-select" aria-label="Default select example" name="gender">
-                        <option value="--Select Gender--">--Select Gender--</option>
+                        <option value=""disabled selected hidden>--Select Gender--</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select>

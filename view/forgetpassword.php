@@ -24,7 +24,7 @@
                 <div class="col-md-4 bg-success text-white"><?php echo $_GET['success']; ?></div>
             <?php } ?>
         </div>
-        <form action="../control/resetpasswordcon.php" method="post">
+        <form action="../control/sendpassword.php" method="post">
         <div class="row mt-3 ">
             <div class="col-md-4">
                 <label class="form-label">Email Address</label>
