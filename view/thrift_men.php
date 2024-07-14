@@ -169,19 +169,19 @@
                             <select class="form-control" id="category" required>
                                 <option value="">Select Category</option>
                                 <option value="men">Men</option>
-                                <option value="women">Women</option>
-                                <option value="kids">Kids</option>
+                                <!-- <option value="women">Women</option>
+                                <option value="kids">Kids</option> -->
                             </select>
                         </div>
                         <div class="form-group hidden" id="subcategoryWrapper">
                             <label for="subcategory" class="bold">Subcategory</label>
                             <select class="form-control" id="subcategory">
                                 <option value="">Select Subcategory</option>
-                                <option value="tops">Tops</option>
-                                <option value="dresses">Dresses</option>
+                                <option value="tops">T Shirts</option>
+                                <option value="dresses">Shirts</option>
                                 <option value="pants">Pants</option>
-                                <option value="accessories">Accessories</option>
-                                <option value="bags">Bags</option>
+                                <option value="accessories">Suits</option>
+                                <option value="bags">Accessories</option>
                                 <option value="shoes">Shoes</option>
                             </select>
                         </div>

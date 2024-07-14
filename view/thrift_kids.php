@@ -168,8 +168,8 @@
                             <label for="category" class="bold">Category</label>
                             <select class="form-control" id="category" required>
                                 <option value="">Select Category</option>
-                                <option value="men">Men</option>
-                                <option value="women">Women</option>
+                                <!-- <option value="men">Men</option>
+                                <option value="women">Women</option> -->
                                 <option value="kids">Kids</option>
                             </select>
                         </div>
@@ -177,12 +177,12 @@
                             <label for="subcategory" class="bold">Subcategory</label>
                             <select class="form-control" id="subcategory">
                                 <option value="">Select Subcategory</option>
-                                <option value="tops">Tops</option>
-                                <option value="dresses">Dresses</option>
-                                <option value="pants">Pants</option>
+                                <option value="tops">Clothes</option>
+                                <option value="dresses">Toys and accessoris</option>
+                                <!-- <option value="pants">Pants</option>
                                 <option value="accessories">Accessories</option>
                                 <option value="bags">Bags</option>
-                                <option value="shoes">Shoes</option>
+                                <option value="shoes">Shoes</option> -->
                             </select>
                         </div>
                         <div class="form-group hidden" id="sizeChartWrapper">
