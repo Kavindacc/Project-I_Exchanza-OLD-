@@ -176,9 +176,9 @@ session_start();
                                 <label for="category" class="bold">Category</label>
                                 <select class="form-control" id="category" name="category" required>
                                     <option value="">Select Category</option>
-                                    <option value="men">Men</option>
+                                    <!-- <option value="men">Men</option> -->
                                     <option value="women">Women</option>
-                                    <option value="kids">Kids</option>
+                                    <!-- <option value="kids">Kids</option> -->
                                 </select>
                             </div>
                             <div class="form-group hidden" id="subcategoryWrapper">

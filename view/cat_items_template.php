@@ -81,9 +81,9 @@ session_start();
         } ?>
 
         <div class="text-center">
-            <h1>Shop Secondhand <?php if (isset($_SESSION['category'])) {
+            <h1>Shop Thrifted <?php if (isset($_SESSION['category'])) {
                                     echo $_SESSION['category'];
-                                } ?> 's&nbsp; <?php if (isset($_SESSION['subcategory'])) {
+                                } ?> 's &nbsp; <?php if (isset($_SESSION['subcategory'])) {
                                                     echo ucfirst($_SESSION['subcategory']);
                                                 } ?></h1>
         </div>
