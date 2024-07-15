@@ -286,8 +286,8 @@ class RegisteredCustormer extends User
 
 class Seller extends RegisteredCustormer
 {
-    private $productname, $price, $colour, $description, $category, $subcategory, $condition, $userid, $size, $filePath;
-    public function additemforthrifting($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath, $userid, $pdo)
+    private $productname, $price, $colour, $description, $category, $subcategory, $condition, $userid, $size, $filePath,$filepatho;
+    public function additemforthrifting($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath,$filepatho, $userid, $pdo)
     {
 
         $this->productname = $productname;
@@ -299,11 +299,12 @@ class Seller extends RegisteredCustormer
         $this->size = $size;
         $this->condition = $condition;
         $this->filePath = $filePath;
+        $this->filepatho=$filepatho;
         $this->userid = $userid;
 
         try {
             // Insert product into products table
-            $query = "INSERT INTO products (product_name, price, colour, description, category, subcategory, size, `condition`, image, userid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO products (product_name, price, colour, description, category, subcategory, size, `condition`, image,otherimage, userid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
             $stmt = $pdo->prepare($query);
             $stmt->bindParam(1, $this->productname);
             $stmt->bindParam(2, $this->price);
@@ -314,7 +315,8 @@ class Seller extends RegisteredCustormer
             $stmt->bindParam(7, $this->size);
             $stmt->bindParam(8, $this->condition);
             $stmt->bindParam(9, $this->filePath);
-            $stmt->bindParam(10, $this->userid);
+            $stmt->bindParam(10,$this->filepatho);
+            $stmt->bindParam(11, $this->userid);
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {
