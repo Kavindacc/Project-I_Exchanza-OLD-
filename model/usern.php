@@ -271,7 +271,7 @@ class RegisteredCustormer extends User
     public function addtoWishlist($productid,$userid,$pdo){//wishlist inser funtion
 
         try {
-            $query="INSERT INTO wishlist(productid,userid) VALUES (?,?,)";
+            $query="INSERT INTO wishlist(productid,userid) VALUES (?,?)";
             $stmt=$pdo->prepare($query);
             $stmt->bindParam(1,$productid);
             $stmt->bindParam(2,$userid);
@@ -282,12 +282,26 @@ class RegisteredCustormer extends User
             echo "Error: " . $e->getMessage();
         }
     }
+    public function wishlistiteamcount($userid,$pdo){//wishlist item count function
+
+        try {
+            $query="SELECT *  FROM wishlist WHERE userid=?";
+            $stmt=$pdo->prepare($query);
+            $stmt->bindParam(1,$userid);
+            $stmt->execute();
+            $count=$stmt->rowcount();
+            return $count;
+        }catch (PDOException $e) {
+
+            echo "Error: " . $e->getMessage();
+        }
+    }
 }
 
 class Seller extends RegisteredCustormer
 {
-    private $productname, $price, $colour, $description, $category, $subcategory, $condition, $userid, $size, $filePath;
-    public function additemforthrifting($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath, $userid, $pdo)
+    private $productname, $price, $colour, $description, $category, $subcategory, $condition, $userid, $size, $filePath,$filepatho;
+    public function additemforthrifting($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath,$filepatho, $userid, $pdo)
     {
 
         $this->productname = $productname;
@@ -299,11 +313,12 @@ class Seller extends RegisteredCustormer
         $this->size = $size;
         $this->condition = $condition;
         $this->filePath = $filePath;
+        $this->filepatho=$filepatho;
         $this->userid = $userid;
 
         try {
             // Insert product into products table
-            $query = "INSERT INTO products (product_name, price, colour, description, category, subcategory, size, `condition`, image, userid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO products (product_name, price, colour, description, category, subcategory, size, `condition`, image,otherimage, userid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
             $stmt = $pdo->prepare($query);
             $stmt->bindParam(1, $this->productname);
             $stmt->bindParam(2, $this->price);
@@ -314,7 +329,8 @@ class Seller extends RegisteredCustormer
             $stmt->bindParam(7, $this->size);
             $stmt->bindParam(8, $this->condition);
             $stmt->bindParam(9, $this->filePath);
-            $stmt->bindParam(10, $this->userid);
+            $stmt->bindParam(10,$this->filepatho);
+            $stmt->bindParam(11, $this->userid);
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {

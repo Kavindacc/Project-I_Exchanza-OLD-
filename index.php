@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php require '../Project-I_Exchanza/model/dbconnection.php';
+require '../Project-I_Exchanza/model/usern.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,17 +50,19 @@
                     </form>
                     <!--login nav-link-a-color-->
                     <div class="d-flex flex-column float-start flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
-                        <a href="../Project-I_Exchanza/view/cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"></span></i></a><!--addtocart-->
+                        <a href="#" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"></span></i></a><!--addtocart-->
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
-                            <a href="#" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp">5</span></i></a><!--addto wishlist-->
+                            <?php $obj = new RegisteredCustormer();
+                            $count = $obj->wishlistiteamcount($_SESSION['userid'], Dbh::connect()); ?>
+                            <a href="../Project-I_Exchanza/view/wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if(isset($count)){ echo $count;}else{echo 0;} ?></span></i></a><!--addto wishlist-->
 
                             <a href="view/userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user" style="font-size:1.5rem;"></i></a>
 
 
                             <?php echo "Hi," . $_SESSION['username']; ?>
                         <?php } else { ?>
-                            <a href="../Project-I_Exchanza/view/cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"></i></a>
+                            <a href="#" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"></i></a>
                             <a href="view/login.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3" style="color:#ffff;">login</button></a>
                         <?php } ?>
                     </div>

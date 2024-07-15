@@ -18,11 +18,20 @@ if (isset($_POST['wishlist'])) {
     } else {
         //add wishlish table
         //check already add
-        $wish=new RegisteredCustormer();
-        $wish->addtoWishlist($productid,$userid,dbh::connect());
-        $_SESSION['msg'] = "Add Product Wishlist.";
-        header("Location: ../view/cat_items_template.php");
-        exit();
+        $pid=new wishlist();
+        $pids=$pid->getwishlistid($userid,Dbh::connect());
+        if(in_array($productid,$pids)){
+            $_SESSION['amsg'] = "Product already add to Wishlist.";
+            header("Location: ../view/cat_items_template.php");
+        }
+        else{
+            $wish=new RegisteredCustormer();
+            $wish->addtoWishlist($productid,$userid,Dbh::connect());
+            $_SESSION['msg'] = "Add Product Wishlist.";
+            header("Location: ../view/cat_items_template.php");
+            exit();
+        }
+        
     }
 }
 

@@ -1,7 +1,8 @@
 <?php
 
 require '../model/products.php';
-session_start();
+require '../model/usern.php';
+require '../model/dbconnection.php';
 
 
 ?>
@@ -58,18 +59,24 @@ session_start();
                     </form>
                     <!--login nav-link-a-color-->
                     <div class="d-flex flex-column float-start flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
-                        <a href="../Project-I_Exchanza/view/cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
+                        <a href="#" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
-
+                            <?php $obj = new RegisteredCustormer();
+                            $count = $obj->wishlistiteamcount($_SESSION['userid'], Dbh::connect()); ?>
+                            <a href="../view/wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if (isset($count)) {
+                                                                                                                                                                                                                                                                echo $count;
+                                                                                                                                                                                                                                                            } else {
+                                                                                                                                                                                                                                                                echo 0;
+                                                                                                                                                                                                                                                            } ?></span></i></a><!--addto wishlist-->
                             <a href="userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user" style="font-size:1.5rem;"></i></a>
 
                             <?php echo "Hi," . $_SESSION['username']; ?>
                         <?php } else {
                             $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-                            $_SESSION['redirect']=$currentPage;
+                            $_SESSION['redirect'] = $currentPage;
                         ?>
-                            <a href="login.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3"style="color:#ffff;">login</button></a>
+                            <a href="login.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3" style="color:#ffff;">login</button></a>
                         <?php } ?>
                     </div>
                 </div>
@@ -126,8 +133,8 @@ session_start();
             By thrifting items, you can find unique pieces while also contributing to a more eco-friendly world.
         </p>
         <?php if (!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) { //login session eka
-            $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];//get current page 
-            $_SESSION['redirect']=$currentPage;
+            $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; //get current page 
+            $_SESSION['redirect'] = $currentPage;
         ?>
             <a href="login.php" style="text-decoration: none;">
                 <button class="add-item-btn" style="width:100%;">Add Item</button>
