@@ -47,7 +47,7 @@ session_start();
                 </div>
             </div>
             <div class="col-md-6">
-                <h1><?php echo $row['name']; ?>
+                <h1><?php echo $row['product_name']; ?>
                     <svg class="heart-icon" id="heartIcon" viewBox="0 0 24 24">
                         <path
                             d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 

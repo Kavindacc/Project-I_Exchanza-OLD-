@@ -66,7 +66,7 @@ class Item
     }
     public function loaditemdetails($pid){
         try {
-            $query = "SELECT p.* FROM products p  WHERE p.product_id = ?";
+            $query = "SELECT * FROM products WHERE product_id = ?";
             $stmt = $this->pdo->prepare($query);
             $stmt->bindParam(1, $pid);
             $stmt->execute();
