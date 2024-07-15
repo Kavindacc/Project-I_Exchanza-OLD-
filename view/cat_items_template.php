@@ -2,7 +2,7 @@
 
 require '../model/products.php';
 require '../model/dbconnection.php';
-session_start();
+require '../model/usern.php';
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +59,9 @@ session_start();
                         <a href="../Project-I_Exchanza/view/cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
-                            <a href="#" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp">5</span></i></a><!--addto wishlist-->
+                            <?php $obj = new RegisteredCustormer();
+                            $count = $obj->wishlistiteamcount($_SESSION['userid'], Dbh::connect()); ?>
+                            <a href="#" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if(isset($count)){ echo $count;}else{echo 0;} ?></span></i></a><!--addto wishlist-->
                             <a href="userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user" style="font-size:1.5rem;"></i></a>
 
                             <?php echo "Hi," . $_SESSION['username']; ?>
@@ -138,8 +140,17 @@ session_start();
 
 
         <?php } ?>
+        <?php if (isset($_SESSION['amsg'])) { ?>
+            <div class="alert alert-success  alert-dismissible fade show col-12" role="alert">
+                <strong><?php echo $_SESSION['amsg'];
+                        unset($_SESSION['amsg']); ?></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+
+        <?php } ?>
     </div>
-    <div class="container d-flex justify-content-start flex-wrap mt-5"><!--get iteam-->
+    <div class="container d-flex justify-content-start flex-wrap mt-3 gap-4"><!--get iteam-->
 
         <?php
 

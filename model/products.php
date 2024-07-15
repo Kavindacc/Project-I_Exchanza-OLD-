@@ -12,7 +12,7 @@ class Item
         $this->pdo = $pdo;
     }
 
-   
+
     public function delete($productid)
     {
         try {
@@ -66,11 +66,12 @@ class Item
     }
 }
 
-class Thrift extends Item{
+class Thrift extends Item
+{
 
-    public $thriftitems =[];
+    public $thriftitems = [];
 
-    public function getdetails($category, $subcategory,$pdo) //subcategory category product get
+    public function getdetails($category, $subcategory, $pdo) //subcategory category product get
     {
         try {
             $query = "SELECT p.* FROM products p JOIN thrift t ON p.product_id = t.product_id WHERE p.category = ? AND p.subcategory = ?";
@@ -78,12 +79,49 @@ class Thrift extends Item{
             $stmt->bindParam(1, $category);
             $stmt->bindParam(2, $subcategory);
             $stmt->execute();
-            $thriftitems= $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $thriftitems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             return $thriftitems;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
     }
+}
 
+class wishlist
+{
+
+
+    public function getwishlistid($userid, $pdo)
+    {
+
+        $sql = "SELECT productid FROM wishlist WHERE userid=?";
+        try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(1, $userid);
+            $stmt->execute();
+
+            $productsids = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            return $productsids;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function wishlistitemdetails($userid, $pdo)
+    {
+
+        $sql = "SELECT p.* FROM products p JOIN wishlist w ON p.product_id = w.productid WHERE w.userid=?";
+        try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(1, $userid);
+            $stmt->execute();
+            if ($stmt->rowcount() > 0) {
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $rows;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
 }
