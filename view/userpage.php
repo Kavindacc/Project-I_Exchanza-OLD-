@@ -53,6 +53,7 @@ require '../model/usern.php';
                         <a href="../Project-I_Exchanza/view/cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
+                        <a href="#" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp">5</span></i></a><!--addto wishlist-->
                             <a href="logout.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3 " style="color: #FFFF;">logout</button></a>
                         <?php } ?>
                     </div>

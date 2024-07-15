@@ -2,7 +2,8 @@
 
 require '../model/products.php';
 require '../model/dbconnection.php';
-session_start();
+require '../model/usern.php';
+
 if (isset($_POST['wishlist'])) {
 
     $productid =htmlspecialchars(trim($_POST['productid']));
@@ -16,8 +17,12 @@ if (isset($_POST['wishlist'])) {
         exit();
     } else {
         //add wishlish table
+        //check already add
+        $wish=new RegisteredCustormer();
+        $wish->addtoWishlist($productid,$userid,dbh::connect());
         $_SESSION['msg'] = "Add Product Wishlist.";
         header("Location: ../view/cat_items_template.php");
         exit();
     }
 }
+

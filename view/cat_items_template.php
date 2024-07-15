@@ -59,12 +59,12 @@ session_start();
                         <a href="../Project-I_Exchanza/view/cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
-
+                            <a href="#" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp">5</span></i></a><!--addto wishlist-->
                             <a href="userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user" style="font-size:1.5rem;"></i></a>
 
                             <?php echo "Hi," . $_SESSION['username']; ?>
                         <?php } else { ?>
-
+                            <a href="../Project-I_Exchanza/view/cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"></i></a>
                             <a href="login.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3" style="color:#ffff;">login</button></a>
 
                         <?php } ?>
@@ -74,7 +74,7 @@ session_start();
         </div>
     </nav>
     <div class="container pt-1"><!--sub category eka ganna-->
-        <?php if (isset($_GET['cat']) || isset($_GET['sub'])) {
+        <?php if (isset($_GET['cat']) && isset($_GET['sub'])) {
 
             $_SESSION['category'] = $_GET['cat'];
             $_SESSION['subcategory'] = $_GET['sub'];
@@ -139,7 +139,7 @@ session_start();
 
         <?php } ?>
     </div>
-    <div class="container d-flex justify-content-start flex-wrap mt-3"><!--get iteam-->
+    <div class="container d-flex justify-content-start flex-wrap mt-5"><!--get iteam-->
 
         <?php
 
@@ -147,37 +147,24 @@ session_start();
         $rows = $obj->getdetails($_SESSION['category'], $_SESSION['subcategory'], Dbh::connect());
         if (isset($rows) && !empty($rows)) {
             foreach ($rows as $row) { ?>
-                <div class="card m-2" style="width: 17rem;">
+                <div class="card m- pt-2" style="width: 17rem;">
                     <img src="../upload/<?php echo $row['image'] ?>" class="card-img-top" alt="..." style="height:10rem;">
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
-                        <p class="card-text"><?php echo $row['description']; ?></p>
-                        <p class="card-text"><?php if (isset($row['size'])) {
+                        <h3 class="card-title"><?php echo $row['product_name']; ?></h3>
+                        <h4 class="card-text"><?php if (isset($row['size'])) {
                                                     echo $row['size'];
-                                                } ?></p>
-                        <p class="card-text">Rs.<?php echo $row['price']; ?></p>
+                                                } ?></h4>
+                        <h5 class="card-text">Rs.<?php echo $row['price']; ?></h5>
                         <form action="../control/wishlist.php" method="post"><!--wishlistform-->
                             <input type="hidden" name="productid" value="<?php echo $row['product_id']; ?>">
                             <?php if (!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) {
                                 $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; //get current page 
                                 $_SESSION['redirect'] = $currentPage; ?>
                                 <a href="login.php" style="text-decoration: none;">
-                                    <button type="button" class="btn btn-primary mt-2  equal-width" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Add to Wishlist</button>
+                                    <button type="button" class="btn btn-primary mt-2  equal-width" style="--bs-btn-color:black;--bs-btn-bg:none;--bs-btn-border-color:black; --bs-btn-hover-bg:#4c3f31;"><i class="fa-regular fa-heart"></i>&nbsp;Add to Wishlist</button>
                                 </a>
                             <?php } else { ?>
-                                <button type="submit" class="btn btn-primary mt-2  equal-width" name="wishlist" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Add to Wishlist</button>
-                            <?php } ?>
-                        </form>
-                        <form action="../control/addtocart.php" method="post"><!--wishlistform-->
-                            <input type="hidden" name="productid" value="<?php echo $row['product_id']; ?>">
-                            <?php if (!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) {
-                                $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; //get current page 
-                                $_SESSION['redirect'] = $currentPage; ?>
-                                <a href="login.php" style="text-decoration: none;">
-                                    <button type="button" class="btn btn-primary mt-2  equal-width" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Add to Cart</button>
-                                </a>
-                            <?php } else { ?>
-                                <button type="submit" class="btn btn-primary mt-2  equal-width" name="addtocart" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Add to Cart</button>
+                                <button type="submit" class="btn btn-primary mt-2  equal-width" name="wishlist" style="--bs-btn-color:black;--bs-btn-bg:none;--bs-btn-border-color:black; --bs-btn-hover-bg:#4c3f31;"><i class="fa-regular fa-heart"></i>&nbsp;Add to Wishlist</button>
                             <?php } ?>
                         </form>
                     </div>
