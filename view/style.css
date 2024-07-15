@@ -183,7 +183,11 @@ input[type=submit]:hover{
     --bs-btn-hover-color:#FFFF;
 }
 .equal-width {
-    width: 150px;
+    width: 230px;
+}
+.sp{
+    top:-9px;
+    left: 26px;
 }
 @media screen and (max-width:720px){
     .item .side{

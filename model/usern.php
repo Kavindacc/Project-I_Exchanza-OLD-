@@ -268,6 +268,20 @@ class RegisteredCustormer extends User
             echo "Error: " . $e->getMessage();
         }
     }
+    public function addtoWishlist($productid,$userid,$pdo){//wishlist inser funtion
+
+        try {
+            $query="INSERT INTO wishlist(productid,userid) VALUES (?,?,)";
+            $stmt=$pdo->prepare($query);
+            $stmt->bindParam(1,$productid);
+            $stmt->bindParam(2,$userid);
+            $stmt->execute();
+            
+        } catch (PDOException $e) {
+
+            echo "Error: " . $e->getMessage();
+        }
+    }
 }
 
 class Seller extends RegisteredCustormer
@@ -324,4 +338,6 @@ class Seller extends RegisteredCustormer
             echo "Error: " . $e->getMessage();
         }
     }
+
+    
 }
