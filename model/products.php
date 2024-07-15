@@ -64,6 +64,20 @@ class Item
             echo "Error: " . $e->getMessage();
         }
     }
+    public function loaditemdetails($pid){
+        try {
+            $query = "SELECT p.* FROM products p  WHERE p.product_id = ?";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindParam(1, $pid);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $row;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+
+    }
 }
 
 class Thrift extends Item{

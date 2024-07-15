@@ -147,8 +147,8 @@ session_start();
         $rows = $obj->getdetails($_SESSION['category'], $_SESSION['subcategory'], Dbh::connect());
         if (isset($rows) && !empty($rows)) {
             foreach ($rows as $row) { ?>
-                <div class="card m- pt-2" style="width: 17rem;">
-                    <img src="../upload/<?php echo $row['image'] ?>" class="card-img-top" alt="..." style="height:10rem;">
+                <div class="card m-2" style="width: 17rem;">
+                    <img src="../upload/<?php echo $row['image'] ?>" class="card-img-top" alt="..." style="height:10rem;" href="items_template.php?id=<?php $row['product_id']; ?>">
                     <div class="card-body">
                         <h3 class="card-title"><?php echo $row['product_name']; ?></h3>
                         <h4 class="card-text"><?php if (isset($row['size'])) {
