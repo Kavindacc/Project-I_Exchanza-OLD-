@@ -111,7 +111,7 @@ class wishlist
     public function wishlistitemdetails($userid, $pdo)
     {
 
-        $sql = "SELECT p.* FROM products p JOIN wishlist w ON p.product_id = w.productid WHERE w.userid=?";
+        $sql = "SELECT * FROM products p JOIN wishlist w ON p.product_id = w.productid WHERE w.userid=?";
         try {
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(1, $userid);
@@ -120,6 +120,20 @@ class wishlist
                 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 return $rows;
             }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function wishlistremove($wishlistid, $pdo)
+    {
+
+        $sql = "DELETE FROM wishlist WHERE wishlistid=?";
+        try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(1, $wishlistid);
+            $stmt->execute();
+            return true;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }

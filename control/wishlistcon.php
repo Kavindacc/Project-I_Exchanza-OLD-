@@ -35,3 +35,14 @@ if (isset($_POST['wishlist'])) {
     }
 }
 
+if(isset($_POST['remove'])){
+
+    $wishlistid=$_POST['wishlistid'];
+    $obj=new wishlist();
+    if($obj->wishlistremove($wishlistid,Dbh::connect())){
+        $_SESSION['rmsg'] = "Product Remove Wishlist.";
+        header("Location: ../view/wishlist.php");
+        exit();
+    }
+}
+?>

@@ -62,7 +62,11 @@ require '../model/usern.php';
             if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
               <?php $obj = new RegisteredCustormer();
               $count = $obj->wishlistiteamcount($_SESSION['userid'], Dbh::connect()); ?>
-              <a href="#1" class="nav-link  text-decoration-none mx-1 active"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if (isset($count)) {  echo $count; } else {  echo 0;                                                                                                                                                                                                                              } ?></span></i></a><!--addto wishlist-->
+              <a href="#1" class="nav-link  text-decoration-none mx-1 active"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if (isset($count)) {
+                                                                                                                                                                                                                echo $count;
+                                                                                                                                                                                                              } else {
+                                                                                                                                                                                                                echo 0;
+                                                                                                                                                                                                              } ?></span></i></a><!--addto wishlist-->
 
               <a href="../view/userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user" style="font-size:1.5rem;"></i></a>
 
@@ -81,6 +85,13 @@ require '../model/usern.php';
     <!-- Content here -->
     <h1>Wish List&nbsp;&nbsp;<span><i class="fa-regular fa-heart"></i></span></h1>
     <div class="wishlist mt-5">
+      <?php if (isset($_SESSION['rmsg'])) { ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong><?php echo $_SESSION['rmsg']; ?></strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <?php unset($_SESSION['rmsg']);
+      } ?>
       <?php $obj = new wishlist();
       $rows = $obj->wishlistitemdetails($_SESSION['userid'], Dbh::connect());
       if (isset($rows)) { ?>
@@ -96,13 +107,34 @@ require '../model/usern.php';
           </thead>
           <tbody>
 
-            <?php foreach ($rows as $row) { ?>
+            <?php foreach ($rows as $row) {
+              $modalId = "staticBackdrop" . $row['wishlistid']; ?>
               <tr class="vertical-center">
                 <td><img src="<?php echo $row['image']; ?>" class="table-image"></td>
                 <td><?php echo $row['product_name']; ?></td>
                 <td><?php echo $row['price']; ?></td>
-                <td><button type="button" class="btn btn-secondary"style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Add to Cart</button></td>
-                <td><i class="fa-solid fa-circle-xmark" style="font-size:1.6rem;cursor: pointer;margin-left:.7rem;"></i></td>
+                <td><button type="button" class="btn btn-secondary" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Add to Cart</button></td>
+                <td> <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .6rem; --bs-btn-font-size: .75rem;"> <i class="fa-solid fa-circle-xmark" style="font-size:1.6rem;cursor: pointer;margin-left:.7rem;"></i> </button>
+                  <div class="modal fade" id="<?php echo $modalId; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="<?php echo $modalId; ?>Label" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-sm">
+                      <div class="modal-content" style="background:#AE9D92;color:#ffff;">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="<?php echo $modalId; ?>Label">Do you Want to Remove?</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <form action="../control/wishlistcon.php" method="post"><!--form data-->
+                            <input type="hidden" name="wishlistid" value="<?php echo $row['wishlistid']; ?>">
+                            <button type="submit" class="btn btn-danger" name="remove">
+                              Remove
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
               </tr>
             <?php } ?>
 
