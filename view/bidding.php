@@ -205,15 +205,18 @@
                     <h2 class="uppercase text-[50px] font-semibold pr-[800px]">Exclusive rare collectibles auction</h2>
                     <p class="text-[25px] text-[#948276] font-semibold ">Join The Bidding War!</p>
 
-                    <!-- <?php if (!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) { ?> 
+                    <?php if (!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) { 
+                            $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];//get current page 
+                            $_SESSION['redirect']=$currentPage;
+                        ?> 
                         <a href="login.php" style="text-decoration: none;"><button class="adabit-btn">Add Your Bid</button></a>
 
                     <?php } else { ?>
-                        <button class="adabit-btn">Add Your Bid</button>
+                        <button class="addbit-btn" onclick=addBidForm()>Add Your Bid</button>
                         <div id="addItemForm" class="add-item-form"> </div>
-                    <?php } ?> -->
+                    <?php } ?>
 
-                    <button class="addbit-btn" onclick=addBidForm()>Add Your Bid</button>
+                    
                     
                 </div>
             </div>            
@@ -328,7 +331,7 @@
         <div class="flex mx-10 my-2 gap-4">
             <div class="w-[60%] border-r-2 border-[#AE9D92]">
                 <h2 class="f-title">ADD YOUR BID</h2>
-                <form action="../control/bidding.php" method="get" enctype="" id="">
+                <form action="../control/biddingcon.php" method="POST" enctype="multipart/form-data" id="">
                     <div class="bform-items">
                                 <label for="itemName"  class="bflable">Item Name</label>
                                 <input type="text" class="form-control" id="itemName" placeholder="Enter item name" name="itemname" required>
@@ -362,7 +365,7 @@
                                 <textarea class="form-control" id="description" rows="3" placeholder="Enter description" name="description" required></textarea>
                     </div>
                     <div>
-                        <button class="plsBid-btn">
+                        <button class="plsBid-btn" name="submitBid">
                             Place Your Bid
                         </button>
                     </div>
