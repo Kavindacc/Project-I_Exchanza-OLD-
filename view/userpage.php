@@ -53,9 +53,13 @@ require '../model/usern.php';
                         <a href="#" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
-                        <?php $obj = new RegisteredCustormer();
+                            <?php $obj = new RegisteredCustormer();
                             $count = $obj->wishlistiteamcount($_SESSION['userid'], Dbh::connect()); ?>
-                            <a href="../view/wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if(isset($count)){ echo $count;}else{echo 0;} ?></span></i></a><!--addto wishlist-->
+                            <a href="../view/wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if (isset($count)) {
+                                                                                                                                                                                                                                            echo $count;
+                                                                                                                                                                                                                                        } else {
+                                                                                                                                                                                                                                            echo 0;
+                                                                                                                                                                                                                                        } ?></span></i></a><!--addto wishlist-->
                             <a href="logout.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3 " style="color: #FFFF;">logout</button></a>
                         <?php } ?>
                     </div>
@@ -189,7 +193,7 @@ require '../model/usern.php';
                 </div>
             </div>
             <div class="col-sm-9 py-2 mt-5" id="itemtable" style="display:none;"><!--iteam table-->
-            <?php if (isset($_SESSION['deletesuccess'])) { ?>
+                <?php if (isset($_SESSION['deletesuccess'])) { ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <strong><?php echo $_SESSION['deletesuccess']; ?></strong>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -211,9 +215,8 @@ require '../model/usern.php';
                     <table class="table table-striped table-hover table-sm">
                         <thead>
                             <tr class="table-primary">
-                                <th scope="col">Product_Id</th>
-                                <th scope="col">Product_Name</th>
                                 <th scope="col">Image</th>
+                                <th scope="col">Product_Name</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Category</th>
                                 <th scope="col">Action</th>
@@ -227,9 +230,8 @@ require '../model/usern.php';
                                 $editModalId = "editModal" . $row['product_id'];
                             ?>
                                 <tr class="vertical-center">
-                                    <td><?php echo $row['product_id']; ?></td>
-                                    <td><?php echo $row['product_name']; ?></td>
                                     <td><img src="<?php echo $row['image']; ?>" class="table-image"></td>
+                                    <td><?php echo $row['product_name']; ?></td>
                                     <td><?php echo $row['price']; ?></td>
                                     <td><?php echo $row['category']; ?></td>
                                     <td>
