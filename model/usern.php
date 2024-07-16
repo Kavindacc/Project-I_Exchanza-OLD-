@@ -270,4 +270,56 @@ class Seller extends RegisteredCustormer
             echo "Error: " . $e->getMessage();
         }
     }
+    // Method to add a bid product
+    public function addItemForBidding($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath, $userid, $start_time, $end_time, $start_price, $pdo) {
+        $this->productname = $productname;
+        $this->price = $price;
+        $this->colour = $colour;
+        $this->description = $description;
+        $this->category = $category;
+        $this->subcategory = $subcategory;
+        $this->size = $size;
+        $this->condition = $condition;
+        $this->filePath = $filePath;
+        $this->userid = $userid;
+
+        try {
+            // Insert product into products table
+            $query = "INSERT INTO products (product_name, price, colour, description, category, subcategory, size, `condition`, image, userid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(1, $this->productname);
+            $stmt->bindParam(2, $this->price);
+            $stmt->bindParam(3, $this->colour);
+            $stmt->bindParam(4, $this->description);
+            $stmt->bindParam(5, $this->category);
+            $stmt->bindParam(6, $this->subcategory);
+            $stmt->bindParam(7, $this->size);
+            $stmt->bindParam(8, $this->condition);
+            $stmt->bindParam(9, $this->filePath);
+            $stmt->bindParam(10, $this->userid);
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+                // Get the last inserted product ID
+                $product_id = $pdo->lastInsertId();
+
+                // Insert into auction table
+                $auction_query = "INSERT INTO auction (product_id, userid, start_time, end_time, start_price) VALUES (?, ?, ?, ?, ?)";
+                $auction_stmt = $pdo->prepare($auction_query);
+                $auction_stmt->bindParam(1, $product_id);
+                $auction_stmt->bindParam(2, $this->userid);
+                $auction_stmt->bindParam(3, $start_time);
+                $auction_stmt->bindParam(4, $end_time);
+                $auction_stmt->bindParam(5, $start_price);
+                $auction_stmt->execute();
+
+                if ($auction_stmt->rowCount() > 0) {
+                    header("Location: ../view/bidding.php?success=Product Added for Auction.");
+                    exit();
+                }
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
 }
