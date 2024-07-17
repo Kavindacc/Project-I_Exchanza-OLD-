@@ -53,6 +53,8 @@ class User
             echo "Error: " . $e->getMessage();
         }
     }
+
+    
 }
 
 class RegisteredCustormer extends User
@@ -407,3 +409,34 @@ class Seller extends RegisteredCustormer
         }
     }
 }
+
+class Admin{
+
+    private $email;
+    public function __construct($email = null)
+    {
+        $this->email = $email;
+    }
+
+    public function loginAdmin($pdo){
+        try {
+            $query = "SELECT * FROM admin WHERE email=?";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([$this->email]);
+
+
+            if ($stmt->rowCount() > 0) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+             return $row['password'];
+                
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+
+            echo "Error: " . $e->getMessage();
+        }
+    }
+}
+?>
