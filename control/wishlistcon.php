@@ -3,7 +3,7 @@
 require '../model/products.php';
 require '../model/dbconnection.php';
 require '../model/usern.php';
-
+session_start();
 if (isset($_POST['wishlist'])) {
 
     $productid =htmlspecialchars(trim($_POST['productid']));

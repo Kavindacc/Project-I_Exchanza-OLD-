@@ -1,7 +1,7 @@
 <?php
 require '../model/usern.php';
 require "../model/dbconnection.php";
-
+session_start();
 if (isset($_POST['update'])) {
 
     $errors = [];
@@ -60,8 +60,11 @@ if (isset($_POST['update'])) {
     }
 
     if ($filePath !== null) {
-        if (!$obj->updateImg($filePath, Dbh::connect())) {
-            $errors[] = "Failed to update profile picture.";
+        if ( $picpath=$obj->updateImg($filePath, Dbh::connect())) {
+            $_SESSION['profilepic']=$picpath;
+        }
+        else{
+            $errors[] = "Failed not upload.";
         }
     }
 

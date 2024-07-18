@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+
 class User
 {
 
@@ -41,10 +41,7 @@ class User
 
             if ($stmt->rowCount() > 0) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                $_SESSION['username'] = $row['name'];
-                $_SESSION['userid'] = $row['userid'];
-                $_SESSION['password'] = $row['password'];
-                $_SESSION['profilepic'] = $row['profilepic'];
+                return $row;
             } else {
                 return false;
             }
@@ -101,8 +98,8 @@ class RegisteredCustormer extends User
             $stmt->bindParam(2, $this->userid);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
-                $_SESSION['profilepic'] = $this->filepath;
-                return true;
+                
+                return $this->filepath;
             } else {
                 return false;
             }
