@@ -1,5 +1,7 @@
 <?php require '../Project-I_Exchanza/model/dbconnection.php';
-require '../Project-I_Exchanza/model/usern.php'; ?>
+require '../Project-I_Exchanza/model/usern.php'; 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 

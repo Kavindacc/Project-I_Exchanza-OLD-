@@ -3,6 +3,7 @@
 require '../model/products.php';
 require '../model/usern.php';
 require '../model/dbconnection.php';
+session_start();
 
 
 ?>

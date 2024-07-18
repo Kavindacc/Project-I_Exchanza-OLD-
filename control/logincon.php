@@ -2,6 +2,7 @@
 
 require '../model/usern.php';
 require '../model/dbconnection.php';
+session_start();
 
 if (isset($_POST['signin'])) {
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
@@ -29,10 +30,12 @@ if (isset($_POST['signin'])) {
         $status = $obj->status(Dbh::connect()); // user.php function
 
         if ($status == "active") {
-            $obj->login(Dbh::connect());
-            if (password_verify($password, $_SESSION['password'])) {
+            $row=$obj->login(Dbh::connect());
+            if (password_verify($password, $row['password'])) {
                 $_SESSION['logedin'] = true;
-
+                $_SESSION['username'] = $row['name'];
+                $_SESSION['userid'] = $row['userid'];
+                $_SESSION['profilepic'] = $row['profilepic'];
                 if ($redirect) { // redirect page
                     header("Location: $redirect");
                     exit();
