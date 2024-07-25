@@ -65,5 +65,7 @@ function edit() {
     document.getElementById('profile').disabled=false;
     document.getElementById('name').disabled=false;
     document.getElementById('phoneno').disabled=false;
+    document.getElementById('email').disabled=false;
     document.getElementById('update').style.display = 'block';
 }
+

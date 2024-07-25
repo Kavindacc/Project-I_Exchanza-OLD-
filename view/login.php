@@ -62,8 +62,8 @@
             </div>
         </div>
     </nav>
-    <div style="padding-bottom:50px;">
-        <div class="container py-2" style="margin-top:50px;">
+    <div class="d-flex justify-content-center align-items-center"style="height:80vh;">
+        <div class="container py-2">
             <div class="row text-center pb-3">
                 <h2>Login now</h2>
             </div>
