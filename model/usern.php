@@ -108,14 +108,15 @@ class RegisteredCustormer extends User
         }
     }
 
-    public function updateUserInfo($name, $phoneno, $pdo)
+    public function updateUserInfo($name, $phoneno,$email, $pdo)
     {
         try {
-            $query = "UPDATE usern SET name=?, phoneno=? WHERE userid =?";
+            $query = "UPDATE usern SET name=?, phoneno=?,email=? WHERE userid =?";
             $stmt = $pdo->prepare($query);
             $stmt->bindParam(1, $name);
             $stmt->bindParam(2, $phoneno);
-            $stmt->bindParam(3, $this->userid);
+            $stmt->bindParam(3, $email);
+            $stmt->bindParam(4, $this->userid);
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {
@@ -162,23 +163,22 @@ class RegisteredCustormer extends User
         return false;
     }
 
+    
 
-    public function browserProducts($pdo) //browser products function
-    {
-
+    public function browserProducts($pdo) {
         try {
             $query = "SELECT * FROM products WHERE userid=?";
             $stmt = $pdo->prepare($query);
             $stmt->bindParam(1, $this->userid);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
-                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                return $rows;
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
     }
+    
 
     public function checkemail($email, $pdo) //email check fogetpassword
     {

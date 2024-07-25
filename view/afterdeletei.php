@@ -2,7 +2,7 @@
 
 require '../model/dbconnection.php';
 require '../model/usern.php';
-session_reset();
+session_start();
 // product.php add karanna ,nmut product.php change karanna one
 ?>
 <!DOCTYPE html>

@@ -74,7 +74,7 @@ session_start();
 
     <div class="container-fluid py-2">
         <div class="row d-flex  mx-auto ">
-            <div class="col-sm-3 d-flex flex-column "><!--prifile picture with button-->
+            <div class="col-sm-3 d-flex flex-column " ><!--prifile picture with button-->
 
                 <?php if (isset($_SESSION['profilepic']) && !empty($_SESSION['profilepic'])) { ?>
                     <img src="<?php echo htmlspecialchars($_SESSION['profilepic']); ?>" class="img-fluid rounded-4 py-2" alt="Profile Picture" style="max-height:300px;">
@@ -127,18 +127,18 @@ session_start();
                     <div class="row mb-3">
                         <div class="col">
                             <label for="" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" placeholder="<?php echo $row['name']; ?>" name="name" id="name" disabled>
+                            <input type="text" class="form-control" placeholder="<?php echo $row['name']; ?>" name="name" id="name" disabled required>
                         </div>
 
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-6">
                             <label for="" class="form-label">Email</label>
-                            <input type="email" class="form-control" placeholder="<?php echo $row['email']; ?>" name="email" disabled>
+                            <input type="email" class="form-control" placeholder="<?php echo $row['email']; ?>" id="email" name="email" disabled required>
                         </div>
                         <div class="col-sm-6">
                             <label for="" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" placeholder="<?php echo $row['phoneno']; ?>" name="phoneno" id="phoneno" disabled>
+                            <input type="tel" class="form-control" placeholder="<?php echo $row['phoneno']; ?>" name="phoneno" id="phoneno" disabled required>
                         </div>
 
                     </div>
@@ -192,7 +192,13 @@ session_start();
                     </div>
                 </div>
             </div>
-            <div class="col-sm-9 py-2 mt-5" id="itemtable" style="display:none;"><!--iteam table-->
+            <?php
+
+            $obj = new RegisteredCustormer($_SESSION['userid']);
+            $rows = $obj->browserProducts(Dbh::connect());
+            ?>
+
+            <div class="col-sm-9 py-2 mt-5 table-responsive overflow-auto" id="itemtable" style="display:none;max-height: 400px;">
                 <?php if (isset($_SESSION['deletesuccess'])) { ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <strong><?php echo $_SESSION['deletesuccess']; ?></strong>
@@ -207,11 +213,8 @@ session_start();
                     </div>
                 <?php unset($_SESSION['editsuccess']);
                 } ?>
-                <?php
-                $obj = new RegisteredCustormer($_SESSION['userid']); // product get product table according to userid
-                $rows = $obj->browserProducts(Dbh::connect());
-                if ($rows != null) {
-                ?>
+
+                <?php if ($rows) { ?>
                     <table class="table table-striped table-hover table-sm">
                         <thead>
                             <tr class="table-primary">
@@ -222,10 +225,8 @@ session_start();
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
-
                         <tbody>
-                            <?php
-                            foreach ($rows as $row) {
+                            <?php foreach ($rows as $row) {
                                 $modalId = "staticBackdrop" . $row['product_id'];
                                 $editModalId = "editModal" . $row['product_id'];
                             ?>
@@ -238,12 +239,10 @@ session_start();
                                         <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#<?php echo $editModalId; ?>" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .9rem; --bs-btn-font-size: .75rem;">
                                             Edit
                                         </button>
-                                        <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .6rem; --bs-btn-font-size: .75rem;">
                                             Delete
                                         </button>
-
-                                        <!--  Modal edit-->
+                                        <!-- Modal edit -->
                                         <div class="modal fade" id="<?php echo $editModalId; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="<?php echo $editModalId; ?>Label" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content" style="background:#AE9D92;color:#ffff;">
@@ -252,7 +251,7 @@ session_start();
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="../control/edititem.php" method="post" enctype="multipart/form-data"><!--edit table-->
+                                                        <form action="../control/edititem.php" method="post" enctype="multipart/form-data">
                                                             <input type="hidden" name="product_id" value="<?php echo $row['product_id']; ?>">
                                                             <div class="mb-3">
                                                                 <label for="product_name" class="form-label">Product Name</label>
@@ -290,9 +289,7 @@ session_start();
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                         <form action="../control/deleteitem.php" method="post">
                                                             <input type="hidden" name="productid" value="<?php echo $row['product_id']; ?>">
-                                                            <button type="submit" class="btn btn-danger" name="delete">
-                                                                Delete
-                                                            </button>
+                                                            <button type="submit" class="btn btn-danger" name="delete">Delete</button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -301,14 +298,15 @@ session_start();
                                     </td>
                                 </tr>
                             <?php } ?>
-
                         </tbody>
                     </table>
-                <?php } else { ?>
-                    <h2>No Add Iteams Yet</h2>
-                <?php } ?>
+                    
 
+                <?php } else { ?>
+                    <h2>No Items Yet</h2>
+                <?php } ?>
             </div>
+
             <div class="col-sm-9 py-2 mt-5" id="producttable" style="display:none;"><!--order table-->
                 <table class="table  table-striped table-hover table-sm">
                     <thead>
