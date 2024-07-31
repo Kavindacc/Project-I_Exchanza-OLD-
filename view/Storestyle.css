@@ -1,0 +1,112 @@
+/*-------Store page details without header & footer---------*/
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #E3E2DD;
+        }
+        .banner {
+            text-align: center;
+            padding: 2rem;
+			color: #CEC0B9;
+            background-color:#4C3F31;
+        }
+        .content {
+            display:flex;
+        }
+        .filters {
+            width: 20%;
+            padding: 1rem;
+            background-color: #f0f0f0;  
+            text-align: left;  
+        }
+
+        .anchors{
+            text-decoration: none;
+            color: #000000;
+        }
+
+    
+        .stores{
+            width: 80%;
+            padding: 1rem;
+        }
+
+        .store-card{
+            
+            align-items: center;
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        .store-card img {
+            max-width: 10%;
+            border-radius: 5rem;
+            border: 2px solid #4c3f31;
+            margin-right: 1rem;
+        }
+        
+        .products {
+            width: 80%;
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .product-card {
+            padding: 1rem;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        .product-card img {
+            max-width: 100%;
+        }
+
+        .button{
+            display: flex;
+            justify-content: flex-start;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn{
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .btn-cart{
+            background-color: #f0f0f0;
+            color: #4c3f31 ;
+            border: 2px solid #4c3f31;
+        }
+
+        .btn-cart:hover{
+            background-color: #4c3f31; 
+            color: #ffffff; 
+            border: 2px solid #f0f0f0;
+        }
+
+        .btn-visit{
+            background-color: #f0f0f0;
+            color: #4c3f31;
+            border: 2px solid #4c3f31;
+        }
+
+        .btn-visit:hover{
+            background-color: #4c3f31; 
+            color: #ffffff; 
+            border: 2px solid #f0f0f0;
+        }
+
+        .product-icons img {
+            width: 16px;
+            margin: 0 5px;
+        }
+   
+   
+ 
