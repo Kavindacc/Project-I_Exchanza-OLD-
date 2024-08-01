@@ -1,6 +1,6 @@
 <?php 
 include("includes/header.php"); 
-include("../config/dbcon.php"); 
+include("../model/dbconnection.php"); 
 ?>
 
 <div class="row">

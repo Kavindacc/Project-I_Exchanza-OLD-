@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("includes/header.php");
-require '../config/dbcon.php';
+require '../model/dbconnection.php';
 require 'classes/Admin.php';
 
 if (!isset($_SESSION['admin_id'])) {

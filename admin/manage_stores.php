@@ -1,15 +1,15 @@
 <?php
 session_start();
-require '../config/dbcon.php';
+require '../model/dbconnection.php';
 require 'classes/Admin.php';
 include("includes/header.php");
 
-if (!isset($_SESSION['admin_id'])) {
-    header("Location: login.php");
+/*if (!isset($_SESSION['admin_id'])) {
+    header("Location: ../view/login.php");
     exit();
-}
+}*/
 
-$admin = new Admin($conn);
+$admin = new Admin($pdo);
 $sellers = $admin->getSellers();
 ?>
 

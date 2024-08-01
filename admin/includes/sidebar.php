@@ -71,6 +71,6 @@
     </div>
     <div class="sidenav-footer mx-3 ">
         
-        <a class="btn bg-gradient-primary mt-3 w-100" href="signout.php">Logout</a>
+        <a class="btn bg-gradient-primary mt-3 w-100" href="../view/logout.php">Logout</a>
     </div>
 </aside>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../config/dbcon.php");
+include("../model/dbconnection.php");
 
 if(isset($_POST['delete_user']))
 {

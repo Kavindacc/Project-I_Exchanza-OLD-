@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../config/dbcon.php';
+require '../model/dbconnection.php';
 require 'classes/AdminLogin.php';
 
 $message = '';

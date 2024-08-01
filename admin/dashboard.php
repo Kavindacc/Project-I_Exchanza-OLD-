@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../config/dbcon.php';
+require '../model/dbconnection.php';
 require 'classes/Admin.php';
 
 if (!isset($_SESSION['admin_id'])) {
