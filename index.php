@@ -46,10 +46,7 @@ session_start();
                             <a class="nav-link" href="#">Selling</a>
                         </li>
                     </ul>
-                    <form class="d-flex me-4 align-items-center" role="search">
-                        <input class="search me-2" type="search" placeholder="Search">
-                        <a href="#1" class="nav-link  text-decoration-none  mt-1"><i class="fa-solid fa-magnifying-glass"></i></a>
-                    </form>
+                    
                     <!--login nav-link-a-color-->
                     <div class="d-flex flex-column float-start flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
                         <a href="#" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"></span></i></a><!--addtocart-->
