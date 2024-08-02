@@ -71,19 +71,21 @@
     
     <!----Cart items details----->
 
+
     <div class="small-container cart-page">
 
-    <!----Title----->
-    <div class="title"><big><b>Shopping Bag</b></big></div>
-    <br>
-    <!----Cart table----->
-         <table>
+       <!----Title----->
+       <div class="title"><big><b>Shopping Bag</b></big></div>
+       <br>
+       <!----Cart table----->
+       <table id="cart-table">
             <tr>
                 <th>Product</th>
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Subtotal</th>
             </tr>
+            
             <tr>
                 <td>
                     <div class="cart-info">
@@ -91,28 +93,31 @@
                        <div>
                         <p><b>Paige Dress</b></p>
                         <br>
-                        <a href="">Remove</a>
-                       </div>
+                            <div class="button">
+                               <button class="btn btn-remove"> Remove </button>
+                            <div>  
                     </div>
                 </td>
-                <td>Rs.7000.00</td>
-                <td><input type="number" value="1"></td>
-                <td>Rs.7000.00</td>
+                <td class="price">7000.00</td>
+                <td><input type="number" value="1" min="1" class="quantity"></td>
+                <td class="subtotal">7000.00</td>
             </tr>
             <!--<tr>
                 <td>
                     <div class="cart-info">
                        <img src="../img/Cami Dress.jpg">
                        <div>
-                        <p><b>Cami Dress</b></p>
-                        <br>
-                        <a href="">Remove</a>
+                         <p><b>Cami Dress</b></p>
+                         <br>
+                            <div class="button">
+                               <button class="btn btn-remove"> Remove </button>
+                            <div>
                        </div>
                     </div>
                 </td>
-                <td>Rs.5500.00</td>
-                <td><input type="number" value="1"></td>
-                <td>Rs.5500.00</td>
+                <td class="price">5500.00</td>
+                <td><input type="number" value="1" min="1" class="quantity"></td>
+                <td class="subtotal">5500.00</td>
             </tr>
             <tr>
                 <td>
@@ -121,13 +126,15 @@
                        <div>
                         <p><b>Cap</b></p> 
                         <br>
-                        <a href="">Remove</a>
+                            <div class="button">
+                                <button class="btn btn-remove"> Remove </button>
+                            <div>  
                        </div>
                     </div>
                 </td>
-                <td>Rs.2000.00</td>
-                <td><input type="number" value="2"></td>
-                <td>Rs.4000.00</td>
+                <td class="price">2000.00</td>
+                <td><input type="number" value="2" min="1" class="quantity"></td>
+                <td class="subtotal">4000.00</td>
             </tr
             <tr>
                 <td>
@@ -136,14 +143,16 @@
                        <div>
                         <p><b>Women's Skirt</b></p>
                         <br>
-                        <a href="">Remove</a>
+                             <div class="button">
+                                <button class="btn btn-remove"> Remove </button>
+                            <div>  
                        </div>
                     </div>
                 </td>
                 <td> Rs.4000.00</td>
                 <td><input type="number" value="1"></td>
                 <td>Rs.4000.00</td>
-            </tr>-->
+            </tr>
          </table>
 
          <div class="total-price">
@@ -151,11 +160,11 @@
             <table>
                 <tr>
                     <td>Subtotal</td>
-                    <td>Rs.20500.00</td>
+                    <td id="cart-subtotal">Rs.20500.00</td>
                 </tr>
                 <tr>
                     <td>Total</td>
-                    <td>Rs.20500.00</td>
+                    <td id="cart-total">Rs.20500.00</td>
                 </tr>
                 <br>
                 <tr>
@@ -212,10 +221,53 @@
             </div>
         </div>
     </div>
+    
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="view/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartTable = document.getElementById('cart-table');
+            const quantityInputs = cartTable.querySelectorAll('.quantity');
+            const removeButtons = cartTable.querySelectorAll('.btn-remove');
+            const cartSubtotal = document.getElementById('cart-subtotal');
+            const cartTotal = document.getElementById('cart-total');
 
+            function updateSubtotal(row) {
+                const price = parseFloat(row.querySelector('.price').textContent);
+                const quantity = parseInt(row.querySelector('.quantity').value);
+                const subtotal = price * quantity;
+                row.querySelector('.subtotal').textContent = subtotal.toFixed(2);
+            }
+
+            function updateCartTotal() {
+                let total = 0;
+                cartTable.querySelectorAll('.subtotal').forEach(subtotal => {
+                    total += parseFloat(subtotal.textContent);
+                });
+                cartSubtotal.textContent = `Rs.${total.toFixed(2)}`;
+                cartTotal.textContent = `Rs.${total.toFixed(2)}`;
+            }
+			
+            quantityInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    updateSubtotal(this.closest('tr'));
+                    updateCartTotal();
+                });
+            });
+
+            removeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('tr').remove();
+                    updateCartTotal();
+                });
+            });
+
+            // Initial update
+            updateCartTotal();
+        });
+    </script>
+	
 
 
 </body>
