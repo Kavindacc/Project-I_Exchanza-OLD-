@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,10 +15,10 @@
 
     <!----Navigation bar----->
 
-     <!--nav bar-->
-     <nav class="navbar navbar-expand-lg sticky-top nav">
+    <!--nav bar-->
+    <nav class="navbar navbar-expand-lg sticky-top nav">
         <div class="container-fluid logo"><!--logo-->
-           <a class="navbar-brand" href="#"><img src="../img/Exchanza.png" width="100px"></a>
+            <a class="navbar-brand" href="#"><img src="../img/Exchanza.png" width="100px"></a>
             <!--toggle button-->
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -67,53 +68,53 @@
                 </div>
             </div>
         </div>
-    </nav> 
-    
+    </nav>
+
     <!----Cart items details----->
 
 
     <div class="small-container cart-page">
 
-       <!----Title----->
-       <div class="title"><big><b>Shopping Bag</b></big></div>
-       <br>
-       <!----Cart table----->
-       <table id="cart-table">
+        <!----Title----->
+        <div class="title"><big><b>Shopping Bag</b></big></div>
+        <br>
+        <!----Cart table----->
+        <table id="cart-table">
             <tr>
                 <th>Product</th>
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Subtotal</th>
             </tr>
-            
+
             <tr>
                 <td>
                     <div class="cart-info">
-                       <img src="../img/Paige Dress.jpg" >
-                       <div>
-                        <p><b>Paige Dress</b></p>
-                        <br>
+                        <img src="../img/Paige Dress.jpg">
+                        <div>
+                            <p><b>Paige Dress</b></p>
+                            <br>
                             <div class="button">
-                               <button class="btn btn-remove"> Remove </button>
-                            <div>  
-                    </div>
+                                <button class="btn btn-remove"> Remove </button>
+                                <div>
+                                </div>
                 </td>
                 <td class="price">7000.00</td>
                 <td><input type="number" value="1" min="1" class="quantity"></td>
                 <td class="subtotal">7000.00</td>
             </tr>
-            <!--<tr>
+            <tr>
                 <td>
                     <div class="cart-info">
-                       <img src="../img/Cami Dress.jpg">
-                       <div>
-                         <p><b>Cami Dress</b></p>
-                         <br>
+                        <img src="../img/Cami Dress.jpg">
+                        <div>
+                            <p><b>Cami Dress</b></p>
+                            <br>
                             <div class="button">
-                               <button class="btn btn-remove"> Remove </button>
-                            <div>
-                       </div>
-                    </div>
+                                <button class="btn btn-remove"> Remove </button>
+                                <div>
+                                </div>
+                            </div>
                 </td>
                 <td class="price">5500.00</td>
                 <td><input type="number" value="1" min="1" class="quantity"></td>
@@ -122,41 +123,41 @@
             <tr>
                 <td>
                     <div class="cart-info">
-                       <img src="../img/Cap.jpg">
-                       <div>
-                        <p><b>Cap</b></p> 
-                        <br>
+                        <img src="../img/Cap.jpg">
+                        <div>
+                            <p><b>Cap</b></p>
+                            <br>
                             <div class="button">
                                 <button class="btn btn-remove"> Remove </button>
-                            <div>  
-                       </div>
-                    </div>
+                                <div>
+                                </div>
+                            </div>
                 </td>
                 <td class="price">2000.00</td>
                 <td><input type="number" value="2" min="1" class="quantity"></td>
                 <td class="subtotal">4000.00</td>
-            </tr
+            </tr>
             <tr>
                 <td>
                     <div class="cart-info">
-                       <img src="../img/Women's Skirt.jpg" >
-                       <div>
-                        <p><b>Women's Skirt</b></p>
-                        <br>
-                             <div class="button">
+                        <img src="../img/Women's Skirt.jpg">
+                        <div>
+                            <p><b>Women's Skirt</b></p>
+                            <br>
+                            <div class="button">
                                 <button class="btn btn-remove"> Remove </button>
-                            <div>  
-                       </div>
-                    </div>
+                                <div>
+                                </div>
+                            </div>
                 </td>
                 <td> Rs.4000.00</td>
                 <td><input type="number" value="1"></td>
                 <td>Rs.4000.00</td>
             </tr>
-         </table>
+        </table>
 
-         <div class="total-price">
-            
+        <div class="total-price">
+
             <table>
                 <tr>
                     <td>Subtotal</td>
@@ -171,23 +172,23 @@
                     <td>Shipping</td>
                     <td><small><b>Shipping costs are calculated during checkout</b></small></td>
                 </tr>
-               <tr>
-                <td colspan="2">
-                    <div>
-                        <button class="checkout">Checkout</button>
-                    </div>
-                </td>
-               </tr>
+                <tr>
+                    <td colspan="2">
+                        <div>
+                            <button class="checkout">Checkout</button>
+                        </div>
+                    </td>
+                </tr>
             </table>
             <br>
-            
-         </div>
+
+        </div>
 
     </div>
 
-<!-------footer------->
+    <!-------footer------->
 
-<div class="container-fluid footer">
+    <div class="container-fluid footer">
         <div class="container p-3">
             <div class="row">
                 <div class="col">
@@ -221,7 +222,7 @@
             </div>
         </div>
     </div>
-    
+
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="view/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
@@ -248,7 +249,7 @@
                 cartSubtotal.textContent = `Rs.${total.toFixed(2)}`;
                 cartTotal.textContent = `Rs.${total.toFixed(2)}`;
             }
-			
+
             quantityInputs.forEach(input => {
                 input.addEventListener('change', function() {
                     updateSubtotal(this.closest('tr'));
@@ -267,9 +268,9 @@
             updateCartTotal();
         });
     </script>
-	
+
 
 
 </body>
-</html>
 
+</html>
