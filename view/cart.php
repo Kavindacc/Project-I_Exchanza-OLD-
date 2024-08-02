@@ -33,10 +33,10 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center  flex-grow-1 pe-3">
                         <li class="nav-item mx-2">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Thrift</a>
+                            <a class="nav-link" href="../view/thrift.php">Thrift</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="#">Bidding</a>
@@ -99,7 +99,7 @@
                 <td><input type="number" value="1"></td>
                 <td>Rs.7000.00</td>
             </tr>
-            <tr>
+            <!--<tr>
                 <td>
                     <div class="cart-info">
                        <img src="../img/Cami Dress.jpg">
@@ -143,7 +143,7 @@
                 <td> Rs.4000.00</td>
                 <td><input type="number" value="1"></td>
                 <td>Rs.4000.00</td>
-            </tr>
+            </tr>-->
          </table>
 
          <div class="total-price">

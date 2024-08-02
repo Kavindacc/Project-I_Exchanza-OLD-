@@ -152,4 +152,29 @@ class wishlist
             echo "Error: " . $e->getMessage();
         }
     }
+
+    public function addtocart($userid,$itemid,$price,$quantity,$pdo){
+
+        $sql="INSERT INTO addtocart (product_id, user_id, price, quantity) VALUES (?,?,?,?)";
+        try {
+            $stmt=$pdo->prepare($sql);
+            $stmt->bindParam(1,$userid);
+            $stmt->bindParam(2,$itemid);
+            $stmt->bindParam(3,$price);
+            $stmt->bindParam(4,$quantity);
+            $stmt->execute();
+            if($stmt->rowcount()>0){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function getadditems($userid,$pdo){
+
+
+    }
 }
