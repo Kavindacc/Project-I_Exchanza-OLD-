@@ -113,7 +113,13 @@ session_start();
                 <td><img src="<?php echo $row['image']; ?>" class="table-image"></td>
                 <td><?php echo $row['product_name']; ?></td>
                 <td><?php echo $row['price']; ?></td>
-                <td><button type="button" class="btn btn-secondary" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Add to Cart</button></td>
+                <td>
+                <form action="../control/addtocart.php" method="post"><!--addtocart-->
+                  <input type="hidden" name="userid" value="<?php echo $_SESSION['userid'];?>">
+                  <input type="hidden" name="itemid" value="<?php echo $row['productid'];?>">
+                  <input type="hidden" name="price" value="<?php echo $row['price'];?>">
+                <button type="submit" class="btn btn-secondary" name="addtocart" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Add to Cart</button>
+                </form> </td>
                 <td> <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .6rem; --bs-btn-font-size: .75rem;"> <i class="fa-solid fa-circle-xmark" style="font-size:1.6rem;cursor: pointer;margin-left:.7rem;"></i> </button>
                   <div class="modal fade" id="<?php echo $modalId; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="<?php echo $modalId; ?>Label" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-sm">
