@@ -1,3 +1,12 @@
+<?php
+require '../model/dbconnection.php';
+require '../model/products.php';
+session_start();
+if (isset($_SESSION['userid'])) {
+    $userid = $_SESSION['userid'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +43,7 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center  flex-grow-1 pe-3">
                         <li class="nav-item mx-2">
-                            <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
+                            <a class="nav-link " aria-current="page" href="../index.php">Home</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="../view/thrift.php">Thrift</a>
@@ -52,12 +61,12 @@
                     </form>
                     <!--login nav-link-a-color-->
                     <div class="d-flex flex-column float-start flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
-                        <a href="#1" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
+                        <a href="wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span></span></i></a>
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
-                            <button class="lo-out btn-sm ms-2 px-3">
-                                <a href="view/logout.php" class=" text-decoration-none">logout</a>
-                            </button>
+
+                            <a href="../view/userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user" style="font-size:1.5rem;"></i></a>
+
                             <?php echo "Hi," . $_SESSION['username']; ?>
                         <?php } else { ?>
                             <button class="lo-button btn-sm ms-2 px-3">
@@ -82,78 +91,31 @@
         <table id="cart-table">
             <tr>
                 <th>Product</th>
+                <th>Product Name</th>
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Subtotal</th>
             </tr>
+            <?php
 
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="../img/Paige Dress.jpg">
-                        <div>
-                            <p><b>Paige Dress</b></p>
-                            <br>
-                            <div class="button">
-                                <button class="btn btn-remove"> Remove </button>
+            $obj = new wishlist();
+            $rows = $obj->getadditems($userid, Dbh::connect());
+            if (!empty($rows)) {
+                foreach ($rows as $row) { ?>
+                    <tr>
+                        <td>
+                            <div class="cart-info">
+                                <img src="<?php echo $row['img']; ?>">
                                 <div>
-                                </div>
-                </td>
-                <td class="price">7000.00</td>
-                <td><input type="number" value="1" min="1" class="quantity"></td>
-                <td class="subtotal">7000.00</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="../img/Cami Dress.jpg">
-                        <div>
-                            <p><b>Cami Dress</b></p>
-                            <br>
-                            <div class="button">
-                                <button class="btn btn-remove"> Remove </button>
-                                <div>
-                                </div>
-                            </div>
-                </td>
-                <td class="price">5500.00</td>
-                <td><input type="number" value="1" min="1" class="quantity"></td>
-                <td class="subtotal">5500.00</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="../img/Cap.jpg">
-                        <div>
-                            <p><b>Cap</b></p>
-                            <br>
-                            <div class="button">
-                                <button class="btn btn-remove"> Remove </button>
-                                <div>
-                                </div>
-                            </div>
-                </td>
-                <td class="price">2000.00</td>
-                <td><input type="number" value="2" min="1" class="quantity"></td>
-                <td class="subtotal">4000.00</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="../img/Women's Skirt.jpg">
-                        <div>
-                            <p><b>Women's Skirt</b></p>
-                            <br>
-                            <div class="button">
-                                <button class="btn btn-remove"> Remove </button>
-                                <div>
-                                </div>
-                            </div>
-                </td>
-                <td> Rs.4000.00</td>
-                <td><input type="number" value="1"></td>
-                <td>Rs.4000.00</td>
-            </tr>
+                        </td>
+                        <td><?php echo $row['pname']; ?></td>
+                        <td class="price"><?php echo $row['price']; ?></td>
+                        <td><input type="number" value="<?php echo $row['quantity']; ?>" min="1" class="quantity"></td>
+                        <td class="subtotal"><?php echo $row['price']; ?></td>
+                    </tr>
+            <?php }
+            }
+            ?>
         </table>
 
         <div class="total-price">

@@ -64,7 +64,8 @@ class Item
             echo "Error: " . $e->getMessage();
         }
     }
-    public function loaditemdetails($pid){
+    public function loaditemdetails($pid)
+    {
         try {
             $query = "SELECT * FROM products WHERE product_id = ?";
             $stmt = $this->pdo->prepare($query);
@@ -76,7 +77,6 @@ class Item
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
-
     }
 }
 
@@ -153,19 +153,22 @@ class wishlist
         }
     }
 
-    public function addtocart($userid,$itemid,$price,$quantity,$pdo){
+    public function addtocart($userid, $itemid, $price, $quantity,$pname, $img, $pdo)
+    {
 
-        $sql="INSERT INTO addtocart (product_id, user_id, price, quantity) VALUES (?,?,?,?)";
+        $sql = "INSERT INTO addtocart (product_id, user_id, price, quantity,pname,img) VALUES (?,?,?,?,?,?)";
         try {
-            $stmt=$pdo->prepare($sql);
-            $stmt->bindParam(1,$userid);
-            $stmt->bindParam(2,$itemid);
-            $stmt->bindParam(3,$price);
-            $stmt->bindParam(4,$quantity);
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(1, $itemid);
+            $stmt->bindParam(2, $userid);
+            $stmt->bindParam(3, $price);
+            $stmt->bindParam(4, $quantity);
+            $stmt->bindParam(5, $pname);
+            $stmt->bindParam(6, $img);
             $stmt->execute();
-            if($stmt->rowcount()>0){
+            if ($stmt->rowcount() > 0) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         } catch (PDOException $e) {
@@ -173,8 +176,22 @@ class wishlist
         }
     }
 
-    public function getadditems($userid,$pdo){
+    public function getadditems($userid, $pdo)
+    {
 
-
+        $sql = "SELECT * FROM addtocart WHERE user_id=?";
+        try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(1, $userid);
+            $stmt->execute();
+            if ($stmt->rowcount() > 0) {
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $rows;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
     }
 }
