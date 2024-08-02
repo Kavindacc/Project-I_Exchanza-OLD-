@@ -75,6 +75,27 @@
             <h1>New Arrivals</h1>
         </div>
         
+          <!-- Filters and Products -->
+           
+        <div>
+        
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true" onclick="window.location.href='thrift.php';">Women</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false" onclick="window.location.href='thrift_men.php';">Men</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false" onclick="window.location.href='thrift_kids.php';">Kids</button>
+                </li>
+            </ul>
+
+
+        </div>
+
+
+
         <!-- Filters and Products -->
         <div class="content">
             <!-- Filters -->
@@ -88,7 +109,7 @@
 						<a class="anchors" href="categoryTem.html">Shorts</a><br>
 						<a class="anchors" href="categoryTem.html">Jeans</a><br>
                         <a class="anchors" href="categoryTem.html">Crop Tops</a><br>
-                        <a class="anchors"class="anchors"  href="categoryTem.html">Blouses</a><br>
+                        <a class="anchors" href="categoryTem.html">Blouses</a><br>
 						<a class="anchors" href="categoryTem.html">Dresses</a><br>
 						<a class="anchors" href="categoryTem.html">Skirts</a>
                     </ul>
@@ -101,7 +122,7 @@
             <div class="stores">
                 <div class="store-card">
                     <a href="StoreTem.html" >
-                        <img src="Clothing Stores.jpg" alt="Store icon">
+                        <img src="../img/Clothing Stores.jpg" alt="Store icon">
                     </a>
                     
                     <p><b>Store Name</b></p>
@@ -113,7 +134,7 @@
                <!-- Products -->
                 <div class="products">
                     <div class="product-card">
-                        <img src="Halter Neck Dress.jpg" alt="Halter Neck Dress">
+                        <img src="../img/Halter Neck Dress.jpg" alt="Halter Neck Dress">
                         <h3>Aloruh Gingham Halter Neck Dress</h3>
                         <p>$12.99</p>
                         <div class="button">
