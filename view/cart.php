@@ -1,6 +1,7 @@
 <?php
 require '../model/dbconnection.php';
 require '../model/products.php';
+require '../model/usern.php';
 session_start();
 if (isset($_SESSION['userid'])) {
     $userid = $_SESSION['userid'];
@@ -61,11 +62,13 @@ if (isset($_SESSION['userid'])) {
                     </form>
                     <!--login nav-link-a-color-->
                     <div class="d-flex flex-column float-start flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
-                        <a href="wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span></span></i></a>
+
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
-
-                            <a href="../view/userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user" style="font-size:1.5rem;"></i></a>
+                            <?php $obj = new RegisteredCustormer();
+                       $count = $obj->wishlistiteamcount($_SESSION['userid'], Dbh::connect()); ?>
+                      <a href="wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if (isset($count)) { echo $count; } else {  echo 0; } ?></span></i></a><!--addto wishlist-->
+                            <a href="userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user" style="font-size:1.5rem;"></i></a>
 
                             <?php echo "Hi," . $_SESSION['username']; ?>
                         <?php } else { ?>
@@ -81,12 +84,17 @@ if (isset($_SESSION['userid'])) {
 
     <!----Cart items details----->
 
+    <?php
 
+       $obj = new wishlist();
+       $rows = $obj->getadditems($userid, Dbh::connect());?>
+      
     <div class="small-container cart-page">
 
         <!----Title----->
         <div class="title"><big><b>Shopping Bag</b></big></div>
         <br>
+      <?php  if (!empty($rows)) {?>
         <!----Cart table----->
         <table id="cart-table">
             <tr>
@@ -96,11 +104,7 @@ if (isset($_SESSION['userid'])) {
                 <th>Quantity</th>
                 <th>Subtotal</th>
             </tr>
-            <?php
-
-            $obj = new wishlist();
-            $rows = $obj->getadditems($userid, Dbh::connect());
-            if (!empty($rows)) {
+            <?php 
                 foreach ($rows as $row) { ?>
                     <tr>
                         <td>
@@ -114,7 +118,6 @@ if (isset($_SESSION['userid'])) {
                         <td class="subtotal"><?php echo $row['price']; ?></td>
                     </tr>
             <?php }
-            }
             ?>
         </table>
 
@@ -147,43 +150,11 @@ if (isset($_SESSION['userid'])) {
         </div>
 
     </div>
+    <?php } else{?>
+        <h3>No Item Add to Cart</h3>
 
-    <!-------footer------->
+   <?php }?>
 
-    <div class="container-fluid footer">
-        <div class="container p-3">
-            <div class="row">
-                <div class="col">
-                    <img src="../img/Exchanza.png" width="200px">
-                </div>
-            </div>
-            <div class="row  mt-4" style="border-bottom:1px solid black;">
-                <div class="col">
-                    <p class=""><i class="fa-solid fa-phone"></i>&nbsp;&nbsp;+94 112 555 444</p>
-                    <p class=""><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;exchanza@gmail.com</p>
-                    <p class=""><i class="fa-solid fa-location-dot"></i>&nbsp;&nbsp;No.56/2,Kotta Rd,Colombo
-                        05,<br>&nbsp;&nbsp;&nbsp;&nbsp;Sri Lanka</p>
-                </div>
-                <div class="col lin">
-                    <h5>Information</h5>
-                    <p><a href="#1">Privacy &amp; Policy</a></p>
-                    <p><a href="#1">About Us</a></p>
-                    <p><a href="#1">Terms &amp; Condition</a></p>
-                </div>
-                <div class="col lin">
-                    <h5>Connect with Us</h5>
-                    <p><a href=""><i class="fa-brands fa-facebook" style="font-size:50px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i class="fa-brands fa-instagram" style="font-size:50px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><i class="fa-brands fa-youtube" style="font-size:50px;"></i></a></p>
-                </div>
-            </div>
-            <div class="row mt-2">
-                <div class="d-flex justify-content-between flex-column flex-md-row">
-                    <div><i class="fa-brands fa-cc-visa" style="font-size:50px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-brands fa-cc-mastercard" style="font-size:50px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-brands fa-cc-amex" style="font-size:50px;"></i></div>
-                    <div>&copy;Exchanze All Rights are reserved</div>
-
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="view/main.js"></script>

@@ -2,6 +2,7 @@
 
 require '../model/dbconnection.php';
 require '../model/usern.php';
+require '../model/products.php';
 session_start();
 //product.php add karanna ,nmut product.php change karanna one
 ?>
@@ -50,18 +51,21 @@ session_start();
                     </ul>
                     <!--login nav-link-a-color-->
                     <div class="d-flex flex-column float-start flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
-                        <a href="cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
-                        <?php
+                       <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
+                            <?php $obj = new wishlist();
+                            $count = $obj->additemcount($_SESSION['userid'], Dbh::connect()); ?>
+                            <a href="cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"><?php if (isset($count)) { echo $count; } else {  echo 0; } ?></span></i></a><!--addtocart-->
                             <?php $obj = new RegisteredCustormer();
                             $count = $obj->wishlistiteamcount($_SESSION['userid'], Dbh::connect()); ?>
-                            <a href="../view/wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if (isset($count)) {
-                                                                                                                                                                                                                                            echo $count;
-                                                                                                                                                                                                                                        } else {
-                                                                                                                                                                                                                                            echo 0;
-                                                                                                                                                                                                                                        } ?></span></i></a><!--addto wishlist-->
+                            <a href="wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if (isset($count)) { echo $count; } else {  echo 0; } ?></span></i></a><!--addto wishlist-->
                             <a href="logout.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3 " style="color: #FFFF;">logout</button></a>
+                        <?php } else { ?>
+                            <a href="login.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"></span></i></a><!--addtocart-->
+                            <a href="login.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"></i></a>
+                            <a href="login.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3" style="color:#ffff;">login</button></a>
                         <?php } ?>
+                        
                     </div>
                 </div>
             </div>

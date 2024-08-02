@@ -194,4 +194,18 @@ class wishlist
             echo "Error: " . $e->getMessage();
         }
     }
+
+    public function additemcount($userid,$pdo){
+        
+        $sql = "SELECT * FROM addtocart WHERE user_id=?";
+        try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(1, $userid);
+            $stmt->execute();
+            $rowcount=$stmt->rowcount();
+            return $rowcount;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
 }
