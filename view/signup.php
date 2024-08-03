@@ -1,4 +1,5 @@
-<?php require '../control/signupcon.php'; ?>
+<?php require '../control/signupcon.php'; 
+session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 

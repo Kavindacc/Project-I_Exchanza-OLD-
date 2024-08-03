@@ -64,7 +64,8 @@ class Item
             echo "Error: " . $e->getMessage();
         }
     }
-    public function loaditemdetails($pid){
+    public function loaditemdetails($pid)
+    {
         try {
             $query = "SELECT * FROM products WHERE product_id = ?";
             $stmt = $this->pdo->prepare($query);
@@ -76,7 +77,6 @@ class Item
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
-
     }
 }
 
@@ -125,7 +125,7 @@ class wishlist
     public function wishlistitemdetails($userid, $pdo)
     {
 
-        $sql = "SELECT p.* FROM products p JOIN wishlist w ON p.product_id = w.productid WHERE w.userid=?";
+        $sql = "SELECT * FROM products p JOIN wishlist w ON p.product_id = w.productid WHERE w.userid=?";
         try {
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(1, $userid);
@@ -134,6 +134,76 @@ class wishlist
                 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 return $rows;
             }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function wishlistremove($wishlistid, $pdo)
+    {
+
+        $sql = "DELETE FROM wishlist WHERE wishlistid=?";
+        try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(1, $wishlistid);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function addtocart($userid, $itemid, $price, $quantity,$pname, $img, $pdo)
+    {
+
+        $sql = "INSERT INTO addtocart (product_id, user_id, price, quantity,pname,img) VALUES (?,?,?,?,?,?)";
+        try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(1, $itemid);
+            $stmt->bindParam(2, $userid);
+            $stmt->bindParam(3, $price);
+            $stmt->bindParam(4, $quantity);
+            $stmt->bindParam(5, $pname);
+            $stmt->bindParam(6, $img);
+            $stmt->execute();
+            if ($stmt->rowcount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function getadditems($userid, $pdo)
+    {
+
+        $sql = "SELECT * FROM addtocart WHERE user_id=?";
+        try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(1, $userid);
+            $stmt->execute();
+            if ($stmt->rowcount() > 0) {
+                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $rows;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function additemcount($userid,$pdo){
+        
+        $sql = "SELECT * FROM addtocart WHERE user_id=?";
+        try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(1, $userid);
+            $stmt->execute();
+            $rowcount=$stmt->rowcount();
+            return $rowcount;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }

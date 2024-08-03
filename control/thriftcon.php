@@ -1,7 +1,7 @@
 <?php
 require '../model/usern.php';
 require '../model/dbconnection.php';
-
+session_start();
 if (isset($_POST['submit'])) {
 
     $productname = ucfirst($_POST['itemname']);

@@ -2,7 +2,8 @@
 
 require '../model/dbconnection.php';
 require '../model/usern.php';
-
+require '../model/products.php';
+session_start();
 //product.php add karanna ,nmut product.php change karanna one
 ?>
 <!DOCTYPE html>
@@ -50,14 +51,21 @@ require '../model/usern.php';
                     </ul>
                     <!--login nav-link-a-color-->
                     <div class="d-flex flex-column float-start flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
-                        <a href="#" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
-                        <?php
+                       <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
-                        <?php $obj = new RegisteredCustormer();
+                            <?php $obj = new wishlist();
+                            $count = $obj->additemcount($_SESSION['userid'], Dbh::connect()); ?>
+                            <a href="cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"><?php if (isset($count)) { echo $count; } else {  echo 0; } ?></span></i></a><!--addtocart-->
+                            <?php $obj = new RegisteredCustormer();
                             $count = $obj->wishlistiteamcount($_SESSION['userid'], Dbh::connect()); ?>
-                            <a href="../view/wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if(isset($count)){ echo $count;}else{echo 0;} ?></span></i></a><!--addto wishlist-->
+                            <a href="wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if (isset($count)) { echo $count; } else {  echo 0; } ?></span></i></a><!--addto wishlist-->
                             <a href="logout.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3 " style="color: #FFFF;">logout</button></a>
+                        <?php } else { ?>
+                            <a href="login.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"></span></i></a><!--addtocart-->
+                            <a href="login.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"></i></a>
+                            <a href="login.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3" style="color:#ffff;">login</button></a>
                         <?php } ?>
+                        
                     </div>
                 </div>
             </div>
@@ -70,7 +78,7 @@ require '../model/usern.php';
 
     <div class="container-fluid py-2">
         <div class="row d-flex  mx-auto ">
-            <div class="col-sm-3 d-flex flex-column "><!--prifile picture with button-->
+            <div class="col-sm-3 d-flex flex-column " ><!--prifile picture with button-->
 
                 <?php if (isset($_SESSION['profilepic']) && !empty($_SESSION['profilepic'])) { ?>
                     <img src="<?php echo htmlspecialchars($_SESSION['profilepic']); ?>" class="img-fluid rounded-4 py-2" alt="Profile Picture" style="max-height:300px;">
@@ -123,18 +131,18 @@ require '../model/usern.php';
                     <div class="row mb-3">
                         <div class="col">
                             <label for="" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" placeholder="<?php echo $row['name']; ?>" name="name" id="name" disabled>
+                            <input type="text" class="form-control" placeholder="<?php echo $row['name']; ?>" name="name" id="name" disabled required>
                         </div>
 
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-6">
                             <label for="" class="form-label">Email</label>
-                            <input type="email" class="form-control" placeholder="<?php echo $row['email']; ?>" name="email" disabled>
+                            <input type="email" class="form-control" placeholder="<?php echo $row['email']; ?>" id="email" name="email" disabled required>
                         </div>
                         <div class="col-sm-6">
                             <label for="" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" placeholder="<?php echo $row['phoneno']; ?>" name="phoneno" id="phoneno" disabled>
+                            <input type="tel" class="form-control" placeholder="<?php echo $row['phoneno']; ?>" name="phoneno" id="phoneno" disabled required>
                         </div>
 
                     </div>
@@ -188,8 +196,14 @@ require '../model/usern.php';
                     </div>
                 </div>
             </div>
-            <div class="col-sm-9 py-2 mt-5" id="itemtable" style="display:none;"><!--iteam table-->
-            <?php if (isset($_SESSION['deletesuccess'])) { ?>
+            <?php
+
+            $obj = new RegisteredCustormer($_SESSION['userid']);
+            $rows = $obj->browserProducts(Dbh::connect());
+            ?>
+
+            <div class="col-sm-9 py-2 mt-5 table-responsive overflow-auto" id="itemtable" style="display:none;max-height: 400px;">
+                <?php if (isset($_SESSION['deletesuccess'])) { ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <strong><?php echo $_SESSION['deletesuccess']; ?></strong>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -203,45 +217,36 @@ require '../model/usern.php';
                     </div>
                 <?php unset($_SESSION['editsuccess']);
                 } ?>
-                <?php
-                $obj = new RegisteredCustormer($_SESSION['userid']); // product get product table according to userid
-                $rows = $obj->browserProducts(Dbh::connect());
-                if ($rows != null) {
-                ?>
+
+                <?php if ($rows) { ?>
                     <table class="table table-striped table-hover table-sm">
                         <thead>
                             <tr class="table-primary">
-                                <th scope="col">Product_Id</th>
-                                <th scope="col">Product_Name</th>
                                 <th scope="col">Image</th>
+                                <th scope="col">Product_Name</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Category</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
-
                         <tbody>
-                            <?php
-                            foreach ($rows as $row) {
+                            <?php foreach ($rows as $row) {
                                 $modalId = "staticBackdrop" . $row['product_id'];
                                 $editModalId = "editModal" . $row['product_id'];
                             ?>
                                 <tr class="vertical-center">
-                                    <td><?php echo $row['product_id']; ?></td>
-                                    <td><?php echo $row['product_name']; ?></td>
                                     <td><img src="<?php echo $row['image']; ?>" class="table-image"></td>
+                                    <td><?php echo $row['product_name']; ?></td>
                                     <td><?php echo $row['price']; ?></td>
                                     <td><?php echo $row['category']; ?></td>
                                     <td>
                                         <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#<?php echo $editModalId; ?>" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .9rem; --bs-btn-font-size: .75rem;">
                                             Edit
                                         </button>
-                                        <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .6rem; --bs-btn-font-size: .75rem;">
                                             Delete
                                         </button>
-
-                                        <!--  Modal edit-->
+                                        <!-- Modal edit -->
                                         <div class="modal fade" id="<?php echo $editModalId; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="<?php echo $editModalId; ?>Label" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content" style="background:#AE9D92;color:#ffff;">
@@ -250,7 +255,7 @@ require '../model/usern.php';
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="../control/edititem.php" method="post" enctype="multipart/form-data"><!--edit table-->
+                                                        <form action="../control/edititem.php" method="post" enctype="multipart/form-data">
                                                             <input type="hidden" name="product_id" value="<?php echo $row['product_id']; ?>">
                                                             <div class="mb-3">
                                                                 <label for="product_name" class="form-label">Product Name</label>
@@ -288,9 +293,7 @@ require '../model/usern.php';
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                         <form action="../control/deleteitem.php" method="post">
                                                             <input type="hidden" name="productid" value="<?php echo $row['product_id']; ?>">
-                                                            <button type="submit" class="btn btn-danger" name="delete">
-                                                                Delete
-                                                            </button>
+                                                            <button type="submit" class="btn btn-danger" name="delete">Delete</button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -299,14 +302,15 @@ require '../model/usern.php';
                                     </td>
                                 </tr>
                             <?php } ?>
-
                         </tbody>
                     </table>
-                <?php } else { ?>
-                    <h2>No Add Iteams Yet</h2>
-                <?php } ?>
+                    
 
+                <?php } else { ?>
+                    <h2>No Items Yet</h2>
+                <?php } ?>
             </div>
+
             <div class="col-sm-9 py-2 mt-5" id="producttable" style="display:none;"><!--order table-->
                 <table class="table  table-striped table-hover table-sm">
                     <thead>

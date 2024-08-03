@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+
 class User
 {
 
@@ -41,10 +41,7 @@ class User
 
             if ($stmt->rowCount() > 0) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                $_SESSION['username'] = $row['name'];
-                $_SESSION['userid'] = $row['userid'];
-                $_SESSION['password'] = $row['password'];
-                $_SESSION['profilepic'] = $row['profilepic'];
+                return $row;
             } else {
                 return false;
             }
@@ -53,6 +50,8 @@ class User
             echo "Error: " . $e->getMessage();
         }
     }
+
+    
 }
 
 class RegisteredCustormer extends User
@@ -99,8 +98,8 @@ class RegisteredCustormer extends User
             $stmt->bindParam(2, $this->userid);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
-                $_SESSION['profilepic'] = $this->filepath;
-                return true;
+                
+                return $this->filepath;
             } else {
                 return false;
             }
@@ -109,14 +108,15 @@ class RegisteredCustormer extends User
         }
     }
 
-    public function updateUserInfo($name, $phoneno, $pdo)
+    public function updateUserInfo($name, $phoneno,$email, $pdo)
     {
         try {
-            $query = "UPDATE usern SET name=?, phoneno=? WHERE userid =?";
+            $query = "UPDATE usern SET name=?, phoneno=?,email=? WHERE userid =?";
             $stmt = $pdo->prepare($query);
             $stmt->bindParam(1, $name);
             $stmt->bindParam(2, $phoneno);
-            $stmt->bindParam(3, $this->userid);
+            $stmt->bindParam(3, $email);
+            $stmt->bindParam(4, $this->userid);
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {
@@ -163,23 +163,22 @@ class RegisteredCustormer extends User
         return false;
     }
 
+    
 
-    public function browserProducts($pdo) //browser products function
-    {
-
+    public function browserProducts($pdo) {
         try {
             $query = "SELECT * FROM products WHERE userid=?";
             $stmt = $pdo->prepare($query);
             $stmt->bindParam(1, $this->userid);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
-                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                return $rows;
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
     }
+    
 
     public function checkemail($email, $pdo) //email check fogetpassword
     {
@@ -407,3 +406,34 @@ class Seller extends RegisteredCustormer
         }
     }
 }
+
+class Admin{
+
+    private $email;
+    public function __construct($email = null)
+    {
+        $this->email = $email;
+    }
+
+    public function loginAdmin($pdo){
+        try {
+            $query = "SELECT * FROM admin WHERE email=?";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([$this->email]);
+
+
+            if ($stmt->rowCount() > 0) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+             return $row['password'];
+                
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+
+            echo "Error: " . $e->getMessage();
+        }
+    }
+}
+?>

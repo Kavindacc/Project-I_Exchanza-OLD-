@@ -5,6 +5,8 @@
 }
 body{
     background: #e3e2dd;
+    font-family: Arial, sans-serif;
+    
 }
 .regi{
     margin-top:30px;
@@ -186,7 +188,7 @@ input[type=submit]:hover{
     width: 230px;
 }
 .sp{
-    top:-9px;
+    top:-6px;
     left: 26px;
 }
 @media screen and (max-width:720px){

@@ -3,6 +3,7 @@
 require '../model/products.php';
 require '../model/dbconnection.php';
 require '../model/usern.php';
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -166,7 +167,7 @@ require '../model/usern.php';
                                                     echo $row['size'];
                                                 } ?></h4>
                         <h5 class="card-text">Rs.<?php echo $row['price']; ?></h5>
-                        <form action="../control/wishlist.php" method="post"><!--wishlistform-->
+                        <form action="../control/wishlistcon.php" method="post"><!--wishlistform-->
                             <input type="hidden" name="productid" value="<?php echo $row['product_id']; ?>">
                             <?php if (!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) {
                                 $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; //get current page 
