@@ -39,21 +39,21 @@ session_start();
                 <div class="mt-3 d-flex item">
                     <img src="../upload/<?php echo $row['other_image_1'] ;?>" class="img-thumbnail thumbnail" alt="Thumbnail 1"
                         onclick="changeImage(this)">
-                    <img src="../upload/<?php echo $row['other_image_2']; ?>" class="img-thumbnail thumbnail" alt="Thumbnail 2"
-                        onclick="changeImage(this)">
-                    <img src="../upload/<?php echo $row['other_image_3'] ;?>" class="img-thumbnail thumbnail" alt="Thumbnail 3"
-                        onclick="changeImage(this)">
+                    <!-- <img src="../upload/<?php echo $row['other_image_2']; ?>" class="img-thumbnail thumbnail" alt="Thumbnail 2"
+                        onclick="changeImage(this)"> -->
+                    <!-- <img src="../upload/<?php echo $row['other_image_3'] ;?>" class="img-thumbnail thumbnail" alt="Thumbnail 3"
+                        onclick="changeImage(this)"> -->
                         <!-- https://via.placeholder.com/120 -->
                 </div>
             </div>
             <div class="col-md-6">
                 <h1><?php echo $row['name']; ?>
-                    <svg class="heart-icon" id="heartIcon" viewBox="0 0 24 24">
+                    <!-- <svg class="heart-icon" id="heartIcon" viewBox="0 0 24 24">
                         <path
                             d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 
                             0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z">
                         </path>
-                    </svg>
+                    </svg> -->
                 </h1>
                 <h2>LKR <?php echo $row['price']; ?></h2>
                 <p>or 3 x LKR <?php echo ($row['price'] / 3) - 100; ?> with KOKO or Mintpay</p>

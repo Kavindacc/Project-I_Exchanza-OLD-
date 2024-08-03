@@ -19,7 +19,7 @@
 
 <body>
 <!--nav bar-->
- <nav class="navbar navbar-expand-lg sticky-top nav">
+<nav class="navbar navbar-expand-lg sticky-top nav">
         <div class="container-fluid logo"><!--logo-->
             <a class="navbar-brand" href="#"><img src="../img/Exchanza.png" width="100px"></a>
             <!--toggle button-->
@@ -37,10 +37,10 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center  flex-grow-1 pe-3">
                         <li class="nav-item mx-2">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link " aria-current="page" href="../index.php">Home</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Thrift</a>
+                            <a class="nav-link active" href="../view/thrift.php">Thrift</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="#">Bidding</a>
@@ -59,13 +59,14 @@
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
 
-                            <a href="view/userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user"style="font-size:1.5rem;"></i></a>
+                            <a href="userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user" style="font-size:1.5rem;"></i></a>
 
                             <?php echo "Hi," . $_SESSION['username']; ?>
-                        <?php } else { ?>
-                            <button class="lo-button btn-sm ms-2 px-3">
-                                <a href="view/login.php" class=" text-decoration-none">login</a>
-                            </button>
+                        <?php } else {
+                            $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+                            $_SESSION['redirect']=$currentPage;
+                        ?>
+                            <a href="login.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3"style="color:#ffff;">login</button></a>
                         <?php } ?>
                     </div>
                 </div>
@@ -322,7 +323,7 @@
  </div>
  </div>   
 <!--footer-->
- <div class="container-fluid" style="background-color:burlywood;">
+ <div class="container-fluid footer">
         <div class="container p-3">
             <div class="row">
                 <div class="col">
@@ -357,5 +358,8 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="sidepanel.js"></script>
+
 </body>
 </html>
