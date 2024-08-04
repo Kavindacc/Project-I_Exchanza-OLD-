@@ -23,8 +23,7 @@ require '../model/dbconnection.php';
 
 <body>
 <!--nav bar-->
- <nav class="navbar navbar-expand-lg sticky-top nav">
-    <!-- latest added -->
+<nav class="navbar navbar-expand-lg sticky-top nav">
         <div class="container-fluid logo"><!--logo-->
             <a class="navbar-brand" href="#"><img src="../img/Exchanza.png" width="100px"></a>
             <!--toggle button-->
@@ -42,7 +41,6 @@ require '../model/dbconnection.php';
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center  flex-grow-1 pe-3">
                         <li class="nav-item mx-2">
-                            <a class="nav-link " aria-current="page" href="../index.php">Home</a>
                             <a class="nav-link " aria-current="page" href="../index.php">Home</a>
                         </li>
                         <li class="nav-item mx-2">
@@ -63,21 +61,28 @@ require '../model/dbconnection.php';
                     <div class="d-flex flex-column float-start flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
                     <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
+                            <?php $obj = new wishlist();
+                            $count = $obj->additemcount($_SESSION['userid'], Dbh::connect()); ?>
+                            <a href="cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"><?php if (isset($count)) { echo $count; } else {  echo 0; } ?></span></i></a><!--addtocart-->
+                            <?php $obj = new RegisteredCustormer();
+                            $count = $obj->wishlistiteamcount($_SESSION['userid'], Dbh::connect()); ?>
+                            <a href="wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if (isset($count)) { echo $count; } else {  echo 0; } ?></span></i></a><!--addto wishlist-->
 
                             <a href="userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user" style="font-size:1.5rem;"></i></a>
 
+
                             <?php echo "Hi," . $_SESSION['username']; ?>
-                        <?php } else {
-                            $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-                            $_SESSION['redirect']=$currentPage;
-                        ?>
-                            <a href="login.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3"style="color:#ffff;">login</button></a>
+                        <?php } else { ?>
+                            <a href="login.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"></span></i></a><!--addtocart-->
+                            <a href="login.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"></i></a>
+                            <a href="login.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3" style="color:#ffff;">login</button></a>
                         <?php } ?>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
+
 
 <!-- thrift arena -->
     <div class="container arena">
@@ -375,7 +380,8 @@ require '../model/dbconnection.php';
         </div>
     </div>
 <!--footer-->
-<div class="container-fluid footer">
+   <!--footer-->
+   <div class="container-fluid footer">
         <div class="container p-3">
             <div class="row">
                 <div class="col">
