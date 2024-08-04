@@ -21,7 +21,7 @@ session_start();
 </head>
 
 <body style="background: none;">
-    <!--nav bar-->
+<!--nav bar-->
     <nav class="navbar navbar-expand-lg sticky-top nav">
         <div class="container-fluid logo"><!--logo-->
             <a class="navbar-brand" href="#"><img src="../img/Exchanza.png" width="100px"></a>
@@ -77,7 +77,7 @@ session_start();
         </div>
     </nav>
 
-    <!-- thrift arena -->
+<!-- thrift arena -->
     <div class="container arena">
         <div class="artext">
             <?php if (isset($_GET['success'])) { //success
@@ -117,7 +117,7 @@ session_start();
         </svg>
         <!-- </a> -->
     </div>
-    <!-- sidepanel -->
+<!-- sidepanel -->
     <div id="sidePanel" class="side-panel">
         <button id="closePanel" class="close-btn">&times;</button>
         <img src="../img/thriftstat3.jpg" alt="Thrift Image" class="panel-image">
@@ -243,7 +243,7 @@ session_start();
 
 
 
-    <!-- image container -->
+<!-- image container -->
     <div class="container thrift" id="thriftwomen">
         <img src="../img/thrift-women.png" alt="women thrift intro" class="thriftwomen">
 
@@ -262,7 +262,7 @@ session_start();
 
     </div>
 
-    <!-- cats -->
+<!-- cats -->
     <div class="container text-center">
         <div class="row row-col-6 catr">
 
@@ -316,7 +316,7 @@ session_start();
 
         </div>
 
-        <!-- review  div-->
+<!-- review  div-->
         <div class="container ">
             <div class="row des">
                 <div class="col-5 stat">
@@ -363,7 +363,7 @@ session_start();
             </div>
         </div>
     </div>
-    <!--footer-->
+<!--footer-->
     <div class="container-fluid footer">
         <div class="container p-3">
             <div class="row">

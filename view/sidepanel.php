@@ -27,7 +27,8 @@
         <button id="closePanel" class="close-btn">&times;</button>
         <img src="image.jpg" alt="Thrift Image" class="panel-image">
         <p class="panel-description">
-            Thrifting is an excellent way to save money, reduce waste, and support sustainable fashion. By thrifting items, you can find unique pieces while also contributing to a more eco-friendly world.
+            Thrifting is an excellent way to save money, reduce waste, and support sustainable fashion.
+             By thrifting items, you can find unique pieces while also contributing to a more eco-friendly world.
         </p>
         <button class="add-item-btn">Add Item</button>
     </div>
