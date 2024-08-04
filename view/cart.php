@@ -116,7 +116,7 @@ if (isset($_SESSION['userid'])) {
                         </td>
                         <td><?php echo $row['pname']; ?></td>
                         <td class="price"><?php echo $row['price']; ?></td>
-                        <td><input type="number" value="<?php echo $row['quantity']; ?>" min="1" class="quantity"></td>
+                        <td><form action="payment_gateway.php" method="POST"><input type="number" name="quantity" value="<?php echo $row['quantity']; ?>" min="1" class="quantity"></form></td>
                         <td class="subtotal"><?php echo $row['price']; ?></td>
                     </tr>
             <?php }
@@ -142,7 +142,7 @@ if (isset($_SESSION['userid'])) {
                 <tr>
                     <td colspan="2">
                         <div>
-                            <button class="checkout">Checkout</button>
+                           <a href="payment_gateway.php"><button class="checkout">Checkout</button></a> 
                         </div>
                     </td>
                 </tr>
