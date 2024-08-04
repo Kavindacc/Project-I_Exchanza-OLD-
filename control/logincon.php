@@ -18,7 +18,7 @@ if (isset($_POST['signin'])) {
     $rpassword = $admin->loginAdmin(Dbh::connect());
     if ($rpassword) {
         if ($password == $rpassword) {
-            header("Location: ../view/admin.php"); // admin page
+            header("Location: ../admin"); // admin page
             exit();
         } else {
             header("Location: ../view/login.php?error=Incorrect email or password");
