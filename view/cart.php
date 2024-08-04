@@ -128,11 +128,11 @@ if (isset($_SESSION['userid'])) {
             <table>
                 <tr>
                     <td>Subtotal</td>
-                    <td id="cart-subtotal">Rs.20500.00</td>
+                    <td id="cart-subtotal"></td>
                 </tr>
                 <tr>
                     <td>Total</td>
-                    <td id="cart-total">Rs.20500.00</td>
+                    <td id="cart-total"></td>
                 </tr>
                 <br>
                 <tr>

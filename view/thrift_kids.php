@@ -336,6 +336,7 @@ require '../model/dbconnection.php';
  </div>
  </div>   
 <!--footer-->
+ <!--footer-->
  <div class="container-fluid footer">
         <div class="container p-3">
             <div class="row">
