@@ -27,41 +27,19 @@ $(document).ready(function() {
         $('#previewSize').text(selectedSize ? 'Size: ' + selectedSize : '');
     }
 
-    // Category change event
+
+  
     $('#category').change(function() {
         var category = $(this).val();
-        if (category === 'women') {
-            $('#subcategoryWrapper').removeClass('hidden');
-        } else {
-            $('#subcategoryWrapper').addClass('hidden');
-            $('#sizeChartWrapper').addClass('hidden');
-            $('#subcategory').val('');
-        }
+        var showSubcategory = ['women', 'men', 'kids'].includes(category);
+        $('#subcategoryWrapper').toggleClass('hidden', !showSubcategory);
+        $('#sizeChartWrapper').addClass('hidden');
+        $('#subcategory').val('');
         updatePreview();
     });
-    $('#category').change(function() {
-        var category = $(this).val();
-        if (category === 'men') {
-            $('#subcategoryWrapper').removeClass('hidden');
-        } else {
-            $('#subcategoryWrapper').addClass('hidden');
-            $('#sizeChartWrapper').addClass('hidden');
-            $('#subcategory').val('');
-        }
-        updatePreview();
-    });
-    $('#category').change(function() {
-        var category = $(this).val();
-        if (category === 'kids') {
-            $('#subcategoryWrapper').removeClass('hidden');
-        } else {
-            $('#subcategoryWrapper').addClass('hidden');
-            $('#sizeChartWrapper').addClass('hidden');
-            $('#subcategory').val('');
-        }
-        updatePreview();
-    });
-    
+
+
+
     // Subcategory change event
     $('#subcategory').change(function() {
         var subcategory = $(this).val();
