@@ -6,7 +6,7 @@ class dbconnectionpg {
         $servername = "127.0.0.1";
         $username = "root";
         $password = "6065031";
-        $dbname = "project-i_exchanza";
+        $dbname = "exchanzedb";
         // Create a connection to the database
         $conn = new mysqli($servername, $username, $password, $dbname);
         // Check the connection
