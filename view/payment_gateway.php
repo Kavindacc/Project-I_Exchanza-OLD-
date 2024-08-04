@@ -18,7 +18,7 @@
 <body className='snippet-body'>
     <div class="card">
         <div class="card-top border-bottom text-center">
-            <a href="#"> Back to shop</a>
+            <a href="#"> Back to cart</a>
             <span id="logo"></span>
         </div>
         <div class="card-body">            
@@ -127,13 +127,13 @@
                     </li>
                 </ul>
 
-                <input type="submit" value="Submit" class="btn btn-primary">
+                <a href="totalpay"><input type="submit" value="Submit" class="btn btn-primary"></a>
                             
 
 
             </div>
         </div>
-                <div class="col-md-5">
+                <div id="summary" class="col-md-5">
                     <div class="right border">
                         <div class="header">Order Summary</div>
                         <hr>
@@ -165,7 +165,7 @@
                                 <div class="col text-right"><span id="delivery">Free</span></div>
                             </div>
 
-                            <div class="row lower">
+                            <div id="totalpay" class="row lower">
                                 <div class="col text-left"><b>Total to pay</b></div>
                                 <div class="col text-right"><b><span id="tot">$ 46.98</span></b></div>
                             </div>
@@ -174,7 +174,7 @@
                         
                         <hr>
 
-                        <input type="button" value="Buy now" onclick="errormsg()" onclick="validation()" onclick="goback()">
+                        <input type="button" value="Buy now" class="btn btn-primary" onclick="errormsg()" >
 
                         <p class="text-muted text-center">Complimentary Shipping & Returns</p>
                         </form>
@@ -222,24 +222,29 @@
             
             if((card == "card") && ("<?php echo $validationResult; ?>" != 1)){
 
-                document.getElementById("error_msg").innerHTML="<?php echo $validationResult; ?>";
-
+                document.getElementById("error_msg").innerHTML="<?php echo $validationResult; ?>";              
                 
+            }
+
+            else{
+                doPayment();
             }
 
             
         } 
 
-        
-        function goback(){
-
-            var value = "<?php echo $validationResult; ?>";
-
-            if(value != true){
-                window.history.back();
+        function doPayment(){
+            var randomNumber = Math.floor(Math.random() * 101);
+            if ((parseInt(randomNumber)) % 2 == 0) {
+                var message = "Can't do the payment.";
+                alert(message);
+            } else {
+                var message = "Payment Successful.";
+                alert(message);
+                window.location.href = "http://localhost/Project-I_Exchanza/index.php";
             }
-
         }
+
 
         
 
