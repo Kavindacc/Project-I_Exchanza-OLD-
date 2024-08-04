@@ -30,7 +30,7 @@ $(document).ready(function() {
     // Category change event
     $('#category').change(function() {
         var category = $(this).val();
-        if (category === 'women') {
+        if (category === 'women'|| 'men' || 'kids') {
             $('#subcategoryWrapper').removeClass('hidden');
         } else {
             $('#subcategoryWrapper').addClass('hidden');
