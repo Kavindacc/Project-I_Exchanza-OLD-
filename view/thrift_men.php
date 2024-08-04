@@ -19,7 +19,8 @@
 
 <body>
 <!--nav bar-->
-<nav class="navbar navbar-expand-lg sticky-top nav">
+ <nav class="navbar navbar-expand-lg sticky-top nav">
+    <!-- latest added -->
         <div class="container-fluid logo"><!--logo-->
             <a class="navbar-brand" href="#"><img src="../img/Exchanza.png" width="100px"></a>
             <!--toggle button-->

@@ -30,7 +30,7 @@ $(document).ready(function() {
     // Category change event
     $('#category').change(function() {
         var category = $(this).val();
-        if (category === 'women'|| 'men' || 'kids') {
+        if (category === 'women') {
             $('#subcategoryWrapper').removeClass('hidden');
         } else {
             $('#subcategoryWrapper').addClass('hidden');
@@ -39,7 +39,29 @@ $(document).ready(function() {
         }
         updatePreview();
     });
-
+    $('#category').change(function() {
+        var category = $(this).val();
+        if (category === 'men') {
+            $('#subcategoryWrapper').removeClass('hidden');
+        } else {
+            $('#subcategoryWrapper').addClass('hidden');
+            $('#sizeChartWrapper').addClass('hidden');
+            $('#subcategory').val('');
+        }
+        updatePreview();
+    });
+    $('#category').change(function() {
+        var category = $(this).val();
+        if (category === 'kids') {
+            $('#subcategoryWrapper').removeClass('hidden');
+        } else {
+            $('#subcategoryWrapper').addClass('hidden');
+            $('#sizeChartWrapper').addClass('hidden');
+            $('#subcategory').val('');
+        }
+        updatePreview();
+    });
+    
     // Subcategory change event
     $('#subcategory').change(function() {
         var subcategory = $(this).val();
