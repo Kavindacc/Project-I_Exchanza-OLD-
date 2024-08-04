@@ -1,4 +1,21 @@
-<?php session_start(); ?>
+<?php session_start(); 
+
+include_once '../model/auction.php';
+
+// Create an instance of the Auction class
+$auction = new Auction();
+
+// Fetch data using the model methods
+$ongoingBids = $auction->getOngoingAuctions();
+$upcomingBids = $auction->getUpcomingAuctions();
+$finishedBids = $auction->getFinishedAuctions();
+
+
+    date_default_timezone_set('Asia/Colombo');
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +27,85 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Bidding</title>
+    <!-- countdown Function -->
+    
+    <script>
+    
+    function updateCountdown(startTime, endTime, countdownDomId, auctionId) {
+            var interval = setInterval(function() {
+                let startDate = new Date(startTime);
+                let endDate = new Date(endTime);
+
+                if (!startDate) {
+                    document.getElementById(countdownDomId).innerHTML = '00:00:00:00';
+                } else {
+                    var now = new Date().getTime();
+                    var distanceToStart = startDate.getTime() - now;
+                    var distanceToEnd = endDate.getTime() - now;
+                    var timeLabel = "Time Left to Start: ";
+
+                    if (distanceToStart < 0) {
+                        if (distanceToEnd < 0) {
+                            clearInterval(interval);
+                            document.getElementById(countdownDomId).innerHTML = 'Bidding finished';
+                            moveToFinished(auctionId);
+                            return;
+                        } else {
+                            distanceToStart = distanceToEnd;
+                            timeLabel = "Time Left to End: ";
+                            moveToOngoing(auctionId);
+                        }
+                    }
+
+                    var days = Math.floor(distanceToStart / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distanceToStart % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distanceToStart % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distanceToStart % (1000 * 60)) / 1000);
+
+                    document.getElementById(countdownDomId).innerHTML = `${timeLabel} ${(days + '').padStart(2, '0')}:${(hours + '').padStart(2, '0')}:${(minutes + '').padStart(2, '0')}:${(seconds + '').padStart(2, '0')}`;
+                }
+            }, 1000);
+        }
+
+        function moveToOngoing(auctionId) {
+            var bidCard = document.getElementById('bidCard' + auctionId);
+            var ongoingContainer = document.querySelector('.ongoing .product-container');
+            if (bidCard && ongoingContainer && !bidCard.classList.contains('moved-to-ongoing')) {
+                ongoingContainer.appendChild(bidCard);
+                bidCard.classList.add('moved-to-ongoing');
+                var bidButton = bidCard.querySelector('.card-btn');
+                bidButton.innerHTML = "Bid Now";
+            }
+        }
+
+        function moveToFinished(auctionId) {
+            var bidCard = document.getElementById('bidCard' + auctionId);
+            var finishedContainer = document.querySelector('.finished .product-container');
+            if (bidCard && finishedContainer && !bidCard.classList.contains('moved-to-finished')) {
+                finishedContainer.appendChild(bidCard);
+                bidCard.classList.add('moved-to-finished');
+                var bidButton = bidCard.querySelector('.card-btn');
+                bidButton.innerHTML = "View Bid";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php foreach ($ongoingBids as $auction) { ?>
+                updateCountdown('<?php echo $auction['start_time']; ?>', '<?php echo $auction['end_time']; ?>', 'ongoingCountdown<?php echo $auction['auction_id']; ?>', <?php echo $auction['auction_id']; ?>);
+            <?php } ?>
+
+            <?php foreach ($upcomingBids as $auction) { ?>
+                updateCountdown('<?php echo $auction['start_time']; ?>', '<?php echo $auction['end_time']; ?>', 'upcomingCountdown<?php echo $auction['auction_id']; ?>', <?php echo $auction['auction_id']; ?>);
+            <?php } ?>
+
+            <?php foreach ($finishedBids as $auction) { ?>
+                updateCountdown('<?php echo $auction['start_time']; ?>', '<?php echo $auction['end_time']; ?>', 'finishedCountdown<?php echo $auction['auction_id']; ?>', <?php echo $auction['auction_id']; ?>);
+            <?php } ?>
+        });
+
+
+    </script>
+
     <style type="text/tailwindcss">
         .product{
             @apply relative overflow-hidden p-[20px];
@@ -156,16 +252,16 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center  flex-grow-1 pe-3">
                         <li class="nav-item mx-2">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Thrift</a>
+                            <a class="nav-link" href="../view/thrift.php">Thrift</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Bidding</a>
+                            <a class="nav-link" href="../view/bidding.php">Bidding</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Selling</a>
+                            <a class="nav-link" href="">Selling</a>
                         </li>
                     </ul>
                     <form class="d-flex me-4 align-items-center" role="search">
@@ -201,9 +297,14 @@
             <div class="relative w-full max-h-[450px] overflow-hidden rounded-[20px]">
                 <img src="../img/Bidding/banner.png" alt="Exclusive rare collectibles auction" class="">
                 <div class="absolute bottom-10 left-6 right-6  bg-opacity-80 pl-36 pt-3 rounded-md ">
-                    <p class=" text-[#746557] text-[20px] font-medium tracking-[0.25rem] mb-2">Hot Auctions</p>
+                    <p class=" text-[rgb(116,101,87)] text-[20px] font-medium tracking-[0.25rem] mb-2">Hot Auctions</p>
                     <h2 class="uppercase text-[50px] font-semibold pr-[800px]">Exclusive rare collectibles auction</h2>
-                    <p class="text-[25px] text-[#948276] font-semibold ">Join The Bidding War!</p>
+                    <p class="text-[25px] text-[#948276] font-semibold ">Join The Bidding War! 
+                    <?php 
+                    // date_default_timezone_set('Asia/Colombo');
+                    // echo date("h:i:sa") . " "; echo gmdate("Y-m-d\TH:i:s\Z"); 
+                    ?>
+                    </p>
 
                     <?php if (!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) { 
                             $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];//get current page 
@@ -222,109 +323,90 @@
             </div>            
         </div>
 
-
-        <!-- Ongoing Bidding Section-->
-        <div class="flex flex-col px-12 pt-16 bg-red bg-[#F3F3F3]">
-
-        <div class="product bg-[#CEC0B9] rounded-[20px]"> 
-            <h2 class="product-category">ongoing Bidding</h2>
-            <button class="pre-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
-            <button class="nxt-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
-            <div class="product-container">
-                <?php
-                    $items = [1,2,3,4,5,3];
-                    foreach ($items as $item) {
-                        echo '
-                            <div class="product-card">
-                                <div class="product-image rounded-[5px]">
-                                    <span class="countdown-tag">04:24:49</span>
-                                    <img src="../img/Bidding/card1.jpg" class="product-thumb" alt="">
-                                    <button class="card-btn ">
-                                        Bid Now 
-                                    </button>
-                                </div>
-                                <div class="product-info">
-                                    <h2 class="product-brand">Luxury Party Stage Men Dress Suit Costume</h2>
-                                    <p class="product-short-description">Homme Popular Clothing Groomsmen Regular Fit Tuxedo 3 Pieces Set Jacket+Trousers+Vest
-                                    Please check your real size and make an order.</p>
-                                    <span class="price">$20</span><span class="actual-price">$40</span>
-                                </div>
-                            </div>        
-                        
-                        ';
-                    }
-                ?>
+        
+       <!-- Ongoing Bidding Section -->
+        <div class="flex flex-col px-12 pt-16 bg-red bg-[#F3F3F3] ongoing">
+            <div class="product bg-[#CEC0B9] rounded-[20px]"> 
+                <h2 class="product-category">Ongoing Bidding</h2>
+                <button class="pre-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
+                <button class="nxt-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
+                <div class="product-container">
+                    <?php foreach ($ongoingBids as $auction) { ?>
+                        <div class="product-card" id="bidCard<?php echo $auction['auction_id']; ?>">
+                            <div class="product-image rounded-[5px]">
+                                <span class="countdown-tag">
+                                    <span id="ongoingCountdown<?php echo $auction['auction_id']; ?>"></span>
+                                </span>
+                                <img src="<?php echo htmlspecialchars($auction['image']); ?>" class="product-thumb" alt="">
+                                <button class="card-btn">Bid Now</button>
+                            </div>
+                            <div class="product-info">
+                                <h2 class="product-brand"><?php echo htmlspecialchars($auction['product_name']); ?></h2>
+                                <p class="product-short-description"><?php echo htmlspecialchars($auction['description']); ?></p>
+                                <span class="price">Rs.<?php echo htmlspecialchars($auction['price']); ?></span>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
         </div>
-        </div>
 
-        <!-- Upcomming Bidding Section-->
+        <!-- Upcoming Bidding Section -->
         <div class="flex flex-col px-12 pt-16 bg-red bg-[#F3F3F3]">
-
-        <div class="product bg-[#CEC0B9] rounded-[20px]"> 
-            <h2 class="product-category">Upcomming Bidding</h2>
-            <button class="pre-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
-            <button class="nxt-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
-            <div class="product-container">
-                <?php
-                    $items = [1,2,3,4,5,3];
-                    foreach ($items as $item) {
-                        echo '
-                            <div class="product-card">
-                                <div class="product-image rounded-[5px]">
-                                    <span class="countdown-tag">04:24:49</span>
-                                    <img src="../img/Bidding/card2.jpg" class="product-thumb" alt="">
-                                    <button class="card-btn">Bid Now</button>
-                                </div>
-                                <div class="product-info">
-                                    <h2 class="product-brand">Luxury Party Stage Men Dress Suit Costume</h2>
-                                    <p class="product-short-description">Homme Popular Clothing Groomsmen Regular Fit Tuxedo 3 Pieces Set Jacket+Trousers+Vest
-                                    Please check your real size and make an order.</p>
-                                    <span class="price">$20</span><span class="actual-price">$40</span>
-                                </div>
-                            </div>        
-                        
-                        ';
-                    }
-                ?>
+            <div class="product bg-[#CEC0B9] rounded-[20px]"> 
+                <h2 class="product-category">Upcoming Bidding</h2>
+                <button class="pre-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
+                <button class="nxt-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
+                <div class="product-container">
+                    <?php foreach ($upcomingBids as $auction) { ?>
+                        <div class="product-card" id="bidCard<?php echo $auction['auction_id']; ?>">
+                            <div class="product-image rounded-[5px]">
+                                <span class="countdown-tag">
+                                    <span id="upcomingCountdown<?php echo $auction['auction_id']; ?>"></span>
+                                </span>
+                                <img src="<?php echo htmlspecialchars($auction['image']); ?>" class="product-thumb" alt="">
+                                <button class="card-btn">View Bid</button>
+                            </div>
+                            <div class="product-info">
+                                <h2 class="product-brand"><?php echo htmlspecialchars($auction['product_name']); ?></h2>
+                                <p class="product-short-description"><?php echo htmlspecialchars($auction['description']); ?></p>
+                                <span class="price">Rs.<?php echo htmlspecialchars($auction['price']); ?></span>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
         </div>
-        </div>
 
-        <!-- Finished Bidding Section-->
-        <div class="flex flex-col px-12 pt-16 bg-red bg-[#F3F3F3]">
-
-        <div class="product bg-[#CEC0B9] rounded-[20px]"> 
-            <h2 class="product-category">Finished Bidding</h2>
-            <button class="pre-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
-            <button class="nxt-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
-            <div class="product-container">
-                <?php
-                    $items = [1,2,3,4,5,3];
-                    foreach ($items as $item) {
-                        echo '
-                            <div class="product-card">
-                                <div class="product-image rounded-[5px]">
-                                    <span class="countdown-tag">04:24:49</span>
-                                    <img src="../img/Bidding/card3.jpg" class="product-thumb" alt="">
-                                    <button class="card-btn">Bid Now</button>
-                                </div>
-                                <div class="product-info">
-                                    <h2 class="product-brand">Luxury Party Stage Men Dress Suit Costume</h2>
-                                    <p class="product-short-description">Homme Popular Clothing Groomsmen Regular Fit Tuxedo 3 Pieces Set Jacket+Trousers+Vest
-                                    Please check your real size and make an order.</p>
-                                    <span class="price">$20</span><span class="actual-price">$40</span>
-                                </div>
-                            </div>        
-                        
-                        ';
-                    }
-                ?>
+        <!-- Finished Bidding Section -->
+        <div class="flex flex-col px-12 pt-16 bg-red bg-[#F3F3F3] finished">
+            <div class="product bg-[#CEC0B9] rounded-[20px]"> 
+                <h2 class="product-category">Finished Bidding</h2>
+                <button class="pre-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
+                <button class="nxt-btn"><img src="../img/Bidding/arrow.png" alt=""></button>
+                <div class="product-container">
+                    <?php foreach ($finishedBids as $auction) { ?>
+                        <div class="product-card" id="bidCard<?php echo $auction['auction_id']; ?>">
+                            <div class="product-image rounded-[5px]">
+                                <span class="countdown-tag">
+                                    <span id="finishedCountdown<?php echo $auction['auction_id']; ?>"></span>
+                                </span>
+                                <img src="<?php echo htmlspecialchars($auction['image']); ?>" class="product-thumb" alt="">
+                                <button class="card-btn">View Bid</button>
+                            </div>
+                            <div class="product-info">
+                                <h2 class="product-brand"><?php echo htmlspecialchars($auction['product_name']); ?></h2>
+                                <p class="product-short-description"><?php echo htmlspecialchars($auction['description']); ?></p>
+                                <span class="price">Rs.<?php echo htmlspecialchars($auction['price']); ?></span>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
         </div>
-        </div>
+
                 
-    </div>
+  
     <!-- Popup Form -->
     <div class=" overflow-y-auto" id="bidpopupform">
         <button id="fcancel-btn" onclick=addBidForm() class="fcancel-btn w-10 text-[1.8rem] ml-[98%] p-0 -mt-40 hover:scale-110 hover:transition-[0.8s]">&times;</button>                
@@ -432,6 +514,15 @@
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const auctions = <?php echo json_encode($upcomingBids); ?>;
+            auctions.forEach(function(auction) {
+                updateCountdownUpcomming(auction.start_time, 'ongoingCountdown' + auction.auction_id);
+            });
+        });
+    </script>
 
 </body>
 
