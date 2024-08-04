@@ -45,16 +45,9 @@
 }
 
 
- th{
-    text-align: left;
-    padding: 5px;
-    color: #CEC0B9;
-    background: #4C3F31;
-    font-weight: normal;
- }
 
  td{
-    padding:10px 5px;
+    padding:5px;
  }
 
  td input{

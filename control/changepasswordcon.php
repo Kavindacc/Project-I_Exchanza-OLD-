@@ -2,7 +2,7 @@
 
 require '../model/dbconnection.php';
 require '../model/usern.php';
-session_reset();
+session_start();
 if (isset($_POST['changepassword'])) {
 
     $currentPassword = $_POST['currentPassword'];

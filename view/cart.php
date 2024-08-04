@@ -92,11 +92,12 @@ if (isset($_SESSION['userid'])) {
     <div class="small-container cart-page">
 
         <!----Title----->
-        <div class="title"><big><b>Shopping Bag</b></big></div>
+        <div class="title"><h2><b>Shopping Bag</b></h2></div>
         <br>
       <?php  if (!empty($rows)) {?>
         <!----Cart table----->
-        <table id="cart-table">
+        <table id="cart-table" table class="table" style="cursor: context-menu;">
+        <thead class="table-primary">
             <tr>
                 <th>Product</th>
                 <th>Product Name</th>
@@ -104,9 +105,10 @@ if (isset($_SESSION['userid'])) {
                 <th>Quantity</th>
                 <th>Subtotal</th>
             </tr>
+        </thead>
             <?php 
                 foreach ($rows as $row) { ?>
-                    <tr>
+                    <tr class="vertical-center">
                         <td>
                             <div class="cart-info">
                                 <img src="<?php echo $row['img']; ?>">

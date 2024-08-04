@@ -43,7 +43,7 @@ session_start();
                             <a class="nav-link" href="../view/thrift.php">Thrift</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Bidding</a>
+                            <a class="nav-link" href="bidding.php">Bidding</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="#">Selling</a>
@@ -172,7 +172,7 @@ session_start();
                                 <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action="../control/changepasswordcon.php" method="post">
+                            <form action="../control/changepasswordcon.php" method="POST">
                                 <div class="modal-body">
                                     <div class="mb-3">
                                         <label for="currentPassword" class="form-label">Current Password</label>
@@ -342,7 +342,7 @@ session_start();
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="main.js"></script>
-    <script type="text/javascript">
+<!--<script type="text/javascript">
         function preventback() {
             window.history.forward()
         };
@@ -350,7 +350,7 @@ session_start();
         window.onunload = function() {
             null
         };
-    </script>
+    </script>-->
 </body>
 
 </html>

@@ -88,9 +88,11 @@ session_start();
       if (isset($_GET['s']) && !empty($_GET['s'])) {
         if ($_GET['s'] == '1') {
           $msg = "Item Successfully Added to the Cart.";
-        } else {
-          $msg = "Product Not Add.";
-        }?>
+        } else if($_GET['s'] == '2') {
+          $msg = "Product already Addto cart.";
+        }else{
+          $msg = "Product not Addto cart.";
+         } ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
           <strong><?php echo $msg; ?></strong>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

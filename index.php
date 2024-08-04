@@ -43,7 +43,7 @@ session_start();
                             <a class="nav-link" href="../Project-I_Exchanza/view/thrift.php">Thrift</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Bidding</a>
+                            <a class="nav-link" href="../Project-I_Exchanza/view/bidding.php">Bidding</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="#">Selling</a>
@@ -106,11 +106,11 @@ session_start();
             <img src="img/pexels-kseniachernaya-3965545.jpg" width="100%">
         </div>
         <div class="text">
-            <h5>Thrift</h5>
+            <h5>Thrifting</h5>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, ab laborum ut accusamus, fugiat earum alias
                 beatae ipsa harum quos atque culpa architecto similique deleniti impedit, facilis at aliquam deserunt!
             </p>
-            <button><a href="">Shop Now&nbsp;>></a></button>
+            <button><a href="../Project-I_Exchanza/view/thrift.php">Shop Now&nbsp;>></a></button>
         </div>
     </div>
     <div class="thirf d-flex flex-row thirf-right thirf-two">
@@ -118,11 +118,11 @@ session_start();
             <img src="img/keagan-henman-ufuk99QfQTg-unsplash.jpg" width="100%">
         </div>
         <div class="text">
-            <h5>Thrift</h5>
+            <h5>Auction</h5>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, ab laborum ut accusamus, fugiat earum alias
                 beatae ipsa harum quos atque culpa architecto similique deleniti impedit, facilis at aliquam deserunt!
             </p>
-            <button><a href="">Shop Now&nbsp;>></a></button>
+            <button><a href="../Project-I_Exchanza/view/bidding.php">Shop Now&nbsp;>></a></button>
         </div>
     </div>
     <div class="thirf d-flex flex-row thirf-left thirf-three">
@@ -130,7 +130,7 @@ session_start();
             <img src="img/pexels-olly-3755706.jpg" width="100%">
         </div>
         <div class="text">
-            <h5>Thrift</h5>
+            <h5>Stores</h5>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, ab laborum ut accusamus, fugiat earum alias
                 beatae ipsa harum quos atque culpa architecto similique deleniti impedit, facilis at aliquam deserunt!
             </p>

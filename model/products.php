@@ -153,6 +153,15 @@ class wishlist
         }
     }
 
+    public function checkIfProductExists($userid, $itemid, $db) {
+        $query = "SELECT COUNT(*) FROM addtocart WHERE user_id =? AND product_id =?";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(1,$userid);
+        $stmt->bindParam(2,$itemid);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0;
+    }
+
     public function addtocart($userid, $itemid, $price, $quantity,$pname, $img, $pdo)
     {
 
