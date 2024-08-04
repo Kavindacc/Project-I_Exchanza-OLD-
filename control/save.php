@@ -5,7 +5,7 @@ class save{
     function card_detailsdb(){
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Retrieve form data with null coalescing operator to handle unset keys
-            $card = $_POST['card'] ?? '';
+            $card = $_POST['card'] ?? '';       
             $name = $_POST['name'] ?? '';
             $cardNumber = $_POST['cardNumber'] ?? '';
             $expDate = $_POST['expDate'] ?? '';
