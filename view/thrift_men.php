@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php session_start(); 
+require '../model/products.php';
+require '../model/usern.php';
+require '../model/dbconnection.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,12 +42,13 @@
                     <ul class="navbar-nav justify-content-center  flex-grow-1 pe-3">
                         <li class="nav-item mx-2">
                             <a class="nav-link " aria-current="page" href="../index.php">Home</a>
+                            <a class="nav-link " aria-current="page" href="../index.php">Home</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link active" href="../view/thrift.php">Thrift</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Bidding</a>
+                            <a class="nav-link" href="bidding.php">Bidding</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="#">Selling</a>
@@ -55,8 +60,7 @@
                     </form>
                     <!--login nav-link-a-color-->
                     <div class="d-flex flex-column float-start flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
-                        <a href="../Project-I_Exchanza/view/cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
-                        <?php
+                    <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
 
                             <a href="userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user" style="font-size:1.5rem;"></i></a>

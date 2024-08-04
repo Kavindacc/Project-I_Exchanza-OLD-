@@ -2,7 +2,7 @@
 
 require '../model/dbconnection.php';
 require '../model/usern.php';
-
+session_start();
 // product.php add karanna ,nmut product.php change karanna one
 ?>
 <!DOCTYPE html>
@@ -50,9 +50,12 @@ require '../model/usern.php';
                     </ul>
                     <!--login nav-link-a-color-->
                     <div class="d-flex flex-column float-start flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
-                        <a href="../Project-I_Exchanza/view/cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
+                        <a href="#" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
+                       <?php $obj = new RegisteredCustormer();
+                            $count = $obj->wishlistiteamcount($_SESSION['userid'], Dbh::connect()); ?>
+                            <a href="../view/wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if(isset($count)){ echo $count;}else{echo 0;} ?></span></i></a><!--addto wishlist-->
                             <a href="logout.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3 " style="color: #FFFF;">logout</button></a>
                         <?php } ?>
                     </div>

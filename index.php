@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php require '../Project-I_Exchanza/model/dbconnection.php';
+require '../Project-I_Exchanza/model/usern.php';
+require '../Project-I_Exchanza/model/products.php';
+
+
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,27 +43,33 @@
                             <a class="nav-link" href="../Project-I_Exchanza/view/thrift.php">Thrift</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Bidding</a>
+                            <a class="nav-link" href="../Project-I_Exchanza/view/bidding.php">Bidding</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="#">Selling</a>
                         </li>
                     </ul>
-                    <form class="d-flex me-4 align-items-center" role="search">
-                        <input class="search me-2" type="search" placeholder="Search">
-                        <a href="#1" class="nav-link  text-decoration-none  mt-1"><i class="fa-solid fa-magnifying-glass"></i></a>
-                    </form>
+
                     <!--login nav-link-a-color-->
                     <div class="d-flex flex-column float-start flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
-                        <a href="../Project-I_Exchanza/view/cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
+
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
+                            <?php $obj = new wishlist();
+                            $count = $obj->additemcount($_SESSION['userid'], Dbh::connect()); ?>
+                            <a href="view/cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"><?php if (isset($count)) { echo $count; } else {  echo 0; } ?></span></i></a><!--addtocart-->
+                            <?php $obj = new RegisteredCustormer();
+                            $count = $obj->wishlistiteamcount($_SESSION['userid'], Dbh::connect()); ?>
+                            <a href="../Project-I_Exchanza/view/wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if (isset($count)) { echo $count; } else {  echo 0; } ?></span></i></a><!--addto wishlist-->
 
-                            <a href="view/userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user"style="font-size:1.5rem;"></i></a>
+                            <a href="view/userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user" style="font-size:1.5rem;"></i></a>
+
 
                             <?php echo "Hi," . $_SESSION['username']; ?>
                         <?php } else { ?>
-                            <a href="view/login.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3"style="color:#ffff;">login</button></a>
+                            <a href="view/login.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"></span></i></a><!--addtocart-->
+                            <a href="view/login.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"></i></a>
+                            <a href="view/login.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3" style="color:#ffff;">login</button></a>
                         <?php } ?>
                     </div>
                 </div>
@@ -94,11 +106,11 @@
             <img src="img/pexels-kseniachernaya-3965545.jpg" width="100%">
         </div>
         <div class="text">
-            <h5>Thrift</h5>
+            <h5>Thrifting</h5>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, ab laborum ut accusamus, fugiat earum alias
                 beatae ipsa harum quos atque culpa architecto similique deleniti impedit, facilis at aliquam deserunt!
             </p>
-            <button><a href="">Shop Now&nbsp;>></a></button>
+            <button><a href="../Project-I_Exchanza/view/thrift.php">Shop Now&nbsp;>></a></button>
         </div>
     </div>
     <div class="thirf d-flex flex-row thirf-right thirf-two">
@@ -106,11 +118,11 @@
             <img src="img/keagan-henman-ufuk99QfQTg-unsplash.jpg" width="100%">
         </div>
         <div class="text">
-            <h5>Thrift</h5>
+            <h5>Auction</h5>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, ab laborum ut accusamus, fugiat earum alias
                 beatae ipsa harum quos atque culpa architecto similique deleniti impedit, facilis at aliquam deserunt!
             </p>
-            <button><a href="">Shop Now&nbsp;>></a></button>
+            <button><a href="../Project-I_Exchanza/view/bidding.php">Shop Now&nbsp;>></a></button>
         </div>
     </div>
     <div class="thirf d-flex flex-row thirf-left thirf-three">
@@ -118,7 +130,7 @@
             <img src="img/pexels-olly-3755706.jpg" width="100%">
         </div>
         <div class="text">
-            <h5>Thrift</h5>
+            <h5>Stores</h5>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, ab laborum ut accusamus, fugiat earum alias
                 beatae ipsa harum quos atque culpa architecto similique deleniti impedit, facilis at aliquam deserunt!
             </p>
@@ -236,7 +248,7 @@
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="view/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    
+
 
 </body>
 

@@ -37,7 +37,7 @@
                             <a class="nav-link " aria-current="page" href="../index.php">Home</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Thrift</a>
+                            <a class="nav-link" href="../view/thrift.php">Thrift</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="#">Bidding</a>
@@ -62,8 +62,8 @@
             </div>
         </div>
     </nav>
-    <div style="padding-bottom:50px;">
-        <div class="container py-2" style="margin-top:50px;">
+    <div class="d-flex justify-content-center align-items-center"style="height:80vh;">
+        <div class="container py-2">
             <div class="row text-center pb-3">
                 <h2>Login now</h2>
             </div>

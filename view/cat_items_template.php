@@ -2,6 +2,7 @@
 
 require '../model/products.php';
 require '../model/dbconnection.php';
+require '../model/usern.php';
 session_start();
 ?>
 
@@ -41,10 +42,10 @@ session_start();
                             <a class="nav-link" aria-current="page" href="../index.php">Home</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link active" href="#">Thrift</a>
+                            <a class="nav-link active" href="../view/thrift.php">Thrift</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Bidding</a>
+                            <a class="nav-link" href="../view/bidding.php">Bidding</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="#">Selling</a>
@@ -56,17 +57,23 @@ session_start();
                     </form>
                     <!--login nav-link-a-color-->
                     <div class="d-flex flex-column float-start flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
-                        <a href="../Project-I_Exchanza/view/cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
-                        <?php
+                    <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
+                            <?php $obj = new wishlist();
+                            $count = $obj->additemcount($_SESSION['userid'], Dbh::connect()); ?>
+                            <a href="cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"><?php if (isset($count)) { echo $count; } else {  echo 0; } ?></span></i></a><!--addtocart-->
+                            <?php $obj = new RegisteredCustormer();
+                            $count = $obj->wishlistiteamcount($_SESSION['userid'], Dbh::connect()); ?>
+                            <a href="wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if (isset($count)) { echo $count; } else {  echo 0; } ?></span></i></a><!--addto wishlist-->
 
                             <a href="userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user" style="font-size:1.5rem;"></i></a>
 
+
                             <?php echo "Hi," . $_SESSION['username']; ?>
                         <?php } else { ?>
-
+                            <a href="login.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"></span></i></a><!--addtocart-->
+                            <a href="login.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"></i></a>
                             <a href="login.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3" style="color:#ffff;">login</button></a>
-
                         <?php } ?>
                     </div>
                 </div>
@@ -74,7 +81,7 @@ session_start();
         </div>
     </nav>
     <div class="container pt-1"><!--sub category eka ganna-->
-        <?php if (isset($_GET['cat']) || isset($_GET['sub'])) {
+        <?php if (isset($_GET['cat']) && isset($_GET['sub'])) {
 
             $_SESSION['category'] = $_GET['cat'];
             $_SESSION['subcategory'] = $_GET['sub'];
@@ -138,8 +145,17 @@ session_start();
 
 
         <?php } ?>
+        <?php if (isset($_SESSION['amsg'])) { ?>
+            <div class="alert alert-success  alert-dismissible fade show col-12" role="alert">
+                <strong><?php echo $_SESSION['amsg'];
+                        unset($_SESSION['amsg']); ?></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+
+        <?php } ?>
     </div>
-    <div class="container d-flex justify-content-start flex-wrap mt-3"><!--get iteam-->
+    <div class="container d-flex justify-content-start flex-wrap mt-3 gap-4"><!--get iteam-->
 
         <?php
 
@@ -147,37 +163,24 @@ session_start();
         $rows = $obj->getdetails($_SESSION['category'], $_SESSION['subcategory'], Dbh::connect());
         if (isset($rows) && !empty($rows)) {
             foreach ($rows as $row) { ?>
-                <div class="card m-2" style="width: 17rem;">
-                    <img src="../upload/<?php echo $row['image'] ?>" class="card-img-top" alt="..." style="height:10rem;" href="items_template.php?id=<?php $row['product_id']; ?>">
+                <div class="card m- pt-2" style="width: 17rem;">
+                    <a href="item_template.php?id=<?php echo $row['product_id']; ?>"><img src="../upload/<?php echo $row['image'] ?>" class="card-img-top" alt="..." style="height:10rem;" href="items_template.php"></a>
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
-                        <p class="card-text"><?php echo $row['description']; ?></p>
-                        <p class="card-text"><?php if (isset($row['size'])) {
+                        <h3 class="card-title"><?php echo $row['product_name']; ?></h3>
+                        <h4 class="card-text"><?php if (isset($row['size'])) {
                                                     echo $row['size'];
-                                                } ?></p>
-                        <p class="card-text">Rs.<?php echo $row['price']; ?></p>
-                        <form action="../control/wishlist.php" method="post"><!--wishlistform-->
+                                                } ?></h4>
+                        <h5 class="card-text">Rs.<?php echo $row['price']; ?></h5>
+                        <form action="../control/wishlistcon.php" method="post"><!--wishlistform-->
                             <input type="hidden" name="productid" value="<?php echo $row['product_id']; ?>">
                             <?php if (!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) {
                                 $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; //get current page 
                                 $_SESSION['redirect'] = $currentPage; ?>
                                 <a href="login.php" style="text-decoration: none;">
-                                    <button type="button" class="btn btn-primary mt-2  equal-width" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Add to Wishlist</button>
+                                    <button type="button" class="btn btn-primary mt-2  equal-width" style="--bs-btn-color:black;--bs-btn-bg:none;--bs-btn-border-color:black; --bs-btn-hover-bg:#4c3f31;"><i class="fa-regular fa-heart"></i>&nbsp;Add to Wishlist</button>
                                 </a>
                             <?php } else { ?>
-                                <button type="submit" class="btn btn-primary mt-2  equal-width" name="wishlist" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Add to Wishlist</button>
-                            <?php } ?>
-                        </form>
-                        <form action="../control/addtocart.php" method="post"><!--wishlistform-->
-                            <input type="hidden" name="productid" value="<?php echo $row['product_id']; ?>">
-                            <?php if (!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) {
-                                $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; //get current page 
-                                $_SESSION['redirect'] = $currentPage; ?>
-                                <a href="login.php" style="text-decoration: none;">
-                                    <button type="button" class="btn btn-primary mt-2  equal-width" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Add to Cart</button>
-                                </a>
-                            <?php } else { ?>
-                                <button type="submit" class="btn btn-primary mt-2  equal-width" name="addtocart" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Add to Cart</button>
+                                <button type="submit" class="btn btn-primary mt-2  equal-width" name="wishlist" style="--bs-btn-color:black;--bs-btn-bg:none;--bs-btn-border-color:black; --bs-btn-hover-bg:#4c3f31;"><i class="fa-regular fa-heart"></i>&nbsp;Add to Wishlist</button>
                             <?php } ?>
                         </form>
                     </div>

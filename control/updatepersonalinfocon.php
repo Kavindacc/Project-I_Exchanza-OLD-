@@ -1,23 +1,20 @@
 <?php
 require '../model/usern.php';
 require "../model/dbconnection.php";
-
+session_start();
 if (isset($_POST['update'])) {
 
     $errors = [];
     $userId = $_SESSION['userid'];
 
-    $obj = new RegisteredCustormer($userId);
-    $currentUserInfo = $obj->manageAccount(Dbh::connect());
-    $currentName = $currentUserInfo['name'];
-    $currentPhoneNo = $currentUserInfo['phoneno'];
 
-    if (!empty($_POST['name'])) {
-        $name = htmlspecialchars(trim($_POST['name']));
-    } else {
-       $name=  $currentName;
+    if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+        $email=filter_var($_POST['email'],FILTER_SANITIZE_EMAIL);
     }
-    if(!empty($_POST['phoneno'])){
+
+        $name = htmlspecialchars(trim($_POST['name']));
+    
+    
         $phoneno = preg_replace("/[^0-9]/", "",$_POST['phoneno']);
         if (strlen($phoneno) === 10) {
             // Valid phone number
@@ -25,10 +22,8 @@ if (isset($_POST['update'])) {
         } else {
             $errors[] = "Invalid Phone Number format.";
         }
-    }
-    else{
-        $pnum=$currentPhoneNo;
-    }
+    
+
 
 
     $filePath = null; // File upload start
@@ -60,14 +55,17 @@ if (isset($_POST['update'])) {
     }
 
     if ($filePath !== null) {
-        if (!$obj->updateImg($filePath, Dbh::connect())) {
-            $errors[] = "Failed to update profile picture.";
+        if ( $picpath=$obj->updateImg($filePath, Dbh::connect())) {
+            $_SESSION['profilepic']=$picpath;
+        }
+        else{
+            $errors[] = "Failed not upload.";
         }
     }
 
     if (empty($errors)) {
         // Update the user information in the database
-        $updateResult = $obj->updateUserInfo($name, $phoneno, Dbh::connect());
+        $updateResult = $obj->updateUserInfo($name, $phoneno,$email, Dbh::connect());
         if ($updateResult) {
             $_SESSION['success']="Profile updated successfully.";
             header("Location: ../view/userpage.php");

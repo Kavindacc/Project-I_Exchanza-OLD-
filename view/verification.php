@@ -16,7 +16,7 @@ require '../control/verificationcon.php';
 </head>
 
 <body>
-    <div class="verification d-flex flex-column"style="border:1px solid red;">
+    <div class="verification d-flex flex-column">
         <div class="text">
             <h3>OTP Verification</h3>
         </div>

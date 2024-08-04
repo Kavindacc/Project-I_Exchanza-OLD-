@@ -1,28 +1,53 @@
 /*---Cart items details-----*/
 
-.cart-page{
-    margin:10px auto;
- }
+.small-container.cart-page{
+   margin: 20px;
+}
+
  table{
     width: 100%;  
     border-collapse: collapse;
+    margin-bottom: 20px;
  }
 
  .cart-info{
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 10px; 
  }
 
- th{
-    text-align: left;
-    padding: 5px;
-    color: #CEC0B9;
-    background: #4C3F31;
-    font-weight: normal;
- }
+
+ .button{
+   display: flex;
+   justify-content: flex-start;
+   gap: 10px;
+   margin-top: 20px 0;
+  
+}
+
+.btn{
+   width: 70px;
+   padding: 10px 0;
+   border: none;
+   border-radius: 3px;
+   cursor: pointer;
+ 
+}
+
+.btn-remove{
+   background-color: #746557;  
+   color: #CEC0B9;
+}
+
+.btn-remove:hover{
+   background-color: #4c3f31;
+   color: #CEC0B9;
+}
+
+
 
  td{
-    padding:10px 5px;
+    padding:5px;
  }
 
  td input{
@@ -31,11 +56,6 @@
     padding: 5px;
  }
 
- td a{
-    text-align: left;
-    color: #910e0e;
-    font-size: 12px;
- }
 
  td img{
     width: 80px;
@@ -46,6 +66,7 @@
 .total-price{
    display: flex;
    justify-content: flex-end;
+   margin-top: 20px;
 }
 
 .total-price table{
@@ -62,20 +83,23 @@ th:last-child{
    text-align: right;
 }
 
+
 .checkout{
    width: 100%;
-   padding: 0 10px;
-   margin-bottom: 20px;
+   padding: 10px 0;
+   margin-bottom: 20px 0;
    color: #CEC0B9;
    cursor: pointer;
    border: none;
    border-radius: 3px;
-   background-color: #897062;
+   background-color: #746557; 
 }
 
-button:hover, .checkout:hover{
-   background-color: #AE9D92 ;
+.checkout:hover{
+   background-color: #4c3f31;
+   color: #CEC0B9;
 }
+
 
 
 /*------media query for less than 600 screen size----*/

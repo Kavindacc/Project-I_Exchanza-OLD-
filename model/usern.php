@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+
 class User
 {
 
@@ -41,10 +41,7 @@ class User
 
             if ($stmt->rowCount() > 0) {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                $_SESSION['username'] = $row['name'];
-                $_SESSION['userid'] = $row['userid'];
-                $_SESSION['password'] = $row['password'];
-                $_SESSION['profilepic'] = $row['profilepic'];
+                return $row;
             } else {
                 return false;
             }
@@ -53,6 +50,8 @@ class User
             echo "Error: " . $e->getMessage();
         }
     }
+
+    
 }
 
 class RegisteredCustormer extends User
@@ -99,8 +98,8 @@ class RegisteredCustormer extends User
             $stmt->bindParam(2, $this->userid);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
-                $_SESSION['profilepic'] = $this->filepath;
-                return true;
+                
+                return $this->filepath;
             } else {
                 return false;
             }
@@ -109,14 +108,15 @@ class RegisteredCustormer extends User
         }
     }
 
-    public function updateUserInfo($name, $phoneno, $pdo)
+    public function updateUserInfo($name, $phoneno,$email, $pdo)
     {
         try {
-            $query = "UPDATE usern SET name=?, phoneno=? WHERE userid =?";
+            $query = "UPDATE usern SET name=?, phoneno=?,email=? WHERE userid =?";
             $stmt = $pdo->prepare($query);
             $stmt->bindParam(1, $name);
             $stmt->bindParam(2, $phoneno);
-            $stmt->bindParam(3, $this->userid);
+            $stmt->bindParam(3, $email);
+            $stmt->bindParam(4, $this->userid);
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {
@@ -163,23 +163,22 @@ class RegisteredCustormer extends User
         return false;
     }
 
+    
 
-    public function browserProducts($pdo) //browser products function
-    {
-
+    public function browserProducts($pdo) {
         try {
             $query = "SELECT * FROM products WHERE userid=?";
             $stmt = $pdo->prepare($query);
             $stmt->bindParam(1, $this->userid);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
-                $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                return $rows;
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
     }
+    
 
     public function checkemail($email, $pdo) //email check fogetpassword
     {
@@ -268,14 +267,94 @@ class RegisteredCustormer extends User
             echo "Error: " . $e->getMessage();
         }
     }
+    public function addtoWishlist($productid,$userid,$pdo){//wishlist inser funtion
+
+        try {
+            $query="INSERT INTO wishlist(productid,userid) VALUES (?,?)";
+            $stmt=$pdo->prepare($query);
+            $stmt->bindParam(1,$productid);
+            $stmt->bindParam(2,$userid);
+            $stmt->execute();
+            
+        } catch (PDOException $e) {
+
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    public function wishlistiteamcount($userid,$pdo){//wishlist item count function
+
+        try {
+            $query="SELECT *  FROM wishlist WHERE userid=?";
+            $stmt=$pdo->prepare($query);
+            $stmt->bindParam(1,$userid);
+            $stmt->execute();
+            $count=$stmt->rowcount();
+            return $count;
+        }catch (PDOException $e) {
+
+            echo "Error: " . $e->getMessage();
+        }
+    }
 }
 
 class Seller extends RegisteredCustormer
 {
-    private $productname, $price, $colour, $description, $category, $subcategory, $condition, $userid, $size, $filePath;
-    public function additemforthrifting($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath, $userid, $pdo)
+    private $productname, $price, $colour, $description, $category, $subcategory, $condition, $userid, $size, $filePath,$filepatho;
+    public function additemforthrifting($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath,$filepatho, $userid, $pdo)
     {
 
+        $this->productname = $productname;
+        $this->price = $price;
+        $this->colour = $colour;
+        $this->description = $description;
+        $this->category = $category;
+        $this->subcategory = $subcategory;
+        $this->size = $size;
+        $this->condition = $condition;
+        $this->filePath = $filePath;
+        $this->filepatho=$filepatho;
+        $this->userid = $userid;
+
+        try {
+            // Insert product into products table
+            $query = "INSERT INTO products (product_name, price, colour, description, category, subcategory, size, `condition`, image,otherimage, userid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(1, $this->productname);
+            $stmt->bindParam(2, $this->price);
+            $stmt->bindParam(3, $this->colour);
+            $stmt->bindParam(4, $this->description);
+            $stmt->bindParam(5, $this->category);
+            $stmt->bindParam(6, $this->subcategory);
+            $stmt->bindParam(7, $this->size);
+            $stmt->bindParam(8, $this->condition);
+            $stmt->bindParam(9, $this->filePath);
+            $stmt->bindParam(10,$this->filepatho);
+            $stmt->bindParam(11, $this->userid);
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+                // Get the last inserted product ID
+                $product_id = $pdo->lastInsertId();
+
+                // Insert into thrift table
+                $thrift_query = "INSERT INTO thrift (product_id, user_id) VALUES (?, ?)";
+                $thrift_stmt = $pdo->prepare($thrift_query);
+                $thrift_stmt->bindParam(1, $product_id);
+                $thrift_stmt->bindParam(2, $this->userid);
+                $thrift_stmt->execute();
+
+                if ($thrift_stmt->rowCount() > 0) {
+                    header("Location: ../view/thrift.php?success=Product Added.");
+                    exit();
+                }
+            }
+        } catch (PDOException $e) {
+
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    // Method to add a bid product
+    public function addItemForBidding($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath, $userid, $start_time, $end_time, $start_price, $pdo) {
         $this->productname = $productname;
         $this->price = $price;
         $this->colour = $colour;
@@ -307,17 +386,49 @@ class Seller extends RegisteredCustormer
                 // Get the last inserted product ID
                 $product_id = $pdo->lastInsertId();
 
-                // Insert into thrift table
-                $thrift_query = "INSERT INTO thrift (product_id, user_id) VALUES (?, ?)";
-                $thrift_stmt = $pdo->prepare($thrift_query);
-                $thrift_stmt->bindParam(1, $product_id);
-                $thrift_stmt->bindParam(2, $this->userid);
-                $thrift_stmt->execute();
+                // Insert into auction table
+                $auction_query = "INSERT INTO auction (product_id, userid, start_time, end_time, start_price) VALUES (?, ?, ?, ?, ?)";
+                $auction_stmt = $pdo->prepare($auction_query);
+                $auction_stmt->bindParam(1, $product_id);
+                $auction_stmt->bindParam(2, $this->userid);
+                $auction_stmt->bindParam(3, $start_time);
+                $auction_stmt->bindParam(4, $end_time);
+                $auction_stmt->bindParam(5, $start_price);
+                $auction_stmt->execute();
 
-                if ($thrift_stmt->rowCount() > 0) {
-                    header("Location: ../view/thrift.php?success=Product Added.");
+                if ($auction_stmt->rowCount() > 0) {
+                    header("Location: ../view/bidding.php?success=Product Added for Auction.");
                     exit();
                 }
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+}
+
+class Admin{
+
+    private $email;
+    public function __construct($email = null)
+    {
+        $this->email = $email;
+    }
+
+    public function loginAdmin($pdo){
+        try {
+            $query = "SELECT * FROM admin WHERE email=?";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([$this->email]);
+
+
+            if ($stmt->rowCount() > 0) {
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+             return $row['password'];
+                
+            } else {
+                return false;
             }
         } catch (PDOException $e) {
 
@@ -325,3 +436,4 @@ class Seller extends RegisteredCustormer
         }
     }
 }
+?>

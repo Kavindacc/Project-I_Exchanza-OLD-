@@ -1,4 +1,5 @@
-<?php require '../control/signupcon.php'; ?>
+<?php require '../control/signupcon.php'; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -85,17 +86,17 @@
             <div class="row justify-content-center mt-4">
                 <div class="col-md-4">
                     <label class="form-label">Full name</label>
-                    <input type="text" class="form-control" placeholder="First and Last name" name="name">
+                    <input type="text" class="form-control" placeholder="First and Last name" name="name" required>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Email Address</label>
-                    <input type="email" class="form-control" placeholder="example@gmail.com" name="email">
+                    <input type="email" class="form-control" placeholder="example@gmail.com" name="email" required>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-4">
                     <label class="form-label">Country</label>
-                    <select class="form-select" aria-label="Default select example" name="country">
+                    <select class="form-select" aria-label="Default select example" name="country" required>
                         <option value=""disabled selected hidden>--Select Country--</option>
                         <option value="Sri lanka">Sri lanka</option>
                         <option value="Uk">Uk</option>
@@ -103,13 +104,13 @@
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Phone number</label>
-                    <input type="tel" class="form-control" name="pnum">
+                    <input type="tel" class="form-control" name="pnum" required>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-4">
                     <label class="form-label">Gender</label>
-                    <select class="form-select" aria-label="Default select example" name="gender">
+                    <select class="form-select" aria-label="Default select example" name="gender" required>
                         <option value=""disabled selected hidden>--Select Gender--</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
@@ -117,13 +118,13 @@
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Password</label>
-                    <input class="form-control" type="password" name="password">
+                    <input class="form-control" type="password" name="password" required>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-4">
                     <label class="form-label">Repeat password</label>
-                    <input class="form-control" type="password" name="rpassword">
+                    <input class="form-control" type="password" name="rpassword" required>
                 </div>
                 <div class="col-md-4" style="margin-top:30px;">
                     <input class="btn btn-primary w-100 " type="submit" value="Register" name="register"style="background:#897062;border:none;">

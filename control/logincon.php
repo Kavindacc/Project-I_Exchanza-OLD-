@@ -2,41 +2,44 @@
 
 require '../model/usern.php';
 require '../model/dbconnection.php';
-
+session_start();
 
 if (isset($_POST['signin'])) {
-
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $password = htmlspecialchars(trim($_POST['password']));
-    $redirect=$_SESSION['redirect'];
+    $redirect = isset($_SESSION['redirect']) ? $_SESSION['redirect'] : null;
 
-    if (empty($password) || empty($email)) {
+    if (empty($email) || empty($password)) {
         header("Location: ../view/login.php?error=Email and password cannot be empty");
         exit();
     }
 
-    $obj = new User($email);
-   if ($email == "admin1@gmail.com") {
-        /*$rpassword = $obj->loginAdmin($email);
-        if ($rpassword && password_verify($password, $rpassword)) {
-            header("Location: ../view/admin.php"); //admin page
+    $admin = new Admin($email);//admin login
+    $rpassword = $admin->loginAdmin(Dbh::connect());
+    if ($rpassword) {
+        if ($password == $rpassword) {
+            header("Location: ../admin/index.php"); // admin page
             exit();
         } else {
             header("Location: ../view/login.php?error=Incorrect email or password");
             exit();
-        }*/
+        }
     } else {
-        $status = $obj->status(Dbh::connect()); //user.php function
-        if ($status == "active") {
-            $obj->login(Dbh::connect());
-            if (password_verify($password,$_SESSION['password'])) {
-                $_SESSION['logedin'] = true;
+        
+        $obj = new User($email);//userlogin
+        $status = $obj->status(Dbh::connect()); // user.php function
 
-                if (isset($redirect)) {//redirect page
+        if ($status == "active") {
+            $row=$obj->login(Dbh::connect());
+            if (password_verify($password, $row['password'])) {
+                $_SESSION['logedin'] = true;
+                $_SESSION['username'] = $row['name'];
+                $_SESSION['userid'] = $row['userid'];
+                $_SESSION['profilepic'] = $row['profilepic'];
+                if ($redirect) { // redirect page
                     header("Location: $redirect");
                     exit();
-                }
-                else{
+                } else {
                     header("Location: ../index.php");
                     exit();
                 }
@@ -50,4 +53,4 @@ if (isset($_POST['signin'])) {
         }
     }
 }
-
+?>
