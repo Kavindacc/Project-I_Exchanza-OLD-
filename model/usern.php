@@ -344,8 +344,7 @@ class Seller extends RegisteredCustormer
                 $thrift_stmt->execute();
 
                 if ($thrift_stmt->rowCount() > 0) {
-                    header("Location: ../view/thrift.php?success=Product Added.");
-                    exit();
+                    return true;
                 }
             }
         } catch (PDOException $e) {

@@ -57,14 +57,22 @@ session_start();
                     </form>
                     <!--login nav-link-a-color-->
                     <div class="d-flex flex-column float-start flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
-                    <?php
+                        <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
                             <?php $obj = new wishlist();
                             $count = $obj->additemcount($_SESSION['userid'], Dbh::connect()); ?>
-                            <a href="cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"><?php if (isset($count)) { echo $count; } else {  echo 0; } ?></span></i></a><!--addtocart-->
+                            <a href="cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"><?php if (isset($count)) {
+                                                                                                                                                                                                                                    echo $count;
+                                                                                                                                                                                                                                } else {
+                                                                                                                                                                                                                                    echo 0;
+                                                                                                                                                                                                                                } ?></span></i></a><!--addtocart-->
                             <?php $obj = new RegisteredCustormer();
                             $count = $obj->wishlistiteamcount($_SESSION['userid'], Dbh::connect()); ?>
-                            <a href="wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if (isset($count)) { echo $count; } else {  echo 0; } ?></span></i></a><!--addto wishlist-->
+                            <a href="wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if (isset($count)) {
+                                                                                                                                                                                                                                    echo $count;
+                                                                                                                                                                                                                                } else {
+                                                                                                                                                                                                                                    echo 0;
+                                                                                                                                                                                                                                } ?></span></i></a><!--addto wishlist-->
 
                             <a href="userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user" style="font-size:1.5rem;"></i></a>
 
@@ -163,31 +171,34 @@ session_start();
         $rows = $obj->getdetails($_SESSION['category'], $_SESSION['subcategory'], Dbh::connect());
         if (isset($rows) && !empty($rows)) {
             foreach ($rows as $row) { ?>
-                <div class="card m- pt-2" style="width: 17rem;">
-                    <a href="item_template.php?id=<?php echo $row['product_id']; ?>"><img src="../upload/<?php echo $row['image'] ?>" class="card-img-top" alt="..." style="height:10rem;" href="items_template.php"></a>
+                <div class="card m-2 p-2" style="width: 17rem; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden;">
+                    <a href="item_template.php?id=<?php echo $row['product_id']; ?>">
+                        <img src="../upload/<?php echo $row['image'] ?>" class="card-img-top" alt="Product Image" style="height: 15rem; object-fit: cover;">
+                    </a>
                     <div class="card-body">
-                        <h3 class="card-title"><?php echo $row['product_name']; ?></h3>
-                        <h4 class="card-text"><?php if (isset($row['size'])) {
-                                                    echo $row['size'];
-                                                } ?></h4>
-                        <h5 class="card-text">Rs.<?php echo $row['price']; ?></h5>
+                        <h3 class="card-title" style="font-size: 1.2rem; font-weight: bold; color: #333;"><?php echo $row['product_name']; ?></h3>
+                        <h4 class="card-text" style="font-size: 1rem; color: #777;"><?php if (isset($row['size'])) {
+                                                                                        echo $row['size'];
+                                                                                    } ?></h4>
+                        <h5 class="card-text" style="font-size: 1rem; color: #555;">Rs.<?php echo $row['price']; ?></h5>
                         <form action="../control/wishlistcon.php" method="post"><!--wishlistform-->
                             <input type="hidden" name="productid" value="<?php echo $row['product_id']; ?>">
                             <?php if (!isset($_SESSION['logedin']) || $_SESSION['logedin'] !== true) {
                                 $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; //get current page 
                                 $_SESSION['redirect'] = $currentPage; ?>
                                 <a href="login.php" style="text-decoration: none;">
-                                    <button type="button" class="btn btn-primary mt-2  equal-width" style="--bs-btn-color:black;--bs-btn-bg:none;--bs-btn-border-color:black; --bs-btn-hover-bg:#4c3f31;"><i class="fa-regular fa-heart"></i>&nbsp;Add to Wishlist</button>
+                                    <button type="button" class="btn btn-primary mt-2 equal-width" style="--bs-btn-color: white; --bs-btn-bg: #007bff; --bs-btn-border-color: #007bff; --bs-btn-hover-bg: #0056b3;"><i class="fa-regular fa-heart"></i>&nbsp;Add to Wishlist</button>
                                 </a>
                             <?php } else { ?>
-                                <button type="submit" class="btn btn-primary mt-2  equal-width" name="wishlist" style="--bs-btn-color:black;--bs-btn-bg:none;--bs-btn-border-color:black; --bs-btn-hover-bg:#4c3f31;"><i class="fa-regular fa-heart"></i>&nbsp;Add to Wishlist</button>
+                                <button type="submit" class="btn btn-primary mt-2 equal-width" name="wishlist" style="--bs-btn-color: white; --bs-btn-bg: #007bff; --bs-btn-border-color: #007bff; --bs-btn-hover-bg: #0056b3;"><i class="fa-regular fa-heart"></i>&nbsp;Add to Wishlist</button>
                             <?php } ?>
                         </form>
                     </div>
                 </div>
+
             <?php }
         } else { ?>
-            <h2>No Iteam</h2>
+            <h2>No Items</h2>
         <?php } ?>
 
 

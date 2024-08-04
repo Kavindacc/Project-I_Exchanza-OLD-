@@ -57,24 +57,32 @@ session_start();
           </form>
           <!--login nav-link-a-color-->
           <div class="d-flex flex-column float-start flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
-          <?php
-                if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
-                  <?php $obj = new wishlist();
-                       $count = $obj->additemcount($_SESSION['userid'], Dbh::connect()); ?>
-                       <a href="cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"><?php if (isset($count)) { echo $count; } else {  echo 0; } ?></span></i></a><!--addtocart-->
-                       <?php $obj = new RegisteredCustormer();
-                       $count = $obj->wishlistiteamcount($_SESSION['userid'], Dbh::connect()); ?>
-                      <a href="wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if (isset($count)) { echo $count; } else {  echo 0; } ?></span></i></a><!--addto wishlist-->
+            <?php
+            if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
+              <?php $obj = new wishlist();
+              $count = $obj->additemcount($_SESSION['userid'], Dbh::connect()); ?>
+              <a href="cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"><?php if (isset($count)) {
+                                                                                                                                                                                                                    echo $count;
+                                                                                                                                                                                                                  } else {
+                                                                                                                                                                                                                    echo 0;
+                                                                                                                                                                                                                  } ?></span></i></a><!--addtocart-->
+              <?php $obj = new RegisteredCustormer();
+              $count = $obj->wishlistiteamcount($_SESSION['userid'], Dbh::connect()); ?>
+              <a href="wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if (isset($count)) {
+                                                                                                                                                                                                                    echo $count;
+                                                                                                                                                                                                                  } else {
+                                                                                                                                                                                                                    echo 0;
+                                                                                                                                                                                                                  } ?></span></i></a><!--addto wishlist-->
 
-                       <a href="userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user" style="font-size:1.5rem;"></i></a>
+              <a href="userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user" style="font-size:1.5rem;"></i></a>
 
 
-                       <?php echo "Hi," . $_SESSION['username']; ?>
-                 <?php } else { ?>
-                       <a href="login.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"></span></i></a><!--addtocart-->
-                       <a href="login.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"></i></a>
-                       <a href="login.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3" style="color:#ffff;">login</button></a>
-            <?php } ?>        
+              <?php echo "Hi," . $_SESSION['username']; ?>
+            <?php } else { ?>
+              <a href="login.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"></span></i></a><!--addtocart-->
+              <a href="login.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"></i></a>
+              <a href="login.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3" style="color:#ffff;">login</button></a>
+            <?php } ?>
           </div>
         </div>
       </div>
@@ -88,16 +96,16 @@ session_start();
       if (isset($_GET['s']) && !empty($_GET['s'])) {
         if ($_GET['s'] == '1') {
           $msg = "Item Successfully Added to the Cart.";
-        } else if($_GET['s'] == '2') {
-          $msg = "Product already Addto cart.";
-        }else{
-          $msg = "Product not Addto cart.";
-         } ?>
+        } else if ($_GET['s'] == '2') {
+          $msg = "Product already added to cart.";
+        } else {
+          $msg = "Product not added to cart.";
+        } ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
           <strong><?php echo $msg; ?></strong>
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-     <?php }
+      <?php }
       ?>
       <?php if (isset($_SESSION['rmsg'])) { ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -106,53 +114,53 @@ session_start();
         </div>
       <?php unset($_SESSION['rmsg']);
       } ?>
-      <?php $obj = new wishlist();
+      <?php 
+      $obj = new wishlist();
       $rows = $obj->wishlistitemdetails($_SESSION['userid'], Dbh::connect());
       if (isset($rows)) { ?>
-        <table class="table" style="cursor: context-menu;">
+        <table class="table table-striped table-hover align-middle">
           <thead class="table-primary">
             <tr>
-              <th scope="col">THUMBNAIL</th>
-              <th scope="col">TITLE</th>
-              <th scope="col">PRICE</th>
-              <th scope="col">ADD TO CART</th>
-              <th scope="col">REMOVE</th>
+              <th scope="col">Thumbnail</th>
+              <th scope="col">Title</th>
+              <th scope="col">Price</th>
+              <th scope="col">Add to Cart</th>
+              <th scope="col">Remove</th>
             </tr>
           </thead>
           <tbody>
-
             <?php foreach ($rows as $row) {
               $modalId = "staticBackdrop" . $row['wishlistid']; ?>
-              <tr class="vertical-center">
-                <td><img src="<?php echo $row['image']; ?>" class="table-image"></td>
+              <tr>
+                <td><img src="<?php echo $row['image']; ?>" class="table-image" style="width: 100px; height: auto;"></td>
                 <td><?php echo $row['product_name']; ?></td>
-                <td><?php echo $row['price']; ?></td>
+                <td>Rs. <?php echo $row['price']; ?></td>
                 <td>
-                  <form action="../control/addtocart.php" method="post"><!--addtocart-->
-
+                  <form action="../control/addtocart.php" method="post">
                     <input type="hidden" name="userid" value="<?php echo $_SESSION['userid']; ?>">
                     <input type="hidden" name="itemid" value="<?php echo $row['productid']; ?>">
                     <input type="hidden" name="price" value="<?php echo $row['price']; ?>">
                     <input type="hidden" name="pname" value="<?php echo $row['product_name']; ?>">
                     <input type="hidden" name="img" value="<?php echo $row['image']; ?>">
-                    <button type="submit" class="btn btn-secondary" name="addtocart" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Add to Cart</button>
+                    <button type="submit" class="btn btn-secondary" name="addtocart" style="background-color: #897062; color: white; border: none;">Add to Cart</button>
                   </form>
                 </td>
-                <td> <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .6rem; --bs-btn-font-size: .75rem;"> <i class="fa-solid fa-circle-xmark" style="font-size:1.6rem;cursor: pointer;margin-left:.7rem;"></i> </button>
+                <td>
+                  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#<?php echo $modalId; ?>" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;">
+                    <i class="fa-solid fa-circle-xmark" style="font-size: 1.6rem; cursor: pointer; margin-left: 0.7rem;"></i>
+                  </button>
                   <div class="modal fade" id="<?php echo $modalId; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="<?php echo $modalId; ?>Label" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-sm">
-                      <div class="modal-content" style="background:#AE9D92;color:#ffff;">
+                      <div class="modal-content" style="background: #AE9D92; color: white;">
                         <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="<?php echo $modalId; ?>Label">Do you Want to Remove?</h1>
+                          <h1 class="modal-title fs-5" id="<?php echo $modalId; ?>Label">Do you want to remove?</h1>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <form action="../control/wishlistcon.php" method="post"><!--form data-->
+                          <form action="../control/wishlistcon.php" method="post">
                             <input type="hidden" name="wishlistid" value="<?php echo $row['wishlistid']; ?>">
-                            <button type="submit" class="btn btn-danger" name="remove">
-                              Remove
-                            </button>
+                            <button type="submit" class="btn btn-danger" name="remove">Remove</button>
                           </form>
                         </div>
                       </div>
@@ -161,16 +169,28 @@ session_start();
                 </td>
               </tr>
             <?php } ?>
-
-
           </tbody>
         </table>
       <?php } else { ?>
-        <h3>No Item Add Wishlist</h3>
-      <?php }
-      ?>
+        <h3>No items in wishlist</h3>
+      <?php } ?>
     </div>
   </div>
+
+<style>
+  .table-image {
+    width: 100px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .modal-content {
+    border-radius: 8px;
+    padding: 1rem;
+  }
+</style>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 

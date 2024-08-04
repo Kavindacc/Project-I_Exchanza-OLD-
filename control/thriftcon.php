@@ -74,16 +74,18 @@ if (isset($_POST['submit'])) {
 
     if ($filePath !== null || $filePatho !== null) {
         $obj = new Seller();
-        $obj->additemforthrifting($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath, $filePatho, $userid, Dbh::connect());
+        if ($obj->additemforthrifting($productname, $price, $colour, $description, $category, $subcategory, $size, $condition, $filePath, $filePatho, $userid, Dbh::connect())) {
+            header("Location: ../view/thrift.php?s=1"); //thrift page
+            exit();
+        }
     } else {
         $errors[] = "File upload failed or no file uploaded.";
     }
 
     if (!empty($errors)) {
         foreach ($errors as $error) {
-            header("Location: ../view/thrift.php?error=$error."); //thrift page
+            header("Location: ../view/thrift.php?s=0"); //thrift page
             exit();
         }
     }
 }
-?>

@@ -150,34 +150,34 @@ require '../model/dbconnection.php';
             <div class="row">
                 <div class="col-md-6">
                     <h2 class="mb-4">Add Item to Resell</h2>
-                    <form id="resellForm">
+                    <form action="../control/thriftcon.php" method="post" enctype="multipart/form-data" id="resellForm">
                         <div class="form-group">
                             <label for="itemName" class="bold">Item Name</label>
-                            <input type="text" class="form-control" id="itemName" placeholder="Enter item name" required>
+                            <input type="text" class="form-control" id="itemName" placeholder="Enter item name" name="itemname" required>
                         </div>
                         <div class="form-group">
                             <label for="price" class="bold">Price (Rs.)</label>
-                            <input type="number" class="form-control" id="price" placeholder="Enter price" required>
+                            <input type="number" class="form-control" id="price" placeholder="Enter price" name="price"  required>
                         </div>
                         <div class="form-group">
                             <label for="color" class="bold">Color</label>
-                            <input type="color" class="form-control" id="color" required>
+                            <input type="color" class="form-control" id="color" name="colour" required>
                         </div>
                         <div class="form-group">
                             <label for="coverImage" class="bold">Cover Image</label>
-                            <input type="file" class="form-control-file" id="coverImage" required>
+                            <input type="file" class="form-control-file" id="coverImage" name="image" required>
                         </div>
                         <div class="form-group">
                             <label for="otherImages" class="bold">Other Images (Optional)</label>
-                            <input type="file" class="form-control-file" id="otherImages" multiple>
+                            <input type="file" class="form-control-file" id="otherImages" name="otherimage" multiple>
                         </div>
                         <div class="form-group">
                             <label for="description" class="bold">Description</label>
-                            <textarea class="form-control" id="description" rows="3" placeholder="Enter description" required></textarea>
+                            <textarea class="form-control" id="description" rows="3" placeholder="Enter description" name="description" required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="category" class="bold">Category</label>
-                            <select class="form-control" id="category" required>
+                            <select class="form-control" id="category" name="category" required>
                                 <option value="">Select Category</option>
                                 <!-- <option value="men">Men</option>
                                 <option value="women">Women</option> -->
@@ -186,10 +186,10 @@ require '../model/dbconnection.php';
                         </div>
                         <div class="form-group hidden" id="subcategoryWrapper">
                             <label for="subcategory" class="bold">Subcategory</label>
-                            <select class="form-control" id="subcategory">
+                            <select class="form-control" name="subcategory" id="subcategory">
                                 <option value="">Select Subcategory</option>
-                                <option value="tops">Clothes</option>
-                                <option value="dresses">Toys and accessoris</option>
+                                <option value="clothes">Clothes</option>
+                                <option value="toys">Toys and accessoris</option>
                                 <!-- <option value="pants">Pants</option>
                                 <option value="accessories">Accessories</option>
                                 <option value="bags">Bags</option>
@@ -217,10 +217,10 @@ require '../model/dbconnection.php';
                         </div>
                         <div class="form-group">
                             <label for="timesUsed" class="bold">Condition</label>
-                            <input type="number" class="form-control" id="timesUsed" placeholder="Enter number of times used" required>
+                            <input type="number" class="form-control" id="timesUsed" placeholder="Enter number of times used" name="condition" required>
                             <small class="form-text text-muted">Please provide an estimate of how many times this item has been used.</small>
                         </div>
-                        <button type="submit" class="btn btn-primary ssubmit">Submit</button>
+                        <button type="submit" class="btn btn-primary ssubmit" name="submit">Submit</button>
                     </form>
                 </div>
                 <div class="col-md-6">

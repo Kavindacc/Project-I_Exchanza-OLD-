@@ -18,10 +18,37 @@ session_start();
     <link rel="stylesheet" href="thriftW.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Thrift</title>
+    <style>
+        /* Popup container */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #888;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            z-index: 999;
+        }
+    </style>
 </head>
 
 <body style="background: none;">
-<!--nav bar-->
+    <!--nav bar-->
     <nav class="navbar navbar-expand-lg sticky-top nav">
         <div class="container-fluid logo"><!--logo-->
             <a class="navbar-brand" href="#"><img src="../img/Exchanza.png" width="100px"></a>
@@ -58,14 +85,22 @@ session_start();
                     </form>
                     <!--login nav-link-a-color-->
                     <div class="d-flex flex-column float-start flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
-                    <?php
+                        <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
                             <?php $obj = new wishlist();
                             $count = $obj->additemcount($_SESSION['userid'], Dbh::connect()); ?>
-                            <a href="cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"><?php if (isset($count)) { echo $count; } else {  echo 0; } ?></span></i></a><!--addtocart-->
+                            <a href="cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"><?php if (isset($count)) {
+                                                                                                                                                                                                                                    echo $count;
+                                                                                                                                                                                                                                } else {
+                                                                                                                                                                                                                                    echo 0;
+                                                                                                                                                                                                                                } ?></span></i></a><!--addtocart-->
                             <?php $obj = new RegisteredCustormer();
                             $count = $obj->wishlistiteamcount($_SESSION['userid'], Dbh::connect()); ?>
-                            <a href="wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if (isset($count)) { echo $count; } else {  echo 0; } ?></span></i></a><!--addto wishlist-->
+                            <a href="wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if (isset($count)) {
+                                                                                                                                                                                                                                    echo $count;
+                                                                                                                                                                                                                                } else {
+                                                                                                                                                                                                                                    echo 0;
+                                                                                                                                                                                                                                } ?></span></i></a><!--addto wishlist-->
 
                             <a href="userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user" style="font-size:1.5rem;"></i></a>
 
@@ -82,15 +117,17 @@ session_start();
         </div>
     </nav>
 
-<!-- thrift arena -->
+    <!-- thrift arena -->
     <div class="container arena">
+    <?php if (isset($_GET['s'])) { 
+    $msg = $_GET['s'] == "1" ? "Product added." : "Product Not added."; ?>
+    <script type="text/javascript">
+        alert("<?php echo $msg; ?>");
+    </script>
+<?php } ?>
+
         <div class="artext">
-            <?php if (isset($_GET['success'])) { //success
-                echo $_GET['success'];
-            } ?>
-            <?php if (isset($_GET['error'])) { //error
-                echo $_GET['error'];
-            } ?>
+
             <p>Thrift Arena</p>
         </div>
 
@@ -122,7 +159,7 @@ session_start();
         </svg>
         <!-- </a> -->
     </div>
-<!-- sidepanel -->
+    <!-- sidepanel -->
     <div id="sidePanel" class="side-panel">
         <button id="closePanel" class="close-btn">&times;</button>
         <img src="../img/thriftstat3.jpg" alt="Thrift Image" class="panel-image">
@@ -248,7 +285,7 @@ session_start();
 
 
 
-<!-- image container -->
+    <!-- image container -->
     <div class="container thrift" id="thriftwomen">
         <img src="../img/thrift-women.png" alt="women thrift intro" class="thriftwomen">
 
@@ -267,108 +304,108 @@ session_start();
 
     </div>
 
-<!-- cats -->
+    <!-- cats -->
     <div class="container text-center">
         <div class="row row-col-6 catr">
 
             <!--item categogy and sub link-->
             <!-- <div class="col r1"> -->
 
-                <div class="col r1">
+            <div class="col r1">
 
-                    <a href="cat_items_template.php?cat=women&sub=tops"><!--iteam show page-->
-                        <img src="../img/TopsW.jpg" alt="women thrift cat1" class="rounded-circle img-fluid twc1">
-                    </a>
-                    <p class="hide"> Tops </p> 
-                </div>
+                <a href="cat_items_template.php?cat=women&sub=tops"><!--iteam show page-->
+                    <img src="../img/TopsW.jpg" alt="women thrift cat1" class="rounded-circle img-fluid twc1">
+                </a>
+                <p class="hide"> Tops </p>
+            </div>
 
-                <div class="col r2">
-                    <a href="cat_items_template.php?cat=women&sub=dresses">
-                        <img src="../img/dressW.jpg" alt="women thrift cat2" class="rounded-circle img-fluid twc2">
-                    </a>
-                    <p class="hide"> Dresses </p> 
-                </div>
+            <div class="col r2">
+                <a href="cat_items_template.php?cat=women&sub=dresses">
+                    <img src="../img/dressW.jpg" alt="women thrift cat2" class="rounded-circle img-fluid twc2">
+                </a>
+                <p class="hide"> Dresses </p>
+            </div>
 
-                <div class="col r3">
-                    <a href="cat_items_template.php?cat=women&sub=pants">
-                        <img src="../img/denimW.jpg" alt="women thrift cat3" class="rounded-circle img-fluid twc3">
-                    </a>
-                    <p class="hide"> Pants </p> 
-                </div>
+            <div class="col r3">
+                <a href="cat_items_template.php?cat=women&sub=pants">
+                    <img src="../img/denimW.jpg" alt="women thrift cat3" class="rounded-circle img-fluid twc3">
+                </a>
+                <p class="hide"> Pants </p>
+            </div>
 
-                <div class="col r4">
-                    <a href="cat_items_template.php?cat=women&sub=accessories">
-                        <img src="../img/acsW.jpg" alt="women thrift cat4" class="rounded-circle img-fluid twc4">
-                    </a>
-                    <p class="hide"> Accessories </p> 
-                </div>
+            <div class="col r4">
+                <a href="cat_items_template.php?cat=women&sub=accessories">
+                    <img src="../img/acsW.jpg" alt="women thrift cat4" class="rounded-circle img-fluid twc4">
+                </a>
+                <p class="hide"> Accessories </p>
+            </div>
 
-                <div class="col r5">
-                    <a href="cat_items_template.php?cat=women&sub=bags">
-                        <img src="../img/bagW.jpg" alt="women thrift cat5" class="rounded-circle img-fluid twc5">
-                    </a>
-                    <p class="hide"> Bags </p> 
-                </div>
+            <div class="col r5">
+                <a href="cat_items_template.php?cat=women&sub=bags">
+                    <img src="../img/bagW.jpg" alt="women thrift cat5" class="rounded-circle img-fluid twc5">
+                </a>
+                <p class="hide"> Bags </p>
+            </div>
 
-                <div class="col r6">
-                    <a href="cat_items_template.php?cat=women&sub=shoes">
-                        <img src="../img/ShoeW.jpg" alt="women thrift cat6" class="rounded-circle img-fluid twc6">
-                    </a>
-                    <p class="hide"> Shoes </p> 
-                </div>
-
+            <div class="col r6">
+                <a href="cat_items_template.php?cat=women&sub=shoes">
+                    <img src="../img/ShoeW.jpg" alt="women thrift cat6" class="rounded-circle img-fluid twc6">
+                </a>
+                <p class="hide"> Shoes </p>
             </div>
 
         </div>
 
-<!-- review  div-->
-        <div class="container ">
-            <div class="row des">
-                <div class="col-5 stat">
-                    <h2>Why Thrift</h2>
-                    <div class="row stat1">
-                        <img src="../img/thriftstat.jpg" alt="thrift stat" class="rounded-circle img-fluid ts1">
-                        <h3>QUALITY ASSURED</h3>
-                        <p>We quality check every single item on<br><b>Exchanza.</b><br>No more surprise stains or fake brands. </p>
-                    </div>
-                    <div class="row stat2">
-                        <img src="../img/thrift stat2.jpg" alt="thrift stat" class="rounded-circle img-fluid ts2">
-                        <h3>QUALITY ASSURED</h3>
-                        <p>We quality check every single item on<br><b>Exchanza.</b><br>No more surprise stains or fake brands. </p>
-                    </div>
-                    <div class="row stat3">
-                        <img src="../img/thrift stat4.jpg" alt="thrift stat" class="rounded-circle img-fluid ts3">
-                        <h3>QUALITY ASSURED</h3>
-                        <p>We quality check every single item on<br><b>Exchanza.</b><br>No more surprise stains or fake brands. </p>
-                    </div>
+    </div>
+
+    <!-- review  div-->
+    <div class="container ">
+        <div class="row des">
+            <div class="col-5 stat">
+                <h2>Why Thrift</h2>
+                <div class="row stat1">
+                    <img src="../img/thriftstat.jpg" alt="thrift stat" class="rounded-circle img-fluid ts1">
+                    <h3>QUALITY ASSURED</h3>
+                    <p>We quality check every single item on<br><b>Exchanza.</b><br>No more surprise stains or fake brands. </p>
                 </div>
-                <div class="col-7">
-                    <div class="container text-center">
-                        <h2>Hear It From Others</h2>
-                        <div class="row revieW">
-                            <section class="reviews">
-                                <div class="review1">
-                                    <img src="https://via.placeholder.com/150" alt="George">
-                                    <blockquote>
-                                        <p>"Secondhand has never been so simple. There's no reason to buy new anymore. You get great quality clothes and you're doing some good for the planet."</p>
-                                        <cite>George</cite>
-                                    </blockquote>
-                                </div>
-                                <div class="review2">
-                                    <img src="https://via.placeholder.com/150" alt="Alex">
-                                    <blockquote>
-                                        <p>"I've never been into thrifting because I thought it would take too much time - but Thrift+ has converted me! It's so quick and easy to find exactly what I am looking for."</p>
-                                        <cite>Alex</cite>
-                                    </blockquote>
-                                </div>
-                            </section>
-                        </div>
+                <div class="row stat2">
+                    <img src="../img/thrift stat2.jpg" alt="thrift stat" class="rounded-circle img-fluid ts2">
+                    <h3>QUALITY ASSURED</h3>
+                    <p>We quality check every single item on<br><b>Exchanza.</b><br>No more surprise stains or fake brands. </p>
+                </div>
+                <div class="row stat3">
+                    <img src="../img/thrift stat4.jpg" alt="thrift stat" class="rounded-circle img-fluid ts3">
+                    <h3>QUALITY ASSURED</h3>
+                    <p>We quality check every single item on<br><b>Exchanza.</b><br>No more surprise stains or fake brands. </p>
+                </div>
+            </div>
+            <div class="col-7">
+                <div class="container text-center">
+                    <h2>Hear It From Others</h2>
+                    <div class="row revieW">
+                        <section class="reviews">
+                            <div class="review1">
+                                <img src="https://via.placeholder.com/150" alt="George">
+                                <blockquote>
+                                    <p>"Secondhand has never been so simple. There's no reason to buy new anymore. You get great quality clothes and you're doing some good for the planet."</p>
+                                    <cite>George</cite>
+                                </blockquote>
+                            </div>
+                            <div class="review2">
+                                <img src="https://via.placeholder.com/150" alt="Alex">
+                                <blockquote>
+                                    <p>"I've never been into thrifting because I thought it would take too much time - but Thrift+ has converted me! It's so quick and easy to find exactly what I am looking for."</p>
+                                    <cite>Alex</cite>
+                                </blockquote>
+                            </div>
+                        </section>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<!--footer-->
+    </div>
+    <!--footer-->
     <div class="container-fluid footer">
         <div class="container p-3">
             <div class="row">
