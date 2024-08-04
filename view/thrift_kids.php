@@ -124,7 +124,7 @@ require '../model/dbconnection.php';
       </svg>
   <!-- </a> -->
  </div>
- <!-- sidepanel -->
+<!-- sidepanel -->
  <div id="sidePanel" class="side-panel">
         <button id="closePanel" class="close-btn">&times;</button>
         <img src="../img/thriftstat3.jpg" alt="Thrift Image" class="panel-image">
