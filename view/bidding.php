@@ -252,13 +252,13 @@ $finishedBids = $auction->getFinishedAuctions();
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center  flex-grow-1 pe-3">
                         <li class="nav-item mx-2">
-                            <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
+                            <a class="nav-link" aria-current="page" href="../index.php">Home</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="../view/thrift.php">Thrift</a>
+                            <a class="nav-link" href="thrift.php">Thrift</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="../view/bidding.php">Bidding</a>
+                            <a class="nav-link active" href="">Bidding</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="">Selling</a>
@@ -274,7 +274,7 @@ $finishedBids = $auction->getFinishedAuctions();
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
 
-                            <a href="view/userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user"style="font-size:1.5rem;"></i></a>
+                            <a href="userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user"style="font-size:1.5rem;"></i></a>
 
                             <?php echo "Hi," . $_SESSION['username']; ?>
                         <?php } else { ?>
@@ -476,7 +476,7 @@ $finishedBids = $auction->getFinishedAuctions();
 
         </div>
     </div>
-
+</div>
     <!--footer-->
     <div class="container-fluid footer">
         <div class="container p-3">
