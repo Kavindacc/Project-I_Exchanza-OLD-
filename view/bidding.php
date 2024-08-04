@@ -13,8 +13,6 @@ $finishedBids = $auction->getFinishedAuctions();
 
     date_default_timezone_set('Asia/Colombo');
 
-
-
 ?>
 
 
@@ -34,78 +32,80 @@ $finishedBids = $auction->getFinishedAuctions();
     <script>
     
     function updateCountdown(startTime, endTime, countdownDomId, auctionId) {
-    var interval = setInterval(function() {
-        let startDate = new Date(startTime);
-        let endDate = new Date(endTime);
+            var interval = setInterval(function() {
+                let startDate = new Date(startTime);
+                let endDate = new Date(endTime);
 
-        if (!startDate) {
-            document.getElementById(countdownDomId).innerHTML = '00:00:00:00';
-        } else {
-            var now = new Date().getTime();
-            var distanceToStart = startDate.getTime() - now;
-            var distanceToEnd = endDate.getTime() - now;
-            var timeLabel = "Time Left to Start: ";
-
-            if (distanceToStart < 0) {
-                if (distanceToEnd < 0) {
-                    clearInterval(interval);
-                    document.getElementById(countdownDomId).innerHTML = 'Bidding finished';
-                    moveToFinished(auctionId);
-                    return;
+                if (!startDate) {
+                    document.getElementById(countdownDomId).innerHTML = '00:00:00:00';
                 } else {
-                    distanceToStart = distanceToEnd;
-                    timeLabel = "Time Left to End: ";
-                    moveToOngoing(auctionId);
+                    var now = new Date().getTime();
+                    var distanceToStart = startDate.getTime() - now;
+                    var distanceToEnd = endDate.getTime() - now;
+                    var timeLabel = "Time Left to Start: ";
+
+                    if (distanceToStart < 0) {
+                        if (distanceToEnd < 0) {
+                            clearInterval(interval);
+                            document.getElementById(countdownDomId).innerHTML = 'Bidding finished';
+                            moveToFinished(auctionId);
+                            return;
+                        } else {
+                            distanceToStart = distanceToEnd;
+                            timeLabel = "Time Left to End: ";
+                            moveToOngoing(auctionId);
+                        }
+                    }
+
+                    var days = Math.floor(distanceToStart / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distanceToStart % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distanceToStart % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distanceToStart % (1000 * 60)) / 1000);
+
+                    document.getElementById(countdownDomId).innerHTML = `${timeLabel} ${(days + '').padStart(2, '0')}:${(hours + '').padStart(2, '0')}:${(minutes + '').padStart(2, '0')}:${(seconds + '').padStart(2, '0')}`;
                 }
+            }, 1000);
+        }
+
+        function moveToOngoing(auctionId) {
+            var bidCard = document.getElementById('bidCard' + auctionId);
+            var ongoingContainer = document.querySelector('.ongoing .product-container');
+            if (bidCard && ongoingContainer && !bidCard.classList.contains('moved-to-ongoing')) {
+                ongoingContainer.appendChild(bidCard);
+                bidCard.classList.add('moved-to-ongoing');
+                var bidButton = bidCard.querySelector('.card-btn');
+                bidButton.innerHTML = "Bid Now";
             }
-
-            var days = Math.floor(distanceToStart / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distanceToStart % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distanceToStart % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distanceToStart % (1000 * 60)) / 1000);
-
-            document.getElementById(countdownDomId).innerHTML = `${timeLabel} ${(days + '').padStart(2, '0')}:${(hours + '').padStart(2, '0')}:${(minutes + '').padStart(2, '0')}:${(seconds + '').padStart(2, '0')}`;
         }
-    }, 1000);
-}
 
-    function moveToOngoing(auctionId) {
-        var bidCard = document.getElementById('bidCard' + auctionId);
-        var ongoingContainer = document.querySelector('.ongoing .product-container');
-        if (bidCard && ongoingContainer && !bidCard.classList.contains('moved-to-ongoing')) {
-            ongoingContainer.appendChild(bidCard);
-            bidCard.classList.add('moved-to-ongoing');
+        function moveToFinished(auctionId) {
+            var bidCard = document.getElementById('bidCard' + auctionId);
+            var finishedContainer = document.querySelector('.finished .product-container');
+            if (bidCard && finishedContainer && !bidCard.classList.contains('moved-to-finished')) {
+                finishedContainer.appendChild(bidCard);
+                bidCard.classList.add('moved-to-finished');
+                var bidButton = bidCard.querySelector('.card-btn');
+                bidButton.innerHTML = "View Bid";
+            }
         }
-    }
 
-    function moveToFinished(auctionId) {
-        var bidCard = document.getElementById('bidCard' + auctionId);
-        var finishedContainer = document.querySelector('.finished .product-container');
-        if (bidCard && finishedContainer && !bidCard.classList.contains('moved-to-finished')) {
-            finishedContainer.appendChild(bidCard);
-            bidCard.classList.add('moved-to-finished');
-        }
-    }
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php foreach ($ongoingBids as $auction) { ?>
+                updateCountdown('<?php echo $auction['start_time']; ?>', '<?php echo $auction['end_time']; ?>', 'ongoingCountdown<?php echo $auction['auction_id']; ?>', <?php echo $auction['auction_id']; ?>);
+            <?php } ?>
 
-    document.addEventListener('DOMContentLoaded', function() {
-        // Ongoing Biddings
-        <?php foreach ($ongoingBids as $auction) { ?>
-            updateCountdown('<?php echo $auction['start_time']; ?>', '<?php echo $auction['end_time']; ?>', 'ongoingCountdown<?php echo $auction['auction_id']; ?>', <?php echo $auction['auction_id']; ?>);
-        <?php } ?>
+            <?php foreach ($upcomingBids as $auction) { ?>
+                updateCountdown('<?php echo $auction['start_time']; ?>', '<?php echo $auction['end_time']; ?>', 'upcomingCountdown<?php echo $auction['auction_id']; ?>', <?php echo $auction['auction_id']; ?>);
+            <?php } ?>
 
-        // Upcoming Biddings
-        <?php foreach ($upcomingBids as $auction) { ?>
-            updateCountdown('<?php echo $auction['start_time']; ?>', '<?php echo $auction['end_time']; ?>', 'upcomingCountdown<?php echo $auction['auction_id']; ?>', <?php echo $auction['auction_id']; ?>);
-        <?php } ?>
-
-        // Finished Biddings
-        <?php foreach ($finishedBids as $auction) { ?>
-            updateCountdown('<?php echo $auction['start_time']; ?>', '<?php echo $auction['end_time']; ?>', 'finishedCountdown<?php echo $auction['auction_id']; ?>', <?php echo $auction['auction_id']; ?>);
-        <?php } ?>
-    });
+            <?php foreach ($finishedBids as $auction) { ?>
+                updateCountdown('<?php echo $auction['start_time']; ?>', '<?php echo $auction['end_time']; ?>', 'finishedCountdown<?php echo $auction['auction_id']; ?>', <?php echo $auction['auction_id']; ?>);
+            <?php } ?>
+        });
 
 
     </script>
+
     <style type="text/tailwindcss">
         .product{
             @apply relative overflow-hidden p-[20px];
@@ -252,16 +252,16 @@ $finishedBids = $auction->getFinishedAuctions();
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center  flex-grow-1 pe-3">
                         <li class="nav-item mx-2">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Thrift</a>
+                            <a class="nav-link" href="../view/thrift.php">Thrift</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Bidding</a>
+                            <a class="nav-link" href="../view/bidding.php">Bidding</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Selling</a>
+                            <a class="nav-link" href="">Selling</a>
                         </li>
                     </ul>
                     <form class="d-flex me-4 align-items-center" role="search">
@@ -324,7 +324,7 @@ $finishedBids = $auction->getFinishedAuctions();
         </div>
 
         
-        <!-- Ongoing Bidding Section -->
+       <!-- Ongoing Bidding Section -->
         <div class="flex flex-col px-12 pt-16 bg-red bg-[#F3F3F3] ongoing">
             <div class="product bg-[#CEC0B9] rounded-[20px]"> 
                 <h2 class="product-category">Ongoing Bidding</h2>
@@ -365,7 +365,7 @@ $finishedBids = $auction->getFinishedAuctions();
                                     <span id="upcomingCountdown<?php echo $auction['auction_id']; ?>"></span>
                                 </span>
                                 <img src="<?php echo htmlspecialchars($auction['image']); ?>" class="product-thumb" alt="">
-                                <button class="card-btn">View BID</button>
+                                <button class="card-btn">View Bid</button>
                             </div>
                             <div class="product-info">
                                 <h2 class="product-brand"><?php echo htmlspecialchars($auction['product_name']); ?></h2>
@@ -392,12 +392,13 @@ $finishedBids = $auction->getFinishedAuctions();
                                     <span id="finishedCountdown<?php echo $auction['auction_id']; ?>"></span>
                                 </span>
                                 <img src="<?php echo htmlspecialchars($auction['image']); ?>" class="product-thumb" alt="">
+                                <button class="card-btn">View Bid</button>
                             </div>
                             <div class="product-info">
                                 <h2 class="product-brand"><?php echo htmlspecialchars($auction['product_name']); ?></h2>
                                 <p class="product-short-description"><?php echo htmlspecialchars($auction['description']); ?></p>
                                 <span class="price">Rs.<?php echo htmlspecialchars($auction['price']); ?></span>
-                            </div>  
+                            </div>
                         </div>
                     <?php } ?>
                 </div>
@@ -405,7 +406,7 @@ $finishedBids = $auction->getFinishedAuctions();
         </div>
 
                 
-    </div>
+  
     <!-- Popup Form -->
     <div class=" overflow-y-auto" id="bidpopupform">
         <button id="fcancel-btn" onclick=addBidForm() class="fcancel-btn w-10 text-[1.8rem] ml-[98%] p-0 -mt-40 hover:scale-110 hover:transition-[0.8s]">&times;</button>                
