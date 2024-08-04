@@ -252,13 +252,13 @@ $finishedBids = $auction->getFinishedAuctions();
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center  flex-grow-1 pe-3">
                         <li class="nav-item mx-2">
-                            <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
+                            <a class="nav-link" aria-current="page" href="../index.php">Home</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="../view/thrift.php">Thrift</a>
+                            <a class="nav-link" href="thrift.php">Thrift</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="../view/bidding.php">Bidding</a>
+                            <a class="nav-link active" href="">Bidding</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="">Selling</a>
@@ -274,7 +274,7 @@ $finishedBids = $auction->getFinishedAuctions();
                         <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
 
-                            <a href="view/userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user"style="font-size:1.5rem;"></i></a>
+                            <a href="userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user"style="font-size:1.5rem;"></i></a>
 
                             <?php echo "Hi," . $_SESSION['username']; ?>
                         <?php } else { ?>
@@ -338,7 +338,7 @@ $finishedBids = $auction->getFinishedAuctions();
                                     <span id="ongoingCountdown<?php echo $auction['auction_id']; ?>"></span>
                                 </span>
                                 <img src="<?php echo htmlspecialchars($auction['image']); ?>" class="product-thumb" alt="">
-                                <button class="card-btn">Bid Now</button>
+                                <a href="bidProduct_view.php?product_id=<?php echo $auction['product_id']; ?>" class="card-btn">Bid Now</a>
                             </div>
                             <div class="product-info">
                                 <h2 class="product-brand"><?php echo htmlspecialchars($auction['product_name']); ?></h2>
@@ -350,6 +350,7 @@ $finishedBids = $auction->getFinishedAuctions();
                 </div>
             </div>
         </div>
+
 
         <!-- Upcoming Bidding Section -->
         <div class="flex flex-col px-12 pt-16 bg-red bg-[#F3F3F3]">
@@ -365,7 +366,7 @@ $finishedBids = $auction->getFinishedAuctions();
                                     <span id="upcomingCountdown<?php echo $auction['auction_id']; ?>"></span>
                                 </span>
                                 <img src="<?php echo htmlspecialchars($auction['image']); ?>" class="product-thumb" alt="">
-                                <button class="card-btn">View Bid</button>
+                                <a href="bidProduct_view.php?product_id=<?php echo $auction['product_id']; ?>" class="card-btn">View Bid</a>
                             </div>
                             <div class="product-info">
                                 <h2 class="product-brand"><?php echo htmlspecialchars($auction['product_name']); ?></h2>
@@ -377,6 +378,7 @@ $finishedBids = $auction->getFinishedAuctions();
                 </div>
             </div>
         </div>
+
 
         <!-- Finished Bidding Section -->
         <div class="flex flex-col px-12 pt-16 bg-red bg-[#F3F3F3] finished">
@@ -392,18 +394,19 @@ $finishedBids = $auction->getFinishedAuctions();
                                     <span id="finishedCountdown<?php echo $auction['auction_id']; ?>"></span>
                                 </span>
                                 <img src="<?php echo htmlspecialchars($auction['image']); ?>" class="product-thumb" alt="">
-                                <button class="card-btn">View Bid</button>
+                                <a href="bidProduct_view.php?product_id=<?php echo $auction['product_id']; ?>" class="card-btn">View Bid</a>
                             </div>
                             <div class="product-info">
                                 <h2 class="product-brand"><?php echo htmlspecialchars($auction['product_name']); ?></h2>
                                 <p class="product-short-description"><?php echo htmlspecialchars($auction['description']); ?></p>
                                 <span class="price">Rs.<?php echo htmlspecialchars($auction['price']); ?></span>
-                            </div>
+                            </div>  
                         </div>
                     <?php } ?>
                 </div>
             </div>
         </div>
+
 
                 
   
@@ -473,7 +476,7 @@ $finishedBids = $auction->getFinishedAuctions();
 
         </div>
     </div>
-
+</div>
     <!--footer-->
     <div class="container-fluid footer">
         <div class="container p-3">
