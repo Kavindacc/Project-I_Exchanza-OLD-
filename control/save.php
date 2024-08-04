@@ -45,18 +45,19 @@ class save{
             $addres = $_POST['addres'] ?? '';
             $city = $_POST['city'] ?? '';
             $zip = $_POST['zip'] ?? '';
-            $district = $_POST['district'] ?? '';
+            $distric = $_POST['distric'] ?? '';
             $province = $_POST['province'] ?? ''; 
+            $country = $_POST['country'] ?? '';
 
             $db = new dbconnectionpg();
             $conn = $db->dbconnect();
             // Prepare the SQL statement with placeholders
-            $stmt = $conn->prepare("INSERT INTO place_order (FullName, Addres, City, Zip, District, Province) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO place_order (FullName, Addres, City, Zip, District, Province, Country) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
             // Check if the preparation was successful
             if ($stmt) {
                 // Bind the parameters with appropriate types
-                $stmt->bind_param("ssssss", $fullname, $addres, $city, $zip, $district, $province);
+                $stmt->bind_param("sssssss", $fullname, $addres, $city, $zip, $distric, $province, $country);
 
                 // Execute the statement
                 if ($stmt->execute()) {
