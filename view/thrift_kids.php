@@ -47,7 +47,7 @@ require '../model/dbconnection.php';
                             <a class="nav-link active" href="#">Thrift</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Bidding</a>
+                            <a class="nav-link" href="bidding.php">Bidding</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="#">Selling</a>
