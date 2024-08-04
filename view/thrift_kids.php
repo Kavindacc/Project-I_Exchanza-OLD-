@@ -24,7 +24,6 @@ require '../model/dbconnection.php';
 <body>
 <!--nav bar-->
 <nav class="navbar navbar-expand-lg sticky-top nav">
-    <!-- latest added -->
         <div class="container-fluid logo"><!--logo-->
             <a class="navbar-brand" href="#"><img src="../img/Exchanza.png" width="100px"></a>
             <!--toggle button-->
@@ -43,10 +42,9 @@ require '../model/dbconnection.php';
                     <ul class="navbar-nav justify-content-center  flex-grow-1 pe-3">
                         <li class="nav-item mx-2">
                             <a class="nav-link " aria-current="page" href="../index.php">Home</a>
-                            <a class="nav-link " aria-current="page" href="../index.php">Home</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link active" href="#">Thrift</a>
+                            <a class="nav-link active" href="../view/thrift.php">Thrift</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="bidding.php">Bidding</a>
@@ -74,11 +72,10 @@ require '../model/dbconnection.php';
 
 
                             <?php echo "Hi," . $_SESSION['username']; ?>
-                        <?php } else {
-                            $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-                            $_SESSION['redirect']=$currentPage;
-                        ?>
-                            <a href="login.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3"style="color:#ffff;">login</button></a>
+                        <?php } else { ?>
+                            <a href="login.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"></span></i></a><!--addtocart-->
+                            <a href="login.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"></i></a>
+                            <a href="login.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3" style="color:#ffff;">login</button></a>
                         <?php } ?>
                     </div>
                 </div>
