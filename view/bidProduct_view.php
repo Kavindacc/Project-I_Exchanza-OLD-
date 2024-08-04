@@ -173,9 +173,9 @@ $highest_bid = $highestBidRow['highest_bid'] ?? $auction['start_price'];
                     <?php if (strtotime($auction['start_time']) <= time() && strtotime($auction['end_time']) >= time()) { ?>
                         <div class="mt-4">
                             <div class="flex space-x-2">
-                                <button class="px-4 py-2 bg-[#CEC0B9] text-white rounded-md hover:bg-gray-500" onclick="placeBid(5)">+5%</button>
-                                <button class="px-4 py-2 bg-[#CEC0B9] text-white rounded-md hover:bg-gray-500" onclick="placeBid(10)">+10%</button>
-                                <button class="px-4 py-2 bg-[#CEC0B9] text-white rounded-md hover:bg-gray-500" onclick="placeBid(15)">+15%</button>
+                                <button class="px-4 py-2 bg-[#897062] text-white rounded-md hover:bg-[#746557]" onclick="placeBid(5)">+5%</button>
+                                <button class="px-4 py-2 bg-[#897062] text-white rounded-md hover:bg-[#746557]" onclick="placeBid(10)">+10%</button>
+                                <button class="px-4 py-2 bg-[#897062] text-white rounded-md hover:bg-[#746557]" onclick="placeBid(15)">+15%</button>
                             </div>
                         </div>
                     <?php } ?>
