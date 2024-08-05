@@ -12,8 +12,8 @@ class Admin {
     }
 
     public function getTotalSales() {
-        // Implement your logic here
-        return 80; // Placeholder
+        // Implement logic
+        return 10; // Placeholder
     }
 
     public function getTotalFeedbacks() {
@@ -32,18 +32,20 @@ class Admin {
     }
 
     public function getSellers() {
-        $stmt = $this->pdo->query("SELECT users.id, users.name AS username, users.email, sellers.variant 
+        $stmt = $this->pdo->query("SELECT sellers.id, usern.name AS username, usern.email, sellers.variant 
                                    FROM usern 
-                                   JOIN sellers ON users.id = sellers.user_id");
+                                   JOIN sellers ON usern.userid = sellers.user_id");
         return $stmt->fetchAll();
     }
+    
 
     public function getMessages() {
-        $stmt = $this->pdo->query("SELECT messages.id, users.name AS username, messages.message, messages.reply 
+        $stmt = $this->pdo->query("SELECT messages.id, usern.name AS username, messages.message, messages.reply 
                                    FROM messages 
-                                   JOIN users ON messages.user_id = users.id");
+                                   JOIN usern ON messages.user_id = usern.userid");
         return $stmt->fetchAll();
     }
+    
 
     public function replyMessage($message_id, $reply) {
         $stmt = $this->pdo->prepare("UPDATE messages SET reply = :reply WHERE id = :id");

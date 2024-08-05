@@ -39,7 +39,9 @@ $sellers = $admin->getSellers();
                             <td><?php echo $seller['email']; ?></td>
                             <td><?php echo $seller['variant']; ?></td>
                             <td>
-                                <a href="delete_store.php?id=<?php echo $seller['id']; ?>">Delete Store</a>
+                            <button type="submit" a href="delete_store.php?id=<?= $seller['id']; ?>" style="background-color:#897062; color:white;" class="btn btn-sm" onclick="return confirm('Are you sure you want to ban this user?')">Delete</a>
+                            <!-- <button type="submit" a href="delete_store.php?id=<?php echo $seller['id']; ?>">Delete Store</a> onclick="return confirm('Are you sure you want to delete this data?')">Delete</button> -->
+                                <!-- <button type="submit" name="delete_user" value="<?= $row['userid']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this data?')">Delete</button> -->
                             </td>
                         </tr>
                     <?php endforeach; ?>
