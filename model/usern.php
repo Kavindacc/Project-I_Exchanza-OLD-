@@ -129,7 +129,7 @@ class RegisteredCustormer extends User
         }
     }
 
-    public function verifyPassword($password, $pdo) //change password function
+    public function verifyPassword($password, $pdo) //change password
     {
 
         $query = "SELECT password FROM usern WHERE userid =?";
