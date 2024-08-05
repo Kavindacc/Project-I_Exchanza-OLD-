@@ -191,6 +191,7 @@ input[type=submit]:hover{
     top:-6px;
     left: 26px;
 }
+
 @media screen and (max-width:720px){
     .item .side{
         width:100%;
@@ -207,10 +208,16 @@ input[type=submit]:hover{
     }
     #personalinfo{
         
-        max-height:400px;
+        max-height:450px;
         
     }
     #update,#edit{
         margin-bottom: .6rem;
+    }
+    .p-btn{
+        margin-bottom: .6rem;
+    }
+    .p-btn{
+        width:10rem;
     }
 }

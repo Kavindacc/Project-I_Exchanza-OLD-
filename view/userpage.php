@@ -160,7 +160,7 @@ session_start();
 
                 </form><!--form end-->
 
-                <div class="float-sm-end me-4"><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#changeimgModal" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#FFA500;">Change Profile picture</button></div>
+                <div class="float-sm-end me-4"><button type="button" class="btn btn-outline-warning p-btn" data-bs-toggle="modal" data-bs-target="#changeimgModal" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#FFA500;">Change Profile picture</button></div>
                 <div class="modal fade" id="changeimgModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content" style="background:#AE9D92;color:#ffff;">
@@ -185,7 +185,7 @@ session_start();
                 </div>
 
                 <!-- Change Password Button -->
-                <div class="float-sm-end me-4"><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#changePasswordModal" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#FFA500;">Change Password</button></div>
+                <div class="float-sm-end me-4"><button type="button" class="btn btn-outline-warning p-btn" data-bs-toggle="modal" data-bs-target="#changePasswordModal" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#FFA500;">Change Password</button></div>
 
                 <!-- Change Password Modal -->
                 <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
