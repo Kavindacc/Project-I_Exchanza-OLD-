@@ -279,7 +279,7 @@ $finishedBids = $auction->getFinishedAuctions();
                             <?php echo "Hi," . $_SESSION['username']; ?>
                         <?php } else { ?>
                             <button class="lo-button btn-sm ms-2 px-3">
-                                <a href="view/login.php" class=" text-decoration-none">login</a>
+                                <a href="view/login.php" class="">login</a>
                             </button>
                         <?php } ?>
                     </div>
@@ -378,6 +378,7 @@ $finishedBids = $auction->getFinishedAuctions();
                 </div>
             </div>
         </div>
+    </div>
 
 
         <!-- Finished Bidding Section -->
