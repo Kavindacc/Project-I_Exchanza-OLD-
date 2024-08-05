@@ -150,7 +150,7 @@ if (isset($_SESSION['userid'])) {
 
                         <div class="row lower">
                             <div class="col text-left">Subtotal</div>
-                            <div class="col text-right"><span id="subtotal">Rs. 46.98</span></div>
+                            <div class="col text-right"><span id="subtotal">Rs. 3,900.00</span></div>
                         </div>
 
                         <div class="row lower">
@@ -160,7 +160,7 @@ if (isset($_SESSION['userid'])) {
 
                         <div id="totalpay" class="row lower">
                             <div class="col text-left"><b>Total to pay</b></div>
-                            <div class="col text-right"><b><span id="tot">Rs. 46.98</span></b></div>
+                            <div class="col text-right"><b><span id="tot">Rs. 3,900.00</span></b></div>
                         </div>
 
 

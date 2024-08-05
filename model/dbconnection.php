@@ -11,9 +11,9 @@ class Dbh
 
     public static function connect()
     {
-        self::$servername = "127.0.0.1";
-        self::$username = "root"; //username add karanna
-        self::$password = "6065031"; //password add karanna
+        self::$servername = "localhost";
+        self::$username = "root"; 
+        self::$password = ""; 
         self::$dbname = "exchanzedb";
 
         try {
