@@ -23,12 +23,12 @@ if (isset($_POST['edit'])) {
     $obj = new Item(Dbh::connect());
     if ($obj->updateitem($product_id, $product_name, $price, $image)) {
         $_SESSION['editsuccess']="Product updated successfully";
-        header("Location: ../view/afterdeletei.php");//userpage page
+        header("Location: ../view/userpage.php");//userpage page
         exit();
     }
     else{
         $_SESSION['editsuccess']="Product Not updated successfully";
-        header("Location: ../view/afterdeletei.php");//userpage page
+        header("Location: ../view/userpage");//userpage page
         exit();
     }
 }

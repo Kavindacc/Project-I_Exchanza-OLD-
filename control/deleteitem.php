@@ -9,7 +9,7 @@ if(isset($_POST['delete'])){
     $obj=new Item(Dbh::connect());
     if($obj->delete($productid)){
         $_SESSION['deletesuccess']='Product Deleted.';
-        header("Location: ../view/afterdeletei.php");//userpage page
+        header("Location: ../view/userpage.php");//userpage page
         exit();
     }
     

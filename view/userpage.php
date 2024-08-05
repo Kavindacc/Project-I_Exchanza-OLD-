@@ -51,21 +51,29 @@ session_start();
                     </ul>
                     <!--login nav-link-a-color-->
                     <div class="d-flex flex-column float-start flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
-                       <?php
+                        <?php
                         if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
                             <?php $obj = new wishlist();
                             $count = $obj->additemcount($_SESSION['userid'], Dbh::connect()); ?>
-                            <a href="cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"><?php if (isset($count)) { echo $count; } else {  echo 0; } ?></span></i></a><!--addtocart-->
+                            <a href="cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"><?php if (isset($count)) {
+                                                                                                                                                                                                                                    echo $count;
+                                                                                                                                                                                                                                } else {
+                                                                                                                                                                                                                                    echo 0;
+                                                                                                                                                                                                                                } ?></span></i></a><!--addtocart-->
                             <?php $obj = new RegisteredCustormer();
                             $count = $obj->wishlistiteamcount($_SESSION['userid'], Dbh::connect()); ?>
-                            <a href="wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if (isset($count)) { echo $count; } else {  echo 0; } ?></span></i></a><!--addto wishlist-->
+                            <a href="wishlist.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-dark sp"><?php if (isset($count)) {
+                                                                                                                                                                                                                                    echo $count;
+                                                                                                                                                                                                                                } else {
+                                                                                                                                                                                                                                    echo 0;
+                                                                                                                                                                                                                                } ?></span></i></a><!--addto wishlist-->
                             <a href="logout.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3 " style="color: #FFFF;">logout</button></a>
                         <?php } else { ?>
                             <a href="login.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus position-relative"><span class="position-absolute translate-middle badge rounded-pill bg-danger sp"></span></i></a><!--addtocart-->
                             <a href="login.php" class="nav-link  text-decoration-none mx-1"><i class="fa-regular fa-heart position-relative"></i></a>
                             <a href="login.php" class=" text-decoration-none"><button class="lo-button btn-sm ms-2 px-3" style="color:#ffff;">login</button></a>
                         <?php } ?>
-                        
+
                     </div>
                 </div>
             </div>
@@ -78,7 +86,7 @@ session_start();
 
     <div class="container-fluid py-2">
         <div class="row d-flex  mx-auto ">
-            <div class="col-sm-3 d-flex flex-column " ><!--prifile picture with button-->
+            <div class="col-sm-3 d-flex flex-column "><!--prifile picture with button-->
 
                 <?php if (isset($_SESSION['profilepic']) && !empty($_SESSION['profilepic'])) { ?>
                     <img src="<?php echo htmlspecialchars($_SESSION['profilepic']); ?>" class="img-fluid rounded-4 py-2" alt="Profile Picture" style="max-height:300px;">
@@ -127,39 +135,54 @@ session_start();
                 $row = $obj->manageAccount(Dbh::connect());
 
                 ?>
-                <form action="../control/updatepersonalinfocon.php" method="post" enctype="multipart/form-data"><!--from-->
+                <form><!--from-->
                     <div class="row mb-3">
-                        <div class="col">
+                        <div class="col-sm-6">
                             <label for="" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" placeholder="<?php echo $row['name']; ?>" name="name" id="name" disabled required>
+                            <input type="text" class="form-control" placeholder="<?php echo $row['name']; ?>" name="name" id="name" disabled>
                         </div>
-
-                    </div>
-                    <div class="row mb-3">
                         <div class="col-sm-6">
                             <label for="" class="form-label">Email</label>
-                            <input type="email" class="form-control" placeholder="<?php echo $row['email']; ?>" id="email" name="email" disabled required>
+                            <input type="email" class="form-control" placeholder="<?php echo $row['email']; ?>" id="email" name="email" disabled>
                         </div>
-                        <div class="col-sm-6">
-                            <label for="" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" placeholder="<?php echo $row['phoneno']; ?>" name="phoneno" id="phoneno" disabled required>
-                        </div>
-
                     </div>
                     <div class="row mb-3">
+
+                        <div class="col-sm-6">
+                            <label for="" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" placeholder="<?php echo $row['phoneno']; ?>" name="phoneno" id="phoneno" disabled>
+                        </div>
                         <div class="col-sm-6">
                             <label for="" class="form-label">Gender</label>
                             <input class="form-control" type="text" id="" name="gender" placeholder="<?php echo $row['gender']; ?>" disabled>
                         </div>
-                        <div class="col-sm-6">
-                            <label for="" class="form-label">Profile Picture</label>
-                            <input class="form-control" type="file" id="profile" name="profilepic" disabled>
-                        </div>
                     </div>
-                    <div class="float-sm-end"><button type="submit" class="btn btn-outline-success" id="update" name="update" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Update</button></div>
 
                 </form><!--form end-->
-                <div class="float-sm-end"><button type="button" class="btn btn-outline-success" id="edit" onclick="edit();" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Edit Personal Information</button><!--edit button--></div>
+
+                <div class="float-sm-end me-4"><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#changeimgModal" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#FFA500;">Change Profile picture</button></div>
+                <div class="modal fade" id="changeimgModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="background:#AE9D92;color:#ffff;">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="changePasswordModalLabel">Change Profile Picture</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="../control/updateimg.php" method="POST" enctype="multipart/form-data"><!--change profile img-->
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="confirmNewPassword" class="form-label">Profile Img</label>
+                                        <input type="file" class="form-control" name="profilepic" required>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary" name="changeimg" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Change Profile Img</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Change Password Button -->
                 <div class="float-sm-end me-4"><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#changePasswordModal" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#FFA500;">Change Password</button></div>
@@ -304,7 +327,7 @@ session_start();
                             <?php } ?>
                         </tbody>
                     </table>
-                    
+
 
                 <?php } else { ?>
                     <h2>No Items Yet</h2>
@@ -342,7 +365,7 @@ session_start();
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="main.js"></script>
-<!--<script type="text/javascript">
+    <!--<script type="text/javascript">
         function preventback() {
             window.history.forward()
         };

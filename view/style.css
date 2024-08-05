@@ -174,7 +174,7 @@ input[type=submit]:hover{
 }
 #personalinfo{
     background: #f4f4f4;
-    max-height: 345px;
+    max-height: 300px;
     border-radius: .6rem;
 }
 #information,#order,#item{
@@ -207,7 +207,7 @@ input[type=submit]:hover{
     }
     #personalinfo{
         
-        max-height:600px;
+        max-height:400px;
         
     }
     #update,#edit{

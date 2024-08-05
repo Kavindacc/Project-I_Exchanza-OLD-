@@ -108,26 +108,6 @@ class RegisteredCustormer extends User
         }
     }
 
-    public function updateUserInfo($name, $phoneno,$email, $pdo)
-    {
-        try {
-            $query = "UPDATE usern SET name=?, phoneno=?,email=? WHERE userid =?";
-            $stmt = $pdo->prepare($query);
-            $stmt->bindParam(1, $name);
-            $stmt->bindParam(2, $phoneno);
-            $stmt->bindParam(3, $email);
-            $stmt->bindParam(4, $this->userid);
-            $stmt->execute();
-
-            if ($stmt->rowCount() > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
 
     public function verifyPassword($password, $pdo) //change password function
     {
