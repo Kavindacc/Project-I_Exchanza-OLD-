@@ -310,7 +310,7 @@ $finishedBids = $auction->getFinishedAuctions();
                             $currentPage = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];//get current page 
                             $_SESSION['redirect']=$currentPage;
                         ?> 
-                        <a href="login.php" style="text-decoration: none;"><button class="adabit-btn">Add Your Bid</button></a>
+                        <a href="login.php" style="color:blue"><button class="adabit-btn">Add Your Bid</button></a>
 
                     <?php } else { ?>
                         <button class="addbit-btn" onclick=addBidForm()>Add Your Bid</button>

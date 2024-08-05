@@ -1,16 +1,17 @@
 <?php
 require '../model/usern.php';
 require '../model/dbconnection.php';
+session_start();
 
 if (isset($_POST['submitBid'])) {
     $productname = ucfirst($_POST['itemname']);
     $price = $_POST['price'];
-    $colour = $_POST[''];
+    $colour =null;
     $description = $_POST['description'];
-    $category = strtolower($_POST['']);
-    $subcategory = strtolower($_POST['']);
+    $category = isset($_POST['']) ? $_POST[''] : null;
+    $subcategory = isset($_POST['']) ? $_POST[''] : null;
     $size = isset($_POST['']) ? $_POST[''] : null; // Use ternary operator
-    $condition = $_POST[''];
+    $condition =isset($_POST['']) ? $_POST[''] : null;
     $start_time = $_POST['bidstarttime'];
     $end_time = $_POST['bitendtime'];
     $start_price = $_POST['price'];

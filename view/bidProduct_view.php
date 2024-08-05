@@ -109,13 +109,13 @@ $highest_bid = $highestBidRow['highest_bid'] ?? $auction['start_price'];
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-center  flex-grow-1 pe-3">
                             <li class="nav-item mx-2">
-                                <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
+                                <a class="nav-link" aria-current="page" href="../index.php">Home</a>
                             </li>
                             <li class="nav-item mx-2">
                                 <a class="nav-link" href="../view/thrift.php">Thrift</a>
                             </li>
                             <li class="nav-item mx-2">
-                                <a class="nav-link" href="../view/bidding.php">Bidding</a>
+                                <a class="nav-link active" href="../view/bidding.php">Bidding</a>
                             </li>
                             <li class="nav-item mx-2">
                                 <a class="nav-link" href="">Selling</a>
@@ -127,16 +127,16 @@ $highest_bid = $highestBidRow['highest_bid'] ?? $auction['start_price'];
                         </form>
                         <!--login nav-link-a-color-->
                         <div class="d-flex flex-column float-start flex-lg-row justify-content-center  align-items-center mt-3 mt-lg-0 gap-3">
-                            <a href="../Project-I_Exchanza/view/cart.php" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
+                            <a href="" class="nav-link  text-decoration-none mx-1"><i class="fa-solid fa-cart-plus"><span></span></i></a>
                             <?php
                             if (isset($_SESSION['logedin']) && $_SESSION['logedin'] === true) { ?>
 
-                                <a href="view/userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user"style="font-size:1.5rem;"></i></a>
+                                <a href="userpage.php" class=" text-decoration-none"><i class="fa-regular fa-circle-user"style="font-size:1.5rem;"></i></a>
 
                                 <?php echo "Hi," . $_SESSION['username']; ?>
                             <?php } else { ?>
                                 <button class="lo-button btn-sm ms-2 px-3">
-                                    <a href="view/login.php" class="">login</a>
+                                    <a href="login.php" class="">login</a>
                                 </button>
                             <?php } ?>
                         </div>
