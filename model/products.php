@@ -85,10 +85,10 @@ class Thrift extends Item
 
     public $thriftitems = [];
 
-    public function getdetails($category, $subcategory, $pdo) //subcategory category product get
+    public function getdetails($category, $subcategory,$userid, $pdo) //subcategory category product get
     {
         try {
-            $query = "SELECT p.* FROM products p JOIN thrift t ON p.product_id = t.product_id WHERE p.category = ? AND p.subcategory = ?";
+            $query = "SELECT p.* FROM products p JOIN thrift t ON p.product_id = t.product_id WHERE p.category = ? AND p.subcategory = ? AND p.userid !=?";
             $stmt = $pdo->prepare($query);
             $stmt->bindParam(1, $category);
             $stmt->bindParam(2, $subcategory);

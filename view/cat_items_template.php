@@ -4,6 +4,7 @@ require '../model/products.php';
 require '../model/dbconnection.php';
 require '../model/usern.php';
 session_start();
+$userid=$_SESSION['userid'];
 ?>
 
 <!DOCTYPE html>
@@ -160,7 +161,7 @@ session_start();
         <?php
 
         $obj = new Thrift();
-        $rows = $obj->getdetails($_SESSION['category'], $_SESSION['subcategory'], Dbh::connect());
+        $rows = $obj->getdetails($_SESSION['category'], $_SESSION['subcategory'],$userid, Dbh::connect());
         if (isset($rows) && !empty($rows)) {
             foreach ($rows as $row) { ?>
                 <div class="card m- pt-2" style="width: 17rem;">
