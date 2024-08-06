@@ -85,17 +85,24 @@ class Thrift extends Item
 
     public $thriftitems = [];
 
-    public function getdetails($category, $subcategory,$userid, $pdo) //subcategory category product get
+    public function getdetails($category, $subcategory, $pdo, $userid = null)
     {
         try {
-            $query = "SELECT p.* FROM products p JOIN thrift t ON p.product_id = t.product_id WHERE p.category = ? AND p.subcategory = ? AND p.userid != ?";
-            $stmt = $pdo->prepare($query);
-            $stmt->bindParam(1, $category);
-            $stmt->bindParam(2, $subcategory);
-            $stmt->bindParam(3, $userid);
+            if ($userid !== null) {
+                $query = "SELECT p.* FROM products p JOIN thrift t ON p.product_id = t.product_id WHERE p.category = ? AND p.subcategory = ? AND p.userid != ?";
+                $stmt = $pdo->prepare($query);
+                $stmt->bindParam(1, $category);
+                $stmt->bindParam(2, $subcategory);
+                $stmt->bindParam(3, $userid);
+            } else {
+                $query = "SELECT p.* FROM products p JOIN thrift t ON p.product_id = t.product_id WHERE p.category = ? AND p.subcategory = ?";
+                $stmt = $pdo->prepare($query);
+                $stmt->bindParam(1, $category);
+                $stmt->bindParam(2, $subcategory);
+            }
+
             $stmt->execute();
             $thriftitems = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
             return $thriftitems;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -154,16 +161,17 @@ class wishlist
         }
     }
 
-    public function checkIfProductExists($userid, $itemid, $db) {
+    public function checkIfProductExists($userid, $itemid, $db)
+    {
         $query = "SELECT COUNT(*) FROM addtocart WHERE user_id =? AND product_id =?";
         $stmt = $db->prepare($query);
-        $stmt->bindParam(1,$userid);
-        $stmt->bindParam(2,$itemid);
+        $stmt->bindParam(1, $userid);
+        $stmt->bindParam(2, $itemid);
         $stmt->execute();
         return $stmt->fetchColumn() > 0;
     }
 
-    public function addtocart($userid, $itemid, $price, $quantity,$pname, $img, $pdo)
+    public function addtocart($userid, $itemid, $price, $quantity, $pname, $img, $pdo)
     {
 
         $sql = "INSERT INTO addtocart (product_id, user_id, price, quantity,pname,img) VALUES (?,?,?,?,?,?)";
@@ -205,14 +213,15 @@ class wishlist
         }
     }
 
-    public function additemcount($userid,$pdo){
-        
+    public function additemcount($userid, $pdo)
+    {
+
         $sql = "SELECT * FROM addtocart WHERE user_id=?";
         try {
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(1, $userid);
             $stmt->execute();
-            $rowcount=$stmt->rowcount();
+            $rowcount = $stmt->rowcount();
             return $rowcount;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
