@@ -86,7 +86,7 @@ session_start();
 
     <div class="container-fluid py-2">
         <div class="row d-flex  mx-auto ">
-            <div class="col-sm-3 d-flex flex-column "><!--prifile picture with button-->
+            <div class="col-md-3 d-flex flex-column "><!--prifile picture with button-->
 
                 <?php if (isset($_SESSION['profilepic']) && !empty($_SESSION['profilepic'])) { ?>
                     <img src="<?php echo htmlspecialchars($_SESSION['profilepic']); ?>" class="img-fluid rounded-4 py-2" alt="Profile Picture" style="max-height:300px;">
@@ -99,7 +99,7 @@ session_start();
                 <button type="button" class="btn  " onclick="showItemTable()" id="item">My Iteams</button>
 
             </div>
-            <div class="col-sm-8 py-2  mx-auto mt-5 " id="personalinfo"><!--personal information -->
+            <div class="col-md-8 py-2  mx-auto mt-5 " id="personalinfo"><!--personal information -->
                 <?php if (isset($_SESSION['success'])) { ?><!--change personal information-->
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <strong><?php echo $_SESSION['success']; ?></strong>
@@ -137,22 +137,22 @@ session_start();
                 ?>
                 <form><!--from-->
                     <div class="row mb-3">
-                        <div class="col-sm-6">
+                        <div class="col-md-6">
                             <label for="" class="form-label">Full Name</label>
                             <input type="text" class="form-control" placeholder="<?php echo $row['name']; ?>" name="name" id="name" disabled>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-md-6">
                             <label for="" class="form-label">Email</label>
                             <input type="email" class="form-control" placeholder="<?php echo $row['email']; ?>" id="email" name="email" disabled>
                         </div>
                     </div>
                     <div class="row mb-3">
 
-                        <div class="col-sm-6">
+                        <div class="col-md-6">
                             <label for="" class="form-label">Phone Number</label>
                             <input type="tel" class="form-control" placeholder="<?php echo $row['phoneno']; ?>" name="phoneno" id="phoneno" disabled>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-md-6">
                             <label for="" class="form-label">Gender</label>
                             <input class="form-control" type="text" id="" name="gender" placeholder="<?php echo $row['gender']; ?>" disabled>
                         </div>
@@ -225,7 +225,7 @@ session_start();
             $rows = $obj->browserProducts(Dbh::connect());
             ?>
 
-            <div class="col-sm-9 py-2 mt-5 table-responsive overflow-auto" id="itemtable" style="display:none;max-height: 400px;">
+            <div class="col-md-9 py-2 mt-5 table-responsive overflow-auto" id="itemtable" style="display:none;max-height: 400px;">
                 <?php if (isset($_SESSION['deletesuccess'])) { ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <strong><?php echo $_SESSION['deletesuccess']; ?></strong>
@@ -334,7 +334,7 @@ session_start();
                 <?php } ?>
             </div>
 
-            <div class="col-sm-9 py-2 mt-5" id="producttable" style="display:none;"><!--order table-->
+            <div class="col-md-9 py-2 mt-5" id="producttable" style="display:none;"><!--order table-->
                 <table class="table  table-striped table-hover table-sm">
                     <thead>
                         <tr class="table-primary">

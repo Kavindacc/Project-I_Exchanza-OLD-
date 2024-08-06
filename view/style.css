@@ -191,7 +191,15 @@ input[type=submit]:hover{
     top:-6px;
     left: 26px;
 }
-
+@media screen and (max-width:768px){
+    
+    
+    #personalinfo{
+        
+        max-height:610px;
+    }
+   
+}
 @media screen and (max-width:720px){
     .item .side{
         width:100%;
