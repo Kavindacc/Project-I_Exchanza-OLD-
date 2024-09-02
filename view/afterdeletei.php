@@ -69,10 +69,10 @@ session_start();
                             <a class="nav-link" aria-current="page" href="../index.php">Home</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="../view/thrift.php">Thrift</a>
+                            <a class="nav-link" href="thrift.php">Thrift</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">Bidding</a>
+                            <a class="nav-link" href="bidding.php">Bidding</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="#">Selling</a>
@@ -110,7 +110,7 @@ session_start();
 
                 <button type="button" class="btn btn-outline-primary m-2" onclick="showInformation()" id="information">Pesonal information</button>
                 <button type="button" class="btn btn-outline-primary m-2" onclick="showOrderTable()" id="order">My Orders</button>
-                <button type="button" class="btn btn-outline-primary m-2" onclick="showItemTable()" id="item">My Iteams</button>
+                <button type="button" class="btn btn-outline-primary m-2" onclick="showItemTable()" id="item">My Items</button>
 
             </div>
             <div class="col-sm-6 py-2 mt-5 mx-auto" id="personalinfo" style="display:none;"><!--personal information -->

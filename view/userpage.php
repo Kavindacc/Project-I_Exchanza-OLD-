@@ -161,18 +161,18 @@ session_start();
                     <div class="row mb-3">
                         <div class="col">
                             <label for="" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" placeholder="<?php echo $row['name']; ?>" name="name" id="name" disabled required>
+                            <input type="text" class="form-control" placeholder="<?php echo $row['name']; ?>" name="name" id="name" disabled >
                         </div>
 
                     </div>
                     <div class="row mb-3">
                         <div class="col-sm-6">
                             <label for="" class="form-label">Email</label>
-                            <input type="email" class="form-control" placeholder="<?php echo $row['email']; ?>" id="email" name="email" disabled required>
+                            <input type="email" class="form-control" placeholder="<?php echo $row['email']; ?>" id="email" name="email" disabled >
                         </div>
                         <div class="col-sm-6">
                             <label for="" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" placeholder="<?php echo $row['phoneno']; ?>" name="phoneno" id="phoneno" disabled required>
+                            <input type="tel" class="form-control" placeholder="<?php echo $row['phoneno']; ?>" name="phoneno" id="phoneno" disabled >
                         </div>
 
                     </div>
@@ -189,7 +189,7 @@ session_start();
                     <div class="float-sm-end"><button type="submit" class="btn btn-outline-success" id="update" name="update" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Update</button></div>
 
                 </form><!--form end-->
-                <div class="float-sm-end"><button type="button" class="btn btn-outline-success" id="edit" onclick="edit();" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;">Edit Personal Information</button><!--edit button--></div>
+                <div class="float-sm-end"><button type="button" class="btn btn-outline-success" id="edit" onclick="edit();" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#4c3f31;"></button><!--edit button--></div>
 
                 <!-- Change Password Button -->
                 <div class="float-sm-end me-4"><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#changePasswordModal" style="--bs-btn-color:#FFFF;--bs-btn-bg:#897062;--bs-btn-border-color:none; --bs-btn-hover-bg:#FFA500;">Change Password</button></div>
