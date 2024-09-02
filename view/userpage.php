@@ -118,7 +118,7 @@ session_start();
 
                 <button type="button" class="btn  my-2" onclick="showInformation()" id="information">Pesonal information</button>
                 <button type="button" class="btn  mb-2" onclick="showOrderTable()" id="order">My Orders</button>
-                <button type="button" class="btn  " onclick="showItemTable()" id="item">My Iteams</button>
+                <button type="button" class="btn  " onclick="showItemTable()" id="item">My Items</button>
 
             </div>
             <div class="col-sm-8 py-2  mx-auto mt-5 " id="personalinfo"><!--personal information -->
